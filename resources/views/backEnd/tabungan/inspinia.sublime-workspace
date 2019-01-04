@@ -1,0 +1,1276 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tabu",
+				"tabungans"
+			],
+			[
+				"reque",
+				"request"
+			],
+			[
+				"TABU",
+				"tabungan"
+			],
+			[
+				"nama",
+				"nama_belakang"
+			],
+			[
+				"ke",
+				"keterangan"
+			],
+			[
+				"jeni",
+				"jenis_nasabah"
+			],
+			[
+				"group",
+				"group_id"
+			],
+			[
+				"di",
+				"div\tTag"
+			],
+			[
+				"btn",
+				"btn-outline"
+			],
+			[
+				"mobile",
+				"mobile_id"
+			],
+			[
+				"da",
+				"dataBinaan"
+			],
+			[
+				"ch",
+				"change"
+			],
+			[
+				"Pe",
+				"Perorangan"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"LOKASI",
+				"lokasi"
+			],
+			[
+				"lOKAS",
+				"Lokasi"
+			],
+			[
+				"edi",
+				"editable"
+			],
+			[
+				"dele",
+				"deleted"
+			],
+			[
+				"sta",
+				"statuses"
+			],
+			[
+				"update",
+				"updated_at"
+			],
+			[
+				"sbu",
+				"sbu_id"
+			],
+			[
+				"installation",
+				"installation_year"
+			],
+			[
+				"buil",
+				"building_id"
+			],
+			[
+				"SLO",
+				"slot"
+			],
+			[
+				"attr",
+				"attr_name"
+			],
+			[
+				"or",
+				"original"
+			],
+			[
+				"ORIGINA",
+				"original"
+			],
+			[
+				"remar",
+				"remark4"
+			],
+			[
+				"asset",
+				"asset_no"
+			],
+			[
+				"seri",
+				"serial_no"
+			],
+			[
+				"dep",
+				"depthname"
+			],
+			[
+				"PARENT",
+				"parent_id"
+			],
+			[
+				"ins",
+				"installation_year"
+			],
+			[
+				"bu",
+				"building"
+			],
+			[
+				"room",
+				"room_id"
+			],
+			[
+				"bui",
+				"building_id"
+			],
+			[
+				"model",
+				"model_id"
+			],
+			[
+				"co",
+				"condition"
+			],
+			[
+				"CREA",
+				"created_at"
+			],
+			[
+				"A",
+				"Activity"
+			],
+			[
+				"YE",
+				"year"
+			],
+			[
+				"created",
+				"created_at"
+			],
+			[
+				"log",
+				"log_table"
+			],
+			[
+				"stau",
+				"status"
+			],
+			[
+				"pic",
+				"pic_email"
+			],
+			[
+				"el",
+				"else"
+			],
+			[
+				"alig",
+				"text-align"
+			],
+			[
+				"STA",
+				"start"
+			],
+			[
+				"seac",
+				"search"
+			],
+			[
+				"id",
+				"iddle"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"sele",
+				"selected"
+			],
+			[
+				"valu",
+				"valueSearch"
+			],
+			[
+				"col",
+				"col-sm-7"
+			],
+			[
+				"QRCODE",
+				"qrcode"
+			],
+			[
+				"se",
+				"select2"
+			],
+			[
+				"book",
+				"booked"
+			],
+			[
+				"use",
+				"used"
+			],
+			[
+				"boo",
+				"booked"
+			],
+			[
+				"chec",
+				"checkmark"
+			],
+			[
+				"qr",
+				"qrcode"
+			],
+			[
+				"qrcode",
+				"qrcode_table"
+			],
+			[
+				"pop",
+				"pop_id"
+			],
+			[
+				"che",
+				"checkAttr"
+			],
+			[
+				"parent",
+				"parent_id"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "create.blade.php",
+			"settings":
+			{
+				"buffer_size": 19825,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "$(\".chosen_select_L\").chosen({\n    disable_search_threshold: 10,\n    no_results_text: \"Oops, nothing found!\"\n  });\n$(\".chosen_select_M\").chosen({\n    disable_search_threshold: 10,\n    no_results_text: \"Oops, nothing found!\"\n  });\n\n$(document).ready(function() {\n    $('#selectall').click(function(event) {\n        if(this.checked) { \n            $('.check').each(function() { \n                this.checked = true; \n            });\n        }else{\n            $('.check').each(function() { \n                this.checked = false; \n            });        \n        }\n    });\n});\n\nfunction addRow(dataTable) {\n\tvar table = document.getElementById(dataTable);\n\tvar rowCount = table.rows.length;\n\tif(rowCount < 11){\n        $(\".chosen_select_L\").chosen('destroy');\n\t\t$(\".chosen_select_M\").chosen('destroy');\n\t\tvar row = table.insertRow(rowCount);\n\t\tvar colCount = table.rows[1].cells.length;\n\t\tfor(var i=0; i<colCount; i++) {\n\t\t\tvar newcell = row.insertCell(i);\n\n\t\t\tnewcell.innerHTML = table.rows[1].cells[i].innerHTML;\n\t\t}\n\t}else{\n\t\t alert(\"Maximum fields is 10.\");\n\t\t\t   \n\t}\n     $(\".chosen_select_L\").chosen();\n\t$(\".chosen_select_M\").chosen();\n}\n\nfunction deleteRow(dataTable) {\n\tvar table = document.getElementById(dataTable);\n\tvar rowCount = table.rows.length;\n\tfor(var i=2; i<rowCount; i++) {\n\t\tvar row = table.rows[i];\n\t\tvar chkbox = row.cells[0].childNodes[0];\n\t\tif(null != chkbox && true == chkbox.checked) {\n\t\t\tif(rowCount <= 1) {\n\t\t\t\talert(\"Cannot Remove all fields.\");\n\t\t\t\tbreak;\n\t\t\t}\n\t\t\ttable.deleteRow(i);\n\t\t\trowCount--;\n\t\t\ti--;\n\t\t}\n\t}\n}",
+			"settings":
+			{
+				"buffer_size": 1543,
+				"line_ending": "Unix",
+				"name": "$(\".chosen_select_L\").chosen({"
+			}
+		},
+		{
+			"file": "/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Http/Controllers/TabunganController.php",
+			"settings":
+			{
+				"buffer_size": 4344,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/users/create.blade.php",
+			"settings":
+			{
+				"buffer_size": 6264,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 354.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Advanced Install Package"
+			],
+			[
+				"mater",
+				"Material Theme: Activate theme"
+			],
+			[
+				"Package Control: Install Package",
+				"Package Control: Advanced Install Package"
+			],
+			[
+				"material",
+				"Material Theme: Activate theme"
+			],
+			[
+				"them",
+				"UI: Select Theme"
+			]
+		],
+		"width": 440.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams"
+	],
+	"file_history":
+	[
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/nasabah/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/nasabah/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Http/Controllers/NasabahController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/tabungan/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/routes/web.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Nasabah.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/tabungan/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Http/Controllers/TabunganController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Tabungan.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/asset/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/AssetController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/nasabah/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/insipinia/Static_Full_Version/form_advanced.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backLayout/NavBar.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/nasabah/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/satuan/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/satuan/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/sampah/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/lokasi/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/lokasi/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/status/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/penadah/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/penadah/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/sampah/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/users/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Http/Controllers/UserController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/brand/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/database/migrations/2017_11_11_134635_create_nasabahs_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Lokasi.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/roles/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/lokasi/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/users/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/satuan/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/lokasi/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/database/migrations/2017_11_09_174451_add_code_to_statuses_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/sampah/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/database/migrations/2017_11_09_170422_create_lokasis_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Sampah.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/penadah/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Penadah.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/penadah/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Http/Controllers/SampahController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Http/Controllers/PenadahController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/database/migrations/2017_11_09_151255_create_penadahs_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/sampah/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/roles/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Satuan.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/users/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/database/migrations/2017_11_09_121125_add_sell_price_buy_price_to_sampahs_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/satuan/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/dashboard.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/sampah/kategori.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/asset/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Http/Controllers/SatuanController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/database/migrations/2017_10_13_201105_create_sampah_tables.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/database/migrations/2017_11_07_152157_create_satuans_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/status/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/status/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/users/show.blade.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/index.blade.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/web.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/result.blade.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/port.blade.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/ReportController.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/AssetController.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/dashboard.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/SBUController.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/AssetDetail.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/workorder/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/workorderController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/AssetSID.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/asset/editport.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/ReportController.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-3/ReportController.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/UsersTableSeeder.php",
+		"/Users/liasiti/Desktop/phpinfo.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/asset.blade.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/Organization.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/Location.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/Kategori.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/SBU.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/Brand.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/routes/web.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/asset/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/brand/createequipment.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/brand/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/BrandController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/asset/editslot.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/log/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/asset/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/config/app.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/sbu/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/sbu/createpop.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/QRController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/qrcode/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/Api/Apiv1Controller.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/HomeController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/dashboard.blade.php",
+		"/private/var/folders/j1/389dxl6172j3zyrkwr84xtdr0000gp/T/fz3temp-2/HomeController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/report/result.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mitos/resources/views/backEnd/report/result.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/workorder/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/sidController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/sid/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/dashboard2.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/sbu/showpop.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/users/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/roles/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Http/Controllers/KategoriController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/kategori/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/qrcode/index0.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/brand/create.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/brand/createattr.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/brand/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/welcome.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/templates/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/asset/mutation.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/brand/brandindex.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/brand/showbrand.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/roles/permissions.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/sbu/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/sbu/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backLayout/NavBar.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/sbu/indexsbu.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/resources/views/backEnd/sbu/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/app/Providers/RouteServiceProvider.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/iconplus_ams/vendor/symfony/routing/RouteCollection.php"
+	],
+	"find":
+	{
+		"height": 44.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"chosen_select_L",
+			"nasabah",
+			"function create",
+			"kredit",
+			"debit",
+			"Back",
+			"Simpan",
+			"Debit",
+			"name=\"code\"",
+			"name=\"norek\"",
+			"function store",
+			"nasabah*",
+			"function store",
+			"Kode*",
+			"Riwayat",
+			"id=\"norek",
+			"closemodel",
+			"datamodel",
+			"showModel",
+			"show model",
+			"datanasabah",
+			"tutup",
+			"Profile Information",
+			"Smart UI component which allows you to easily create wizard-like interfaces.",
+			"alan",
+			"pratinjau",
+			"tutup",
+			"pratinjau",
+			"chosen-select",
+			"nasabah",
+			"With chosen select uesr can fase chose from large in select input.",
+			"select2_demo_2",
+			"select2",
+			"Select2 also supports multi-value select boxes."
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "create.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19825,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10582,
+								10582
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4035.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1543,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1173,
+								1173
+							]
+						],
+						"settings":
+						{
+							"auto_name": "$(\".chosen_select_L\").chosen({",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 427.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/app/Http/Controllers/TabunganController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4344,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								166,
+								166
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Applications/XAMPP/xamppfiles/htdocs/pdk_abah/resources/views/backEnd/users/create.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6264,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5907,
+								5876
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2272.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 66.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "inspinia.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"user/crea",
+				"pdk_abah/resources/views/backEnd/users/create.blade.php"
+			],
+			[
+				"nasabah/create",
+				"pdk_abah/resources/views/backEnd/nasabah/create.blade.php"
+			],
+			[
+				"nasabah/edit",
+				"pdk_abah/resources/views/backEnd/nasabah/edit.blade.php"
+			],
+			[
+				"tabungan",
+				"pdk_abah/app/Http/Controllers/TabunganController.php"
+			],
+			[
+				"tabungan/create",
+				"pdk_abah/resources/views/backEnd/tabungan/create.blade.php"
+			],
+			[
+				"nasa",
+				"pdk_abah/app/Nasabah.php"
+			],
+			[
+				"tabungan/inde",
+				"pdk_abah/resources/views/backEnd/tabungan/index.blade.php"
+			],
+			[
+				"tabu",
+				"pdk_abah/app/Tabungan.php"
+			],
+			[
+				"tabungancontro",
+				"pdk_abah/app/Http/Controllers/TabunganController.php"
+			],
+			[
+				"routes/web",
+				"pdk_abah/routes/web.php"
+			],
+			[
+				"assetcontr",
+				"iconplus_ams/app/Http/Controllers/AssetController.php"
+			],
+			[
+				"asset/crea",
+				"iconplus_ams/resources/views/backEnd/asset/create.blade.php"
+			],
+			[
+				"nasabah/show",
+				"pdk_abah/resources/views/backEnd/nasabah/show.blade.php"
+			],
+			[
+				"tabungan/crea",
+				"pdk_abah/resources/views/backEnd/tabungan/create.blade.php"
+			],
+			[
+				"navbar",
+				"pdk_abah/resources/views/backLayout/NavBar.blade.php"
+			],
+			[
+				"nasabah/inde",
+				"pdk_abah/resources/views/backEnd/nasabah/index.blade.php"
+			],
+			[
+				"penadah/inde",
+				"pdk_abah/resources/views/backEnd/penadah/index.blade.php"
+			],
+			[
+				"status/show",
+				"pdk_abah/resources/views/backEnd/status/show.blade.php"
+			],
+			[
+				"lokasi/show",
+				"pdk_abah/resources/views/backEnd/lokasi/show.blade.php"
+			],
+			[
+				"lokasi/inde",
+				"pdk_abah/resources/views/backEnd/lokasi/index.blade.php"
+			],
+			[
+				"sampah/show",
+				"pdk_abah/resources/views/backEnd/sampah/show.blade.php"
+			],
+			[
+				"satuan/show",
+				"pdk_abah/resources/views/backEnd/satuan/show.blade.php"
+			],
+			[
+				"satuan/index",
+				"pdk_abah/resources/views/backEnd/satuan/index.blade.php"
+			],
+			[
+				"sampah/inde",
+				"pdk_abah/resources/views/backEnd/sampah/index.blade.php"
+			],
+			[
+				"penadah/show",
+				"pdk_abah/resources/views/backEnd/penadah/show.blade.php"
+			],
+			[
+				"user/",
+				"pdk_abah/resources/views/backEnd/users/create.blade.php"
+			],
+			[
+				"usercontro",
+				"pdk_abah/app/Http/Controllers/UserController.php"
+			],
+			[
+				"user/create",
+				"pdk_abah/resources/views/backEnd/users/create.blade.php"
+			],
+			[
+				"nasabah",
+				"pdk_abah/app/Nasabah.php"
+			],
+			[
+				"nasabahcon",
+				"pdk_abah/app/Http/Controllers/NasabahController.php"
+			],
+			[
+				"brand/show",
+				"iconplus_ams/resources/views/backEnd/brand/show.blade.php"
+			],
+			[
+				"nasabah/ed",
+				"resources/views/backEnd/nasabah/edit.blade.php"
+			],
+			[
+				"nasabahcontro",
+				"app/Http/Controllers/NasabahController.php"
+			],
+			[
+				"penadah/create",
+				"pdk_abah/resources/views/backEnd/penadah/create.blade.php"
+			],
+			[
+				"form_basi",
+				"Static_Full_Version/form_basic.html"
+			],
+			[
+				"lokasi",
+				"app/Lokasi.php"
+			],
+			[
+				"sampah/index",
+				"resources/views/backEnd/sampah/index.blade.php"
+			],
+			[
+				"sampah/edit",
+				"resources/views/backEnd/sampah/edit.blade.php"
+			],
+			[
+				"sampahcontro",
+				"app/Http/Controllers/SampahController.php"
+			],
+			[
+				"sampah/create",
+				"resources/views/backEnd/sampah/create.blade.php"
+			],
+			[
+				"sampah",
+				"app/Sampah.php"
+			],
+			[
+				"user/edit",
+				"resources/views/backEnd/users/edit.blade.php"
+			],
+			[
+				"role/edit",
+				"resources/views/backEnd/roles/edit.blade.php"
+			],
+			[
+				"satuan/edit",
+				"resources/views/backEnd/satuan/edit.blade.php"
+			],
+			[
+				"lokasi/create",
+				"resources/views/backEnd/lokasi/create.blade.php"
+			],
+			[
+				"lokasi/edit",
+				"resources/views/backEnd/lokasi/edit.blade.php"
+			],
+			[
+				"satuan/inde",
+				"resources/views/backEnd/satuan/index.blade.php"
+			],
+			[
+				"lokasi/",
+				"resources/views/backEnd/lokasi/create.blade.php"
+			],
+			[
+				"routes/we",
+				"routes/web.php"
+			],
+			[
+				"status.",
+				"app/Status.php"
+			],
+			[
+				"nav",
+				"resources/views/backLayout/NavBar.blade.php"
+			],
+			[
+				"",
+				"app/Http/Controllers/PenadahController.php"
+			],
+			[
+				"penada",
+				"app/Http/Controllers/PenadahController.php"
+			],
+			[
+				"penadah/",
+				"resources/views/backEnd/penadah/create.blade.php"
+			],
+			[
+				"penadah/edit",
+				"resources/views/backEnd/penadah/edit.blade.php"
+			],
+			[
+				"penad",
+				"app/Penadah.php"
+			],
+			[
+				"penadah",
+				"app/Http/Controllers/PenadahController.php"
+			],
+			[
+				"penadah/index",
+				"resources/views/backEnd/penadah/index.blade.php"
+			],
+			[
+				"role/index",
+				"resources/views/backEnd/roles/index.blade.php"
+			],
+			[
+				"user/index",
+				"resources/views/backEnd/users/index.blade.php"
+			],
+			[
+				"sampahcontrol",
+				"app/Http/Controllers/SampahController.php"
+			],
+			[
+				"satuan",
+				"app/Satuan.php"
+			],
+			[
+				"satuan/create",
+				"resources/views/backEnd/satuan/create.blade.php"
+			],
+			[
+				"satuan/",
+				"resources/views/backEnd/satuan/create.blade.php"
+			],
+			[
+				"satuancontro",
+				"app/Http/Controllers/SatuanController.php"
+			],
+			[
+				"sampahconr",
+				"app/Http/Controllers/SampahController.php"
+			],
+			[
+				"status/create",
+				"resources/views/backEnd/status/create.blade.php"
+			],
+			[
+				"status/index",
+				"resources/views/backEnd/status/index.blade.php"
+			],
+			[
+				"user/sho",
+				"resources/views/backEnd/users/show.blade.php"
+			],
+			[
+				"user",
+				"app/Http/Controllers/UserController.php"
+			],
+			[
+				"dashboard",
+				"resources/views/backEnd/dashboard.blade.php"
+			],
+			[
+				"home",
+				"app/Http/Controllers/HomeController.php"
+			],
+			[
+				"sbucontro",
+				"app/Http/Controllers/SBUController.php"
+			],
+			[
+				"work",
+				"app/Http/Controllers/workorderController.php"
+			],
+			[
+				"workorder/",
+				"resources/views/backEnd/workorder/show.blade.php"
+			],
+			[
+				"app/asse",
+				"app/AssetSID.php"
+			],
+			[
+				"asset",
+				"app/AssetDetail.php"
+			],
+			[
+				"asset/edit",
+				"resources/views/backEnd/asset/edit.blade.php"
+			],
+			[
+				"asset/show",
+				"resources/views/backEnd/asset/show.blade.php"
+			],
+			[
+				"asset/sh",
+				"resources/views/backEnd/asset/show.blade.php"
+			],
+			[
+				"report/resu",
+				"resources/views/backEnd/report/result.blade.php"
+			],
+			[
+				"repotr",
+				"app/Http/Controllers/ReportController.php"
+			],
+			[
+				"asset/i",
+				"resources/views/backEnd/asset/index.blade.php"
+			],
+			[
+				"assetdetail",
+				"app/AssetDetail.php"
+			],
+			[
+				"assetsid",
+				"app/AssetSID.php"
+			],
+			[
+				"apiv1",
+				"app/Http/Controllers/Api/Apiv1Controller.php"
+			],
+			[
+				"assetcontro",
+				"app/Http/Controllers/AssetController.php"
+			],
+			[
+				"apiv",
+				"app/Http/Controllers/Api/Apiv1Controller.php"
+			],
+			[
+				"routes/api",
+				"routes/api.php"
+			],
+			[
+				"report/",
+				"resources/views/backEnd/report/result.blade.php"
+			],
+			[
+				"route/we",
+				"routes/web.php"
+			],
+			[
+				"reportcontro",
+				"app/Http/Controllers/ReportController.php"
+			],
+			[
+				"brand/edit",
+				"resources/views/backEnd/brand/edit.blade.php"
+			],
+			[
+				"brand/createeqi",
+				"resources/views/backEnd/brand/createequipment.blade.php"
+			],
+			[
+				"brandcontro",
+				"app/Http/Controllers/BrandController.php"
+			],
+			[
+				"asset/inde",
+				"resources/views/backEnd/asset/index.blade.php"
+			],
+			[
+				"assetcontroller",
+				"app/Http/Controllers/AssetController.php"
+			],
+			[
+				"asse",
+				"app/AssetDetail.php"
+			],
+			[
+				"api",
+				"app/Http/Controllers/Api/Apiv1Controller.php"
+			],
+			[
+				"log/inde",
+				"resources/views/backEnd/log/index.blade.php"
+			],
+			[
+				"sbu",
+				"app/Http/Controllers/SBUController.php"
+			],
+			[
+				"asset/create",
+				"resources/views/backEnd/asset/create.blade.php"
+			],
+			[
+				"brand",
+				"Brand.php"
+			],
+			[
+				"app/kategori",
+				"app/Kategori.php"
+			],
+			[
+				"kategoricontro",
+				"app/Http/Controllers/KategoriController.php"
+			],
+			[
+				"traits/detect",
+				"vendor/linearsoft/laravel-activitylog-backport/src/Traits/DetectsChanges.php"
+			],
+			[
+				"composer",
+				"composer.json"
+			],
+			[
+				"kategori/show",
+				"resources/views/backEnd/kategori/show.blade.php"
+			],
+			[
+				"sbu/create",
+				"resources/views/backEnd/sbu/create.blade.php"
+			],
+			[
+				"sbu/crea",
+				"resources/views/backEnd/sbu/createpop.blade.php"
+			],
+			[
+				"das",
+				"resources/views/backEnd/dashboard2.blade.php"
+			],
+			[
+				"dash",
+				"resources/views/backEnd/dashboard.blade.php"
+			],
+			[
+				"sid/create",
+				"resources/views/backEnd/sid/create.blade.php"
+			],
+			[
+				"sidcontro",
+				"app/Http/Controllers/sidController.php"
+			],
+			[
+				"au",
+				"app/Http/Controllers/Api/AuthController.php"
+			],
+			[
+				"log/index",
+				"resources/views/backEnd/log/index.blade.php"
+			],
+			[
+				"asset/index",
+				"resources/views/backEnd/asset/index.blade.php"
+			],
+			[
+				"brand/index",
+				"resources/views/backEnd/brand/index.blade.php"
+			],
+			[
+				"brandcontroller",
+				"app/Http/Controllers/BrandController.php"
+			],
+			[
+				"qrcode/i",
+				"resources/views/backEnd/qrcode/index.blade.php"
+			],
+			[
+				"qrc",
+				"app/Http/Controllers/QRController.php"
+			],
+			[
+				"log",
+				"app/Http/Controllers/LogController.php"
+			],
+			[
+				"log/",
+				"resources/views/backEnd/log/index.blade.php"
+			],
+			[
+				"login",
+				"pdk_abah/resources/views/auth/login.blade.php"
+			],
+			[
+				"brand/sh",
+				"resources/views/backEnd/brand/show.blade.php"
+			],
+			[
+				"workorder/inde",
+				"iconplus_ams/resources/views/backEnd/workorder/index.blade.php"
+			],
+			[
+				"sbu/show",
+				"resources/views/backEnd/sbu/showpop.blade.php"
+			],
+			[
+				"user/inde",
+				"resources/views/backEnd/users/index.blade.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 277.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

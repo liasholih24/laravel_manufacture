@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://127.0.0.1:8100/asset/create -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head><body id="wrapper" class="pace-done pace-done pace-done"><div class="pace  pace-inactive pace-inactive pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+  
+
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+      <title>	Create new Asset
+| Asset Management System</title>
+
+    <link media="all" type="text/css" rel="stylesheet" href="./Create new Asset _ Asset Management System_files/bootstrap.min.css">
+
+    <link media="all" type="text/css" rel="stylesheet" href="./Create new Asset _ Asset Management System_files/font-awesome.css">
+
+
+      <!-- Toastr style -->
+    <link media="all" type="text/css" rel="stylesheet" href="./Create new Asset _ Asset Management System_files/toastr.min.css">
+
+
+      <!-- Gritter -->
+    <link media="all" type="text/css" rel="stylesheet" href="./Create new Asset _ Asset Management System_files/jquery.gritter.css">
+
+
+    <link media="all" type="text/css" rel="stylesheet" href="./Create new Asset _ Asset Management System_files/animate.css">
+
+    <link media="all" type="text/css" rel="stylesheet" href="./Create new Asset _ Asset Management System_files/style.css">
+
+
+      <style>
+    .ibox { margin: 1px 2px 0px 0px !important }
+    .ibox.float-e-margins{ margin: 0px 2px !important}
+  </style>
+  <link media="all" type="text/css" rel="stylesheet" href="./Create new Asset _ Asset Management System_files/custom.css">
+
+  <link media="all" type="text/css" rel="stylesheet" href="./Create new Asset _ Asset Management System_files/select2.min.css">
+
+  
+  <!-- PAGE CONTAINER -->
+  <!-- BEGIN CONTAINER -->
+
+		    <!-- Navbar -->
+	         <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element"> <span>
+                    <img alt="image" class="img-circle" src="./Create new Asset _ Asset Management System_files/profile_small.jpg">
+                     </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="http://127.0.0.1:8100/asset/create#">
+                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Lia Siti</strong>
+                    </span> <span class="text-muted text-xs block"> <b class="caret"></b></span> </span> </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="http://127.0.0.1:8100/asset/create#">Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="http://127.0.0.1:8100/asset/create#">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    iAMS
+                </div>
+            </li>
+            <li>
+                <a href="http://127.0.0.1:8100/dashboard"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+            </li>
+                        <li>
+                <a href="http://127.0.0.1:8100/workorder"><i class="fa fa-calendar"></i> <span class="nav-label">Work Order</span></a>
+            </li>
+                        <li class="active">
+                <a href="http://127.0.0.1:8100/asset/create#"><i class="fa fa-list"></i> <span class="nav-label">Assets Management</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse in">
+                                      <li class="active">
+                      <a href="http://127.0.0.1:8100/asset">Asset List</a>
+                    </li>
+                  
+                    <li>
+                      <a href="http://127.0.0.1:8100/qrcode">QR Generator</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="http://127.0.0.1:8100/asset/create#"><i class="fa fa-database"></i> <span class="nav-label">Master Data</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                                      <li>
+                      <a href="http://127.0.0.1:8100/organization">Organization</a>
+                    </li>
+                                                        <li>
+                      <a href="http://127.0.0.1:8100/status">Status</a>
+                    </li>
+                                                        <li>
+                      <a href="http://127.0.0.1:8100/location">Location                                      </a>
+                    </li>
+                                                        <li>
+                      <a href="http://127.0.0.1:8100/sbu">SBU
+                      </a>
+                    </li>
+                                                        <li>
+                      <a href="http://127.0.0.1:8100/kategori">Asset Category</a>
+                    </li>
+                                                        <li>
+                      <a href="http://127.0.0.1:8100/brand">Brand of Assets             </a>
+                    </li>
+                                                        <li>
+                      <a href="http://127.0.0.1:8100/sid">SID Data </a>
+                    </li>
+                  
+                </ul>
+            </li>
+            <li>
+                <a href="http://127.0.0.1:8100/asset/create#"><i class="fa fa-cogs"></i> <span class="nav-label">System Setting</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                                      <li>
+                      <a href="http://127.0.0.1:8100/role">Roles</a>
+                    </li>
+                                                        <li>
+                      <a href="http://127.0.0.1:8100/user">User Management</a>
+                    </li>
+                                      <li>
+                      <a href="http://127.0.0.1:8100/asset/create#">Log Activity</a>
+                    </li>
+                </ul>
+            </li>
+</ul></div></nav>
+	      <!-- /Navbar -->
+
+        <!-- BEGIN CONTENT -->
+          <div id="page-wrapper" class="gray-bg dashbard-1" style="min-height: 679px;">
+        <!-- Navbar top -->
+          <div class="row border-bottom">
+<nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+<div class="navbar-header">
+    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="http://127.0.0.1:8100/asset/create#"><i class="fa fa-bars"></i> </a>
+</div>
+<ul class="nav navbar-top-links navbar-left">
+  <br>
+    <li><span class="m-r-sm text-muted welcome-message">Welcome to <strong>Amarta</strong>
+</span></li>
+</ul>
+    <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <span class="m-r-sm text-muted welcome-message">
+              <strong>8:45pm on Thursday</strong>, 10th August 2017        </span></li>
+            <li>
+              <form method="POST" action="http://127.0.0.1:8100/logout" accept-charset="UTF-8" class="form-inline"><input name="_token" type="hidden" value="pKmsVClObUvrylREG8s0ki5JihLEsJ9jgtZHFHNo">
+                    <input type="hidden" name="_token" value="pKmsVClObUvrylREG8s0ki5JihLEsJ9jgtZHFHNo">
+               <button type="submit" class="btn btn-w-m btn-link">
+                 <i class="fa fa-sign-out"></i> <b>Sign Out</b>
+               </button>
+              </form>
+            </li>
+    </ul>
+
+</nav>
+</div>
+        <!-- End Navbar top -->
+        <!-- beadcurms-->
+        <div class="row wrapper border-bottom white-bg page-heading">
+                  <div id="bread" class="col-lg-9">
+                    <h2> 	Create new Asset
+ <small> -   </small></h2>
+                    <ol class="breadcrumb">
+                                      <li class=""><a href="http://127.0.0.1:8100/dashboard">Dashboard</a></li>
+                                      <li class="active"><a href="http://127.0.0.1:8100/asset/create#"><b>	Create new Asset
+</b></a></li>
+                                    </ol>
+                  </div>
+        </div>
+        <!-- Begin Page -->
+          	<div class="wrapper wrapper-content">
+		<div class="row detail_content3">
+			<div class="col-lg-12 detail_content2" style="background-color: white">
+				<div class="row ibox-title">
+					<ol class="breadcrumb col-sm-6 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
+						<li class="">
+            	<a href="http://127.0.0.1:8100/asset">
+            		Asset
+            	</a>
+        		</li>
+        		<li class="">
+              <a href="http://127.0.0.1:8100/asset/create#">
+              	Add New
+							</a>
+        		</li>
+    			</ol>
+          <a href="http://127.0.0.1:8100/asset">
+            <button class="btn btn-sm btn-outline btn-warning pull-right">
+            	<i class="fa fa-arrow-circle-o-left" style="margin-right: 5px"></i> Back
+            </button>
+          </a>
+    		</div>
+				<div class="row ibox-content" style="min-height: 65vh; ">
+					<div class="col-xs-12 col-sm-22">
+						<form method="POST" action="http://127.0.0.1:8100/asset" accept-charset="UTF-8" class="form-horizontal"><input name="_token" type="hidden" value="pKmsVClObUvrylREG8s0ki5JihLEsJ9jgtZHFHNo">
+            <input class="form-control" name="created_by" type="hidden" value="1">
+          	<input class="form-control" name="updated_by" type="hidden" value="1">
+            <div class="form-group">
+              <label for="sbu_id" class="col-sm-2 control-label">SBU*</label>
+              <div class="col-sm-4 ">
+          		<select class="form-control select2_demo_1 select2-hidden-accessible" id="sbu" name="sbu_id" tabindex="-1" aria-hidden="true"><option selected="selected" disabled="disabled" hidden="hidden" value="">Select SBU</option><option value="1">SBU MEDAN</option><option value="2">SBU PEKANBARU</option><option value="3">SBU PALEMBANG</option><option value="4">SBU JAKARTA</option><option value="5">SBU BANDUNG</option><option value="6">SBU SEMARANG</option><option value="7">SBU SURABAYA</option><option value="8">SBU DENPASAR</option><option value="9">SBU BALIKPAPAN</option><option value="10">SBU MAKASSAR</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-sbu-container"><span class="select2-selection__rendered" id="select2-sbu-container" title="Select SBU">Select SBU</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+          		
+              </div>
+              <label for="type_id" class="col-sm-2 control-label">Type*</label>
+              <div class="col-sm-4 col-xs-12 ">
+                <select class="form-control select2_demo_1 select2-hidden-accessible" id="type" name="type_id" tabindex="-1" aria-hidden="true"><option selected="selected" disabled="disabled" hidden="hidden" value="">Select Type</option><option value="1">Perangkat Telekomunikasi</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-type-container"><span class="select2-selection__rendered" id="select2-type-container" title="Select Type">Select Type</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="pop" class="col-sm-2 control-label">POP*</label>
+              <div class="col-sm-4 col-xs-12 ">
+                <select name="pop_id" id="pop" class="form-control select2_demo_1 select2-hidden-accessible" data-placeholder="Select POP" tabindex="-1" aria-hidden="true">
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-pop-container"><span class="select2-selection__rendered" id="select2-pop-container"><span class="select2-selection__placeholder">Select POP</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                
+              </div>
+              <label for="category_id" class="col-sm-2 control-label">Category*</label>
+              <div class="col-sm-4 col-xs-12 ">
+                <select id="category" name="category_id" class="form-control select2_demo_1 select2-hidden-accessible" data-placeholder="Select Category" tabindex="-1" aria-hidden="true"><option value="2">Perangkat Jaringan</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-category-container"><span class="select2-selection__rendered" id="select2-category-container" title="Perangkat Jaringan">Perangkat Jaringan</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                
+            </div>
+            </div>
+            <div class="form-group">
+              <label for="building_id" class="col-sm-2 control-label">Building*</label>
+              <div class="col-sm-4 col-xs-12 ">
+                <select name="building_id" id="building" class="form-control select2_demo_1 select2-hidden-accessible" data-placeholder="Select Building" tabindex="-1" aria-hidden="true">
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-building-container"><span class="select2-selection__rendered" id="select2-building-container"><span class="select2-selection__placeholder">Select Building</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                
+              </div>
+              <label for="asset_category" class="col-sm-2 control-label">Asset Category*</label>
+              <div class="col-sm-4 col-xs-12 ">
+                <select id="asset_category" name="asset_category" class="form-control select2_demo_1 select2-hidden-accessible" data-placeholder="Select Category" tabindex="-1" aria-hidden="true"><option value="32">SFP </option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-asset_category-container"><span class="select2-selection__rendered" id="select2-asset_category-container" title="SFP ">SFP </span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                
+              </div>
+            </div>
+            <div class="form-group">
+
+              <label for="room_id" class="col-sm-2 control-label">Room</label>
+              <div class="col-sm-4 col-xs-12">
+                <select name="room_id" id="room" class="form-control select2_demo_1 select2-hidden-accessible" data-placeholder="Select Room" tabindex="-1" aria-hidden="true">
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-room-container"><span class="select2-selection__rendered" id="select2-room-container"><span class="select2-selection__placeholder">Select Room</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                
+              </div>
+              <label for="brand_id" class="col-sm-2 control-label">Brand*</label>
+              <div class="col-sm-4 ">
+                <select id="brand" name="brand" class="form-control select2_demo_1 select2-hidden-accessible" data-placeholder="Select Brand" tabindex="-1" aria-hidden="true">
+                  <option value="0">Select Brand</option>
+                                      <option value="1">3M </option>
+                                      <option value="2">6COM </option>
+                                      <option value="3">ABB </option>
+                                      <option value="4">ABBA </option>
+                                      <option value="5">ADVA </option>
+                                      <option value="6">AEC </option>
+                                      <option value="7">AEG </option>
+                                      <option value="8">AGM </option>
+                                      <option value="9">ALCATEL </option>
+                                      <option value="10">ALLIED TELESYN </option>
+                                      <option value="11">AMRICON </option>
+                                      <option value="12">ANTEX </option>
+                                      <option value="13">APC </option>
+                                      <option value="14">AROS </option>
+                                      <option value="15">ASCOM </option>
+                                      <option value="16">ASTELLO </option>
+                                      <option value="17">ATEN </option>
+                                      <option value="18">ATRIE </option>
+                                      <option value="19">AUDIO CODEC </option>
+                                      <option value="20">BELCOM </option>
+                                      <option value="21">BELDEN </option>
+                                      <option value="22">BELL </option>
+                                      <option value="23">BEM </option>
+                                      <option value="24">BSB </option>
+                                      <option value="25">CALIFORNIA </option>
+                                      <option value="26">CCOM </option>
+                                      <option value="27">CEGELEC </option>
+                                      <option value="28">CHANNEL </option>
+                                      <option value="29">CHANNEL MASTER </option>
+                                      <option value="30">CIS </option>
+                                      <option value="31">CISCO </option>
+                                      <option value="32">CODAN </option>
+                                      <option value="33">COMTREND </option>
+                                      <option value="34">CORECESS </option>
+                                      <option value="35">CORIANT </option>
+                                      <option value="36">CORINEX </option>
+                                      <option value="37">COSLIGHT </option>
+                                      <option value="38">CRONE </option>
+                                      <option value="39">CTC UNION </option>
+                                      <option value="40">DATATWIST </option>
+                                      <option value="41">DELTA </option>
+                                      <option value="42">DYNASTY </option>
+                                      <option value="43">EATON </option>
+                                      <option value="44">ECI </option>
+                                      <option value="45">ECOM </option>
+                                      <option value="46">ELAN </option>
+                                      <option value="47">EMERSON </option>
+                                      <option value="48">ENGENIUS </option>
+                                      <option value="49">ERICSSON </option>
+                                      <option value="50">FIBERHOME </option>
+                                      <option value="51">FINISAR </option>
+                                      <option value="52">FORTINET </option>
+                                      <option value="53">FORTUNA </option>
+                                      <option value="54">FUJIKURA </option>
+                                      <option value="55">FUJITSU </option>
+                                      <option value="56">GAMATRONIC </option>
+                                      <option value="57">GIGALIGTH </option>
+                                      <option value="58">GTEC </option>
+                                      <option value="59">HARIFF </option>
+                                      <option value="60">HARMER SIMMON </option>
+                                      <option value="61">HAZE </option>
+                                      <option value="62">HG GENUINE </option>
+                                      <option value="63">HOPPECKE </option>
+                                      <option value="64">HP </option>
+                                      <option value="65">HUAWEI </option>
+                                      <option value="66">HUGHES </option>
+                                      <option value="67">ICA </option>
+                                      <option value="68">ILEVO </option>
+                                      <option value="69">IMAX </option>
+                                      <option value="70">INFO ASIA </option>
+                                      <option value="71">INFORM </option>
+                                      <option value="72">IONTRONIC </option>
+                                      <option value="73">IP3 NETWORK </option>
+                                      <option value="74">JUNIPER </option>
+                                      <option value="75">JUPHOON </option>
+                                      <option value="76">JUTA </option>
+                                      <option value="77">KING TYPE </option>
+                                      <option value="78">KRAMER </option>
+                                      <option value="79">KYOWA </option>
+                                      <option value="80">LEOCH </option>
+                                      <option value="81">LG </option>
+                                      <option value="82">LINKSYS </option>
+                                      <option value="83">LITECH </option>
+                                      <option value="84">MAIN-NET </option>
+                                      <option value="85">MAIPU </option>
+                                      <option value="86">MARS ACTEL </option>
+                                      <option value="87">MATSUNAGA </option>
+                                      <option value="88">MATSUYAMA </option>
+                                      <option value="89">MEDIATRIX </option>
+                                      <option value="90">METAPOWER </option>
+                                      <option value="91">MICRONET </option>
+                                      <option value="92">MIKROTIK </option>
+                                      <option value="93">MOTOROLA </option>
+                                      <option value="94">MOXA </option>
+                                      <option value="95">MRV </option>
+                                      <option value="96">NEC </option>
+                                      <option value="97">NEXTGENWAVE </option>
+                                      <option value="98">NIPPRESS </option>
+                                      <option value="99">NJRC </option>
+                                      <option value="100">NOKIA </option>
+                                      <option value="101">NORSAT </option>
+                                      <option value="102">NORTEL NETWORK </option>
+                                      <option value="103">NSN </option>
+                                      <option value="104">NUERA </option>
+                                      <option value="105">OPNEXT </option>
+                                      <option value="106">ORION </option>
+                                      <option value="107">PACKETEER </option>
+                                      <option value="108">PANASONIC </option>
+                                      <option value="109">PATRIOT </option>
+                                      <option value="110">PATTON </option>
+                                      <option value="111">PCB </option>
+                                      <option value="112">PHILIPS </option>
+                                      <option value="113">PICOM </option>
+                                      <option value="114">PLANET </option>
+                                      <option value="115">PLP </option>
+                                      <option value="116">POWER KINGDOM </option>
+                                      <option value="117">POWER MATIC </option>
+                                      <option value="118">POWER ONE </option>
+                                      <option value="119">POWER WARE </option>
+                                      <option value="120">POWERKINETICS </option>
+                                      <option value="121">POWERSAFE </option>
+                                      <option value="122">PREMINET </option>
+                                      <option value="123">PRODELIN </option>
+                                      <option value="124">PROLINK </option>
+                                      <option value="125">PSU </option>
+                                      <option value="126">QUINTUM </option>
+                                      <option value="127">RAD </option>
+                                      <option value="128">RADVISION </option>
+                                      <option value="129">RAISECOM </option>
+                                      <option value="130">RITAR </option>
+                                      <option value="131">ROCKET </option>
+                                      <option value="132">SACRED SUN </option>
+                                      <option value="133">SAFT NIFE </option>
+                                      <option value="134">SAGEM </option>
+                                      <option value="135">SAMSUNG </option>
+                                      <option value="136">SANYODENKI </option>
+                                      <option value="137">SAT </option>
+                                      <option value="138">SCOPIA </option>
+                                      <option value="139">SEC </option>
+                                      <option value="140">SHARP </option>
+                                      <option value="141">SHINKWANG </option>
+                                      <option value="142">SHIRON </option>
+                                      <option value="143">SIEGES </option>
+                                      <option value="144">SIEMENS </option>
+                                      <option value="145">SMART </option>
+                                      <option value="146">SOLUNA </option>
+                                      <option value="147">SOLUTION </option>
+                                      <option value="148">SONNENSCHEIN </option>
+                                      <option value="149">SONUS </option>
+                                      <option value="150">SOPHO </option>
+                                      <option value="151">SOUNDWIN </option>
+                                      <option value="152">SPC </option>
+                                      <option value="153">SPOTLINK </option>
+                                      <option value="154">STARVIEW </option>
+                                      <option value="155">SUA </option>
+                                      <option value="156">SUNCOMM </option>
+                                      <option value="157">TAYLIN </option>
+                                      <option value="158">TBB </option>
+                                      <option value="159">TELWAYS </option>
+                                      <option value="160">TANDBERG </option>
+                                      <option value="161">TOTEN </option>
+                                      <option value="162">TRANSITION </option>
+                                      <option value="163">TUNDO </option>
+                                      <option value="164">VGEN </option>
+                                      <option value="165">VIASAT </option>
+                                      <option value="166">VISION </option>
+                                      <option value="167">VIVOTECH </option>
+                                      <option value="168">WAVIN </option>
+                                      <option value="169">WELLGATE </option>
+                                      <option value="170">WELLSEE </option>
+                                      <option value="171">WELLTECH </option>
+                                      <option value="172">WRI </option>
+                                      <option value="173">WTD </option>
+                                      <option value="174">YEALINK </option>
+                                      <option value="175">ZINWELL </option>
+                                      <option value="176">ZTE </option>
+                                      <option value="177">ZTT </option>
+                                      <option value="178">ZYXEL </option>
+                                      <option value="179">NO BRAND </option>
+                                      <option value="180">VAPEL</option>
+                                      <option value="181">SEMIKOM</option>
+                                      <option value="182">RACKMOUNT</option>
+                                      <option value="183">SWITCH</option>
+                                      <option value="184">ECOM</option>
+                                      <option value="185">SUNKAX</option>
+                                      <option value="186">GENUINE</option>
+                                  </select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-brand-container"><span class="select2-selection__rendered" id="select2-brand-container" title="6COM ">6COM </span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+
+              
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-6 ">
+              </div>
+              <label for="model_id" class="col-sm-2 control-label">Model*</label>
+              <div class="col-sm-4 col-xs-12 ">
+                <select id="model" name="model_id" class="form-control select2_demo_1 select2-hidden-accessible" data-placeholder="Select Model" tabindex="-1" aria-hidden="true"><option value="0">Select Model</option><option value="987">6C-WDM-0240A </option><option value="988">6C-WDM-0240B </option><option value="989">6C-WDM-0240B &amp; 6C-WDM-0240A </option><option value="990">6C-SFP+-ER </option><option value="991">6C-SFP+-LR </option><option value="992">6C-0301D </option><option value="1212">CWDM-1.25G-40-47 </option><option value="1213">CWDM 18Ch+ODP </option><option value="1214">CWDM-1.25G-40-55 </option><option value="1215">CWDM-1.25G-40-51 </option><option value="1216">CWDM-1.25G-40-61 </option><option value="1217">CWDM-1.25G-40-53 </option><option value="1218">CWDM 18Ch+Chasis19 </option><option value="1219">CWDM-1.25G-40-59 </option><option value="1220">CWDM-1.25G-40-57 </option><option value="1221">CWDM-1.25G-40-49 </option></select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-model-container"><span class="select2-selection__rendered" id="select2-model-container" title="6C-WDM-0240A ">6C-WDM-0240A </span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                
+              </div>
+
+            </div>
+
+              <div class="form-group">
+                <label for="rack" class="col-sm-2 control-label">Rack</label>
+                <div class="col-sm-4 ">
+                  <select name="rack" id="rack" class="form-control select2_demo_1 select2-hidden-accessible" data-placeholder="Select Rack" tabindex="-1" aria-hidden="true">
+                  </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-rack-container"><span class="select2-selection__rendered" id="select2-rack-container"><span class="select2-selection__placeholder">Select Rack</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                </div>
+                <label for="material" class="col-sm-2 control-label">Material*</label>
+                <div class="col-sm-4 ">
+                  <select id="material" name="material" class="form-control select2_demo_1 select2-hidden-accessible" data-placeholder="Select Material" tabindex="-1" aria-hidden="true"><option>1002060135          </option></select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 356px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="true" tabindex="0" aria-labelledby="select2-material-container" aria-owns="select2-material-results"><span class="select2-selection__rendered" id="select2-material-container" title="1002060135          ">1002060135          </span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>  
+                </div>
+              </div>
+
+              <div id="data-model"><input type="text" name="code" value="SFP-6C-WDM-0240A "><input type="text" name="name" value="6C-WDM-0240A "></div>
+
+              <div class="form-group">
+
+                  <label for="qr_label" class="col-sm-2 control-label">QR label</label>
+              		<div class="col-sm-4 ">
+                    <select class="form-control" id="qr_label" name="qr_label"><option selected="selected" disabled="disabled" hidden="hidden" value="">Select License</option><option value="1">Yes</option><option value="2">No</option></select>
+                  
+                  </div>
+
+
+                    <label for="investasi" class="col-sm-2 control-label">Investasi</label>
+                    <div class="col-sm-4 col-xs-12 ">
+                    	<input class="form-control" placeholder="Investasi" name="investasi" type="text" id="investasi">
+                      
+                    </div>
+
+              </div>
+              <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">Status*</label>
+                <div class="col-sm-4 ">
+                  <select class="form-control" id="status" name="status"><option value="2">Innactive</option><option value="3">Active</option></select>
+                    
+                  </div>
+
+                  <label for="io_no" class="col-sm-2 control-label">IO Number</label>
+                  <div class="col-sm-4 col-xs-12 ">
+                  	<input class="form-control" placeholder="IO Number." name="io_no" type="text" id="io_no">
+                    
+                  </div>
+                </div>
+                <div class="form-group ">
+                  <label for="acc_no" class="col-sm-2 control-label">Accounting Number</label>
+                  <div class="col-sm-4 col-xs-12 ">
+                    <input class="form-control" placeholder="Accounting Number." name="acc_no" type="text" id="acc_no">
+                    
+                  </div>
+
+                    <label for="asset_no" class="col-sm-2 control-label">Asset Number</label>
+                    <div class="col-sm-4 col-xs-12 ">
+                      <input class="form-control" placeholder="Asset Number." name="asset_no" type="text" id="asset_no">
+                      
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="serial_no" class="col-sm-2 control-label">Serial Number</label>
+                    <div class="col-sm-4 col-xs-12 ">
+                      <input class="form-control" placeholder="Serial Number." name="serial_no" type="text" id="serial_no">
+                      
+                    </div>
+
+
+                    </div>
+                    <div class="form-group">
+          						<label for="desc" class="col-sm-2 control-label">Desc</label>
+          						<div class="col-sm-4 col-xs-12 ">
+          									<textarea name="desc" type="text" class="form-control" placeholder="Description of Asset. [ Maks. 500 char ]" style="height: auto"></textarea>
+          								
+          						</div>
+          					</div>
+
+          								<div class="hr-line-dashed"></div>
+            <div class="form-group">
+							<a href="http://127.0.0.1:8100/asset" class="detail2 btn btn-md btn-outline btn-danger pull-right">  <i class="fa fa-times-circle"></i> Cancel</a>
+	      				<button type="submit" class="create_mdl btn btn-outline btn-primary pull-right" style="margin-right: 20px; ">
+	                <i class="fa fa-plus-circle"></i>  Create
+	              </button>
+      				
+    				</div>
+    				</form>
+    			</div>
+    		</div>
+  		</div>
+		</div>
+	</div>
+        <!-- End Page -->
+
+  <div class="footer">
+    <div class="pull-right">
+        <strong>Copyright</strong> PT. Indonesia Comnets Plus © 2017
+    </div>
+</div>
+
+</div>
+          <!-- END CONTENT -->
+          <!-- Mainly scripts -->
+          <script src="./Create new Asset _ Asset Management System_files/jquery-2.1.1.js"></script>
+
+          <script src="./Create new Asset _ Asset Management System_files/bootstrap.min.js"></script>
+
+          <script src="./Create new Asset _ Asset Management System_files/jquery.metisMenu.js"></script>
+
+          <script src="./Create new Asset _ Asset Management System_files/jquery.jeditable.js"></script>
+
+          <script src="./Create new Asset _ Asset Management System_files/jquery.slimscroll.min.js"></script>
+
+
+
+          <!-- Peity -->
+          <script src="./Create new Asset _ Asset Management System_files/jquery.peity.min.js"></script>
+
+          <script src="./Create new Asset _ Asset Management System_files/peity-demo.js"></script>
+
+
+          <!-- Custom and plugin javascript -->
+          <script src="./Create new Asset _ Asset Management System_files/inspinia.js"></script>
+
+          <script src="./Create new Asset _ Asset Management System_files/pace.min.js"></script>
+
+
+          <!-- jQuery UI -->
+          <script src="./Create new Asset _ Asset Management System_files/jquery-ui.min.js"></script>
+
+          <!-- GITTER -->
+          <script src="./Create new Asset _ Asset Management System_files/jquery.gritter.min.js"></script>
+
+          <!-- Sparkline -->
+          <script src="./Create new Asset _ Asset Management System_files/jquery.sparkline.min.js"></script>
+
+
+          <!-- Sparkline demo data  -->
+          <script src="./Create new Asset _ Asset Management System_files/sparkline-demo.js"></script>
+
+
+
+          <!-- Toastr -->
+          <script src="./Create new Asset _ Asset Management System_files/toastr.min.js"></script>
+
+ <script src="./Create new Asset _ Asset Management System_files/icheck.min.js"></script>
+
+<script src="./Create new Asset _ Asset Management System_files/select2.full.min.js"></script>
+
+
+<script>
+var csrf = $('meta[name="csrf-token"]').attr('content');
+ jQuery(document).ready(function() {
+// fungsi pilih sbu
+$('#sbu').on('change', function(e){
+		 console.log(e);
+		 var sbu_id = e.target.value;
+
+		 $.get('/pop?sbu_id=' + sbu_id, function(data){  // Ganti bagian ini......
+
+			 $('#pop').empty();
+			  $('#pop').append('<option value="0">Select POP</option>');
+			 $.each(data, function(index, subcatObj){
+				 $('#pop').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+			 });
+		 });
+	 });
+
+	 // fungsi pilih model/building
+	 $('#pop').on('change', function(e){
+	 		 console.log(e);
+	 		 var pop_id = e.target.value;
+	 		 //ajax
+	 		 $.get('/building?pop_id=' + pop_id, function(data){  // Ganti bagian ini......
+
+	 			 $('#building').empty();
+	 			  $('#building').append('<option value="0">Select Building</option>');
+	 			 $.each(data, function(index, subcatObj){
+	 				 $('#building').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+	 			 });
+	 		 });
+
+       $.get('/rack?pop_id=' + pop_id, function(data){  // Ganti bagian ini......
+
+	 			 $('#rack').empty();
+	 			  $('#rack').append('<option value="0">Select Rack</option>');
+	 			 $.each(data, function(index, subcatObj){
+	 				 $('#rack').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+	 			 });
+	 		 });
+	 	 });
+     //pilih fingsi room
+     // fungsi pilih model/building
+  	 $('#building').on('change', function(e){
+  	 		 console.log(e);
+  	 		 var building_id = e.target.value;
+  	 		 //ajax
+  	 		 $.get('/room?building_id=' + building_id, function(data){  // Ganti bagian ini......
+
+  	 			 $('#room').empty();
+  	 			  $('#room').append('<option value="0">Select Room</option>');
+  	 			 $.each(data, function(index, subcatObj){
+  	 				 $('#room').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+  	 			 });
+  	 		 });
+  	 	 });
+       //pilih type
+       $('#type').on('change', function(e){
+       		 console.log(e);
+       		 var type_id = e.target.value;
+
+       		 $.get('/category?type_id=' + type_id, function(data){  // Ganti bagian ini......
+
+       			 $('#category').empty();
+       			  $('#category').append('<option value="0">Select Category</option>');
+       			 $.each(data, function(index, subcatObj){
+       				 $('#category').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+       			 });
+       		 });
+       	 });
+
+         // fungsi pilih asset category
+        $('#category').on('change', function(e){
+            console.log(e);
+            var category_id = e.target.value;
+
+            $.get('/assetcategory?category_id=' + category_id, function(data){  // Ganti bagian ini......
+
+              $('#asset_category').empty();
+               $('#asset_category').append('<option value="0">Select Asset Category</option>');
+              $.each(data, function(index, subcatObj){
+                $('#asset_category').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+              });
+            });
+          });
+
+         //funsgi pilih brand/model
+         $('#brand').on('change', function(e){
+            console.log(e);
+            var brand_id = e.target.value;
+            //ajax
+            $.get('/brandmodel?brand_id=' + brand_id, function(data){  // Ganti bagian ini......
+
+              $('#model').empty();
+               $('#model').append('<option value="0">Select Model</option>');
+              $.each(data, function(index, subcatObj){
+                $('#model').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+              });
+            });
+
+          });
+          $('#model').on('change', function(e){
+             console.log(e);
+             var model_id = e.target.value;
+             //ajax
+             $.get('/model?model_id=' + model_id, function(data){  // Ganti bagian ini......
+
+               $('#data-model').empty();
+              // $('#model-data').empty();
+            //   $('#modelname').append('<input type="text" value="0">');
+               $.each(data, function(index, subcatObj){
+               $('#data-model').append('<input type="text" name="code" value="'+subcatObj.code+'"><input type="text" name="name" value="'+subcatObj.name+'">');
+            //  $('#data-model').append('<a class="remove btn btn-outline btn-sm btn-danger pull-right" style="margin-left: 20px; margin-top: 20px"><i class="fa fa-eye-slash"></i>  Hide Data</a>');
+
+              });
+             });
+
+             //categorybybrand
+             $.get('/categorybybrand?model_id=' + model_id, function(data){  // Ganti bagian ini......
+               $('#category').empty();
+               $('#category').append('<option value="0">Select Category</option>');
+               $.each(data, function(index, subcatObj){
+                 $("#category").select2('destroy').empty().select2({data: [{id: subcatObj.id, text: subcatObj.name }]});
+
+               });
+             });
+             //assetcategorybybrand
+             $.get('/astcategorybybrand?model_id=' + model_id, function(data){  // Ganti bagian ini......
+
+               $('#asset_category').empty();
+                 $('#asset_category').append('<option value="0">Select Asset Category</option>');
+               $.each(data, function(index, subcatObj){
+                  $("#asset_category").select2('destroy').empty().select2({data: [{id: subcatObj.id, text: subcatObj.name }]});
+               });
+             });
+             //material
+             $.get('/materialbybrand?model_id=' + model_id, function(data){  // Ganti bagian ini......
+
+            //   $('#material').empty();
+              //   $('#material').append('<option value="0">Select Material</option>');
+               $.each(data, function(index, subcatObj){
+                  $("#material").select2('destroy').empty().select2({data: [{id: subcatObj.id, text: subcatObj.name }]});
+               });
+             });
+           });
+           //filter by material
+           $('#material').on('change', function(e){
+              console.log(e);
+              var material = e.target.value;
+              //ajax
+
+              //categorybybrand
+              $.get('/categorybymaterial?material=' + material, function(data){  // Ganti bagian ini......
+
+                $('#category').empty();
+                $('#category').append('<option value="0">Select Category</option>');
+                $.each(data, function(index, subcatObj){
+                  $("#category").select2('destroy').empty().select2({data: [{id: subcatObj.id, text: subcatObj.name }]});
+                });
+              });
+              //assetcategorybybrand
+              $.get('/astcategorybymaterial?material=' + material, function(data){  // Ganti bagian ini......
+
+                $('#asset_category').empty();
+                $('#asset_category').append('<option value="0">Select Asset Category</option>');
+                $.each(data, function(index, subcatObj){
+                  $("#asset_category").select2('destroy').empty().select2({data: [{id: subcatObj.id, text: subcatObj.name }]});
+
+                });
+              });
+              //brandbymaterial
+              $.get('/brandbymaterial?material=' + material, function(data){  // Ganti bagian ini......
+
+                $('#brand').empty();
+                $('#brand').append('<option value="0">Select Brand</option>');
+                $.each(data, function(index, subcatObj){
+                  $("#brand").select2('destroy').empty().select2({data: [{id: subcatObj.id, text: subcatObj.name }]});
+
+                });
+              });
+              //modelbymaterial
+              $.get('/modelbymaterial?material=' + material, function(data){  // Ganti bagian ini......
+
+                $('#data-model').empty();
+                $('#model').empty();
+                $('#model').append('<option value="0">Select Model</option>');
+                $.each(data, function(index, subcatObj){
+                  $("#model").select2('destroy').empty().select2({data: [{id: subcatObj.id, text: subcatObj.name }]});
+                  $('#data-model').append('<input type="text" name="code" value="'+subcatObj.code+'"><input type="text" name="name" value="'+subcatObj.name+'">');
+               //  $('#data-model').append('<a class="remove btn btn-outline btn-sm btn-danger pull-right" style="margin-left: 20px; margin-top: 20px"><i class="fa fa-eye-slash"></i>  Hide Data</a>');
+
+                });
+              });
+            });
+          //i-checks
+				$('.i-checks').iCheck({
+						checkboxClass: 'icheckbox_square-green',
+						radioClass: 'iradio_square-green',
+				});
+
+		$(".select2_demo_1").select2();
+		});
+</script>
+
+
+ 
+<span class="select2-container select2-container--default select2-container--open" style="position: absolute; top: 479px; left: 1037.64px;"><span class="select2-dropdown select2-dropdown--below" dir="ltr" style="width: 356px;"><span class="select2-search select2-search--dropdown"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="textbox"></span><span class="select2-results"><ul class="select2-results__options" role="tree" id="select2-material-results" aria-expanded="true" aria-hidden="false"><li class="select2-results__option loading-results" role="treeitem" aria-disabled="true">Searching…</li></ul></span></span></span></body></html>

@@ -1,0 +1,9 @@
+vendor
+public/storage
+.env
+app/.DS_Store
+resources/.DS_Store
+config/.DS_Store
+.DS_Store
+bootstrap/
+storage*
