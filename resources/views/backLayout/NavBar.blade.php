@@ -54,11 +54,7 @@
             <li {{{ (Request::is('item*','kategori*','status*','satuan*','penadah*','lokasi*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Master Data</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                  @if (Sentinel::getUser()->hasAnyAccess(['penadah*']))
-                    <li {{{ (Request::is('penadah*') ? 'class=active' : '') }}}>
-                      <a href="{{route('penadah.index')}}">Supplier</a>
-                    </li>
-                    @endif
+              
                   @if (Sentinel::getUser()->hasAnyAccess(['item*','kategori*']))
                     <li {{{ (Request::is('item*','kategori*') ? 'class=active' : '') }}}>
                       <a href="{{route('item.index')}}">Barang</a>
