@@ -74,11 +74,9 @@ border: 1px solid #f8ac59 !important;
     <tr>
         <th>No.</th>
         <th>Kode</th>
-        <th>Nama Barang</th>
-        <th>Nilai Jual</th>
-        <th>Nilai Beli</th>
-        <th>Deskripsi</th>
-        <th>Tgl.Expire</th>
+        <th>Nama</th>
+        <th>Kategori</th>
+        <th>Brand</th>
         <th>Updated By</th>
         <th>Status</th>
         <th>Actions</th>
@@ -92,10 +90,8 @@ border: 1px solid #f8ac59 !important;
       <td>{{$i}}</td>
       <td>{{$table->code}}</td>
       <td>{{$table->name}}</td>
-      <td>{{$table->sell_price}}{!! empty($table->getsatuan->code)?"<i>No Data</i>":"/".$table->getsatuan->code !!}</td>
-      <td>{{$table->buy_price}}{!! empty($table->getsatuan->code)?"<i>No Data</i>":"/".$table->getsatuan->code!!}</td>
-      <td>{!! empty($table->note)?"<i>Tidak ada deskripsi</i>":$table->note !!}</td>
-      <td>{!! empty($table->expire_date)?"<i>Not Set</i>": $table->expire_date !!}</td>
+      <td>{{$table->parent->name}}</td>
+      <td>{!! empty($table->brand->name)? "<i>No Brand</i>" : $table->brand->name !!}</td>
       <td>{!! empty($table->updatedby->first_name)?"": $table->updatedby->first_name!!} {!! empty($table->updatedby->last_name)?"": $table->updatedby->last_name!!}</td>
       <td>
         @if( $table->status == "3")

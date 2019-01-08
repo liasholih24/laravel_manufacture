@@ -78,15 +78,14 @@ class ItemController extends Controller
         $id = $id;
         $item = Item::where('status',3)->where('id','=',$id)->first();
         $categories = Item::where('status',3)->get();
-        $activations = Status::where('parent_id','=','1')->orderby('id','desc')->get()->pluck('name','id');
         $satuans = Satuan::where('status','=',3)->get()->pluck('name','id');
-        $types = Status::where('parent_id','=','16')->get()->pluck('name','id');
+       
         $level = 0;
         if ($id==0) {
           $item = Item::where('status',3)->where('nesting','=',1)->get();
         }
         $datenow = date("Y-m-d");
-        return view('backEnd.item.create',compact('item','activations','categories','level','id','satuans','types','datenow'));
+        return view('backEnd.item.create',compact('item','categories','level','id','satuans','datenow'));
     }
 
 
