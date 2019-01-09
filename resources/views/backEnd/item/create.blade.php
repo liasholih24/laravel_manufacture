@@ -70,7 +70,7 @@ Tambah Baru
                 </div>
                 {!! Form::label('brand', 'Brand*', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5 col-xs-12">
-                  {{ Form::select('brand', $satuans, null, ['class' => 'form-control chosen-select','placeholder' => 'Pilih Brand']) }}
+                  {{ Form::select('brand', $brands, null, ['class' => 'form-control chosen-select','placeholder' => 'Pilih Brand']) }}
                   
                   {!! $errors->first('brand', '<p class="help-block">:message</p>') !!}
                 </div>
@@ -81,7 +81,7 @@ Tambah Baru
                 {!! Form::label('note', 'Deskripsi', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5 col-xs-12">
                   {!! Form::textarea('note', null, ['class' => 'form-control', 'rows' => '2', 'placeholder' => 'Deskripsi [Max: 500 Katakter]']) !!}
-                  {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
+                  {!! $errors->first('note', '<p class="help-block">:message</p>') !!}
                 </div>
                 {!! Form::label('satuan', 'Satuan*', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5 col-xs-12">

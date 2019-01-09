@@ -139,3 +139,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/refpb', 'PembelianController@refpb');
     Route::get('/getharga', 'PembelianController@getharga');
 });
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('brand', 'BrandController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('supplier', 'SupplierController');
+});

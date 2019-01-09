@@ -31,9 +31,7 @@ class Item extends Node {
   public function updatedby(){
     return $this->hasOne('App\User','id','updated_by');
   }
-   public function getstatus(){
-    return $this->hasOne('App\Status','id','status');
-  }
+
 
   // 'parent_id' column name
   protected $parentColumn = 'parent_id';
