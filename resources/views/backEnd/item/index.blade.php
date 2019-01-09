@@ -90,7 +90,7 @@ border: 1px solid #f8ac59 !important;
   <tr>
       <td>{{$i}}</td>
       <td>{{$table->code}}</td>
-      <td>{{$table->name}}</td>
+      <td>{{$table->name}}</td> 
       <td>{{$table->parent->name}}</td>
       <td>{!! empty($table->brand->name)? "<i>No Brand</i>" : $table->brand->name !!}</td>
       <td>{{$table->getsatuan->name}}</td>

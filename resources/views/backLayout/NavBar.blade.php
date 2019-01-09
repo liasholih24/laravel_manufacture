@@ -57,13 +57,13 @@
 
                    @if (Sentinel::getUser()->hasAnyAccess(['supplier*']))
                     <li {{{ (Request::is('supplier*') ? 'class=active' : '') }}}>
-                      <a href="{{route('item.index')}}">Supplier</a>
+                      <a href="{{route('supplier.index')}}">Supplier</a>
                     </li>
                     @endif              
                    @if (Sentinel::getUser()->hasAnyAccess(['item*','kategori*']))
                     <li {{{ (Request::is('item*','kategori*') ? 'class=active' : '') }}}>
                       <a href="{{route('item.index')}}">Barang</a>
-                    </li>
+                    </li> 
                     @endif
                     @if (Sentinel::getUser()->hasAnyAccess(['brand*']))
                     <li {{{ (Request::is('brand*') ? 'class=active' : '') }}}>
