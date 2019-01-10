@@ -145,3 +145,9 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web']], function () {
 	Route::resource('supplier', 'SupplierController');
 });
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('pakan', 'pakanController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('produksi', 'ProduksiController');
+});
