@@ -56,8 +56,8 @@
             </li>
           @endif
           
-          @if (Sentinel::getUser()->hasAnyAccess(['item*','brand*','kategori.*','satuan.*']))
-            <li {{{ (Request::is('item*','kategori*','status*','satuan*') ? 'class=active' : '') }}}>
+          @if (Sentinel::getUser()->hasAnyAccess(['item*','kategori.*','satuan.*','supplier*','lokasi*','pakan*']))
+            <li {{{ (Request::is('item*','kategori*','status*','satuan*','supplier*','lokasi*','pakan*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Master Data</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                    @if (Sentinel::getUser()->hasAnyAccess(['item*','kategori*']))
@@ -65,30 +65,12 @@
                       <a href="{{route('item.index')}}">Barang</a>
                     </li> 
                     @endif
-                    @if (Sentinel::getUser()->hasAnyAccess(['brand*']))
-                    <li {{{ (Request::is('brand*') ? 'class=active' : '') }}}>
-                      <a href="{{route('brand.index')}}">Brand</a>
-                    </li>
-                    @endif
                     @if (Sentinel::getUser()->hasAnyAccess(['satuan*']))
                     <li {{{ (Request::is('satuan*') ? 'class=active' : '') }}}>
                       <a href="{{route('satuan.index')}}">Satuan</a>
                     </li>
                     @endif
-                    @if (Sentinel::getUser()->hasAnyAccess(['pakan*']))
-                    <li {{{ (Request::is('pakan*') ? 'class=active' : '') }}}>
-                      <a href="{{route('pakan.index')}}">Komposisi Pakan</a>
-                    </li>
-                    @endif
-                </ul>
-            </li>
-          @endif
-          @if (Sentinel::getUser()->hasAnyAccess(['lokasi*','status*','supplier*']))
-            <li {{{ (Request::is('status*','lokasi*') ? 'class=active' : '') }}}>
-                <a href="#"><i class="fa fa-th-list"></i> <span class="nav-label">Referensi</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-
-                   @if (Sentinel::getUser()->hasAnyAccess(['supplier*']))
+                    @if (Sentinel::getUser()->hasAnyAccess(['supplier*']))
                     <li {{{ (Request::is('supplier*') ? 'class=active' : '') }}}>
                       <a href="{{route('supplier.index')}}">Supplier</a>
                     </li>
@@ -98,14 +80,18 @@
                       <a href="{{route('lokasi.index')}}">Kandang</a>
                     </li>
                     @endif
-                    @if (Sentinel::getUser()->hasAnyAccess(['status*']))
-                    <li {{{ (Request::is('status*') ? 'class=active' : '') }}}>
-                      <a href="{{route('status.index')}}">Status</a>
+                    @if (Sentinel::getUser()->hasAnyAccess(['pakan*']))
+                    <li {{{ (Request::is('pakan*') ? 'class=active' : '') }}}>
+                      <a href="{{route('pakan.index')}}">Komposisi Pakan</a>
                     </li>
                     @endif
+                    <li>
+                      <a href="">Customer</a>
+                    </li>
                 </ul>
             </li>
-            @endif
+          @endif
+        
              @if (Sentinel::getUser()->hasAnyAccess(['stocks*','rekapitulasi*','laporan.*']))
            
             <li {{{ (Request::is('stocks*','rekapitulasi/stocks*','laporan*','rekapitulasi*') ? 'class=active' : '') }}}>

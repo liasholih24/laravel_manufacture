@@ -78,7 +78,7 @@ Kelola Data Kandang
   <tr>
       <td>{{$i}}</td>
       <td>{{$table->name}}</td>
-      <td>{{$table->parent()->first()->name}}</td>
+      <td>{{$table->parent()->first()->name}}</td> 
       <td>{!! empty($table->notes)?"<i>Tidak ada Deskripsi</i>":$table->notes !!}</td>
      <td>{{$table->updated_at}}</td>
       <td>{{$table->updatedby->first_name}} {{$table->updatedby->last_name}}</td>
