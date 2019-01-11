@@ -52,37 +52,37 @@ Kelola Data Satuan
             <table class="table table-striped table-bordered table-hover" id="tblsatuan">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Kode</th>
                     <th>Nama</th>
                     <th>Nilai Standar</th>
                     <th>Last Update</th>
                     <th>Updated By</th>
-                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
+            <?php $i = 0?>
             @foreach($satuan as $item)
+            <?php $i++ ?>
                 <tr>
-                    <td>{{ $item->id }}</td>
+                    <td>{{ $i }}</td>
                     <td>{{ $item->code }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->standard_value }} {{ empty($item->getbasis->name)? $item->code : $item->getbasis->code }}</td>
-                   
                     <td>{!! empty($item->updated_at)? "<i>No Updated</i>" : $item->updated_at !!}</td>
                     <td>{!! empty($item->updatedby->first_name)?"<i>No Updated</i>": $item->updatedby->first_name !!} {!! empty($item->updatedby->last_name)?"<i></i>" : $item->updatedby->last_name !!}</td>
-                    <td>
-                    @if( $item->status == "3")
-                    <a href="#" class="btn btn-xs btn-success btn-outline active">Active</a>
-                   @else
-                  <a href="#" class="btn btn-xs btn-default btn-outline">Inactive</a>
-                  @endif
-                </td>
+                  
                     <td>
                         <a href="{{ url('satuan/' . $item->id . '/edit') }}" class="btn btn-primary btn-outline btn-xs">Edit</a> 
-                        <a href="{{ url('satuan/' . $item->id . '') }}" class="btn btn-primary  btn-outline btn-xs">View</a> 
-                       
+                        {!! Form::open([
+                            'method'=>'DELETE',
+                            'url' => ['satuan', $item->id],
+                            'style' => 'display:inline',
+                            'onsubmit' => 'return ConfirmDelete()'
+                        ]) !!}
+                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
+                         {!! Form::close() !!}
                     </td>
                 </tr>
             @endforeach
@@ -101,8 +101,14 @@ Kelola Data Satuan
 <script type="text/javascript">
     $(document).ready(function(){
         var oTable = $('#tblsatuan').DataTable();
-
-
     });
+    function ConfirmDelete()
+    {
+    var x = confirm("Are you sure you want to delete?");
+    if (x)
+        return true;
+    else
+        return false;
+    }
 </script>
 @endsection
