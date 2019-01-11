@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Pengajuan;
+use App\DetailPengajuan;
 use App\Item;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Auth;
 use Session;
 use Validator;
 use Sentinel;
@@ -51,12 +53,26 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        $flight = new Flight;
-        $flight->name = $request->name;
-        $flight->save();
-
-        Session::flash('alert-success', 'Transfer '.$model->name.' is created successfully');
+        $number = Pengajuan::max('number');
+        if($number==null){
+            $number = 'PG-000001';
+        }
+        else{
+            $number = 'PG-'.sprintf('%06d', substr($number, 3) + 1);
+        }
+        $pengajuan = new Pengajuan;
+        $pengajuan->number = $number;
+        $pengajuan->date = $request->date;
+        $pengajuan->desc = $request->desc;
+        $pengajuan->save();
+        for($i=0;$i<count($request->item_id);$i++){
+            $detail = new DetailPengajuan;
+            $detail->pengajuan_id = $pengajuan->id;
+            $detail->item_id = $request->item_id[$i];
+            $detail->qty = $request->qty[$i];
+            $detail->save();
+        }
+        Session::flash('alert-success', 'Pengajuan berhasil dibuat.');
         return redirect('pengajuan');
     }
 
@@ -69,21 +85,12 @@ class PengajuanController extends Controller
      */
     public function show($id)
     {
-        $transfer = Transfer::findOrFail($id);
-
-        return view('backEnd.transfer.show', compact('transfer'));
+        
     }
 
     public function print($id)
     {
-        $transfer = Transfer::findOrFail($id);
-        $details = DB::select(
-                   DB::raw("SELECT d.*, s.name as sampah FROM detailtransfers d 
-                            JOIN sampahs s ON s.id = d.sampah
-                            WHERE d.noref = '$transfer->id'"));
-  
-
-        return view('backEnd.transfer.print', compact('transfer','details'));
+        
     }
 
     /**
@@ -95,9 +102,10 @@ class PengajuanController extends Controller
      */
     public function edit($id)
     {
-        $transfer = Transfer::findOrFail($id);
-
-        return view('backEnd.transfer.edit', compact('transfer'));
+        $pengajuan = Pengajuan::findOrFail($id);
+        $detail = DetailPengajuan::where('pengajuan_id', $id)->get();
+        $item = Item::where('nesting', 1)->get();
+        return view('backEnd.pengajuan.edit', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item]);
     }
 
     /**
@@ -107,24 +115,23 @@ class PengajuanController extends Controller
      *
      * @return Response
      */
-    public function update($id, Request $request)
+    public function update(Request $request, Pengajuan $pengajuan)
     {
-    if ($this->validator($request)->fails()) {
-        return redirect()->back()
-                    ->withErrors($this->validator($request))
-                    ->withInput();
-    }
-        
-        $transfer = Transfer::findOrFail($id);
-        $transfer->update($request->all());
-
-        $attributes = $transfer->getOriginal();
-
-        activity()->performedOn($transfer)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Transfer '.$transfer->name.' is updated successfully');
-
-        Session::flash('alert-success', ' Transfer '.$transfer->name.' is updated successfully');
-
-        return redirect('transfer');
+        $pengajuan = Pengajuan::findOrFail($pengajuan->id);
+        $pengajuan->date = $request->date;
+        $pengajuan->desc = $request->desc;
+        $pengajuan->save();
+        $detail = DetailPengajuan::where('pengajuan_id', $pengajuan->id);
+        $detail->delete();
+        for($i=0;$i<count($request->item_id);$i++){
+            $detail = new DetailPengajuan;
+            $detail->pengajuan_id = $pengajuan->id;
+            $detail->item_id = $request->item_id[$i];
+            $detail->qty = $request->qty[$i];
+            $detail->save();
+        }
+        Session::flash('alert-success', 'Pengajuan berhasil diubah.');
+        return redirect('pengajuan');
     }
 
     /**
@@ -136,17 +143,7 @@ class PengajuanController extends Controller
      */
     public function destroy($id)
     {
-        $transfer = Transfer::findOrFail($id);
-
-        $transfer->delete();
-
-        $attributes = $transfer->getOriginal();
-
-        activity()->performedOn($transfer)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Transfer '.$transfer->name.' is deleted successfully');
-
-        Session::flash('alert-warnig', ' Transfer '.$transfer->name.' is deleted successfully');
-
-        return redirect('transfer');
+        
     }
 
 }

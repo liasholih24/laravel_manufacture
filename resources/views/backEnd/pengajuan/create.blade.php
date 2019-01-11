@@ -74,7 +74,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="qty[]" class="form-control input-sm" required>
+                                                    <input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-sm btn-danger" onclick="hapusBaris(0)"><i class="fa fa-trash"></i></button>
@@ -134,12 +134,12 @@
                     '<select name="item_id[]" class="form-control input-sm select-item" required>' +
                         '<option value=""></option>' +
                         @foreach($item as $r)
-                        <option value="{{ $r->id }}">{{ $r->name }}</option>
+                        '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
                         @endforeach
                     '</select>' +
                 '</td>' +
                 '<td>' +
-                    '<input type="text" name="qty[]" class="form-control input-sm" required>' +
+                    '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
                     '<button class="btn btn-sm btn-danger" onclick="hapusBaris(' + nomor + ')"><i class="fa fa-trash"></i></button>' +

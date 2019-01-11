@@ -56,7 +56,8 @@
                                         <td>{{ $r->desc }}</td>
                                         <td>{{ empty($r->createdby->first_name) ? "" : $r->createdby->first_name }} {{ empty($r->createdby->last_name) ? "" : $r->createdby->last_name }}</td>
                                         <td>
-                                            <a href="{{ url('pengajuan/' . $r->id . '/print') }}" class="btn btn-outline btn-success btn-xs" target="_blank">Cetak Bukti</a>
+                                            <a href="{{ url('pengajuan/' . $r->id . '/edit') }}" class="btn btn-outline btn-warning btn-xs">Ubah</a>
+                                            <a href="{{ url('pengajuan/' . $r->id . '/print') }}" class="btn btn-outline btn-primary btn-xs" target="_blank">Cetak</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -82,7 +83,7 @@
     <script>
         $(document).ready(function(){
             var oTable = $('#tblpengajuan').DataTable({
-                order: [6, 'desc']
+                order: [0, 'desc']
             });
         });
     </script>
