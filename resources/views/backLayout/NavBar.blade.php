@@ -1,13 +1,13 @@
 <nav class="navbar-default navbar-static-side" role="navigation" style="position: fixed;">
-    <div class="sidebar-collapse">
+	<div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
-                <div class="dropdown profile-element"> <span>
-                   <img alt="image" width="40px" height="40px" style="object-fit: cover;" class="img-circle" src="{{ asset(Sentinel::getUser()->url_image) }}" />
-                     </span>
-                    <a href="#">
-                    <span class="block m-t-xs"> <strong class="font-bold">{{Sentinel::getUser()->first_name.' ' .Sentinel::getUser()->last_name }}</strong>
+                <div class="dropdown profile-element">
+					<span>
+                   		<img alt="image" width="40px" height="40px" style="object-fit: cover;" class="img-circle" src="{{ asset(Sentinel::getUser()->url_image) }}" />
                     </span>
+                    <a href="#">
+                    	<span class="block m-t-xs"> <strong class="font-bold">{{Sentinel::getUser()->first_name.' ' .Sentinel::getUser()->last_name }}</strong></span>
                     </a>
                 </div>
                 <div class="logo-element">
@@ -22,17 +22,17 @@
             @if (Sentinel::getUser()->hasAnyAccess(['nasabah*']))
             <li {{{ (Request::is('nasabah*') ? 'class=active' : '') }}}>
                 <a href="{{route('nasabah.index')}}"><i class="fa fa-users"></i> <span class="nav-label">Nasabah</span></a>
-
             </li>
             @endif
-             @if (Sentinel::getUser()->hasAnyAccess(['transfer.*']))
-            <li {{{ (Request::is('transfer*') ? 'class=active' : '') }}}>
+            @if (Sentinel::getUser()->hasAnyAccess(['pengajuan.*', 'penerimaan.*', 'pengeluaran.*', 'pemakaian.*', 'transfer.*']))
+            <li {{{ (Request::is('pengajuan*','penerimaan*','pengeluaran*','pemakaian*','transfer*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">Monitoring</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-
-                    <li>
-                      <a href="#">Pengajuan </a>
+                    @if (Sentinel::getUser()->hasAnyAccess(['pengajuan.*']))
+                    <li {{{ (Request::is('pengajuan*') ? 'class=active' : '') }}}>
+                      <a href="{{route('pengajuan.index')}}">Pengajuan </a>
                     </li>
+                    @endif
                     <li>
                       <a href="#">Penerimaan </a>
                     </li>
@@ -42,7 +42,7 @@
                     <li>
                       <a href="#">Pemakaian </a>
                     </li>
-                     @if (Sentinel::getUser()->hasAnyAccess(['transfer.*']))
+                    @if (Sentinel::getUser()->hasAnyAccess(['transfer.*']))
                     <li {{{ (Request::is('transfer*') ? 'class=active' : '') }}}>
                       <a href="{{route('transfer.index')}}">Transfer</a>
                     </li>
@@ -50,7 +50,7 @@
                 </ul>
             </li>
             @endif
-          @if (Sentinel::getUser()->hasAnyAccess(['penadah*','item*','kategori.*','satuan.*','lokasi*','status*']))
+          	@if (Sentinel::getUser()->hasAnyAccess(['penadah*','item*','kategori.*','satuan.*','lokasi*','status*']))
             <li {{{ (Request::is('item*','kategori*','status*','satuan*','penadah*','lokasi*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Master Data</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
@@ -82,8 +82,7 @@
                 </ul>
             </li>
             @endif
-             @if (Sentinel::getUser()->hasAnyAccess(['stocks*','rekapitulasi*','laporan.*']))
-           
+            @if (Sentinel::getUser()->hasAnyAccess(['stocks*','rekapitulasi*','laporan.*']))
             <li {{{ (Request::is('stocks*','rekapitulasi/stocks*','laporan*','rekapitulasi*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-area-chart"></i> <span class="nav-label">Laporan</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
@@ -106,10 +105,8 @@
                    @endif  
                 </ul>
             </li>
-         
             @endif
             @if (Sentinel::getUser()->hasAnyAccess(['role*','user*']))
-
             <li {{{ (Request::is('role*','user*','log*','posts*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label">System Setting</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
@@ -136,6 +133,6 @@
                 </ul>
             </li>
             @endif
-
-
+		</ul>
+	</div>
 </nav>

@@ -134,6 +134,11 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => ['web']], function () {
+    Route::resource('pengajuan', 'PengajuanController');
+    Route::get('pengajuan/{id}/print', ['uses' => 'PengajuanController@print', 'as' => 'pengajuan.print']);
+});
+
+Route::group(['middleware' => ['web']], function () {
 	Route::resource('pembelian', 'PembelianController');
     Route::get('pembelian/{id}/print', ['uses' => 'PembelianController@print', 'as' => 'pembelian.print']);
     Route::get('/refpb', 'PembelianController@refpb');
