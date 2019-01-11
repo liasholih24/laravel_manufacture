@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePenadahsTable extends Migration
+class CreatePakansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,11 @@ class CreatePenadahsTable extends Migration
     public function up()
     {
         
-            Schema::create('penadahs', function(Blueprint $table) {
+            Schema::create('pakans', function(Blueprint $table) {
                 $table->increments('id');
-                $table->string('code');
-                $table->string('name');
+                $table->string('name')->nullable();
                 $table->text('notes')->nullable();
-                $table->text('address')->nullable();
-                $table->integer('phone')->nullable();
-                $table->string('pic')->nullable();
-                $table->integer('status');
-                $table->integer('created_by');
-                $table->integer('updated_by');
-
+                $table->integer('created_by')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
             });
@@ -38,7 +31,7 @@ class CreatePenadahsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('penadahs');
+        Schema::drop('pakans');
     }
 
 }

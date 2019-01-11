@@ -8,6 +8,7 @@ use App\Item;
 use App\Log;
 use App\Status;
 use App\Satuan;
+use App\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -39,11 +40,11 @@ class ItemController extends Controller
      */
      public function index()
      {
-        $filters = Item::where('nesting',0)->get();
-        $table = Item::where('nesting',1)->get();
+        $filters = Item::where('nesting',0)->orderby('created_by','desc')->get();
+        $table = Item::where('nesting',1)->orderby('created_by','desc')->get();
           if(empty($table)){
-              $tables = Item::where('nesting',0)->get();
-            }else{$tables = Item::where('nesting',1)->get();}
+              $tables = Item::where('nesting',0)->orderby('created_by','desc')->get();
+            }else{$tables = Item::where('nesting',1)->orderby('created_by','desc')->get();}
        $id= false;
         return view('backEnd.item.index', compact('tables','filters','id'));
      }
@@ -67,26 +68,26 @@ class ItemController extends Controller
         $categories = Item::all();
         $activations = Status::where('parent_id','=','1')->orderby('id','desc')->get()->pluck('name','id');
         $satuans = Satuan::where('status','=',3)->get()->pluck('name','id');
+        $brands = Brand::get()->pluck('name','id');
         $types = Status::where('parent_id','=','16')->get()->pluck('name','id');
         $level = 0;
         $id = "";
         $datenow = date("Y-m-d");
-        return view('backEnd.item.create',compact('categories','activations','level','id','satuans','types','datenow'));
+        return view('backEnd.item.create',compact('categories','brands','activations','level','id','satuans','types','datenow'));
     }
     public function creates($id)
     {
         $id = $id;
-        $item = Item::where('status',3)->where('id','=',$id)->first();
-        $categories = Item::where('status',3)->get();
-        $activations = Status::where('parent_id','=','1')->orderby('id','desc')->get()->pluck('name','id');
+        $item = Item::where('status',1)->where('id','=',$id)->first();
+        $categories = Item::where('status',1)->get();
         $satuans = Satuan::where('status','=',3)->get()->pluck('name','id');
-        $types = Status::where('parent_id','=','16')->get()->pluck('name','id');
+        $brands = Brand::get()->pluck('name','id');
         $level = 0;
         if ($id==0) {
           $item = Item::where('status',3)->where('nesting','=',1)->get();
         }
         $datenow = date("Y-m-d");
-        return view('backEnd.item.create',compact('item','activations','categories','level','id','satuans','types','datenow'));
+        return view('backEnd.item.create',compact('item','categories','brands','level','id','satuans','datenow'));
     }
 
 
@@ -115,28 +116,26 @@ if ($request->item == "uncategories")
   $depthname = "Sub Kategori";
   $depthicon = "fa-list";
 
-$root = Item::create(['code' => $request->code
-                          ,'name' => $request->name
-                          ,'status' => $request->status
-                          ,'note' => $request->note
-                          ,'title' => $title
-                          ,'subtitle' => $subtitle
-                          ,'depthname' => $depthname
-                          ,'depthicon' => $depthicon
-                          ,'created_by' => $request->created_by
-                          ,'updated_by' => $request->updated_by]);
+    $root = Item::create(['code' => $request->code
+                              ,'name' => $request->name
+                              ,'note' => $request->note
+                              ,'title' => $title
+                              ,'subtitle' => $subtitle
+                              ,'depthname' => $depthname
+                              ,'depthicon' => $depthicon
+                              ,'created_by' => $request->created_by
+                              ,'updated_by' => $request->updated_by]);
 
-activity()->performedOn($root)->causedBy(Sentinel::getUser()->id)->withProperties(['new'=>$root,'old'=>$root])->log('Item '.$root->name.' is created successfully');
+      activity()->performedOn($root)->causedBy(Sentinel::getUser()->id)->withProperties(['new'=>$root,'old'=>$root])->log('Item '.$root->name.' is created successfully');
 
 
-Session::flash('alert-success', 'Kategori '.$request->name.' is created successfully');
+      Session::flash('alert-success', 'Kategori '.$request->name.' is created successfully');
 
-return redirect('kategori');
+      return redirect('kategori');
 
 
 }
 else if ($request->item <> "uncategories"){
-
 
 
   $depthicon = "fa-list";
@@ -149,28 +148,24 @@ else if ($request->item <> "uncategories"){
   $root = Item::where('id', '=', $request->item)->first();
 
 
-$child1 =  $root->children()->create(['code' => $request->code
-                          ,'name' => $request->name
-                          ,'status' => $request->status
-                          ,'note' => $request->note
-                          ,'sell_price' => $request->sell_price
-                          ,'buy_price' => $request->buy_price
-                          ,'satuan' => $request->satuan
-                          ,'title' => $title
-                          ,'subtitle' => $subtitle
-                          ,'depthname' => $depthname
-                          ,'depthicon' => $depthicon
-                          ,'expire_date' => $request->expire_date
-                          ,'created_by' => $request->created_by
-                          ,'updated_by' => $request->updated_by]);
+  $child1 =  $root->children()->create(['code' => $request->code
+                            ,'name' => $request->name
+                            ,'note' => $request->note
+                            ,'satuan' => $request->satuan
+                            ,'title' => $title
+                            ,'subtitle' => $subtitle
+                            ,'depthname' => $depthname
+                            ,'depthicon' => $depthicon
+                            ,'created_by' => $request->created_by
+                            ,'updated_by' => $request->updated_by]);
 
-                          if ($request->thumbnail) {
-                            $image = $request->thumbnail;
-                            $filename = $image->getClientOriginalName();
-                            $newFilename = $child1->id.'.'.pathinfo($filename, PATHINFO_EXTENSION);
-                            $destinationPath = 'images/items/'.$child1->id.'/';
-                            $child1->update(['thumbnail'=>$destinationPath.$newFilename]);
-                            $upload_success = $image->move($destinationPath, $newFilename);
+                            if ($request->thumbnail) {
+                              $image = $request->thumbnail;
+                              $filename = $image->getClientOriginalName();
+                              $newFilename = $child1->id.'.'.pathinfo($filename, PATHINFO_EXTENSION);
+                              $destinationPath = 'images/items/'.$child1->id.'/';
+                              $child1->update(['thumbnail'=>$destinationPath.$newFilename]);
+                              $upload_success = $image->move($destinationPath, $newFilename);
                         }
   
     Session::flash('alert-success', 'Item '.$request->name.' is created successfully');

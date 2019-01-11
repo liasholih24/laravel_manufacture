@@ -1,9 +1,9 @@
 @extends('backLayout.app')
 @section('title')
-Lokasi
+Kandang
 @stop
 @section('desc')
-Kelola Data
+Kelola Data Kandang
 @stop
 @section('style')
 {{ HTML::style('assets_back/css/plugins/dataTables/datatables.min.css') }}
@@ -38,7 +38,7 @@ Kelola Data
           </a>
           @endif
         <select class="form-control chosen-select" style="width:200px;margin-right: 10px;" onchange="if (this.value) window.location.href=this.value">
-          <option value="{{ url('lokasi')}}">Pilih Wilayah</option>
+          <option value="{{ url('lokasi')}}">Pilih Farm</option>
           @foreach($filters as $filter)
           <option value="{{ url('lokasi/' . $filter->id . '/filter') }}" <?php if ($filter->id == $id) echo ' selected="selected"'; ?>>
             {{$filter->name}}
@@ -63,8 +63,7 @@ Kelola Data
     <tr>
         <th>No.</th>
         <th>Name</th>
-        <th>Wilayah</th>
-        <th>Type</th>
+        <th>Farm</th>
         <th>Deskripsi</th>
         <th>Last Update</th>
         <th>Updated By</th>
@@ -79,8 +78,7 @@ Kelola Data
   <tr>
       <td>{{$i}}</td>
       <td>{{$table->name}}</td>
-      <td>{{$table->parent()->first()->name}}</td>
-      <td>{{$table->gettype->name}}</td>
+      <td>{{$table->parent()->first()->name}}</td> 
       <td>{!! empty($table->notes)?"<i>Tidak ada Deskripsi</i>":$table->notes !!}</td>
      <td>{{$table->updated_at}}</td>
       <td>{{$table->updatedby->first_name}} {{$table->updatedby->last_name}}</td>

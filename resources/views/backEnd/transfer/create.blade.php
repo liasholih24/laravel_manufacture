@@ -175,7 +175,7 @@ Tambah
 {{ HTML::script('assets_back/js/plugins/select2/select2.full.min.js') }}
 {{ HTML::script('assets_back/js/plugins/datapicker/bootstrap-datepicker.js') }}
 <script>
-            $(document).ready(function () {
+$(document).ready(function () {
 
                 var config = {
                 '.chosen-select'           : {},
@@ -189,7 +189,7 @@ Tambah
             }
 
 // DYNAMIC TABLE
-  $("#add_row").on("click", function() {
+$("#add_row").on("click", function() {
 
         // Dynamic Rows Code
         

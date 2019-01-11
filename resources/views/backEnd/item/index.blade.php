@@ -74,13 +74,12 @@ border: 1px solid #f8ac59 !important;
     <tr>
         <th>No.</th>
         <th>Kode</th>
-        <th>Nama Barang</th>
-        <th>Nilai Jual</th>
-        <th>Nilai Beli</th>
-        <th>Deskripsi</th>
-        <th>Tgl.Expire</th>
+        <th>Nama</th>
+        <th>Kategori</th>
+        <th>Brand</th>
+        <th>Satuan</th>
         <th>Updated By</th>
-        <th>Status</th>
+        <th>Updated At</th>
         <th>Actions</th>
     </tr>
 </thead>
@@ -91,21 +90,15 @@ border: 1px solid #f8ac59 !important;
   <tr>
       <td>{{$i}}</td>
       <td>{{$table->code}}</td>
-      <td>{{$table->name}}</td>
-      <td>{{$table->sell_price}}{!! empty($table->getsatuan->code)?"<i>No Data</i>":"/".$table->getsatuan->code !!}</td>
-      <td>{{$table->buy_price}}{!! empty($table->getsatuan->code)?"<i>No Data</i>":"/".$table->getsatuan->code!!}</td>
-      <td>{!! empty($table->note)?"<i>Tidak ada deskripsi</i>":$table->note !!}</td>
-      <td>{!! empty($table->expire_date)?"<i>Not Set</i>": $table->expire_date !!}</td>
+      <td>{{$table->name}}</td> 
+      <td>{{$table->parent->name}}</td>
+      <td>{!! empty($table->brand->name)? "<i>No Brand</i>" : $table->brand->name !!}</td>
+      <td>{{$table->getsatuan->name}}</td>
       <td>{!! empty($table->updatedby->first_name)?"": $table->updatedby->first_name!!} {!! empty($table->updatedby->last_name)?"": $table->updatedby->last_name!!}</td>
       <td>
-        @if( $table->status == "3")
-        <a href="#" class="btn btn-xs btn-success btn-outline active">Active</a>
-        @else
-        <a href="#" class="btn btn-xs btn-default btn-outline">Inactive</a>
-        @endif
+      {{$table->created_at}}
       </td>
       <td>
-
         @if (Sentinel::getUser()->hasAccess(['item.show']))
         <a href="{{ url('item/' . $table->id . '/show') }}" class="btn btn-primary btn-outline btn-xs">View</a>
         @endif
@@ -113,8 +106,6 @@ border: 1px solid #f8ac59 !important;
         @if (Sentinel::getUser()->hasAccess(['item.edit']))
         <a href="{{ url('item/' . $table->id . '/edit') }}" class="btn btn-outline btn-primary btn-xs">Edit</a>
         @endif
-       
-
       </td>
   </tr>
   @endforeach
@@ -151,7 +142,7 @@ border: 1px solid #f8ac59 !important;
       }
         /* Init DataTables */
         var oTable = $('#editable').DataTable(
-          {order: [ 4, 'desc' ]}
+          {order: [ 7, 'desc' ]}
         );
 
 $('#submit').click(function(){

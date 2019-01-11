@@ -38,11 +38,12 @@ Add New
     {!! Form::open(['url' => 'lokasi', 'class' => 'form-horizontal']) !!}
 		{!! Form::hidden('created_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
 		{!! Form::hidden('updated_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
+		{!! Form::hidden('status', 3 , ['class' => 'form-control']) !!}
 		<div class="form-group">
-			{!! Form::label('kategori', 'Wilayah', ['class' => 'col-sm-1 control-label']) !!}
+			{!! Form::label('kategori', 'Farm', ['class' => 'col-sm-1 control-label']) !!}
 			<div class="col-sm-5 {{ $errors->has('category') ? 'has-error' : ''}}">
 				<select class="form-control chosen-select" name="kategori">
-					<option value="uncategories">Pilih Wilayah</option>
+					<option value="uncategories">Pilih Farm</option>
 					@foreach($statuses  as $status)
 					@foreach($status->getDescendantsAndSelf(array('id','parent_id','name','depth'))->toHierarchy() as $relation)
 					@if($relation->depth==0)
@@ -58,11 +59,6 @@ Add New
 				</select>
 					{!! $errors->first('kategori', '<p class="help-block">:message</p>') !!}
 			</div>
-			{!! Form::label('status', 'Status*', ['class' => 'col-sm-1 control-label']) !!}
-			<div class="col-sm-5 {{ $errors->has('status') ? 'has-error' : ''}}">
-				{{ Form::select('status', $activations, null, ['class' => 'form-control chosen-select']) }}
-					{!! $errors->first('status', '<p class="help-block">:message</p>') !!}
-			</div>
 		</div>
 <div class="form-group">
 	{!! Form::label('code', 'Kode*', ['class' => 'col-sm-1 control-label']) !!}
@@ -70,11 +66,7 @@ Add New
 			{!! Form::text('code', null, ['class' => 'form-control','placeholder'=>'Kode/Singkatan.']) !!}
 			{!! $errors->first('code', '<p class="help-block">:message</p>') !!}
 	</div>
-	{!! Form::label('type', 'Type', ['class' => 'col-sm-1 control-label']) !!}
-			<div class="col-sm-5 {{ $errors->has('type') ? 'has-error' : ''}}">
-				{{ Form::select('type', $types, null, ['class' => 'form-control chosen-select','placeholder'=>'Pilih Type']) }}
-					{!! $errors->first('type', '<p class="help-block">:message</p>') !!}
-			</div>
+
 </div>
 <div class="form-group">
 	{!! Form::label('name', 'Nama*', ['class' => 'col-sm-1 control-label']) !!}
@@ -82,17 +74,13 @@ Add New
 			{!! Form::text('name', null, ['class' => 'form-control','placeholder'=>'Nama Lokasi/Wilayah.']) !!}
 			{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
 	</div>
-	{!! Form::label('address', 'Alamat*', ['class' => 'col-sm-1 control-label']) !!}
-	<div class="col-sm-5 {{ $errors->has('address') ? 'has-error' : ''}}">
-			{!! Form::text('address', null, ['class' => 'form-control','placeholder'=>'Alamat Lokasi/Wilayah.']) !!}
-			{!! $errors->first('address', '<p class="help-block">:message</p>') !!}
-	</div>
+
 </div>
 <div class="form-group">
 {!! Form::label('notes', 'Deskripsi', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5 col-xs-12">
                   {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => '2', 'placeholder' => 'Deskripsi [Max: 500 Katakter]']) !!}
-                  {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
+                  {!! $errors->first('notes', '<p class="help-block">:message</p>') !!}
                 </div>
 </div>
 

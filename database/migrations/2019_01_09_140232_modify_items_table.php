@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSellPriceBuyPriceToSampahsTable extends Migration
+class ModifyItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,13 @@ class AddSellPriceBuyPriceToSampahsTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::table('sampahs', function (Blueprint $table) {
-            $table->decimal('sell_price', 12, 2)->nullable();
-            $table->decimal('buy_price', 12, 2)->nullable();
-            $table->integer('satuan')->nullable();
+    { 
+        
+        Schema::table('items', function (Blueprint $table) {
+        $table->dropColumn('status');
+        });
+        Schema::table('items', function (Blueprint $table) {
+            $table->enum('status', ['1', '0'])->default('1');
         });
     }
 
@@ -27,7 +29,7 @@ class AddSellPriceBuyPriceToSampahsTable extends Migration
      */
     public function down()
     {
-        Schema::table('sampahs', function (Blueprint $table) {
+        Schema::table('items', function (Blueprint $table) {
             //
         });
     }

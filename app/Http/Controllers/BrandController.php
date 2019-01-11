@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Penadah;
-use App\Status;
+use App\Brand;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 use Validator;
 use Sentinel;
-use Spatie\Activitylog\Models\Activity as Activity;
+use Activity;
 
-class PenadahController extends Controller
+class BrandController extends Controller
 {
 
 protected function validator(Request $request)
@@ -32,9 +31,9 @@ protected function validator(Request $request)
      */
     public function index()
     {
-        $penadah = Penadah::all();
+        $brand = Brand::all();
 
-        return view('backEnd.penadah.index', compact('penadah'));
+        return view('backEnd.brand.index', compact('brand'));
     }
 
     /**
@@ -44,8 +43,7 @@ protected function validator(Request $request)
      */
     public function create()
     {
-        $activations = Status::where('parent_id','=','1')->orderBy('id','desc')->get()->pluck('name','id');
-        return view('backEnd.penadah.create',compact('activations'));
+        return view('backEnd.brand.create');
     }
 
     /**
@@ -64,15 +62,15 @@ protected function validator(Request $request)
     }
 
         
-      $model = Penadah::create($request->all());
+      $model = Brand::create($request->all());
 
       $attributes = $model->getOriginal();
 
-      activity()->performedOn($model)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Penadah '.$model->name.' is created successfully');
+      activity()->performedOn($model)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Brand '.$model->name.' is created successfully');
 
-      Session::flash('alert-success', 'Penadah '.$model->name.' is created successfully');
+      Session::flash('alert-success', 'Brand '.$model->name.' is created successfully');
 
-        return redirect('penadah');
+        return redirect('brand');
     }
 
     /**
@@ -84,10 +82,9 @@ protected function validator(Request $request)
      */
     public function show($id)
     {
-        $penadah = Penadah::findOrFail($id);
-        $logs = Activity::where('subject_type', 'App\Penadah')->where('subject_id',$id)->get();
+        $brand = Brand::findOrFail($id);
 
-        return view('backEnd.penadah.show', compact('penadah','logs'));
+        return view('backEnd.brand.show', compact('brand'));
     }
 
     /**
@@ -99,10 +96,9 @@ protected function validator(Request $request)
      */
     public function edit($id)
     {
-        $penadah = Penadah::findOrFail($id);
-        $activations = Status::where('parent_id','=','1')->orderBy('id','desc')->get()->pluck('name','id');
+        $brand = Brand::findOrFail($id);
 
-        return view('backEnd.penadah.edit', compact('penadah','activations'));
+        return view('backEnd.brand.edit', compact('brand'));
     }
 
     /**
@@ -120,14 +116,16 @@ protected function validator(Request $request)
                     ->withInput();
     }
         
-        $penadah = Penadah::findOrFail($id);
-        $penadah->update($request->all());
+        $brand = Brand::findOrFail($id);
+        $brand->update($request->all());
 
-        $attributes = $penadah->getOriginal();
+        $attributes = $brand->getOriginal();
 
-        Session::flash('alert-success', ' Penadah '.$penadah->name.' is updated successfully');
+        activity()->performedOn($brand)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Brand '.$brand->name.' is updated successfully');
 
-        return redirect('penadah');
+        Session::flash('alert-success', ' Brand '.$brand->name.' is updated successfully');
+
+        return redirect('brand');
     }
 
     /**
@@ -139,17 +137,17 @@ protected function validator(Request $request)
      */
     public function destroy($id)
     {
-        $penadah = Penadah::findOrFail($id);
+        $brand = Brand::findOrFail($id);
 
-        $penadah->delete();
+        $brand->delete();
 
-        $attributes = $penadah->getOriginal();
+        $attributes = $brand->getOriginal();
 
-        activity()->performedOn($penadah)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Penadah '.$penadah->name.' is deleted successfully');
+        activity()->performedOn($brand)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Brand '.$brand->name.' is deleted successfully');
 
-        Session::flash('alert-warning', ' Penadah '.$penadah->name.' is deleted successfully');
+        Session::flash('alert-warnig', ' Brand '.$brand->name.' is deleted successfully');
 
-        return redirect('penadah');
+        return redirect('brand');
     }
 
 }

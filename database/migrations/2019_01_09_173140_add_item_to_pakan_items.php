@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTypeToSampahsTable extends Migration
+class AddItemToPakanItems extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddTypeToSampahsTable extends Migration
      */
     public function up()
     {
-        Schema::table('sampahs', function (Blueprint $table) {
-            $table->integer('type')->nullable();
+        Schema::table('pakan_items', function (Blueprint $table) {
+            $table->integer('item')->after('pakan')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddTypeToSampahsTable extends Migration
      */
     public function down()
     {
-        Schema::table('sampahs', function (Blueprint $table) {
+        Schema::table('pakan_items', function (Blueprint $table) {
             //
         });
     }
