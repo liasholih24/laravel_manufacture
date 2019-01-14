@@ -39,14 +39,14 @@
                       <a href="{{route('pengajuan.index')}}">Pengajuan </a>
                     </li>
                     @endif
-                    <li>
-                      <a href="#">Penerimaan </a>
+                    <li {{{ (Request::is('penerimaan*') ? 'class=active' : '') }}}>
+                      <a href="{{route('penerimaan.index')}}">Penerimaan </a>
                     </li>
-                    <li>
-                      <a href="#">Pengeluaran </a>
+                    <li {{{ (Request::is('pengeluaran*') ? 'class=active' : '') }}}>
+                      <a href="{{route('pengeluaran.index')}}">Pengeluaran </a>
                     </li>
-                    <li>
-                      <a href="#">Pemakaian </a>
+                    <li {{{ (Request::is('pemakaian*') ? 'class=active' : '') }}}>
+                      <a href="{{route('pemakaian.index')}}">Pemakaian </a>
                     </li>
                     @if (Sentinel::getUser()->hasAnyAccess(['transfer.*']))
                     <li {{{ (Request::is('transfer*') ? 'class=active' : '') }}}>
