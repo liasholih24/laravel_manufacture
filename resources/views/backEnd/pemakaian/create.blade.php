@@ -1,11 +1,11 @@
 @extends('backLayout.app')
 
 @section('title')
-    Pengajuan
+    Pemakaian
 @stop
 
 @section('desc')
-    Tambah Pengajuan
+    Tambah Pemakaian
 @stop
 
 @section('style')
@@ -26,13 +26,13 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Tambah Pengajuan</h5>
-                        <a href="{{ url('pengajuan') }}" class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px">
+                        <h5>Tambah Pemakaian</h5>
+                        <a href="{{ url('pemakaian') }}" class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px">
                             <i class="fa fa-arrow-circle-o-left"></i> Kembali
                         </a>
                     </div>
                     <div class="ibox-content">
-                        <form action="{{ url('pengajuan') }}" method="POST" class="form-horizontal">
+                        <form action="{{ url('pemakaian') }}" method="POST" class="form-horizontal">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
@@ -95,7 +95,7 @@
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <button class="btn btn-outline btn-primary" type="submit"><i class="fa fa-plus-circle"></i> Simpan</button>
-                                    <a href="{{ url('pengajuan') }}" class="btn btn-outline btn-danger"><i class="fa fa-times-circle"></i> Batal</a>
+                                    <a href="{{ url('pemakaian') }}" class="btn btn-outline btn-danger"><i class="fa fa-times-circle"></i> Batal</a>
                                 </div>
                             </div>
                         </form>

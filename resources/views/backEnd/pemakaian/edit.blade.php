@@ -1,11 +1,11 @@
 @extends('backLayout.app')
 
 @section('title')
-    Pengajuan
+    Pemakaian
 @stop
 
 @section('desc')
-    Ubah Pengajuan
+    Ubah Pemakaian
 @stop
 
 @section('style')
@@ -26,31 +26,31 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Ubah Pengajuan</h5>
-                        <a href="{{ url('pengajuan') }}" class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px">
+                        <h5>Ubah Pemakaian</h5>
+                        <a href="{{ url('pemakaian') }}" class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px">
                             <i class="fa fa-arrow-circle-o-left"></i> Kembali
                         </a>
                     </div>
                     <div class="ibox-content">
-                        <form action="{{ url('pengajuan/'.$pengajuan->id) }}" method="POST" class="form-horizontal">
+                        <form action="{{ url('pemakaian/'.$pemakaian->id) }}" method="POST" class="form-horizontal">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control" value="{{ $pengajuan->number }}" readonly>
+                                    <input type="text" name="number" class="form-control" value="{{ $pemakaian->number }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($pengajuan->date)) }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($pemakaian->date)) }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="desc" class="form-control" rows="3">{{ $pengajuan->desc }}</textarea>
+                                    <textarea name="desc" class="form-control" rows="3">{{ $pemakaian->desc }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <button class="btn btn-outline btn-primary" type="submit"><i class="fa fa-plus-circle"></i> Simpan Perubahan</button>
-                                    <a href="{{ url('pengajuan') }}" class="btn btn-outline btn-danger"><i class="fa fa-times-circle"></i> Batal</a>
+                                    <a href="{{ url('pemakaian') }}" class="btn btn-outline btn-danger"><i class="fa fa-times-circle"></i> Batal</a>
                                 </div>
                             </div>
                         </form>

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Pengajuan;
-use App\DetailPengajuan;
+use App\Pengeluaran;
+use App\DetailPengeluaran;
 use App\Item;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -31,8 +31,8 @@ class PengeluaranController extends Controller
      */
     public function index()
     {
-        $pengajuan = Pengajuan::whereMonth('created_at', '=', date('m'))->get();
-        return view('backEnd.pengeluaran.index', ['pengajuan' => $pengajuan]);
+        $pengeluaran = Pengeluaran::whereMonth('created_at', '=', date('m'))->get();
+        return view('backEnd.pengeluaran.index', ['pengeluaran' => $pengeluaran]);
     }
 
     /**
@@ -43,7 +43,7 @@ class PengeluaranController extends Controller
      public function create()
     {
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pengajuan.create', ['item' => $item]);
+        return view('backEnd.pengeluaran.create', ['item' => $item]);
     }
 
     /**
@@ -53,27 +53,27 @@ class PengeluaranController extends Controller
      */
     public function store(Request $request)
     {
-        $number = Pengajuan::max('number');
+        $number = Pengeluaran::max('number');
         if($number==null){
-            $number = 'PG-000001';
+            $number = 'PN-000001';
         }
         else{
-            $number = 'PG-'.sprintf('%06d', substr($number, 3) + 1);
+            $number = 'PN-'.sprintf('%06d', substr($number, 3) + 1);
         }
-        $pengajuan = new Pengajuan;
-        $pengajuan->number = $number;
-        $pengajuan->date = $request->date;
-        $pengajuan->desc = $request->desc;
-        $pengajuan->save();
+        $pengeluaran = new Pengeluaran;
+        $pengeluaran->number = $number;
+        $pengeluaran->date = $request->date;
+        $pengeluaran->desc = $request->desc;
+        $pengeluaran->save();
         for($i=0;$i<count($request->item_id);$i++){
-            $detail = new DetailPengajuan;
-            $detail->pengajuan_id = $pengajuan->id;
+            $detail = new DetailPengeluaran;
+            $detail->pengeluaran_id = $pengeluaran->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
             $detail->save();
         }
-        Session::flash('alert-success', 'Pengajuan berhasil dibuat.');
-        return redirect('pengajuan');
+        Session::flash('alert-success', 'Pengeluaran berhasil dibuat.');
+        return redirect('pengeluaran');
     }
 
     /**
@@ -102,10 +102,10 @@ class PengeluaranController extends Controller
      */
     public function edit($id)
     {
-        $pengajuan = Pengajuan::findOrFail($id);
-        $detail = DetailPengajuan::where('pengajuan_id', $id)->get();
+        $pengeluaran = Pengeluaran::findOrFail($id);
+        $detail = DetailPengeluaran::where('pengeluaran_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pengajuan.edit', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item]);
+        return view('backEnd.pengeluaran.edit', ['pengeluaran' => $pengeluaran, 'detail' => $detail, 'item' => $item]);
     }
 
     /**
@@ -115,23 +115,23 @@ class PengeluaranController extends Controller
      *
      * @return Response
      */
-    public function update(Request $request, Pengajuan $pengajuan)
+    public function update(Request $request, Pengeluaran $pengeluaran)
     {
-        $pengajuan = Pengajuan::findOrFail($pengajuan->id);
-        $pengajuan->date = $request->date;
-        $pengajuan->desc = $request->desc;
-        $pengajuan->save();
-        $detail = DetailPengajuan::where('pengajuan_id', $pengajuan->id);
+        $pengeluaran = Pengeluaran::findOrFail($pengeluaran->id);
+        $pengeluaran->date = $request->date;
+        $pengeluaran->desc = $request->desc;
+        $pengeluaran->save();
+        $detail = DetailPengeluaran::where('pengeluaran_id', $pengeluaran->id);
         $detail->delete();
         for($i=0;$i<count($request->item_id);$i++){
-            $detail = new DetailPengajuan;
-            $detail->pengajuan_id = $pengajuan->id;
+            $detail = new DetailPengeluaran;
+            $detail->pengeluaran_id = $pengeluaran->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
             $detail->save();
         }
-        Session::flash('alert-success', 'Pengajuan berhasil diubah.');
-        return redirect('pengajuan');
+        Session::flash('alert-success', 'Pengeluaran berhasil diubah.');
+        return redirect('pengeluaran');
     }
 
     /**

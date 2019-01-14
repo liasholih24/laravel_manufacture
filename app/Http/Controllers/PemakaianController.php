@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Pengajuan;
-use App\DetailPengajuan;
+use App\Pemakaian;
+use App\DetailPemakaian;
 use App\Item;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -31,8 +31,8 @@ class PemakaianController extends Controller
      */
     public function index()
     {
-        $pengajuan = Pengajuan::whereMonth('created_at', '=', date('m'))->get();
-        return view('backEnd.pemakaian.index', ['pengajuan' => $pengajuan]);
+        $pemakaian = Pemakaian::whereMonth('created_at', '=', date('m'))->get();
+        return view('backEnd.pemakaian.index', ['pemakaian' => $pemakaian]);
     }
 
     /**
@@ -43,7 +43,7 @@ class PemakaianController extends Controller
      public function create()
     {
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pengajuan.create', ['item' => $item]);
+        return view('backEnd.pemakaian.create', ['item' => $item]);
     }
 
     /**
@@ -53,27 +53,27 @@ class PemakaianController extends Controller
      */
     public function store(Request $request)
     {
-        $number = Pengajuan::max('number');
+        $number = Pemakaian::max('number');
         if($number==null){
-            $number = 'PG-000001';
+            $number = 'PK-000001';
         }
         else{
-            $number = 'PG-'.sprintf('%06d', substr($number, 3) + 1);
+            $number = 'PK-'.sprintf('%06d', substr($number, 3) + 1);
         }
-        $pengajuan = new Pengajuan;
-        $pengajuan->number = $number;
-        $pengajuan->date = $request->date;
-        $pengajuan->desc = $request->desc;
-        $pengajuan->save();
+        $pemakaian = new Pemakaian;
+        $pemakaian->number = $number;
+        $pemakaian->date = $request->date;
+        $pemakaian->desc = $request->desc;
+        $pemakaian->save();
         for($i=0;$i<count($request->item_id);$i++){
-            $detail = new DetailPengajuan;
-            $detail->pengajuan_id = $pengajuan->id;
+            $detail = new DetailPemakaian;
+            $detail->pemakaian_id = $pemakaian->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
             $detail->save();
         }
-        Session::flash('alert-success', 'Pengajuan berhasil dibuat.');
-        return redirect('pengajuan');
+        Session::flash('alert-success', 'Pemakaian berhasil dibuat.');
+        return redirect('pemakaian');
     }
 
     /**
@@ -102,10 +102,10 @@ class PemakaianController extends Controller
      */
     public function edit($id)
     {
-        $pengajuan = Pengajuan::findOrFail($id);
-        $detail = DetailPengajuan::where('pengajuan_id', $id)->get();
+        $pemakaian = Pemakaian::findOrFail($id);
+        $detail = DetailPemakaian::where('pemakaian_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pengajuan.edit', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item]);
+        return view('backEnd.pemakaian.edit', ['pemakaian' => $pemakaian, 'detail' => $detail, 'item' => $item]);
     }
 
     /**
@@ -115,23 +115,23 @@ class PemakaianController extends Controller
      *
      * @return Response
      */
-    public function update(Request $request, Pengajuan $pengajuan)
+    public function update(Request $request, Pemakaian $pemakaian)
     {
-        $pengajuan = Pengajuan::findOrFail($pengajuan->id);
-        $pengajuan->date = $request->date;
-        $pengajuan->desc = $request->desc;
-        $pengajuan->save();
-        $detail = DetailPengajuan::where('pengajuan_id', $pengajuan->id);
+        $pemakaian = Pemakaian::findOrFail($pemakaian->id);
+        $pemakaian->date = $request->date;
+        $pemakaian->desc = $request->desc;
+        $pemakaian->save();
+        $detail = DetailPemakaian::where('pemakaian_id', $pemakaian->id);
         $detail->delete();
         for($i=0;$i<count($request->item_id);$i++){
-            $detail = new DetailPengajuan;
-            $detail->pengajuan_id = $pengajuan->id;
+            $detail = new DetailPemakaian;
+            $detail->pemakaian_id = $pemakaian->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
             $detail->save();
         }
-        Session::flash('alert-success', 'Pengajuan berhasil diubah.');
-        return redirect('pengajuan');
+        Session::flash('alert-success', 'Pemakaian berhasil diubah.');
+        return redirect('pemakaian');
     }
 
     /**
