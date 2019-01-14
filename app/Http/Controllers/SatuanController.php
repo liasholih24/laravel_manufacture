@@ -38,7 +38,7 @@ class SatuanController extends Controller
      */
     public function index()
     {
-        $satuan = Satuan::all();
+        $satuan = Satuan::orderby('created_at', 'desc')->get();
 
         return view('backEnd.satuan.index', compact('satuan'));
     }

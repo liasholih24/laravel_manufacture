@@ -75,12 +75,7 @@ Tambah Baru
                      {!! Form::textarea('note', null, ['class' => 'form-control', 'rows' => '2', 'placeholder' => 'Deskirpsi mengenai satuan [Max: 500 Karakter].']) !!}
                     {!! $errors->first('desc', '<p class="help-block">:message</p>') !!}
                 </div>
-                {!! Form::label('status', 'Status*', ['class' => 'col-sm-1 control-label']) !!}
-                <div class="col-sm-5 col-xs-12">
-                  {{ Form::select('status', $activations, null, ['class' => 'form-control']) }}
-                  
-                  {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
-                </div>
+              
                 
             </div>
            

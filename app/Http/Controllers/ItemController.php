@@ -8,7 +8,7 @@ use App\Item;
 use App\Log;
 use App\Status;
 use App\Satuan;
-use App\Brand;
+use App\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -28,8 +28,19 @@ class ItemController extends Controller
     {
     /*dicustom*/
       return Validator::make($request->all(), [
-        'name' => 'required|max:50'
+         'name' => 'required|max:50'
         ,'code' => 'required|unique:items'
+      ]);
+    }
+
+    protected function validator2(Request $request)
+    {
+    /*dicustom*/
+      return Validator::make($request->all(), [
+         'name' => 'required|max:50'
+        ,'code' => 'required|unique:items'
+        ,'item' => 'required'
+        ,'satuan' => 'required'
       ]);
     }
 
@@ -68,7 +79,6 @@ class ItemController extends Controller
         $categories = Item::all();
         $activations = Status::where('parent_id','=','1')->orderby('id','desc')->get()->pluck('name','id');
         $satuans = Satuan::where('status','=',3)->get()->pluck('name','id');
-        $brands = Brand::get()->pluck('name','id');
         $types = Status::where('parent_id','=','16')->get()->pluck('name','id');
         $level = 0;
         $id = "";
@@ -81,13 +91,13 @@ class ItemController extends Controller
         $item = Item::where('status',1)->where('id','=',$id)->first();
         $categories = Item::where('status',1)->get();
         $satuans = Satuan::where('status','=',3)->get()->pluck('name','id');
-        $brands = Brand::get()->pluck('name','id');
+        $suppliers = Supplier::get()->pluck('name','id');
         $level = 0;
         if ($id==0) {
           $item = Item::where('status',3)->where('nesting','=',1)->get();
         }
         $datenow = date("Y-m-d");
-        return view('backEnd.item.create',compact('item','categories','brands','level','id','satuans','datenow'));
+        return view('backEnd.item.create',compact('item','categories','suppliers','level','id','satuans','datenow'));
     }
 
 
@@ -99,17 +109,13 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-    //  return $request->all();
-   if ($this->validator($request)->fails()) {
-        return redirect()->back()
-                    ->withErrors($this->validator($request))
-                    ->withInput();
-    }
-
-
-
-if ($request->item == "uncategories")
-{
+      if ($request->item == "")
+      {
+        if ($this->validator($request)->fails()) {
+          return redirect()->back()
+                      ->withErrors($this->validator($request))
+                      ->withInput();
+      }
 
   $title = "Kategori";
   $subtitle = "Kelola Kategori Barang";
@@ -135,8 +141,14 @@ if ($request->item == "uncategories")
 
 
 }
-else if ($request->item <> "uncategories"){
+else if ($request->item <> ""){
+ 
 
+  if ($this->validator2($request)->fails()) {
+    return redirect()->back()
+                ->withErrors($this->validator2($request))
+                ->withInput();
+  }
 
   $depthicon = "fa-list";
 
@@ -152,6 +164,15 @@ else if ($request->item <> "uncategories"){
                             ,'name' => $request->name
                             ,'note' => $request->note
                             ,'satuan' => $request->satuan
+                            ,'supplier' => $request->supplier
+                            ,'panjang' => $request->panjang
+                            ,'lebar' => $request->lebar
+                            ,'tinggi' => $request->tinggi
+                            ,'dimensi_satuan' => $request->dimensi_satuan
+                            ,'berat' => $request->berat
+                            ,'berat_satuan' => $request->berat_satuan
+                            ,'kapasitas' => $request->kapasitas
+                            ,'kapasitas_satuan' => $request->kapasitas_satuan
                             ,'title' => $title
                             ,'subtitle' => $subtitle
                             ,'depthname' => $depthname
@@ -159,14 +180,7 @@ else if ($request->item <> "uncategories"){
                             ,'created_by' => $request->created_by
                             ,'updated_by' => $request->updated_by]);
 
-                            if ($request->thumbnail) {
-                              $image = $request->thumbnail;
-                              $filename = $image->getClientOriginalName();
-                              $newFilename = $child1->id.'.'.pathinfo($filename, PATHINFO_EXTENSION);
-                              $destinationPath = 'images/items/'.$child1->id.'/';
-                              $child1->update(['thumbnail'=>$destinationPath.$newFilename]);
-                              $upload_success = $image->move($destinationPath, $newFilename);
-                        }
+                      
   
     Session::flash('alert-success', 'Item '.$request->name.' is created successfully');
 

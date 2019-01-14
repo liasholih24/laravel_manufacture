@@ -24,16 +24,13 @@ border: 1px solid #f8ac59 !important;
       .ibox.float-e-margins{ margin: 0px 2px !important}
     </style>
     <div class="ibox-title row">
-        <ol class="breadcrumb col-sm-6 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
+        <ol class="breadcrumb col-sm-7 col-xs-12" style="font-size: 14px; padding-top: 6px;">
           <li class="active">
               <a class="detail2" href="">
                 <strong>Data Barang</strong>
               </a>
           </li>
          </ol>
-          <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline btn-primary pull-right">
-              <i class="fa fa-arrow-circle-o-left" style="margin-right: 5px"></i> Back
-          </a>
           @if (Sentinel::getUser()->hasAccess(['item.create']))
           <a href="{{ url('item/1/create') }}">
           <button class="detail2 btn btn-sm btn-outline btn-success pull-right" style="margin-right: 10px">
@@ -48,12 +45,12 @@ border: 1px solid #f8ac59 !important;
                   Kategori Barang
           </button>
           </a>
-          <select class="form-control chosen-select" style="max-width:265px;margin-right: 10px;" onchange="if (this.value) window.location.href=this.value">
-						<option value="{{ url('item')}}">Pilih Kategori</option>
+          <select class="form-control chosen-select" style="max-width:240px; margin-right: 10px;" onchange="if (this.value) window.location.href=this.value">
+						  <option value="{{ url('item')}}">Pilih Kategori</option>
 						@foreach($filters as $filter)
-						<option value="{{ url('item/' . $filter->id . '/filter') }}" <?php if ($filter->id == $id) echo ' selected="selected"'; ?>>
-							{{$filter->name}}
-            </option>
+              <option value="{{ url('item/' . $filter->id . '/filter') }}" <?php if ($filter->id == $id) echo ' selected="selected"'; ?>>
+                {{$filter->name}}
+              </option>
 						@endforeach
 					</select>
 
@@ -76,7 +73,6 @@ border: 1px solid #f8ac59 !important;
         <th>Kode</th>
         <th>Nama</th>
         <th>Kategori</th>
-        <th>Brand</th>
         <th>Satuan</th>
         <th>Updated By</th>
         <th>Updated At</th>
@@ -92,20 +88,22 @@ border: 1px solid #f8ac59 !important;
       <td>{{$table->code}}</td>
       <td>{{$table->name}}</td> 
       <td>{{$table->parent->name}}</td>
-      <td>{!! empty($table->brand->name)? "<i>No Brand</i>" : $table->brand->name !!}</td>
       <td>{{$table->getsatuan->name}}</td>
-      <td>{!! empty($table->updatedby->first_name)?"": $table->updatedby->first_name!!} {!! empty($table->updatedby->last_name)?"": $table->updatedby->last_name!!}</td>
+      <td>{!! empty($table->createdby->first_name)?"": $table->createdby->first_name!!} {!! empty($table->createdby->last_name)?"": $table->createdby->last_name!!}</td>
+      <td>{{$table->created_at}}</td>
       <td>
-      {{$table->created_at}}
-      </td>
-      <td>
-        @if (Sentinel::getUser()->hasAccess(['item.show']))
-        <a href="{{ url('item/' . $table->id . '/show') }}" class="btn btn-primary btn-outline btn-xs">View</a>
-        @endif
-
         @if (Sentinel::getUser()->hasAccess(['item.edit']))
         <a href="{{ url('item/' . $table->id . '/edit') }}" class="btn btn-outline btn-primary btn-xs">Edit</a>
         @endif
+
+        {!! Form::open([
+                'method'=>'DELETE',
+                'url' => ['item', $table->id],
+                'style' => 'display:inline',
+                'onsubmit' => 'return ConfirmDelete()'
+            ]) !!}
+                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
+        {!! Form::close() !!}
       </td>
   </tr>
   @endforeach
@@ -129,7 +127,7 @@ border: 1px solid #f8ac59 !important;
 {{ HTML::script('assets_back/js/plugins/chosen/chosen.jquery.js') }}
 <!-- Page-Level Scripts -->
 <script>
-    $(document).ready(function(){
+  $(document).ready(function(){
       var config = {
           '.chosen-select'           : {search_contains: true },
           '.chosen-select-deselect'  : {allow_single_deselect:true},
@@ -142,18 +140,26 @@ border: 1px solid #f8ac59 !important;
       }
         /* Init DataTables */
         var oTable = $('#editable').DataTable(
-          {order: [ 7, 'desc' ]}
+          {order: [ 6, 'desc' ]}
         );
 
-$('#submit').click(function(){
-  //  alert('submitting');
-    $('#formfield').submit();
-});
-
+    $('#submit').click(function(){
+      //  alert('submitting');
+        $('#formfield').submit();
     });
 
-		$(".select2_demo_1").select2();
+  });
 
+	$(".select2_demo_1").select2();
+
+  function ConfirmDelete()
+  {
+    var x = confirm("Are you sure you want to delete?");
+    if (x)
+      return true;
+    else
+      return false;
+  }
 </script>
 
 

@@ -8,7 +8,7 @@
 @endsection
 @extends('backLayout.app')
 @section('title')
-Data Barang
+@if($id == 0) Kategori @else Barang @endif
 @stop
 @section('desc')
 Tambah Baru
@@ -20,7 +20,8 @@ Tambah Baru
         <div class="row ibox-title">
          <ol class="breadcrumb col-sm-6 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
             <li class="">
-              <a href="{{ url('item') }}"> Data Barang</a>
+            @if($id == 0) <a href="{{ url('kategori') }}"> Data Kategori</a> @else <a href="{{ url('item') }}"> Data Barang</a> @endif
+             
             </li>
             <li class="active">
               Tambah Baru
@@ -36,7 +37,6 @@ Tambah Baru
           <div class="col-xs-12 col-sm-12">
             {!! Form::open(['url' => 'item', 'class' => 'form-horizontal','files'=>'true']) !!}
               {!! Form::hidden('created_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
-                {!! Form::hidden('updated_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
               <h4>Informasi Umum</h4>
               <div class="form-group ">
                 {!! Form::label('code', 'Kode*', ['class' => 'col-sm-1 control-label']) !!}
@@ -44,23 +44,22 @@ Tambah Baru
                   {!! Form::text('code', null, ['class' => 'form-control', 'placeholder' => 'Kode/Singkatan.']) !!}
                   {!! $errors->first('code', '<p class="help-block">:message</p>') !!}
                 </div>
-                 {!! Form::label('categories', 'Kategori', ['class' => 'col-sm-1 control-label']) !!}
-                <div class="col-sm-5">
+                @if($id != 0 )
+                 {!! Form::label('categories', 'Kategori*', ['class' => 'col-sm-1 control-label']) !!}
+                <div class="col-sm-5 {{ $errors->has('item') ? 'has-error' : ''}}">
                   <div class="input-group col-sm-12 col-xs-12 ">
                     <select class="form-control m-b chosen-select" name="item">
-                      
-                        <option value="uncategories">Choose Category</option>
+                        <option value="">Pilih Kategori</option>
                         @foreach($categories  as $item)
-                          
                               @if($item->nesting==0)
                                    <option value="{{$item->id}}">{{$item->name}}</option> 
                               @endif
-                     
                         @endforeach
                     </select>
                   </div>
                   {!! $errors->first('item', '<p class="help-block">:message</p>') !!}
                 </div>
+                @endif
               </div>
               <div class="form-group">
                {!! Form::label('name', 'Nama*', ['class' => 'col-sm-1 control-label']) !!}
@@ -68,12 +67,13 @@ Tambah Baru
                   {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nama [Max: 50 Katakter]']) !!}
                   {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
                 </div>
-                {!! Form::label('brand', 'Brand*', ['class' => 'col-sm-1 control-label']) !!}
-                <div class="col-sm-5 col-xs-12">
-                  {{ Form::select('brand', $brands, null, ['class' => 'form-control chosen-select','placeholder' => 'Pilih Brand']) }}
-                  
-                  {!! $errors->first('brand', '<p class="help-block">:message</p>') !!}
+                @if($id != 0 )
+                {!! Form::label('satuan', 'Satuan*', ['class' => 'col-sm-1 control-label']) !!}
+                <div class="col-sm-5 {{ $errors->has('satuan') ? 'has-error' : ''}}">
+                  {{ Form::select('satuan', $satuans, null, ['class' => 'form-control chosen-select','placeholder' => 'Pilih Satuan']) }}
+                  {!! $errors->first('satuan', '<p class="help-block">:message</p>') !!}
                 </div>
+                @endif
                 
               </div>
             
@@ -83,13 +83,17 @@ Tambah Baru
                   {!! Form::textarea('note', null, ['class' => 'form-control', 'rows' => '2', 'placeholder' => 'Deskripsi [Max: 500 Katakter]']) !!}
                   {!! $errors->first('note', '<p class="help-block">:message</p>') !!}
                 </div>
-                {!! Form::label('satuan', 'Satuan*', ['class' => 'col-sm-1 control-label']) !!}
+                @if($id != 0 )
+                {!! Form::label('supplier', 'Supplier', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5 col-xs-12">
-                  {{ Form::select('satuan', $satuans, null, ['class' => 'form-control chosen-select','placeholder' => 'Pilih Satuan']) }}
-                  {!! $errors->first('satuan', '<p class="help-block">:message</p>') !!}
+                  {{ Form::select('supplier', $suppliers, null, ['class' => 'form-control chosen-select','placeholder' => 'Pilih Supplier']) }}
+                  {!! $errors->first('supplier', '<p class="help-block">:message</p>') !!}
+                  <small>*khusus supplier obat&pakan</small>
                 </div>
+                @endif
                 
               </div>
+              @if($id != 0 )
                 <br/>
               <h4>Informasi Atribut</h4>
               <div class="form-group ">
@@ -160,6 +164,7 @@ Tambah Baru
                   {!! $errors->first('maksimum_stock', '<p class="help-block">:message</p>') !!}
                 </div>
               </div>
+              @endif
               <div class="form-group">
                 <a href="{{ url()->previous() }}" class="detail2 btn btn-md btn-outline btn-danger pull-right">  <i class="fa fa-times-circle" ></i> Batal</a>
                   <button type="submit" class="create_mdl btn btn-outline btn-success pull-right" style="margin-right: 10px; ">

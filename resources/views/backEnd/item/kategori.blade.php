@@ -31,9 +31,6 @@ border: 1px solid #f8ac59 !important;
               </a>
           </li>
          </ol>
-          <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline btn-primary pull-right">
-              <i class="fa fa-arrow-circle-o-left" style="margin-right: 5px"></i> Back
-          </a>
           @if (Sentinel::getUser()->hasAccess(['item.create']))
           <a href="{{ url('item/0/create') }}">
           <button class="detail2 btn btn-sm btn-outline btn-success pull-right" style="margin-right: 10px">
@@ -66,9 +63,8 @@ border: 1px solid #f8ac59 !important;
         <th>Kode</th>
         <th>Nama</th>
         <th>Deskripsi</th>
-        <th>Last Update</th>
+        <th>Updated At</th>
         <th>Updated By</th>
-        <th>Status</th>
         <th>Actions</th>
     </tr>
 </thead>
@@ -81,24 +77,21 @@ border: 1px solid #f8ac59 !important;
       <td>{{$table->code}}</td>
       <td>{{$table->name}}</td>
       <td>{!! empty($table->note)?"<i>No Description</i>":$table->note !!}</td>
-     <td>{{$table->updated_at}}</td>
-      <td>{{$table->updatedby->first_name}} {{$table->updatedby->last_name}}</td>
+      <td>{{$table->updated_at}}</td>
+      <td>{{$table->createdby->first_name}} {{$table->createdby->last_name}}</td>
       <td>
-        @if( $table->status == "3")
-        <a href="#" class="btn btn-xs btn-success btn-outline active">Active</a>
-        @else
-        <a href="#" class="btn btn-xs btn-default btn-outline">Inactive</a>
-        @endif
-      </td>
-      <td>
-
-        @if (Sentinel::getUser()->hasAccess(['item.show']))
-        <a href="{{ url('item/' . $table->id . '/show') }}" class="btn btn-primary btn-outline btn-xs">View</a>
-        @endif
-
         @if (Sentinel::getUser()->hasAccess(['item.edit']))
         <a href="{{ url('item/' . $table->id . '/edit') }}" class="btn btn-outline btn-primary btn-xs">Edit</a>
         @endif
+
+        {!! Form::open([
+                'method'=>'DELETE',
+                'url' => ['item', $table->id],
+                'style' => 'display:inline',
+                'onsubmit' => 'return ConfirmDelete()'
+            ]) !!}
+                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
+        {!! Form::close() !!}
       </td>
   </tr>
   @endforeach
