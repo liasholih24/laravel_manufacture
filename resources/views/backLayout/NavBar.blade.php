@@ -30,8 +30,8 @@
                     </li>
                 </ul>
           </li>
-             @if (Sentinel::getUser()->hasAnyAccess(['pengajuan.*', 'penerimaan.*', 'pengeluaran.*', 'pemakaian.*', 'transfer.*']))
-            <li {{{ (Request::is('pengajuan*','penerimaan*','pengeluaran*','pemakaian*','transfer*') ? 'class=active' : '') }}}>
+             @if (Sentinel::getUser()->hasAnyAccess(['pengajuan.*', 'penerimaan.*', 'pengeluaran.*', 'penjualan.*', 'transfer.*']))
+            <li {{{ (Request::is('pengajuan*','penerimaan*','penjualan*','pemakaian*','transfer*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Monitoring</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     @if (Sentinel::getUser()->hasAnyAccess(['pengajuan.*']))
