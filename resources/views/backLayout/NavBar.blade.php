@@ -58,7 +58,7 @@
           @endif
           
           @if (Sentinel::getUser()->hasAnyAccess(['item*','kategori.*','satuan.*','supplier*','lokasi*','pakan*']))
-            <li {{{ (Request::is('item*','kategori*','status*','satuan*','supplier*','lokasi*','pakan*') ? 'class=active' : '') }}}>
+            <li {{{ (Request::is('item*','kategori*','status*','satuan*','supplier*','lokasi*','pakan*','customer*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Master Data</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                    @if (Sentinel::getUser()->hasAnyAccess(['item*','kategori*']))
@@ -86,8 +86,8 @@
                       <a href="{{route('pakan.index')}}">Komposisi Pakan</a>
                     </li>
                     @endif
-                    <li>
-                      <a href="">Customer</a>
+                    <li {{{ (Request::is('customer*') ? 'class=active' : '') }}}>
+                      <a href="{{route('customer.index')}}">Customer</a>
                     </li>
                 </ul>
             </li>
