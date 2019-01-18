@@ -18,7 +18,7 @@ class CreatePenerimaansTable extends Migration
             $table->string('number', 15)->nullable();
             $table->unsignedInteger('pengajuan_id')->nullable();
             $table->date('date')->nullable();
-            $table->string('desc')->nulleble();
+            $table->string('desc')->nullable();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();

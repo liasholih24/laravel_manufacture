@@ -140,7 +140,8 @@
             placeholder: 'Pilih Item'
         });
         $('.select-pengajuan').select2({
-            placeholder: 'Pilih Pengajuan'
+            placeholder: 'Pilih Pengajuan',
+            allowClear: true
         });
         var nomor = 1;
         $('#tambah-baris').on('click', function() { 
@@ -175,7 +176,37 @@
         }
         function changePengajuan() {
             var param = $('select[name="pengajuan_id"]').val();
-            
+            $.get("pengajuan/" + param, function(data, status){
+                $('#tbody').empty();
+                if (data.length == 0) {
+                    $('#tambah-baris').prop('disabled', false);
+                }
+                else {
+                    for (i=0; i<data.length; i++) {
+                        $('#tbody').append('<tr id="tr' + i + '">' +
+                            '<td>' +
+                                '<select name="item_id[]" class="form-control input-sm select-item" readonly required>' +
+                                    '<option value="' + data[i].id + '" selected>' + data[i].name + '</option>' +
+                                '</select>' +
+                            '</td>' +
+                            '<td>' +
+                                '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" value="' + data[i].qty + '" required>' +
+                            '</td>' +
+                            '<td>' +
+                                '<input type="text" name="price[]" class="form-control input-sm" autocomplete="off" required>' +
+                            '</td>' +
+                            '<td>' +
+                                '<button class="btn btn-sm btn-danger" onclick="hapusBaris(' + i + ')" disabled><i class="fa fa-trash"></i></button>' +
+                            '</td>' +
+                        '</tr>');
+                        $('.select-item').select2({
+                            placeholder: 'Pilih Item',
+                            readonly: true
+                        });
+                    }
+                    $('#tambah-baris').prop('disabled', true);
+                }
+            });
             return false;
         }
     </script>

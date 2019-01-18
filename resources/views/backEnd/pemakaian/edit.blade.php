@@ -42,15 +42,26 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">Kandang</label>
+                                <div class="col-sm-3">
+                                    <select name="storage_id" class="select-storage form-control input-sm" required>
+                                        <option value=""></option>
+                                        @foreach($storage as $r)
+                                        <option value="{{ $r->id }}" @if($pemakaian->storage_id==$r->id) selected @endif>{{ $r->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($pemakaian->date)) }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($pemakaian->date)) }}" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="desc" class="form-control" rows="3">{{ $pemakaian->desc }}</textarea>
+                                    <textarea name="desc" class="form-control" rows="3" required>{{ $pemakaian->desc }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -131,6 +142,9 @@
         });
         $('.select-item').select2({
             placeholder: 'Pilih Item'
+        });
+        $('.select-storage').select2({
+            placeholder: 'Pilih Kandang'
         });
         var nomor = {{$i}};
         $('#tambah-baris').on('click', function() { 

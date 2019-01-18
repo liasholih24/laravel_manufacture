@@ -140,6 +140,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::resource('penerimaan', 'PenerimaanController');
+    Route::get('penerimaan/pengajuan/{id}', 'PenerimaanController@pengajuan');
 });
 
 Route::group(['middleware' => ['web']], function () {

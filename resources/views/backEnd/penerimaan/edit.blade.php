@@ -44,12 +44,15 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Pengajuan</label>
                                 <div class="col-sm-3">
-                                    <select name="pengajuan_id" class="select-pengajuan form-control input-sm" onchange="changePengajuan()">
+                                    <select name="pengajuan_id" class="select-pengajuan form-control input-sm" onchange="changePengajuan()" @if($penerimaan->pengajuan_id) disabled @endif>
                                         <option value=""></option>
                                         @foreach($pengajuan as $r)
-                                        <option value="{{ $r->id }}">{{ $r->number }}</option>
+                                        <option value="{{ $r->id }}" @if($penerimaan->pengajuan_id==$r->id) selected @endif>{{ $r->number }}</option>
                                         @endforeach
                                     </select>
+                                    @if($penerimaan->pengajuan_id)
+                                    <input type="hidden" name="pengajuan_id" value="{{ $penerimaan->pengajuan_id }}">
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group">
@@ -81,12 +84,15 @@
                                             @foreach($detail as $d)
                                             <tr id="tr{{$i}}">
                                                 <td>
-                                                    <select name="item_id[]" class="select-item form-control input-sm" required>
+                                                    <select name="item_id[]" class="select-item form-control input-sm" @if($penerimaan->pengajuan_id) disabled @endif required>
                                                         <option value=""></option>
                                                         @foreach($item as $r)
                                                         <option value="{{ $r->id }}" @if($d->item_id==$r->id) selected @endif>{{ $r->name }}</option>
                                                         @endforeach
                                                     </select>
+                                                    @if($penerimaan->pengajuan_id)
+                                                    <input type="hidden" name="item_id[]" value="{{ $d->item_id }}">
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <input type="text" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
@@ -95,7 +101,7 @@
                                                     <input type="text" name="price[]" class="form-control input-sm" value="{{ $d->price }}" autocomplete="off" required>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-danger" onclick="hapusBaris({{$i}})"><i class="fa fa-trash"></i></button>
+                                                    <button class="btn btn-sm btn-danger" onclick="hapusBaris({{$i}})" @if($penerimaan->pengajuan_id) disabled @endif><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                             <?php $i++ ?>
@@ -104,7 +110,7 @@
                                         <tfoot>
                                             <tr>
                                                 <td colspan="4">
-                                                    <button id="tambah-baris" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+                                                    <button id="tambah-baris" class="btn btn-sm btn-primary" @if($penerimaan->pengajuan_id) disabled @endif><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
                                         </tfoot>

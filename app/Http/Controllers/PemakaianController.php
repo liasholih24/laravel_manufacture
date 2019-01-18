@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Pemakaian;
 use App\DetailPemakaian;
 use App\Item;
+use App\Lokasi;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -43,7 +44,8 @@ class PemakaianController extends Controller
      public function create()
     {
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pemakaian.create', ['item' => $item]);
+        $storage = Lokasi::where('depth', 1)->get();
+        return view('backEnd.pemakaian.create', ['item' => $item, 'storage' => $storage]);
     }
 
     /**
@@ -62,14 +64,19 @@ class PemakaianController extends Controller
         }
         $pemakaian = new Pemakaian;
         $pemakaian->number = $number;
+        $pemakaian->storage_id = $request->storage_id;
         $pemakaian->date = $request->date;
         $pemakaian->desc = $request->desc;
+        $pemakaian->created_by = Sentinel::getUser()->id;
+        $pemakaian->updated_by = Sentinel::getUser()->id;
         $pemakaian->save();
         for($i=0;$i<count($request->item_id);$i++){
             $detail = new DetailPemakaian;
             $detail->pemakaian_id = $pemakaian->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->created_by = Sentinel::getUser()->id;
+            $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();
         }
         Session::flash('alert-success', 'Pemakaian berhasil dibuat.');
@@ -105,7 +112,8 @@ class PemakaianController extends Controller
         $pemakaian = Pemakaian::findOrFail($id);
         $detail = DetailPemakaian::where('pemakaian_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pemakaian.edit', ['pemakaian' => $pemakaian, 'detail' => $detail, 'item' => $item]);
+        $storage = Lokasi::where('depth', 1)->get();
+        return view('backEnd.pemakaian.edit', ['pemakaian' => $pemakaian, 'detail' => $detail, 'item' => $item, 'storage' => $storage]);
     }
 
     /**
@@ -118,8 +126,11 @@ class PemakaianController extends Controller
     public function update(Request $request, Pemakaian $pemakaian)
     {
         $pemakaian = Pemakaian::findOrFail($pemakaian->id);
+        $pemakaian->storage_id = $request->storage_id;
         $pemakaian->date = $request->date;
         $pemakaian->desc = $request->desc;
+        $pemakaian->created_by = Sentinel::getUser()->id;
+        $pemakaian->updated_by = Sentinel::getUser()->id;
         $pemakaian->save();
         $detail = DetailPemakaian::where('pemakaian_id', $pemakaian->id);
         $detail->delete();
@@ -128,6 +139,8 @@ class PemakaianController extends Controller
             $detail->pemakaian_id = $pemakaian->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->created_by = Sentinel::getUser()->id;
+            $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();
         }
         Session::flash('alert-success', 'Pemakaian berhasil diubah.');
