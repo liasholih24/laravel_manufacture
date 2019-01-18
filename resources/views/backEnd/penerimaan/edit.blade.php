@@ -1,11 +1,11 @@
 @extends('backLayout.app')
 
 @section('title')
-    Pengajuan
+    Penerimaan
 @stop
 
 @section('desc')
-    Ubah Pengajuan
+    Ubah Penerimaan
 @stop
 
 @section('style')
@@ -26,31 +26,42 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Ubah Pengajuan</h5>
-                        <a href="{{ url('pengajuan') }}" class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px">
+                        <h5>Ubah Penerimaan</h5>
+                        <a href="{{ url('penerimaan') }}" class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px">
                             <i class="fa fa-arrow-circle-o-left"></i> Kembali
                         </a>
                     </div>
                     <div class="ibox-content">
-                        <form action="{{ url('pengajuan/'.$pengajuan->id) }}" method="POST" class="form-horizontal">
+                        <form action="{{ url('penerimaan/'.$penerimaan->id) }}" method="POST" class="form-horizontal">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control" value="{{ $pengajuan->number }}" readonly>
+                                    <input type="text" name="number" class="form-control" value="{{ $penerimaan->number }}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Pengajuan</label>
+                                <div class="col-sm-3">
+                                    <select name="pengajuan_id" class="select-pengajuan form-control input-sm" onchange="changePengajuan()">
+                                        <option value=""></option>
+                                        @foreach($pengajuan as $r)
+                                        <option value="{{ $r->id }}">{{ $r->number }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($pengajuan->date)) }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($penerimaan->date)) }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="desc" class="form-control" rows="3">{{ $pengajuan->desc }}</textarea>
+                                    <textarea name="desc" class="form-control" rows="3">{{ $penerimaan->desc }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -60,7 +71,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                <th width="25%">Qty</th>
+                                                <th width="15%">Qty</th>
+                                                <th width="20%">Harga</th>
                                                 <th width="50px">&nbsp;</th>
                                             </tr>
                                         </thead>
@@ -80,6 +92,9 @@
                                                     <input type="text" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
                                                 </td>
                                                 <td>
+                                                    <input type="text" name="price[]" class="form-control input-sm" value="{{ $d->price }}" autocomplete="off" required>
+                                                </td>
+                                                <td>
                                                     <button class="btn btn-sm btn-danger" onclick="hapusBaris({{$i}})"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
@@ -88,7 +103,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="3">
+                                                <td colspan="4">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -100,7 +115,7 @@
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <button class="btn btn-outline btn-primary" type="submit"><i class="fa fa-plus-circle"></i> Simpan Perubahan</button>
-                                    <a href="{{ url('pengajuan') }}" class="btn btn-outline btn-danger"><i class="fa fa-times-circle"></i> Batal</a>
+                                    <a href="{{ url('penerimaan') }}" class="btn btn-outline btn-danger"><i class="fa fa-times-circle"></i> Batal</a>
                                 </div>
                             </div>
                         </form>
@@ -132,6 +147,9 @@
         $('.select-item').select2({
             placeholder: 'Pilih Item'
         });
+        $('.select-pengajuan').select2({
+            placeholder: 'Pilih Pengajuan'
+        });
         var nomor = {{$i}};
         $('#tambah-baris').on('click', function() { 
             $('#tbody').append('<tr id="tr' + nomor + '">' +
@@ -145,6 +163,9 @@
                 '</td>' +
                 '<td>' +
                     '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
+                '</td>' +
+                '<td>' +
+                    '<input type="text" name="price[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
                     '<button class="btn btn-sm btn-danger" onclick="hapusBaris(' + nomor + ')"><i class="fa fa-trash"></i></button>' +

@@ -1,11 +1,11 @@
 @extends('backLayout.app')
 
 @section('title')
-    Pengajuan
+    Penerimaan
 @stop
 
 @section('desc')
-    Tambah Pengajuan
+    Tambah Penerimaan
 @stop
 
 @section('style')
@@ -26,18 +26,29 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Tambah Pengajuan</h5>
-                        <a href="{{ url('pengajuan') }}" class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px">
+                        <h5>Tambah Penerimaan</h5>
+                        <a href="{{ url('penerimaan') }}" class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px">
                             <i class="fa fa-arrow-circle-o-left"></i> Kembali
                         </a>
                     </div>
                     <div class="ibox-content">
-                        <form action="{{ url('pengajuan') }}" method="POST" class="form-horizontal">
+                        <form action="{{ url('penerimaan') }}" method="POST" class="form-horizontal">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
                                     <input type="text" name="number" class="form-control" placeholder="-- Auto Number --" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Pengajuan</label>
+                                <div class="col-sm-3">
+                                    <select name="pengajuan_id" class="select-pengajuan form-control input-sm" onchange="changePengajuan()">
+                                        <option value=""></option>
+                                        @foreach($pengajuan as $r)
+                                        <option value="{{ $r->id }}">{{ $r->number }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -59,7 +70,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                <th width="25%">Qty</th>
+                                                <th width="15%">Qty</th>
+                                                <th width="20%">Harga</th>
                                                 <th width="50px">&nbsp;</th>
                                             </tr>
                                         </thead>
@@ -77,13 +89,16 @@
                                                     <input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>
                                                 </td>
                                                 <td>
+                                                    <input type="text" name="price[]" class="form-control input-sm" autocomplete="off" required>
+                                                </td>
+                                                <td>
                                                     <button class="btn btn-sm btn-danger" onclick="hapusBaris(0)"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="3">
+                                                <td colspan="4">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -95,7 +110,7 @@
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <button class="btn btn-outline btn-primary" type="submit"><i class="fa fa-plus-circle"></i> Simpan</button>
-                                    <a href="{{ url('pengajuan') }}" class="btn btn-outline btn-danger"><i class="fa fa-times-circle"></i> Batal</a>
+                                    <a href="{{ url('penerimaan') }}" class="btn btn-outline btn-danger"><i class="fa fa-times-circle"></i> Batal</a>
                                 </div>
                             </div>
                         </form>
@@ -112,9 +127,6 @@
     {{ HTML::script('assets_back/js/plugins/select2/select2.full.min.js') }}
     {{ HTML::script('assets_back/js/plugins/datapicker/bootstrap-datepicker.js') }}
     <script>
-        $(document).ready(function () {
-            
-        });
         $("#tanggal").datepicker({
             startDate : '-0m',
             format :  'yyyy-mm-dd',
@@ -126,6 +138,9 @@
         });
         $('.select-item').select2({
             placeholder: 'Pilih Item'
+        });
+        $('.select-pengajuan').select2({
+            placeholder: 'Pilih Pengajuan'
         });
         var nomor = 1;
         $('#tambah-baris').on('click', function() { 
@@ -142,6 +157,9 @@
                     '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
+                    '<input type="text" name="price[]" class="form-control input-sm" autocomplete="off" required>' +
+                '</td>' +
+                '<td>' +
                     '<button class="btn btn-sm btn-danger" onclick="hapusBaris(' + nomor + ')"><i class="fa fa-trash"></i></button>' +
                 '</td>' +
             '</tr>');
@@ -153,6 +171,11 @@
         });
         function hapusBaris(baris) {
             $('#tr' + baris).remove();
+            return false;
+        }
+        function changePengajuan() {
+            var param = $('select[name="pengajuan_id"]').val();
+            
             return false;
         }
     </script>

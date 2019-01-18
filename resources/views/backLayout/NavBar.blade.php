@@ -42,8 +42,8 @@
                     <li {{{ (Request::is('penerimaan*') ? 'class=active' : '') }}}>
                       <a href="{{route('penerimaan.index')}}">Penerimaan </a>
                     </li>
-                    <li {{{ (Request::is('pengeluaran*') ? 'class=active' : '') }}}>
-                      <a href="{{route('pengeluaran.index')}}">Pengeluaran </a>
+                    <li {{{ (Request::is('penjualan*') ? 'class=active' : '') }}}>
+                      <a href="{{route('penjualan.index')}}">Penjualan </a>
                     </li>
                     <li {{{ (Request::is('pemakaian*') ? 'class=active' : '') }}}>
                       <a href="{{route('pemakaian.index')}}">Pemakaian </a>

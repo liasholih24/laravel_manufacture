@@ -19,7 +19,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Daftar Penerimaan</h5>
-                        <a href="{{ url('pengajuan/create') }}">
+                        <a href="{{ url('penerimaan/create') }}">
                             <button class="btn btn-sm btn-outline btn-success pull-right" style="margin-top: -7px">
                                 <i class="fa fa-plus-circle"></i> Tambah Penerimaan
                             </button>
@@ -34,9 +34,9 @@
                         </div>
                         @endif
                         @endforeach
-                        @if(!empty($pengajuan[0]))
+                        @if(!empty($penerimaan[0]))
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="tblpengajuan">
+                            <table class="table table-striped table-bordered table-hover" id="tblpenerimaan">
                                 <thead>
                                     <tr>
                                         <th>Nomor</th>
@@ -48,7 +48,7 @@
                                 </thead>
                                 <tbody>
                                     <?php $i = 0 ?>
-                                    @foreach($pengajuan as $r)
+                                    @foreach($penerimaan as $r)
                                     <?php $i++ ?>
                                     <tr>
                                         <td>{{ $r->number }}</td>
@@ -56,8 +56,8 @@
                                         <td>{{ $r->desc }}</td>
                                         <td>{{ empty($r->createdby->first_name) ? "" : $r->createdby->first_name }} {{ empty($r->createdby->last_name) ? "" : $r->createdby->last_name }}</td>
                                         <td>
-                                            <a href="{{ url('pengajuan/' . $r->id . '/edit') }}" class="btn btn-outline btn-warning btn-xs">Ubah</a>
-                                            <a href="{{ url('pengajuan/' . $r->id . '/print') }}" class="btn btn-outline btn-primary btn-xs" target="_blank">Cetak</a>
+                                            <a href="{{ url('penerimaan/' . $r->id . '/edit') }}" class="btn btn-outline btn-warning btn-xs">Ubah</a>
+                                            <a href="{{ url('penerimaan/' . $r->id . '/print') }}" class="btn btn-outline btn-primary btn-xs" target="_blank">Cetak</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -67,8 +67,8 @@
                         @else
                         <div class="jumbotron">
                             <h1>Data Kosong ... </h1>
-                            <p>Mohon maaf, tidak ada data pengajuan untuk bulan ini.</p>
-                            <p><a href="{{ url('pengajuan/create') }}" class="btn btn-primary btn-lg" role="button">Tambah Pengajuan</a></p>
+                            <p>Mohon maaf, tidak ada data penerimaan untuk bulan ini.</p>
+                            <p><a href="{{ url('penerimaan/create') }}" class="btn btn-primary btn-lg" role="button">Tambah Penerimaan</a></p>
                         </div>
                         @endif
                     </div>
@@ -82,7 +82,7 @@
     {{ HTML::script('assets_back/js/plugins/dataTables/datatables.min.js') }}
     <script>
         $(document).ready(function(){
-            var oTable = $('#tblpengajuan').DataTable({
+            var oTable = $('#tblpenerimaan').DataTable({
                 order: [0, 'desc']
             });
         });

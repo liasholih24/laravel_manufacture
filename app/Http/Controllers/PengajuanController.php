@@ -64,12 +64,16 @@ class PengajuanController extends Controller
         $pengajuan->number = $number;
         $pengajuan->date = $request->date;
         $pengajuan->desc = $request->desc;
+        $pengajuan->created_by = Sentinel::getUser()->id;
+        $pengajuan->updated_by = Sentinel::getUser()->id;
         $pengajuan->save();
         for($i=0;$i<count($request->item_id);$i++){
             $detail = new DetailPengajuan;
             $detail->pengajuan_id = $pengajuan->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->created_by = Sentinel::getUser()->id;
+            $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();
         }
         Session::flash('alert-success', 'Pengajuan berhasil dibuat.');
@@ -120,6 +124,7 @@ class PengajuanController extends Controller
         $pengajuan = Pengajuan::findOrFail($pengajuan->id);
         $pengajuan->date = $request->date;
         $pengajuan->desc = $request->desc;
+        $pengajuan->updated_by = Sentinel::getUser()->id;
         $pengajuan->save();
         $detail = DetailPengajuan::where('pengajuan_id', $pengajuan->id);
         $detail->delete();
@@ -128,6 +133,8 @@ class PengajuanController extends Controller
             $detail->pengajuan_id = $pengajuan->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->created_by = Sentinel::getUser()->id;
+            $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();
         }
         Session::flash('alert-success', 'Pengajuan berhasil diubah.');

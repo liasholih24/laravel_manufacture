@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Penerimaan;
 use App\Pengajuan;
-use App\DetailPengajuan;
+use App\DetailPenerimaan;
 use App\Item;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -31,8 +32,8 @@ class PenerimaanController extends Controller
      */
     public function index()
     {
-        $pengajuan = Pengajuan::whereMonth('created_at', '=', date('m'))->get();
-        return view('backEnd.penerimaan.index', ['pengajuan' => $pengajuan]);
+        $penerimaan = Penerimaan::whereMonth('created_at', '=', date('m'))->get();
+        return view('backEnd.penerimaan.index', ['penerimaan' => $penerimaan]);
     }
 
     /**
@@ -42,8 +43,9 @@ class PenerimaanController extends Controller
      */
      public function create()
     {
+        $pengajuan = Pengajuan::all();
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pengajuan.create', ['item' => $item]);
+        return view('backEnd.penerimaan.create', ['pengajuan' => $pengajuan, 'item' => $item]);
     }
 
     /**
@@ -53,27 +55,33 @@ class PenerimaanController extends Controller
      */
     public function store(Request $request)
     {
-        $number = Pengajuan::max('number');
+        $number = Penerimaan::max('number');
         if($number==null){
-            $number = 'PG-000001';
+            $number = 'PR-000001';
         }
         else{
-            $number = 'PG-'.sprintf('%06d', substr($number, 3) + 1);
+            $number = 'PR-'.sprintf('%06d', substr($number, 3) + 1);
         }
-        $pengajuan = new Pengajuan;
-        $pengajuan->number = $number;
-        $pengajuan->date = $request->date;
-        $pengajuan->desc = $request->desc;
-        $pengajuan->save();
+        $penerimaan = new Penerimaan;
+        $penerimaan->number = $number;
+        $penerimaan->pengajuan_id = $request->pengajuan_id;
+        $penerimaan->date = $request->date;
+        $penerimaan->desc = $request->desc;
+        $penerimaan->created_by = Sentinel::getUser()->id;
+        $penerimaan->updated_by = Sentinel::getUser()->id;
+        $penerimaan->save();
         for($i=0;$i<count($request->item_id);$i++){
-            $detail = new DetailPengajuan;
-            $detail->pengajuan_id = $pengajuan->id;
+            $detail = new DetailPenerimaan;
+            $detail->penerimaan_id = $penerimaan->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->price = $request->price[$i];
+            $detail->created_by = Sentinel::getUser()->id;
+            $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();
         }
-        Session::flash('alert-success', 'Pengajuan berhasil dibuat.');
-        return redirect('pengajuan');
+        Session::flash('alert-success', 'Penerimaan berhasil dibuat.');
+        return redirect('penerimaan');
     }
 
     /**
@@ -102,10 +110,11 @@ class PenerimaanController extends Controller
      */
     public function edit($id)
     {
-        $pengajuan = Pengajuan::findOrFail($id);
-        $detail = DetailPengajuan::where('pengajuan_id', $id)->get();
+        $penerimaan = Penerimaan::findOrFail($id);
+        $detail = DetailPenerimaan::where('penerimaan_id', $id)->get();
+        $pengajuan = Pengajuan::all();
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pengajuan.edit', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item]);
+        return view('backEnd.penerimaan.edit', ['penerimaan' => $penerimaan, 'detail' => $detail, 'pengajuan' => $pengajuan, 'item' => $item]);
     }
 
     /**
