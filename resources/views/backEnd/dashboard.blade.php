@@ -15,10 +15,10 @@
                                 <h5>Hasil Produksi</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{empty($deposit) ? "No Data": "Rp".number_format($deposit,0)}}</h1>
-                                <div class="stat-percent font-bold text-success">{{empty($sampah)?"0": $sampah}} kg 
+                                <h1 class="no-margins">No Data</h1>
+                                <div class="stat-percent font-bold text-success">0 kg 
                                 </div>
-                                 <small> dari {{empty($nasabah)?"0": $nasabah }} kandang</small>
+                                 <small> dari 0 kandang</small>
                             </div>
                         </div>
                     </div>
@@ -29,9 +29,9 @@
                                 <h5>Populasi Akhir</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{empty($penjualan_rp)?"0": number_format($penjualan_rp,0)}}</h1>
-                                <div class="stat-percent font-bold text-navy">{{empty($penjualan_kg)?"0": $penjualan_kg}} kg </div>
-                                <small>dari {{ empty($perusahaan)?"0": $perusahaan }} kandang</small>
+                                <h1 class="no-margins">No Data</h1>
+                                <div class="stat-percent font-bold text-navy">0 kg </div>
+                                <small>dari 0 kandang</small>
                             </div>
                         </div>
                     </div>
@@ -42,8 +42,8 @@
                                 <h5>Pemakaian Pakan</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{empty($deposit) ? "No Data": "Rp".number_format($jPembelian,0)}}</h1>
-                                <div class="stat-percent font-bold text-success">{{empty($jKg)?"0": $sampah}} kg 
+                                <h1 class="no-margins">No Data</h1>
+                                <div class="stat-percent font-bold text-success">0 kg 
                                 </div>
                                  <small> dari 0 kandang</small>
                             </div>
@@ -52,11 +52,11 @@
                     <div class="col-lg-3">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <span class="label label-warning pull-right">Update per {{ Carbon\Carbon::parse($created_at)->diffForHumans() }}</span>
+                                <span class="label label-warning pull-right">Update per today</span>
                                 <h5>HPP</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{empty($nasabah_ttl)?"No Data": $nasabah_ttl }}</h1>
+                                <h1 class="no-margins">0</h1>
                                 <small>per kg</small>
                             </div>
                         </div>
@@ -83,36 +83,36 @@
                                 <div class="col-lg-3">
                                     <ul class="stat-list">
                                         <li>
-                                            <h2 class="no-margins">{{empty($deposit_rpm)?"No Data" : "Rp.".number_format($deposit_rpm,0)}}</h2>
+                                            <h2 class="no-margins">0</h2>
                                             <small>Pemakaian Pakan (Rp.) {{date('M Y')}}</small>
-                                            <div class="stat-percent">{{empty($deposit_rpm0)? 0 : number_format($deposit_rpm / $deposit_rpm0 * 100,2)}}% <i class="fa <?php if($deposit_rpm >= $deposit_rpm0) {echo"fa-level-up";} else { echo "fa-level-down";} ?> text-navy"></i></div>
+                                            <div class="stat-percent">0% <i class="fa fa-level-up text-navy"></i></div>
                                             <div class="progress progress-mini">
-                                                <div style="width: {{empty($deposit_rpm)? 0 : number_format($deposit_rpm0 / $deposit_rpm * 100,2)}}%;" class="progress-bar"></div>
+                                                <div style="width: 0%;" class="progress-bar"></div>
                                             </div>
                                         </li>
                                         <li>
-                                            <h2 class="no-margins">{{empty($deposit_kgm)?"No Data" : number_format($deposit_kgm,0)."kg"}}</h2>
+                                            <h2 class="no-margins">0</h2>
                                             <small>Pemakaian Pakan (kg) {{date('M Y')}}</small>
-                                            <div class="stat-percent">{{empty($deposit_kgm0)? 0 : number_format(($deposit_kgm / $deposit_kgm0) * 100 ,2)}}% <i class="fa <?php if($deposit_kgm >= $deposit_kgm0) {echo"fa-level-up";} else { echo "fa-level-down";} ?> text-navy"></i></div>
+                                            <div class="stat-percent">0% <i class="fa fa-level-up text-navy"></i></div>
                                             <div class="progress progress-mini">
-                                                <div style="width: {{empty($deposit_kgm0)? 0 : number_format(($deposit_kgm / $deposit_kgm0) * 100 ,2)}}%;" class="progress-bar"></div>
+                                                <div style="width: 0%;" class="progress-bar"></div>
                                             </div>
                                         </li>
                                          <li>
-                                            <h2 class="no-margins">{{empty($penjualan_rpm)?"No Data" : "Rp.".number_format($penjualan_rpm,0)}}</h2>
+                                            <h2 class="no-margins">0</h2>
                                             <small>Hasil Produksi (Rp.) {{date('M Y')}} </small>
-                                            <div class="stat-percent">{{empty($penjualan_rpm0)? 0 : number_format(($penjualan_rpm / $penjualan_rpm0) * 100 ,2)}}%
-                                             <i class="fa <?php if($penjualan_rpm >= $penjualan_rpm0) {echo"fa-level-up";} else { echo "fa-level-down";} ?> text-navy"></i></div>
+                                            <div class="stat-percent">0%
+                                             <i class="fa fa-level-up text-navy"></i></div>
                                             <div class="progress progress-mini">
-                                                <div style="width: {{empty($penjualan_rpm0)? 0 : number_format(($penjualan_rpm / $penjualan_rpm0) * 100 ,2)}}%;" class="progress-bar"></div>
+                                                <div style="width: 0%;" class="progress-bar"></div>
                                             </div>
                                         </li>
                                         <li>
-                                            <h2 class="no-margins">{{empty($penjualan_kgm)?"No Data" :  number_format($penjualan_kgm,0)."kg"}}</h2>
+                                            <h2 class="no-margins">0</h2>
                                             <small>Hasil Produksi (kg) {{date('M Y')}}</small>
-                                            <div class="stat-percent">{{empty($penjualan_kgm0)? 0 : number_format(($penjualan_kgm / $penjualan_kgm0) * 100 ,2)}}% <i class="fa <?php if($penjualan_kgm >= $penjualan_kgm0) {echo"fa-level-up";} else { echo "fa-level-down";} ?> text-navy"></i></div>
+                                            <div class="stat-percent">0% <i class="fa fa-level-up text-navy"></i></div>
                                             <div class="progress progress-mini">
-                                                <div style="width: {{empty($penjualan_kgm0)? 0 : number_format(($penjualan_kgm / $penjualan_kgm0) * 100 ,2)}}%;" class="progress-bar"></div>
+                                                <div style="width: 0%;" class="progress-bar"></div>
                                             </div>
                                         </li>
                                         </ul>
@@ -141,19 +141,11 @@
                         </div>
                         <div class="ibox-content ibox-heading">
                         <h3>Total Persediaan
-                            <div class="stat-percent text-navy">{{number_format($qty,1)}} Kg</div>
+                            <div class="stat-percent text-navy">{{number_format(0,1)}} Kg</div>
                         </h3>
                         <span class="bar_dashboard">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9,6,4,5,7,3,2,1,0,9,5,6,8,3,2,1</span>
                         </div>
-                        @foreach($sampah_ttl as $item)
-                        <div class="ibox-content">
-                        <h3>{{$item->type}}
-                            <div class="stat-percent text-navy">{{number_format($item->qty,1)}} kg</div>
-                        </h3>
-                        <span class="pie">{{$qty}},{{$item->qty}}</span> 
-                        {{empty($item->qty)? 0 : number_format($item->qty / $qty * 100,0)}}% dari persediaan
-                        </div>
-                       @endforeach
+                 
                        
                     </div>
                 </div>
@@ -202,12 +194,7 @@
                            <h4>Rekap Persediaan Barang (kg)</h4>
                     <div>
                         <ul class="list-group">
-                            @foreach($sampah_ttl2 as $item)
-                            <li class="list-group-item">
-                                <span class="badge {{$item->badge}}">{{$item->jml}}</span>
-                                {{$item->sampah}}
-                            </li>
-                            @endforeach
+                        
                            
                         </ul>
                     </div>
@@ -247,17 +234,7 @@
                 size: 80
             });
 
-            var data2 = [
-            <?php foreach($deposits as $dep){?>
-                [gd({{$dep->y}}, {{$dep->m}}, {{$dep->d}}), {{$dep->deposit_rp}}],
-            <?php }?>
-            ];
-
-            var data3 = [
-                <?php foreach($penjualans as $pen){?>
-                [gd({{$pen->y}}, {{$pen->m}}, {{$pen->d}}), {{$pen->penjualan_rp}}],
-            <?php }?>
-            ];
+    
 
 
             var dataset = [
@@ -359,69 +336,9 @@
                 "GB": 120,
             };
 
-            //rekap sampah 1
-            c3.generate({
-                bindto: '#pie',
-                data:{
-                    columns: [
-                    <?php foreach ($rekap_sampahs as $rekap_sampah) {?>
-                      
-                        ['{{$rekap_sampah->sampah}}', '{{$rekap_sampah->jml}}'],
-                       
-                       <?php }?>
-                    ],
-                    colors:{
-                        Kertas: '#1ab394',
-                        Plastik: '#23c6c8',
-                        EMBERAN: '#1C84C6',
-                        KACA: '#ccc',
-                        LOGAM: '#999',
-                    },
-                    type : 'bar'
-                }
-            });
-            //rekap sampah 2
-            c3.generate({
-                bindto: '#pie2',
-                data:{
-                    columns: [
-                    <?php foreach ($rekap_sampahs2 as $rekap_sampah2) {?>
-                      
-                        ['{{$rekap_sampah2->sampah}}', '{{$rekap_sampah2->jml}}'],
-                       
-                       <?php }?>
-                    ],
-                    colors:{
-                        Kertas: '#1ab394',
-                        Plastik: '#23c6c8',
-                        EMBERAN: '#1C84C6',
-                        KACA: '#ccc',
-                        LOGAM: '#999',
-                    },
-                    type : 'bar'
-                }
-            });
+      
 
-             c3.generate({
-                bindto: '#pie3',
-                data:{
-                    columns: [
-                    <?php foreach ($sedekahs as $sedekah) {?>
-                      
-                        ['{{$sedekah->sampah}}', '{{$sedekah->jml}}'],
-                       
-                       <?php }?>
-                    ],
-                    colors:{
-                        Kertas: '#1ab394',
-                        Plastik: '#23c6c8',
-                        EMBERAN: '#1C84C6',
-                        KACA: '#ccc',
-                        LOGAM: '#999',
-                    },
-                    type : 'bar'
-                }
-            });
+      
 
 
 
