@@ -45,6 +45,8 @@ Route::group(['middleware' => ['web','auth', 'permission']], function () {
 Route::group(['middleware' => ['web','auth', 'permission']], function () {
     Route::resource('lokasi', 'LokasiController');
     Route::get('lokasi/{id}/filter', ['uses' => 'LokasiController@filter']);
+    Route::get('area', ['uses' => 'LokasiController@area']);
+    Route::get('area/create', ['uses' => 'LokasiController@creates']);
 });
 
 

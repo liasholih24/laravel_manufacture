@@ -78,7 +78,7 @@
                     @endif      
                     @if (Sentinel::getUser()->hasAnyAccess(['lokasi*']))
                     <li {{{ (Request::is('lokasi*') ? 'class=active' : '') }}}>
-                      <a href="{{route('lokasi.index')}}">Kandang</a>
+                      <a href="{{route('lokasi.index')}}">Lokasi</a>
                     </li>
                     @endif
                     @if (Sentinel::getUser()->hasAnyAccess(['pakan*']))
