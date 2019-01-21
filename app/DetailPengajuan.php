@@ -15,6 +15,10 @@ class DetailPengajuan extends Model
      */
     protected $table = 'detailpengajuans';
 
+    public function item(){
+        return $this->hasOne('App\Item', 'id', 'item_id');
+    }
+
     public function createdby(){
         return $this->hasOne('App\User', 'id', 'created_by');
     }

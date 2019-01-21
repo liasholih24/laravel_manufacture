@@ -52,7 +52,7 @@
                                     <?php $i++ ?>
                                     <tr>
                                         <td>{{ $r->number }}</td>
-                                        <td>{{ $r->date }}</td>
+                                        <td>{{ date('d/m/Y', strtotime($r->date)) }}</td>
                                         <td>{{ $r->desc }}</td>
                                         <td>{{ empty($r->createdby->first_name) ? "" : $r->createdby->first_name }} {{ empty($r->createdby->last_name) ? "" : $r->createdby->last_name }}</td>
                                         <td>

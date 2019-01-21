@@ -141,6 +141,23 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::group(['middleware' => ['web']], function () {
+    Route::resource('penerimaan', 'PenerimaanController');
+    Route::get('penerimaan/pengajuan/{id}', 'PenerimaanController@pengajuan');
+});
+
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('pemakaian', 'PemakaianController');
+});
+
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('pengeluaran', 'PengeluaranController');
+});
+
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('customer', 'CustomerController');
+});
+
+Route::group(['middleware' => ['web']], function () {
 	Route::resource('pembelian', 'PembelianController');
     Route::get('pembelian/{id}/print', ['uses' => 'PembelianController@print', 'as' => 'pembelian.print']);
     Route::get('/refpb', 'PembelianController@refpb');

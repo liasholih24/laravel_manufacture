@@ -15,25 +15,22 @@ class Penjualan extends Model
      */
     protected $table = 'penjualans';
 
-    public function getperusahaan(){
-    return $this->hasOne('App\Penadah','id','perusahaan');
-    }
-
     public function createdby(){
-    return $this->hasOne('App\User','id','created_by');
+        return $this->hasOne('App\User', 'id', 'created_by');
     }
 
-     public function updatedby(){
-    return $this->hasOne('App\User','id','updated_by');
-     }
+    public function updatedby(){
+        return $this->hasOne('App\User', 'id', 'updated_by');
+    }
+
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['code', 'perusahaan', 'keterangan', 'created_by', 'updated_by','total_kg','total_rp','created_at','customer','diskon','tunai','kembali'];
+    protected $fillable = ['number', 'date', 'desc', 'created_by', 'updated_by', 'created_at'];
 
-    //use SoftDeletes;
-    //protected $dates = ['deleted_at'];
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
 }
