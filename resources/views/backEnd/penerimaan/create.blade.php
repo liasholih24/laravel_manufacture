@@ -70,6 +70,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
+                                                <th width="25%">Pemasok</th>
                                                 <th width="15%">Qty</th>
                                                 <th width="20%">Harga</th>
                                                 <th width="50px">&nbsp;</th>
@@ -81,6 +82,14 @@
                                                     <select name="item_id[]" class="select-item form-control input-sm" required>
                                                         <option value=""></option>
                                                         @foreach($item as $r)
+                                                        <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="supplier_id[]" class="select-supplier form-control input-sm">
+                                                        <option value=""></option>
+                                                        @foreach($supplier as $r)
                                                         <option value="{{ $r->id }}">{{ $r->name }}</option>
                                                         @endforeach
                                                     </select>
@@ -98,7 +107,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="4">
+                                                <td colspan="5">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -143,6 +152,10 @@
             placeholder: 'Pilih Pengajuan',
             allowClear: true
         });
+        $('.select-supplier').select2({
+            placeholder: 'Pilih Pemasok',
+            allowClear: true
+        });
         var nomor = 1;
         $('#tambah-baris').on('click', function() { 
             $('#tbody').append('<tr id="tr' + nomor + '">' +
@@ -150,6 +163,14 @@
                     '<select name="item_id[]" class="form-control input-sm select-item" required>' +
                         '<option value=""></option>' +
                         @foreach($item as $r)
+                        '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
+                        @endforeach
+                    '</select>' +
+                '</td>' +
+                '<td>' +
+                    '<select name="supplier_id[]" class="form-control input-sm select-supplier" required>' +
+                        '<option value=""></option>' +
+                        @foreach($supplier as $r)
                         '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
                         @endforeach
                     '</select>' +
@@ -166,6 +187,10 @@
             '</tr>');
             $('.select-item').select2({
                 placeholder: 'Pilih Item'
+            });
+            $('.select-supplier').select2({
+                placeholder: 'Pilih Pemasok',
+                allowClear: true
             });
             nomor++;
             return false;

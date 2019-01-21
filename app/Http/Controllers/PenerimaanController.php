@@ -9,6 +9,7 @@ use App\Pengajuan;
 use App\DetailPenerimaan;
 use App\DetailPengajuan;
 use App\Item;
+use App\Supplier;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -46,7 +47,8 @@ class PenerimaanController extends Controller
     {
         $pengajuan = Pengajuan::where('status', 1)->get();
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.penerimaan.create', ['pengajuan' => $pengajuan, 'item' => $item]);
+        $supplier = Supplier::all();
+        return view('backEnd.penerimaan.create', ['pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier]);
     }
 
     /**
@@ -78,6 +80,7 @@ class PenerimaanController extends Controller
             $detail = new DetailPenerimaan;
             $detail->penerimaan_id = $penerimaan->id;
             $detail->item_id = $request->item_id[$i];
+            $detail->supplier_id = $request->supplier_id[$i];
             $detail->qty = $request->qty[$i];
             $detail->price = $request->price[$i];
             $detail->created_by = Sentinel::getUser()->id;
@@ -118,7 +121,8 @@ class PenerimaanController extends Controller
         $detail = DetailPenerimaan::where('penerimaan_id', $id)->get();
         $pengajuan = Pengajuan::where('status', 1)->get();
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.penerimaan.edit', ['penerimaan' => $penerimaan, 'detail' => $detail, 'pengajuan' => $pengajuan, 'item' => $item]);
+        $supplier = Supplier::all();
+        return view('backEnd.penerimaan.edit', ['penerimaan' => $penerimaan, 'detail' => $detail, 'pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier]);
     }
 
     /**
@@ -141,6 +145,7 @@ class PenerimaanController extends Controller
             $detail = new DetailPenerimaan;
             $detail->penerimaan_id = $penerimaan->id;
             $detail->item_id = $request->item_id[$i];
+            $detail->supplier_id = $request->supplier_id[$i];
             $detail->qty = $request->qty[$i];
             $detail->price = $request->price[$i];
             $detail->created_by = Sentinel::getUser()->id;

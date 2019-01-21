@@ -137,6 +137,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::resource('pengajuan', 'PengajuanController');
+    Route::get('pengajuan/item/{id}', 'PengajuanController@item');
     Route::get('pengajuan/{id}/print', ['uses' => 'PengajuanController@print', 'as' => 'pengajuan.print']);
 });
 

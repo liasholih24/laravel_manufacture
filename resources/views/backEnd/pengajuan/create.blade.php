@@ -66,7 +66,7 @@
                                         <tbody id="tbody">
                                             <tr id="tr0">
                                                 <td>
-                                                    <select name="item_id[]" class="select-item form-control input-sm" required>
+                                                    <select name="item_id[]" onchange="pilihItem(0)" class="select-item form-control input-sm" required>
                                                         <option value=""></option>
                                                         @foreach($item as $r)
                                                         <option value="{{ $r->id }}">{{ $r->name }}</option>
@@ -74,7 +74,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>
+                                                    <input type="number" name="qty[]" class="form-control input-sm" autocomplete="off" required>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-sm btn-danger" onclick="hapusBaris(0)"><i class="fa fa-trash"></i></button>
@@ -131,7 +131,7 @@
         $('#tambah-baris').on('click', function() { 
             $('#tbody').append('<tr id="tr' + nomor + '">' +
                 '<td>' +
-                    '<select name="item_id[]" class="form-control input-sm select-item" required>' +
+                    '<select name="item_id[]" onchange="pilihItem(' + nomor + ')" class="form-control input-sm select-item" required>' +
                         '<option value=""></option>' +
                         @foreach($item as $r)
                         '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
@@ -139,7 +139,7 @@
                     '</select>' +
                 '</td>' +
                 '<td>' +
-                    '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
+                    '<input type="number" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
                     '<button class="btn btn-sm btn-danger" onclick="hapusBaris(' + nomor + ')"><i class="fa fa-trash"></i></button>' +
@@ -151,6 +151,13 @@
             nomor++;
             return false;
         });
+        function pilihItem(baris) {
+            var param = $('#tr' + baris + ' select[name="item_id[]"]').val();
+            $.get("item/" + param, function(data, status){
+                $('#tr' + baris + ' input[name="qty[]"]').prop('min', data.minstock);
+                $('#tr' + baris + ' input[name="qty[]"]').prop('max', data.maxstock);
+            });
+        }
         function hapusBaris(baris) {
             $('#tr' + baris).remove();
             return false;

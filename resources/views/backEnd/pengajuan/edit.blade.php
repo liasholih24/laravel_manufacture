@@ -69,7 +69,7 @@
                                             @foreach($detail as $d)
                                             <tr id="tr{{$i}}">
                                                 <td>
-                                                    <select name="item_id[]" class="select-item form-control input-sm" required>
+                                                    <select name="item_id[]" onchange="pilihItem({{$i}})" class="select-item form-control input-sm" required>
                                                         <option value=""></option>
                                                         @foreach($item as $r)
                                                         <option value="{{ $r->id }}" @if($d->item_id==$r->id) selected @endif>{{ $r->name }}</option>
@@ -77,7 +77,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
+                                                    <input type="number" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-sm btn-danger" onclick="hapusBaris({{$i}})"><i class="fa fa-trash"></i></button>
@@ -136,7 +136,7 @@
         $('#tambah-baris').on('click', function() { 
             $('#tbody').append('<tr id="tr' + nomor + '">' +
                 '<td>' +
-                    '<select name="item_id[]" class="form-control input-sm select-item" required>' +
+                    '<select name="item_id[]" onchange="pilihItem(' + nomor + ')" class="form-control input-sm select-item" required>' +
                         '<option value=""></option>' +
                         @foreach($item as $r)
                         '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
@@ -144,7 +144,7 @@
                     '</select>' +
                 '</td>' +
                 '<td>' +
-                    '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
+                    '<input type="number" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
                     '<button class="btn btn-sm btn-danger" onclick="hapusBaris(' + nomor + ')"><i class="fa fa-trash"></i></button>' +
@@ -156,6 +156,13 @@
             nomor++;
             return false;
         });
+        function pilihItem(baris) {
+            var param = $('#tr' + baris + ' select[name="item_id[]"]').val();
+            $.get("/pengajuan/item/" + param, function(data, status){
+                $('#tr' + baris + ' input[name="qty[]"]').prop('min', data.minstock);
+                $('#tr' + baris + ' input[name="qty[]"]').prop('max', data.maxstock);
+            });
+        }
         function hapusBaris(baris) {
             $('#tr' + baris).remove();
             return false;
