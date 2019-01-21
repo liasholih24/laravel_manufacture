@@ -33,7 +33,7 @@ class Transfer extends Model
      *
      * @var array
      */
-    protected $fillable = ['gdg_from', 'gdg_to', 'qty_kg', 'keterangan', 'created_by', 'updated_by'];
+    protected $fillable = ['number','date','gdg_from', 'gdg_to', 'qty_kg', 'keterangan', 'created_by', 'updated_by'];
 
     use SoftDeletes;
     protected $dates = ['deleted_at'];

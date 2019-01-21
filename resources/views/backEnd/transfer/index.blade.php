@@ -1,114 +1,90 @@
 @section('style')
-  {{ HTML::style('assets_back/css/plugins/dataTables/datatables.min.css') }}
+    {{ HTML::style('assets_back/css/plugins/dataTables/datatables.min.css') }}
 @endsection
-@extends('backLayout.app')
-@section('title')
-Transfer
-@stop
-@section('desc')
 
+@extends('backLayout.app')
+
+@section('title')
+    Mutasi
 @stop
+
+@section('desc')
+    Daftar Mutasi
+@stop
+
 @section('content')
-<div class="wrapper wrapper-content">
-	<div class="row detail_content3">
-	     <div class="col-lg-12 detail_content2" style="background-color: white"><style>
-						.ibox { margin: 1px 2px 0px 0px !important }
-						.ibox.float-e-margins{ margin: 0px 2px !important}
-						</style>
-            <div class="row ibox-title">
-   <ol class="breadcrumb col-sm-6 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
-        <li class="active">
-            Transfer
-        </li>
-    </ol>
-    <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline btn-primary pull-right">
-        <i class="fa fa-arrow-circle-o-left" style="margin-right: 5px"></i> Back
-    </a>
-    <a href="{{ url('transfer/create') }}">
-    <button class="detail2 btn btn-sm btn-outline btn-success pull-right" style="margin-right: 10px">
-        <i class="fa fa-plus-circle" style="margin-right: 5px"></i> Tambah Transfer
-    </button>
-  </a>
-</div>
-<div class="row ibox-content" style="min-height: 65vh; ">
-  @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-      @if(Session::has('alert-' . $msg))
-      <div class="alert alert-{{ $msg }} alert-dismissable">
-                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                    {{ Session::get('alert-' . $msg) }}.
-      </div>
-      @endif
-    @endforeach
-	<div class="col-xs-12 col-sm-12">
-    @if(!empty($transfer[0]))
-    <div class="table-responsive">
-<table class="table table-striped table-bordered table-hover" id="tbltransfer">
-<thead>
-    <tr>
-        <th>ID</th>
-        <th>Kode Transaksi</th>
-        <th>Gudang Asal</th>
-        <th>Gudang Tujuan</th>
-        <th>Jumlah/kg</th>
-        <th>Keterangan</th>
-        <th>Tgl. Transaksi</th>
-        <th>Diproses oleh</th>
-        <th>Actions</th>
-    </tr>
-</thead>
-<tbody>
-<?php $i = 0 ?>
-@foreach($transfer as $item)
-<?php $i++ ?>
-    <tr>
-        <td>{{ $item->id }}</td>
-        <td>{{ $item->code }}</td>
-        <td>{{ $item->gudangfrom->name}}</td>
-        <td>{{ $item->gudangto->name}}</td>
-        <td>{{ $item->qty_kg }}</td>
-        <td>{!! empty($item->keterangan) ? "<i>Tidak ada keterangan</i>": $item->keterangan  !!}</td>
-        <td>{{ $item->updated_at }}</td>
-        <td>{{ empty($item->createdby->first_name)?"": $item->createdby->first_name }} {{ empty($item->createdby->last_name)?"": $item->createdby->last_name }}</td>
-        <td>
-            <a href="{{ url('transfer/' . $item->id . '/print') }}" 
-              class="btn btn-outline btn-success btn-xs" target="_blank">Cetak Bukti</a>
-            
-        </td>
-    </tr>
-@endforeach
-</tfoot>
-</table>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Daftar Mutasi</h5>
+                        <a href="{{ url('transfer/create') }}">
+                            <button class="btn btn-sm btn-outline btn-success pull-right" style="margin-top: -7px">
+                                <i class="fa fa-plus-circle"></i> Tambah Mutasi
+                            </button>
+                        </a>
+                    </div>
+                    <div class="ibox-content">
+                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-' . $msg))
+                        <div class="alert alert-{{ $msg }} alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            {{ Session::get('alert-' . $msg) }}.
+                        </div>
+                        @endif
+                        @endforeach
+                        @if(!empty($mutasi[0]))
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="tblmutasi">
+                                <thead>
+                                    <tr>
+                                        <th>Nomor</th>
+                                        <th>Tanggal</th>
+                                        <th>Deskripsi</th>
+                                        <th>Dibuat oleh</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $i = 0 ?>
+                                    @foreach($mutasi as $r)
+                                    <?php $i++ ?>
+                                    <tr>
+                                        <td>{{ $r->number }}</td>
+                                        <td>{{ date('d/m/Y', strtotime($r->date)) }}</td>
+                                        <td>{{ $r->keterangan }}</td>
+                                        <td>{{ empty($r->createdby->first_name) ? "" : $r->createdby->first_name }} {{ empty($r->createdby->last_name) ? "" : $r->createdby->last_name }}</td>
+                                        <td>
+                                            <a href="{{ url('transfer/' . $r->id . '/edit') }}" class="btn btn-outline btn-warning btn-xs">Ubah</a>
+                                            <a href="{{ url('transfer/' . $r->id . '/print') }}" class="btn btn-outline btn-primary btn-xs" target="_blank">Cetak</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        @else
+                        <div class="jumbotron">
+                            <h1>Data Kosong ... </h1>
+                            <p>Mohon maaf, tidak ada data mutasi untuk bulan ini.</p>
+                            <p><a href="{{ url('transfer/create') }}" class="btn btn-primary btn-lg" role="button">Tambah Mutasi</a></p>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
-        @else
-         <div class="jumbotron">
-                        <h1>Data Kosong ... </h1>
-                        <p>Mohon maaf, tidak ada data transaksi transfer sampah untuk bulan ini.</p>
-                        <p><a href="{{ url('transfer/create') }}" class="btn btn-primary btn-lg" role="button">Tambah Transfer</a>
-                        </p>
-        </div>
-        @endif
-      </div>
     </div>
-  </div>
-</div>
-</div>
 @endsection
 
 @section('script')
-
-{{ HTML::script('assets_back/js/plugins/dataTables/datatables.min.js') }}
-
-<!-- Page-Level Scripts -->
-<script>
-    $(document).ready(function(){
-       
-
-        /* Init DataTables */
-         var oTable = $('#tbltransfer').DataTable(
-          {order: [ 6, 'desc' ]}
-        );
-         
-    });
-
-</script>
+    {{ HTML::script('assets_back/js/plugins/dataTables/datatables.min.js') }}
+    <script>
+        $(document).ready(function(){
+            var oTable = $('#tblmutasi').DataTable({
+                order: [0, 'desc']
+            });
+        });
+    </script>
 @endsection

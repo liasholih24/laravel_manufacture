@@ -50,7 +50,7 @@
                     </li>
                     @if (Sentinel::getUser()->hasAnyAccess(['transfer.*']))
                     <li {{{ (Request::is('transfer*') ? 'class=active' : '') }}}>
-                      <a href="{{route('transfer.index')}}">Transfer</a>
+                      <a href="{{route('transfer.index')}}">Mutasi</a>
                     </li>
                     @endif
                 </ul>

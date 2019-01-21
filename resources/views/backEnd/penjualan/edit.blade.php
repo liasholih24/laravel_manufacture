@@ -42,6 +42,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">Customer</label>
+                                <div class="col-sm-3">
+                                    <select name="customer_id" class="select-customer form-control input-sm">
+                                        <option value=""></option>
+                                        @foreach($customer as $r)
+                                        <option value="{{ $r->id }}" @if($r->id==$penjualan->customer_id) selected @endif>{{ $r->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
                                     <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($penjualan->date)) }}">
@@ -135,6 +146,9 @@
         });
         $('.select-item').select2({
             placeholder: 'Pilih Item'
+        });
+        $('.select-customer').select2({
+            placeholder: 'Pilih Customer'
         });
         var nomor = {{$i}};
         $('#tambah-baris').on('click', function() { 

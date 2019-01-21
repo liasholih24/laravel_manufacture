@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Penjualan;
 use App\DetailPenjualan;
 use App\Item;
+use App\Customer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -43,7 +44,8 @@ class PenjualanController extends Controller
      public function create()
     {
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.penjualan.create', ['item' => $item]);
+        $customer = Customer::all();
+        return view('backEnd.penjualan.create', ['item' => $item, 'customer' => $customer]);
     }
 
     /**
@@ -62,6 +64,7 @@ class PenjualanController extends Controller
         }
         $penjualan = new Penjualan;
         $penjualan->number = $number;
+        $penjualan->customer_id = $request->customer_id;
         $penjualan->date = $request->date;
         $penjualan->desc = $request->desc;
         $penjualan->created_by = Sentinel::getUser()->id;
@@ -110,7 +113,8 @@ class PenjualanController extends Controller
         $penjualan = Penjualan::findOrFail($id);
         $detail = DetailPenjualan::where('penjualan_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.penjualan.edit', ['penjualan' => $penjualan, 'detail' => $detail, 'item' => $item]);
+        $customer = Customer::all();
+        return view('backEnd.penjualan.edit', ['penjualan' => $penjualan, 'detail' => $detail, 'item' => $item, 'customer' => $customer]);
     }
 
     /**
@@ -123,6 +127,7 @@ class PenjualanController extends Controller
     public function update(Request $request, Penjualan $penjualan)
     {
         $penjualan = Penjualan::findOrFail($penjualan->id);
+        $penjualan->customer_id = $request->customer_id;
         $penjualan->date = $request->date;
         $penjualan->desc = $request->desc;
         $penjualan->updated_by = Sentinel::getUser()->id;
