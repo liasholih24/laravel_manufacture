@@ -19,7 +19,8 @@ Login
 		            -->
 		        </div>
             {{ Form::open(array('url' => route('login'), 'class' => 'login-form','files' => true)) }}
-            {!! csrf_field() !!}
+        
+			<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 
 						@foreach (['danger', 'warning', 'success', 'info'] as $msg)
 								@if(Session::has('alert-' . $msg))
