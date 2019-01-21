@@ -26,8 +26,13 @@
                       <a href="{{route('produksi.index')}}">Produksi </a>
                     </li>
                     <li {{{ (Request::is('hpp*') ? 'class=active' : '') }}}>
-                      <a href="{{route('produksi.index')}}">HPP </a>
+                      <a href="{{route('produksi.index')}}">HPP Telur</a>
                     </li>
+                    @if (Sentinel::getUser()->hasAnyAccess(['pakan*']))
+                    <li {{{ (Request::is('pakan*') ? 'class=active' : '') }}}>
+                      <a href="{{route('pakan.index')}}">HPP Pakan</a>
+                    </li>
+                    @endif
                 </ul>
           </li>
              @if (Sentinel::getUser()->hasAnyAccess(['pengajuan.*', 'penerimaan.*', 'pengeluaran.*', 'penjualan.*', 'transfer.*']))
@@ -79,11 +84,6 @@
                     @if (Sentinel::getUser()->hasAnyAccess(['lokasi*']))
                     <li {{{ (Request::is('lokasi*') ? 'class=active' : '') }}}>
                       <a href="{{route('lokasi.index')}}">Lokasi</a>
-                    </li>
-                    @endif
-                    @if (Sentinel::getUser()->hasAnyAccess(['pakan*']))
-                    <li {{{ (Request::is('pakan*') ? 'class=active' : '') }}}>
-                      <a href="{{route('pakan.index')}}">Komposisi Pakan</a>
                     </li>
                     @endif
                     <li {{{ (Request::is('customer*') ? 'class=active' : '') }}}>

@@ -43,6 +43,14 @@ protected function validator(Request $request)
       return view('backEnd.lokasi.index', compact('tables','filters','id'));
     }
 
+    public function area()
+    {
+      $tables = Lokasi::where('depth',0)->get();
+
+      $id= false;
+      return view('backEnd.lokasi.area', compact('tables','id'));
+    }
+
     public function filter($id)
     {
       $filters = Lokasi::where('depth',0)->get();
@@ -60,10 +68,15 @@ protected function validator(Request $request)
     public function create()
     {
         $statuses = Lokasi::all();
-        $activations = Status::where('parent_id','=','1')->orderby('id','desc')->pluck('name', 'id');
-        $types = Status::where('parent_id','=','12')->orderby('id','desc')->pluck('name', 'id');
+        $id = 1;
+        return view('backEnd.lokasi.create',compact ('statuses','id'));
+    }
 
-        return view('backEnd.lokasi.create',compact ('statuses','activations','types'));
+    public function creates()
+    {
+        $statuses = Lokasi::all();
+        $id = 0;
+        return view('backEnd.lokasi.create',compact ('statuses','id'));
     }
 
     /**
@@ -82,7 +95,7 @@ protected function validator(Request $request)
     }
 
 
-    if ($request->kategori == "uncategories")
+    if (empty($request->kategori))
     {
     $root = Lokasi::create(['code' => $request->code
                               ,'name' => $request->name
@@ -96,6 +109,9 @@ protected function validator(Request $request)
     $attributes = $root->getOriginal();
     activity()->performedOn($root)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Lokasi '.$request->name.' is created successfully');
 
+    Session::flash('alert-success', 'Area '.$request->name.' is created successfully');
+
+      return redirect('area');
     }
     else {
     $root = Lokasi::where('id', '=', $request->kategori)->first();
@@ -110,12 +126,14 @@ protected function validator(Request $request)
                             ]);
     $attributes = $child1->getOriginal();
     activity()->performedOn($child1)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Lokasi '.$request->name.' is created successfully');
+ 
+    Session::flash('alert-success', 'Lokasi '.$request->name.' is created successfully');
+
+    return redirect('lokasi');
 
     }
 
-      Session::flash('alert-success', 'Lokasi '.$request->name.' is created successfully');
-
-      return redirect('lokasi');
+      
     }
 
     /**

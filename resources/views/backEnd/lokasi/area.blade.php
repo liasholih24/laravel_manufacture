@@ -1,9 +1,9 @@
 @extends('backLayout.app')
 @section('title')
-Lokasi
+Area
 @stop
 @section('desc')
-Kelola Data Lokasi
+Kelola Data Area
 @stop
 @section('style')
 {{ HTML::style('assets_back/css/plugins/dataTables/datatables.min.css') }}
@@ -21,33 +21,25 @@ Kelola Data Lokasi
         <ol class="breadcrumb col-sm-8 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
           <li class="active">
               <a class="detail2" href="">
-                Lokasi
+                Area
               </a>
           </li>
           </ol>
          
           @if (Sentinel::getUser()->hasAccess(['lokasi.create']))
-          <a href="{{ url('lokasi/create') }}">
+          <a href="{{ url('area/create') }}">
           <button class="detail2 btn btn-sm btn-outline btn-success pull-right" style="margin-right: 10px">
               <i class="fa fa-plus-circle" style="margin-right: 5px"></i>
-                  Tambah
+                  Tambah Area
           </button>
           </a>
           @endif
-          <a href="{{ url('area') }}">
+          <a href="{{ url('lokasi') }}">
           <button class="detail2 btn btn-sm btn-outline btn-info pull-right" style="margin-right: 10px">
               <i class="fa fa-list" style="margin-right: 5px"></i>
-                Area
+                Lokasi
           </button>
           </a>
-        <select class="form-control chosen-select" style="width:205px;margin-right: 10px;" onchange="if (this.value) window.location.href=this.value">
-          <option value="{{ url('lokasi')}}">Pilih Area</option>
-          @foreach($filters as $filter)
-          <option value="{{ url('lokasi/' . $filter->id . '/filter') }}" <?php if ($filter->id == $id) echo ' selected="selected"'; ?>>
-            {{$filter->name}}
-          </option>
-          @endforeach
-        </select>
 
     </div>
   <div class="col-xs-12 col-sm-12 ibox-content row" style="min-height:65vh;">
@@ -66,8 +58,8 @@ Kelola Data Lokasi
     <tr>
         <th>No.</th>
         <th>Name</th>
-        <th>Area</th>
         <th>Deskripsi</th>
+        <th>Type</th>
         <th>Last Update</th>
         <th>Updated By</th>
         <th>Actions</th>
@@ -80,8 +72,8 @@ Kelola Data Lokasi
   <tr>
       <td>{{$i}}</td>
       <td>{{$table->name}}</td>
-      <td>{{$table->parent()->first()->name}}</td>  
       <td>{!! empty($table->notes)?"<i>Tidak ada Deskripsi</i>":$table->notes !!}</td>
+      <td>{{$table->type}}</td>
       <td>{{$table->updated_at}}</td>
       <td>{{$table->updatedby->first_name}} {{$table->updatedby->last_name}}</td>
       <td>

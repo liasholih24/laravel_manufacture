@@ -1,9 +1,9 @@
 @extends('backLayout.app')
 @section('title')
-Lokasi
+@if($id == 0) Area @else Lokasi @endif
 @stop
 @section('desc')
-Add New
+Tambah
 @stop
 @section('style')
  {{ HTML::style('assets_back/css/plugins/chosen/chosen.css')}}
@@ -18,16 +18,16 @@ Add New
       <div class="row ibox-title">
    <ol class="breadcrumb col-sm-6 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
         <li class="">
-            <a href="{{ url('status') }}"> Lokasi
+             @if($id == 0) <a href="{{ url('area') }}"> Area</a> @else  <a href="{{ url('lokasi') }}"> Lokasi</a> @endif
         </li>
-        /
+        
         <li class="">
                 <a href="#">
-                    Add New
+                    Tambah
                 </a>
         </li>
     </ol>
-            <a href="{{ url('status') }}">
+            <a href="{{ url('lokasi') }}">
             <button class="btn btn-sm btn-outline btn-warning pull-right">
             <i class="fa fa-arrow-circle-o-left" style="margin-right: 5px"></i> Back
             </button>
@@ -39,19 +39,16 @@ Add New
 		{!! Form::hidden('created_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
 		{!! Form::hidden('updated_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
 		{!! Form::hidden('status', 3 , ['class' => 'form-control']) !!}
+        @if($id == 1)
 		<div class="form-group">
-			{!! Form::label('kategori', 'Farm', ['class' => 'col-sm-1 control-label']) !!}
+			{!! Form::label('kategori', 'Area', ['class' => 'col-sm-1 control-label']) !!}
 			<div class="col-sm-5 {{ $errors->has('category') ? 'has-error' : ''}}">
 				<select class="form-control chosen-select" name="kategori">
-					<option value="uncategories">Pilih Farm</option>
+					<option value="uncategories">Pilih Area</option>
 					@foreach($statuses  as $status)
 					@foreach($status->getDescendantsAndSelf(array('id','parent_id','name','depth'))->toHierarchy() as $relation)
 					@if($relation->depth==0)
 					<option value="{{$relation->id}}">{{$relation->name}}</option>
-					@elseif($relation->depth==1)
-						<option value="{{$relation->id}}">
-							&nbsp;&nbsp; - {{$relation->name}}
-						</option>
 					@endif
 					@endforeach
 					@endforeach
@@ -60,6 +57,20 @@ Add New
 					{!! $errors->first('kategori', '<p class="help-block">:message</p>') !!}
 			</div>
 		</div>
+        @endif
+        @if($id == 0)
+        <div class="form-group">
+			{!! Form::label('type', 'Type', ['class' => 'col-sm-1 control-label']) !!}
+			<div class="col-sm-5 {{ $errors->has('type') ? 'has-error' : ''}}">
+				<select class="form-control chosen-select" name="type">
+					<option value="">Pilih Type</option>
+					<option value="Kandang">Kandang</option>
+                    <option value="Kantor">Kantor</option>
+				</select>
+					{!! $errors->first('type', '<p class="help-block">:message</p>') !!}
+			</div>
+		</div>
+        @endif
 <div class="form-group">
 	{!! Form::label('code', 'Kode*', ['class' => 'col-sm-1 control-label']) !!}
 	<div class="col-sm-5 {{ $errors->has('code') ? 'has-error' : ''}}">
