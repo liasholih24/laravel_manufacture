@@ -38,7 +38,18 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control" value="{{ $penerimaan->number }}" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" value="{{ $penerimaan->number }}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Lokasi</label>
+                                <div class="col-sm-3">
+                                    <select name="storage_id" class="select-lokasi form-control input-sm">
+                                        <option value=""></option>
+                                        @foreach($lokasi as $r)
+                                        <option value="{{ $r->id }}" @if($r->id==$penerimaan->storage_id) selected @endif>{{ $r->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -58,13 +69,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($penerimaan->date)) }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d', strtotime($penerimaan->date)) }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="desc" class="form-control" rows="3">{{ $penerimaan->desc }}</textarea>
+                                    <textarea name="desc" class="form-control input-sm" rows="3">{{ $penerimaan->desc }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -161,6 +172,9 @@
         });
         $('.select-item').select2({
             placeholder: 'Pilih Item'
+        });
+        $('.select-lokasi').select2({
+            placeholder: 'Pilih Lokasi'
         });
         $('.select-pengajuan').select2({
             placeholder: 'Pilih Pengajuan'

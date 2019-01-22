@@ -38,13 +38,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control" value="{{ $mutasi->number }}" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" value="{{ $mutasi->number }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($mutasi->date)) }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d', strtotime($mutasi->date)) }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -72,7 +72,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="keterangan" class="form-control" rows="3">{{ $mutasi->keterangan }}</textarea>
+                                    <textarea name="keterangan" class="form-control input-sm" rows="3">{{ $mutasi->keterangan }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">

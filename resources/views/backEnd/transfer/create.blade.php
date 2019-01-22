@@ -37,13 +37,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control" placeholder="-- Auto Number --" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" placeholder="-- Auto Number --" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d') }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d') }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -71,7 +71,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="keterangan" class="form-control" rows="3"></textarea>
+                                    <textarea name="keterangan" class="form-control input-sm" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">

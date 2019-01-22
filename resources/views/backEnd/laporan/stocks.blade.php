@@ -103,7 +103,6 @@ Laporan Persediaan
 <table class="table table-striped table-bordered table-hover" id="tblstocks">
 <thead>
     <tr>
-        <th>ID</th>
         <th>Gudang</th>
         <th>Sampah</th>
         <th>Satuan</th>
@@ -117,7 +116,6 @@ Laporan Persediaan
 </thead>
 <tfoot>
             <tr>
-               <th></th>
                <th></th>
                <th></th>
                <th>Total</th>
@@ -174,9 +172,8 @@ Laporan Persediaan
        serverSide: true,
        ajax: '{{url("/stocksapi")}}',
        columns: [
-           {data: 'id', name: 'id'},
            {data: 'gudang', name: 'gudang'},
-           {data: 'sampah', name: 'sampah'},
+           {data: 'item', name: 'item'},
            {data: 'satuan', name: 'satuan'},
            {data: 'qty_in', name: 'qty_in'},
            {data: 'qty_out', name: 'qty_out'},
@@ -197,7 +194,7 @@ Laporan Persediaan
            orderable: false,
            targets:   0
        } ],
-       order: [ 9, 'desc' ],
+       order: [ 8, 'desc' ],
        
        dom: '<"html5buttons"B>lTfgitp',
      

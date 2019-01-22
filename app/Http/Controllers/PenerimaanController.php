@@ -10,6 +10,7 @@ use App\DetailPenerimaan;
 use App\DetailPengajuan;
 use App\Item;
 use App\Supplier;
+use App\Lokasi;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -48,7 +49,8 @@ class PenerimaanController extends Controller
         $pengajuan = Pengajuan::where('status', 1)->get();
         $item = Item::where('nesting', 1)->get();
         $supplier = Supplier::all();
-        return view('backEnd.penerimaan.create', ['pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier]);
+        $lokasi = Lokasi::where('depth', 0)->get();
+        return view('backEnd.penerimaan.create', ['pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier, 'lokasi' => $lokasi]);
     }
 
     /**
@@ -67,6 +69,7 @@ class PenerimaanController extends Controller
         }
         $penerimaan = new Penerimaan;
         $penerimaan->number = $number;
+        $penerimaan->storage_id = $request->storage_id;
         $penerimaan->pengajuan_id = $request->pengajuan_id;
         $penerimaan->date = $request->date;
         $penerimaan->desc = $request->desc;
@@ -122,7 +125,8 @@ class PenerimaanController extends Controller
         $pengajuan = Pengajuan::where('status', 1)->get();
         $item = Item::where('nesting', 1)->get();
         $supplier = Supplier::all();
-        return view('backEnd.penerimaan.edit', ['penerimaan' => $penerimaan, 'detail' => $detail, 'pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier]);
+        $lokasi = Lokasi::where('depth', 0)->get();
+        return view('backEnd.penerimaan.edit', ['penerimaan' => $penerimaan, 'detail' => $detail, 'pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier, 'lokasi' => $lokasi]);
     }
 
     /**
@@ -136,6 +140,7 @@ class PenerimaanController extends Controller
     {
         $penerimaan = Penerimaan::findOrFail($penerimaan->id);
         $penerimaan->pengajuan_id = $request->pengajuan_id;
+        $penerimaan->storage_id = $request->storage_id;
         $penerimaan->date = $request->date;
         $penerimaan->desc = $request->desc;
         $penerimaan->save();

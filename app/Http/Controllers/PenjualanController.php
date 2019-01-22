@@ -8,6 +8,7 @@ use App\Penjualan;
 use App\DetailPenjualan;
 use App\Item;
 use App\Customer;
+use App\Lokasi;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -45,7 +46,8 @@ class PenjualanController extends Controller
     {
         $item = Item::where('nesting', 1)->get();
         $customer = Customer::all();
-        return view('backEnd.penjualan.create', ['item' => $item, 'customer' => $customer]);
+        $lokasi = Lokasi::where('depth', 0)->get();
+        return view('backEnd.penjualan.create', ['item' => $item, 'customer' => $customer, 'lokasi' => $lokasi]);
     }
 
     /**
@@ -65,6 +67,7 @@ class PenjualanController extends Controller
         $penjualan = new Penjualan;
         $penjualan->number = $number;
         $penjualan->customer_id = $request->customer_id;
+        $penjualan->storage_id = $request->storage_id;
         $penjualan->date = $request->date;
         $penjualan->desc = $request->desc;
         $penjualan->created_by = Sentinel::getUser()->id;
@@ -114,7 +117,8 @@ class PenjualanController extends Controller
         $detail = DetailPenjualan::where('penjualan_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
         $customer = Customer::all();
-        return view('backEnd.penjualan.edit', ['penjualan' => $penjualan, 'detail' => $detail, 'item' => $item, 'customer' => $customer]);
+        $lokasi = Lokasi::where('depth', 0)->get();
+        return view('backEnd.penjualan.edit', ['penjualan' => $penjualan, 'detail' => $detail, 'item' => $item, 'customer' => $customer, 'lokasi' => $lokasi]);
     }
 
     /**
@@ -128,6 +132,7 @@ class PenjualanController extends Controller
     {
         $penjualan = Penjualan::findOrFail($penjualan->id);
         $penjualan->customer_id = $request->customer_id;
+        $penjualan->storage_id = $request->storage_id;
         $penjualan->date = $request->date;
         $penjualan->desc = $request->desc;
         $penjualan->updated_by = Sentinel::getUser()->id;

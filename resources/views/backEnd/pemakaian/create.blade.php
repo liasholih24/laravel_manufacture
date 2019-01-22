@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control" placeholder="-- Auto Number --" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" placeholder="-- Auto Number --" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -54,13 +54,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d') }}" autocomplete="off">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d') }}" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="desc" class="form-control" rows="3" required></textarea>
+                                    <textarea name="desc" class="form-control input-sm" rows="3" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
