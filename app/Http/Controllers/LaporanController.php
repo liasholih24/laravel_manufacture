@@ -35,12 +35,11 @@ class LaporanController extends Controller
      */
     public function stocks()
     {
-        $stocks = Stock::all();
-        $filters = Lokasi::where('type', 13)->get();
+        $filters = Lokasi::where('depth', 0)->get();
         $id = "";
         $datenow = date('Y-m-d');
 
-        return view('backEnd.laporan.stocks', compact('tables', 'stocks', 'filters', 'id', 'datenow'));
+        return view('backEnd.laporan.stocks', compact('filters', 'id', 'datenow'));
     }
 
     public function tabungan()
@@ -68,44 +67,30 @@ class LaporanController extends Controller
 
     public function stocksapi()
     {
-        $filterdata= ""; $filterRange= "AND MONTH(a.created_at) = MONTH(NOW()) ";
+        $filterdata= ""; $filterRange= "AND MONTH(created_at) = MONTH(NOW()) ";
         $gudang = Input::get('gudang');
         $fromDate = Input::get('fromDate');
         $toDate = Input::get('toDate');
 
 
         if (!empty($gudang)) {
-            $filterdata = "AND a.gudang = '$gudang'";
+            $filterdata = "AND gudang = '$gudang'";
         }
         if (!empty($fromDate) && empty($toDate)){
-            $filterRange = "AND DATE(a.created_at) = '$fromDate' ";
+            $filterRange = "AND DATE(created_at) = '$fromDate' ";
         }
         if (!empty($toDate) && empty($fromDate)){
-            $filterRange = "AND DATE(a.created_at) = '$toDate' ";
+            $filterRange = "AND DATE(created_at) = '$toDate' ";
         }
         if (!empty($toDate) && !empty($fromDate)){
-            $filterRange = "AND DATE(a.created_at) BETWEEN '$fromDate' AND '$toDate'";
+            $filterRange = "AND DATE(created_at) BETWEEN '$fromDate' AND '$toDate'";
         }
 
         $tables = DB::select(
-                DB::raw("SELECT a.id as id
-                      ,g.name as gudang
-                      ,s.name as sampah
-                      ,a.satuan
-                      ,a.qty_in
-                      ,a.qty_out
-                      ,a.qty
-                      , CASE WHEN a.saldo <= 0
-                                   THEN 0
-                                   ELSE a.saldo 
-                                   END as saldo
-                      ,a.noref
-                      ,a.created_at
-        FROM stocks a
-        LEFT JOIN lokasis g on  g.id = a.gudang
-        LEFT JOIN sampahs s on s.id = a.sampah
+                DB::raw("SELECT *
+        FROM v_stocks
         WHERE 1 = 1 $filterdata $filterRange
-        ORDER BY a.created_at desc")
+        ORDER BY created_at desc")
       );
        
 

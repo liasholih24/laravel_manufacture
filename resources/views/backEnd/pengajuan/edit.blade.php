@@ -38,19 +38,30 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control" value="{{ $pengajuan->number }}" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" value="{{ $pengajuan->number }}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Lokasi</label>
+                                <div class="col-sm-3">
+                                    <select name="storage_id" class="select-lokasi form-control input-sm">
+                                        <option value=""></option>
+                                        @foreach($lokasi as $r)
+                                        <option value="{{ $r->id }}" @if($r->id==$pengajuan->storage_id) selected @endif>{{ $r->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($pengajuan->date)) }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d', strtotime($pengajuan->date)) }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="desc" class="form-control" rows="3">{{ $pengajuan->desc }}</textarea>
+                                    <textarea name="desc" class="form-control input-sm" rows="3">{{ $pengajuan->desc }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -69,7 +80,7 @@
                                             @foreach($detail as $d)
                                             <tr id="tr{{$i}}">
                                                 <td>
-                                                    <select name="item_id[]" class="select-item form-control input-sm" required>
+                                                    <select name="item_id[]" onchange="pilihItem({{$i}})" class="select-item form-control input-sm" required>
                                                         <option value=""></option>
                                                         @foreach($item as $r)
                                                         <option value="{{ $r->id }}" @if($d->item_id==$r->id) selected @endif>{{ $r->name }}</option>
@@ -77,7 +88,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
+                                                    <input type="number" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-sm btn-danger" onclick="hapusBaris({{$i}})"><i class="fa fa-trash"></i></button>
@@ -132,11 +143,14 @@
         $('.select-item').select2({
             placeholder: 'Pilih Item'
         });
+        $('.select-lokasi').select2({
+            placeholder: 'Pilih Lokasi'
+        });
         var nomor = {{$i}};
         $('#tambah-baris').on('click', function() { 
             $('#tbody').append('<tr id="tr' + nomor + '">' +
                 '<td>' +
-                    '<select name="item_id[]" class="form-control input-sm select-item" required>' +
+                    '<select name="item_id[]" onchange="pilihItem(' + nomor + ')" class="form-control input-sm select-item" required>' +
                         '<option value=""></option>' +
                         @foreach($item as $r)
                         '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
@@ -144,7 +158,7 @@
                     '</select>' +
                 '</td>' +
                 '<td>' +
-                    '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
+                    '<input type="number" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
                     '<button class="btn btn-sm btn-danger" onclick="hapusBaris(' + nomor + ')"><i class="fa fa-trash"></i></button>' +
@@ -156,6 +170,13 @@
             nomor++;
             return false;
         });
+        function pilihItem(baris) {
+            var param = $('#tr' + baris + ' select[name="item_id[]"]').val();
+            $.get("/pengajuan/item/" + param, function(data, status){
+                $('#tr' + baris + ' input[name="qty[]"]').prop('min', data.minstock);
+                $('#tr' + baris + ' input[name="qty[]"]').prop('max', data.maxstock);
+            });
+        }
         function hapusBaris(baris) {
             $('#tr' + baris).remove();
             return false;

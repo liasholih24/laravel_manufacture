@@ -38,7 +38,18 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control" value="{{ $penerimaan->number }}" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" value="{{ $penerimaan->number }}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Lokasi</label>
+                                <div class="col-sm-3">
+                                    <select name="storage_id" class="select-lokasi form-control input-sm">
+                                        <option value=""></option>
+                                        @foreach($lokasi as $r)
+                                        <option value="{{ $r->id }}" @if($r->id==$penerimaan->storage_id) selected @endif>{{ $r->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -58,13 +69,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d', strtotime($penerimaan->date)) }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d', strtotime($penerimaan->date)) }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="desc" class="form-control" rows="3">{{ $penerimaan->desc }}</textarea>
+                                    <textarea name="desc" class="form-control input-sm" rows="3">{{ $penerimaan->desc }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -74,6 +85,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
+                                                <th width="25%">Pemasok</th>
                                                 <th width="15%">Qty</th>
                                                 <th width="20%">Harga</th>
                                                 <th width="50px">&nbsp;</th>
@@ -95,6 +107,14 @@
                                                     @endif
                                                 </td>
                                                 <td>
+                                                    <select name="supplier_id[]" class="select-supplier form-control input-sm">
+                                                        <option value=""></option>
+                                                        @foreach($supplier as $r)
+                                                        <option value="{{ $r->id }}" @if($d->supplier_id==$r->id) selected @endif>{{ $r->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
                                                     <input type="text" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
                                                 </td>
                                                 <td>
@@ -109,7 +129,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="4">
+                                                <td colspan="5">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary" @if($penerimaan->pengajuan_id) disabled @endif><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -153,8 +173,15 @@
         $('.select-item').select2({
             placeholder: 'Pilih Item'
         });
+        $('.select-lokasi').select2({
+            placeholder: 'Pilih Lokasi'
+        });
         $('.select-pengajuan').select2({
             placeholder: 'Pilih Pengajuan'
+        });
+        $('.select-supplier').select2({
+            placeholder: 'Pilih Pemasok',
+            allowClear: true
         });
         var nomor = {{$i}};
         $('#tambah-baris').on('click', function() { 
@@ -163,6 +190,14 @@
                     '<select name="item_id[]" class="form-control input-sm select-item" required>' +
                         '<option value=""></option>' +
                         @foreach($item as $r)
+                        '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
+                        @endforeach
+                    '</select>' +
+                '</td>' +
+                '<td>' +
+                    '<select name="supplier_id[]" class="form-control input-sm select-supplier" required>' +
+                        '<option value=""></option>' +
+                        @foreach($supplier as $r)
                         '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
                         @endforeach
                     '</select>' +
@@ -179,6 +214,10 @@
             '</tr>');
             $('.select-item').select2({
                 placeholder: 'Pilih Item'
+            });
+            $('.select-supplier').select2({
+                placeholder: 'Pilih Pemasok',
+                allowClear: true
             });
             nomor++;
             return false;

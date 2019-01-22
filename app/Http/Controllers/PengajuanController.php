@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Pengajuan;
 use App\DetailPengajuan;
 use App\Item;
+use App\Lokasi;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -43,7 +44,8 @@ class PengajuanController extends Controller
      public function create()
     {
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pengajuan.create', ['item' => $item]);
+        $lokasi = Lokasi::where('depth', 0)->get();
+        return view('backEnd.pengajuan.create', ['item' => $item, 'lokasi' => $lokasi]);
     }
 
     /**
@@ -62,6 +64,7 @@ class PengajuanController extends Controller
         }
         $pengajuan = new Pengajuan;
         $pengajuan->number = $number;
+        $pengajuan->storage_id = $request->storage_id;
         $pengajuan->date = $request->date;
         $pengajuan->desc = $request->desc;
         $pengajuan->created_by = Sentinel::getUser()->id;
@@ -109,7 +112,8 @@ class PengajuanController extends Controller
         $pengajuan = Pengajuan::findOrFail($id);
         $detail = DetailPengajuan::where('pengajuan_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
-        return view('backEnd.pengajuan.edit', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item]);
+        $lokasi = Lokasi::where('depth', 0)->get();
+        return view('backEnd.pengajuan.edit', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item, 'lokasi' => $lokasi]);
     }
 
     /**
@@ -122,6 +126,7 @@ class PengajuanController extends Controller
     public function update(Request $request, Pengajuan $pengajuan)
     {
         $pengajuan = Pengajuan::findOrFail($pengajuan->id);
+        $pengajuan->storage_id = $request->storage_id;
         $pengajuan->date = $request->date;
         $pengajuan->desc = $request->desc;
         $pengajuan->updated_by = Sentinel::getUser()->id;
@@ -151,6 +156,12 @@ class PengajuanController extends Controller
     public function destroy($id)
     {
         
+    }
+
+    public function item($id)
+    {
+        $item = Item::findOrFail($id)->first();
+        return response($item);
     }
 
 }

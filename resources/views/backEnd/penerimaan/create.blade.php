@@ -37,7 +37,18 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control" placeholder="-- Auto Number --" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" placeholder="-- Auto Number --" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Lokasi</label>
+                                <div class="col-sm-3">
+                                    <select name="storage_id" class="select-lokasi form-control input-sm">
+                                        <option value=""></option>
+                                        @foreach($lokasi as $r)
+                                        <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -54,13 +65,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control" value="{{ date('Y-m-d') }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d') }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="desc" class="form-control" rows="3"></textarea>
+                                    <textarea name="desc" class="form-control input-sm" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -70,6 +81,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
+                                                <th width="25%">Pemasok</th>
                                                 <th width="15%">Qty</th>
                                                 <th width="20%">Harga</th>
                                                 <th width="50px">&nbsp;</th>
@@ -81,6 +93,14 @@
                                                     <select name="item_id[]" class="select-item form-control input-sm" required>
                                                         <option value=""></option>
                                                         @foreach($item as $r)
+                                                        <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="supplier_id[]" class="select-supplier form-control input-sm">
+                                                        <option value=""></option>
+                                                        @foreach($supplier as $r)
                                                         <option value="{{ $r->id }}">{{ $r->name }}</option>
                                                         @endforeach
                                                     </select>
@@ -98,7 +118,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="4">
+                                                <td colspan="5">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -139,8 +159,15 @@
         $('.select-item').select2({
             placeholder: 'Pilih Item'
         });
+        $('.select-lokasi').select2({
+            placeholder: 'Pilih Lokasi'
+        });
         $('.select-pengajuan').select2({
             placeholder: 'Pilih Pengajuan',
+            allowClear: true
+        });
+        $('.select-supplier').select2({
+            placeholder: 'Pilih Pemasok',
             allowClear: true
         });
         var nomor = 1;
@@ -150,6 +177,14 @@
                     '<select name="item_id[]" class="form-control input-sm select-item" required>' +
                         '<option value=""></option>' +
                         @foreach($item as $r)
+                        '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
+                        @endforeach
+                    '</select>' +
+                '</td>' +
+                '<td>' +
+                    '<select name="supplier_id[]" class="form-control input-sm select-supplier">' +
+                        '<option value=""></option>' +
+                        @foreach($supplier as $r)
                         '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
                         @endforeach
                     '</select>' +
@@ -166,6 +201,10 @@
             '</tr>');
             $('.select-item').select2({
                 placeholder: 'Pilih Item'
+            });
+            $('.select-supplier').select2({
+                placeholder: 'Pilih Pemasok',
+                allowClear: true
             });
             nomor++;
             return false;
@@ -190,6 +229,14 @@
                                 '</select>' +
                             '</td>' +
                             '<td>' +
+                                '<select name="supplier_id[]" class="form-control input-sm select-supplier">' +
+                                    '<option value=""></option>' +
+                                    @foreach($supplier as $r)
+                                    '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
+                                    @endforeach
+                                '</select>' +
+                            '</td>' +
+                            '<td>' +
                                 '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" value="' + data[i].qty + '" required>' +
                             '</td>' +
                             '<td>' +
@@ -202,6 +249,10 @@
                         $('.select-item').select2({
                             placeholder: 'Pilih Item',
                             readonly: true
+                        });
+                        $('.select-supplier').select2({
+                            placeholder: 'Pilih Pemasok',
+                            allowClear: true
                         });
                     }
                     $('#tambah-baris').prop('disabled', true);
