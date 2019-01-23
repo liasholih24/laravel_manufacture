@@ -67,30 +67,30 @@ class LaporanController extends Controller
 
     public function stocksapi()
     {
-        $filterdata= ""; $filterRange= "AND MONTH(created_at) = MONTH(NOW()) ";
+        $filterdata= ""; $filterRange= "AND MONTH(`date`) = MONTH(NOW()) ";
         $gudang = Input::get('gudang');
         $fromDate = Input::get('fromDate');
         $toDate = Input::get('toDate');
 
 
         if (!empty($gudang)) {
-            $filterdata = "AND gudang = '$gudang'";
+            $filterdata = "AND gudang_id = '$gudang'";
         }
         if (!empty($fromDate) && empty($toDate)){
-            $filterRange = "AND DATE(created_at) = '$fromDate' ";
+            $filterRange = "AND DATE(`date`) = '$fromDate' ";
         }
         if (!empty($toDate) && empty($fromDate)){
-            $filterRange = "AND DATE(created_at) = '$toDate' ";
+            $filterRange = "AND DATE(`date`) = '$toDate' ";
         }
         if (!empty($toDate) && !empty($fromDate)){
-            $filterRange = "AND DATE(created_at) BETWEEN '$fromDate' AND '$toDate'";
+            $filterRange = "AND DATE(`date`) BETWEEN '$fromDate' AND '$toDate'";
         }
 
         $tables = DB::select(
                 DB::raw("SELECT *
-        FROM v_stocks
+        FROM v_date_stocks
         WHERE 1 = 1 $filterdata $filterRange
-        ORDER BY created_at desc")
+        ORDER BY `created_at` asc")
       );
        
 

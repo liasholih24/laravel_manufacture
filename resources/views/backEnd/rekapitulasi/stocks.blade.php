@@ -103,23 +103,15 @@ Rekapitulasi Persediaan
 <table class="table table-striped table-bordered table-hover" id="tblstocks">
 <thead>
     <tr>
-        <th>No.</th>
-        <th>Sampah</th>
-        <th>Jml. Masuk</th>
-        <th>Jml. Keluar</th>
-        <th>Saldo(Kg)</th>
-        <th>Saldo(Rp.)</th>
-        <th>Perbaharuan Terakhir</th>
+        <th>Gudang</th>
+        <th>Item</th>
+        <th>Stok</th>
     </tr>
 </thead>
 <tfoot>
             <tr>
                <th></th>
                <th>Total</th>
-               <th></th>
-               <th></th>
-               <th></th>
-               <th></th>
                <th></th>
             </tr>
 </tfoot>
@@ -241,71 +233,6 @@ Rekapitulasi Persediaan
                 ''+QtyIn +''
             );
  
-            // Total over all pages
-            qty_out = api
-                .column(3)
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Total over this page
-            QtyOut = api
-                .column( 3, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Update footer
-            $( api.column( 3).footer() ).html(
-                ''+QtyOut +''
-            );
-
-           
-
-            // Total over all pages
-            qty = api
-                .column(4)
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Total over this page
-            Qty = api
-                .column( 4, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Update footer
-            $( api.column( 4 ).footer() ).html(
-                ''+Qty +''
-            );
-
-
-            // Total over all pages
-            qty2 = api
-                .column(5)
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Total over this page
-            Qty2 = api
-                .column( 5, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Update footer
-            $( api.column( 5 ).footer() ).html(
-                ''+Qty2 +''
-            );
         }
 
    });
