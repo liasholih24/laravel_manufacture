@@ -20,7 +20,7 @@ class Supplier extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'notes', 'pic', 'telp', 'created_by'];
+    protected $fillable = ['name', 'notes', 'pic', 'telp', 'pic2', 'telp2', 'created_by'];
 
     use SoftDeletes;
     protected $dates = ['deleted_at'];

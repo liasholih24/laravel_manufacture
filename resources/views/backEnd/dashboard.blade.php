@@ -52,7 +52,7 @@
                     <div class="col-lg-3">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <span class="label label-warning pull-right">Update per today</span>
+                                <span class="label label-warning pull-right">Update per today</span> 
                                 <h5>HPP</h5>
                             </div>
                             <div class="ibox-content">

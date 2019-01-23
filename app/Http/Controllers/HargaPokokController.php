@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Supplier;
+use App\HargaPokok;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
@@ -13,17 +13,14 @@ use Validator;
 use Sentinel;
 use Activity;
 
-class SupplierController extends Controller
+class HargaPokokController extends Controller
 {
 
 protected function validator(Request $request)
 {
 /*dicustom*/
   return Validator::make($request->all(), [
-   /*  'name' => 'required|max:35|min:2|string',
-     'pic' => 'required|max:35|min:2|string',
-     'telp' => 'required',
-     */
+    /*  'name' => 'required|max:35|min:2|string',*/
   ]);
 }
 
@@ -34,9 +31,9 @@ protected function validator(Request $request)
      */
     public function index()
     {
-        $supplier = Supplier::all();
+        $hargapokok = HargaPokok::all();
 
-        return view('backEnd.supplier.index', compact('supplier'));
+        return view('backEnd.hargapokok.index', compact('hargapokok'));
     }
 
     /**
@@ -46,7 +43,7 @@ protected function validator(Request $request)
      */
     public function create()
     {
-        return view('backEnd.supplier.create');
+        return view('backEnd.hargapokok.create');
     }
 
     /**
@@ -65,15 +62,15 @@ protected function validator(Request $request)
     }
 
         
-      $model = Supplier::create($request->all());
+      $model = HargaPokok::create($request->all());
 
       $attributes = $model->getOriginal();
 
-      activity()->performedOn($model)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Supplier '.$model->name.' is created successfully');
+      activity()->performedOn($model)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('HargaPokok '.$model->name.' is created successfully');
 
-      Session::flash('alert-success', 'Supplier '.$model->name.' is created successfully');
+      Session::flash('alert-success', 'HargaPokok '.$model->name.' is created successfully');
 
-        return redirect('supplier');
+        return redirect('hargapokok');
     }
 
     /**
@@ -85,9 +82,9 @@ protected function validator(Request $request)
      */
     public function show($id)
     {
-        $supplier = Supplier::findOrFail($id);
+        $hargapokok = HargaPokok::findOrFail($id);
 
-        return view('backEnd.supplier.show', compact('supplier'));
+        return view('backEnd.hargapokok.show', compact('hargapokok'));
     }
 
     /**
@@ -99,9 +96,9 @@ protected function validator(Request $request)
      */
     public function edit($id)
     {
-        $supplier = Supplier::findOrFail($id);
+        $hargapokok = HargaPokok::findOrFail($id);
 
-        return view('backEnd.supplier.edit', compact('supplier'));
+        return view('backEnd.hargapokok.edit', compact('hargapokok'));
     }
 
     /**
@@ -119,16 +116,16 @@ protected function validator(Request $request)
                     ->withInput();
     }
         
-        $supplier = Supplier::findOrFail($id);
-        $supplier->update($request->all());
+        $hargapokok = HargaPokok::findOrFail($id);
+        $hargapokok->update($request->all());
 
-        $attributes = $supplier->getOriginal();
+        $attributes = $hargapokok->getOriginal();
 
-        activity()->performedOn($supplier)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Supplier '.$supplier->name.' is updated successfully');
+        activity()->performedOn($hargapokok)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('HargaPokok '.$hargapokok->name.' is updated successfully');
 
-        Session::flash('alert-success', ' Supplier '.$supplier->name.' is updated successfully');
+        Session::flash('alert-success', ' HargaPokok '.$hargapokok->name.' is updated successfully');
 
-        return redirect('supplier');
+        return redirect('hargapokok');
     }
 
     /**
@@ -140,17 +137,17 @@ protected function validator(Request $request)
      */
     public function destroy($id)
     {
-        $supplier = Supplier::findOrFail($id);
+        $hargapokok = HargaPokok::findOrFail($id);
 
-        $supplier->delete();
+        $hargapokok->delete();
 
-        $attributes = $supplier->getOriginal();
+        $attributes = $hargapokok->getOriginal();
 
-        activity()->performedOn($supplier)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Supplier '.$supplier->name.' is deleted successfully');
+        activity()->performedOn($hargapokok)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('HargaPokok '.$hargapokok->name.' is deleted successfully');
 
-        Session::flash('alert-warnig', ' Supplier '.$supplier->name.' is deleted successfully');
+        Session::flash('alert-warnig', ' HargaPokok '.$hargapokok->name.' is deleted successfully');
 
-        return redirect('supplier');
+        return redirect('hargapokok');
     }
 
 }

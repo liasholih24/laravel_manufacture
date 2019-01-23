@@ -1,9 +1,6 @@
 @extends('backLayout.app')
 @section('title')
-Pakan
-@stop
-@section('desc')
-Buat Komposisi Pakan
+Create new Pengobatan
 @stop
 @section('style')
   {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
@@ -16,9 +13,9 @@ Buat Komposisi Pakan
 						.ibox.float-e-margins{ margin: 0px 2px !important}
 						</style>
       <div class="row ibox-title">
-   <ol class="breadcrumb col-sm-6 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
+   <ol class="breadcrumb col-sm-4 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
         <li class="">
-            <a href="{{ url('pakan') }}"> Pakan
+            <a href="{{ url('pengobatan') }}"> Pengobatan
         </li>
         /
         <li class="">
@@ -27,109 +24,109 @@ Buat Komposisi Pakan
                 </a>
         </li>
     </ol>
-            <a href="{{ url('pakan') }}">
+            <a href="{{ url('pengobatan') }}">
             <button class="btn btn-sm btn-outline btn-warning pull-right">
             <i class="fa fa-arrow-circle-o-left" style="margin-right: 5px"></i> Back
             </button>
             </a>
     </div>
 <div class="row ibox-content" style="min-height: 65vh; ">
-	<div class="col-xs-12 col-sm-12">
-    {!! Form::open(['url' => 'pakan', 'class' => 'form-horizontal']) !!}
+	<div class="col-xs-12 col-sm-22">
+    {!! Form::open(['url' => 'pengobatan', 'class' => 'form-horizontal']) !!}
     {!! Form::hidden('created_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
-            <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-                {!! Form::label('name', 'Nama', ['class' => 'col-sm-1 control-label']) !!}
-                <div class="col-sm-5">
-                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nama [Max: 50 Katakter]']) !!}
-                    {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <div class="form-group {{ $errors->has('hpp') ? 'has-error' : ''}}">
-                {!! Form::label('hpp', 'HPP', ['class' => 'col-sm-1 control-label']) !!}
-                <div class="col-sm-5">
-                    {!! Form::text('hpp', null, ['class' => 'form-control Numeric','id'=> 'hpp_pakan', 'placeholder' => 'HPP Pakan', 'readonly' => 'readonly']) !!}
-                    {!! $errors->first('hpp', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <div class="form-group {{ $errors->has('notes') ? 'has-error' : ''}}">
-                 {!! Form::label('notes', 'Deskripsi', ['class' => 'col-sm-1 control-label']) !!}
-                <div class="col-sm-5 col-xs-12">
-                    {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => '2', 'placeholder' => 'Deskripsi [Max: 500 Katakter]']) !!}
-                    {!! $errors->first('notes', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
 
-        <div class="hr-line-dashed"></div>       
+            <div class="form-group {{ $errors->has('tgl_checkin') ? 'has-error' : ''}}">
+                {!! Form::label('tgl_checkin', 'Tgl Checkin', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-5">
+                    {!! Form::date('tgl_checkin', null, ['class' => 'form-control']) !!}
+                    {!! $errors->first('tgl_checkin', '<p class="help-block">:message</p>') !!}
+                </div>
+                
+            </div>
+            <div class="form-group {{ $errors->has('populasi') ? 'has-error' : ''}}">
+                {!! Form::label('populasi', 'Populasi', ['class' => 'col-sm-3 control-label']) !!}
+                    <div class="col-sm-5">
+                        {!! Form::text('populasi', null, ['class' => 'form-control','placeholder' =>'Jml. Populasi']) !!}
+                        {!! $errors->first('populasi', '<p class="help-block">:message</p>') !!}
+                    </div>
+            </div>
+            <div class="hr-line-dashed"></div>       
 
-         <div class="row clearfix">
-             <div class="col-md-12 table-responsive">
-                <table class="table table-bordered table-hover table-sortable" id="tab_logic">
-                    <thead>
-                        <tr>
-                            <th class="text-center" style="width:10px;"></th>
-                            <th class="text-center" style="width:300px;">
-                            Item
-                            </th>
-                            <th class="text-center" style="width:100px;">
-                            Harga
-                            </th> 
-                            <th class="text-center" style="width:100px;">
-                            Qty (Kg)
-                            </th> 
-                            <th class="text-center" style="width:100px;">
-                            Rupiah
-                            </th> 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr id='addr0' data-id="0" class="hidden">
-                        <td data-name="del">
-                            <button name="del0" class='btn btn-default btn-xs glyphicon glyphicon-remove row-remove'></button>
-                        </td>
-                        <td data-name="item">
-                        <select  name="item[]" class="form-control Item chosen-select" data-placeholder="Pilih Item"  style="width:300px;">
-                                @foreach($items as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                @endforeach
-                        </select>
-                        </td>
-                        <td data-name="harga">
-                            {!! Form::text('harga[]', null, ['class' => 'form-control Harga ','step'=>'any']) !!}
-                        </td>
-                        <td data-name="qty">
-                            {!! Form::number('qty[]', null, ['class' => 'form-control Qty','step'=>'any']) !!}
-                        </td>
-                    
-                        <td data-name="rupiah">
-                            {!! Form::number('rupiah[]', null, ['class' => 'form-control Rupiah','step'=>'any']) !!}
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="3"></td>
-                        <td>
-                            {!! Form::number('jqty', null, ['class' => 'form-control jqty Numeric','id' => 'total_kg','placeholder'=>'Total (Kg)']) !!}
-                        </td>
-                        <td>
-                            {!! Form::text('jharga', null, ['class' => 'form-control jharga Numeric','id' => 'total_rp','placeholder'=>'Total (Rp)']) !!}
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
-             </div>
-         </div>
-        <a id="add_row" class="btn btn-success btn-xs pull-right btn-outline " ><i class="fa fa-plus"></i> Add Row</a>
-        <a id="kal" class="btn btn-warning btn-xs pull-right  btn-outline "  style="margin-right: 5px;"><i class="fa fa-refresh"></i> Kalkukasi</a>
+<div class="row clearfix">
+    <div class="col-md-12 table-responsive">
+       <table class="table table-bordered table-hover table-sortable" id="tab_logic">
+           <thead>
+               <tr>
+                   <th class="text-center" style="width:10px;"></th>
+                   <th class="text-center" style="width:70px;">
+                   Tanggal
+                   </th>
+                   <th class="text-center" style="width:100px;">
+                   Umur
+                   </th> 
+                   <th class="text-center" style="width:100px;">
+                   Obat/Vitamin
+                   </th> 
+                   <th class="text-center" style="width:100px;">
+                   Vaksin
+                   </th> 
+                   <th class="text-center" style="width:100px;">
+                   Dosis
+                   </th> 
+                   <th class="text-center" style="width:100px;">
+                   Aplikasi
+                   </th> 
+                   
+               </tr>
+           </thead>
+           <tbody>
+               <tr id='addr0' data-id="0" class="hidden">
+               <td data-name="del">
+                   <button name="del0" class='btn btn-default btn-xs glyphicon glyphicon-remove row-remove'></button>
+               </td>
+               <td data-name="obat">
+                    {!! Form::date('tgl_pengobatan[]', null, ['class' => 'form-control']) !!}
+               </td>
+               <td data-name="umur">
+                    {!! Form::text('umur[]', null, ['class' => 'form-control',]) !!}
+               </td>
+               <td data-name="obat">
+               <select  name="obat[]" class="form-control Obat chosen-select" data-placeholder="Pilih Obat/Vitamin"  style="width:150px;">
+                    @foreach($obats as $obat)
+                        <option value="{{$obat->id}}">{{$obat->name}}</option>
+                    @endforeach
+               </select>
+               </td>
+               <td data-name="vaksin">
+               <select  name="vaksin[]" class="form-control chosen-select" data-placeholder="Pilih Vaksin"  style="width:150px;">
+                    @foreach($obats as $obat)
+                        <option value="{{$obat->id}}">{{$obat->name}}</option>
+                    @endforeach
+               </select>
+               </td>
+               <td data-name="dosis">
+                    {!! Form::text('dosis[]', null, ['class' => 'form-control',]) !!}
+               </td>
+               <td data-name="aplikasi">
+                    {!! Form::text('aplikasi[]', null, ['class' => 'form-control',]) !!}
+               </td>
                
-        <br/>
-    
-        <div class="hr-line-dashed"></div> 
+            
+           </tr>
+           </tbody>
+       </table>
+    </div>
+</div>
+<a id="add_row" class="btn btn-success btn-xs pull-right btn-outline " ><i class="fa fa-plus"></i> Add Row</a>
+   
+<br/>
 
+<div class="hr-line-dashed"></div>
+         
 
 
     <div class="form-group">
-<a href="{{ url('pakan') }}" class="detail2 btn btn-md btn-outline btn-danger pull-right">  <i class="fa fa-times-circle" ></i> Cancel</a>
+<a href="{{ url('pengobatan') }}" class="detail2 btn btn-md btn-outline btn-danger pull-right">  <i class="fa fa-times-circle" ></i> Cancel</a>
       <button type="submit" class="create_mdl btn btn-outline btn-primary pull-right" style="margin-right: 20px; ">
                         <i class="fa fa-plus-circle"></i>  Create
                       </button>
@@ -143,7 +140,6 @@ Buat Komposisi Pakan
 </div>
 
 @endsection
-
 @section('script')
 {{ HTML::script('assets_back/js/plugins/select2/select2.full.min.js') }}
 {{ HTML::script('assets_back/js/inputmask/jquery.inputmask.bundle.js') }}
@@ -350,4 +346,3 @@ $("#add_row").on("click", function() {
 
         </script>
 @endsection
-

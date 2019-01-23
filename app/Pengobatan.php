@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class pakan extends Model
+class Pengobatan extends Model
 {
 
     /**
@@ -13,21 +13,14 @@ class pakan extends Model
      *
      * @var string
      */
-    protected $table = 'pakans';
+    protected $table = 'pengobatans';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['name','hpp','notes', 'created_by'];
-
-    public function createdby(){
-        return $this->hasOne('App\User','id','created_by');
-      }
-      public function updatedby(){
-        return $this->hasOne('App\User','id','updated_by');
-      }
+    protected $fillable = ['tgl_pengobatan', 'tgl_checkin', 'umur', 'vaksin', 'dosis', 'aplikasi', 'obat', 'notes', 'created_by','populasi'];
 
     use SoftDeletes;
     protected $dates = ['deleted_at'];

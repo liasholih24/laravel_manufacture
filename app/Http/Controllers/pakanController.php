@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use DB;
 use App\pakan;
 use App\Item;
@@ -73,8 +74,10 @@ protected function validator(Request $request)
         for($i=0;$i<count($request->item);$i++){
              if($request->input('item')[$i]){
             DB::table('pakan_items')->insert(['pakan'=> $model->id
-                                        ,'satuan'=> $request->satuan[$i]
+                                        ,'item'=> $request->item[$i]
+                                        ,'harga'=> $request->harga[$i]
                                         ,'qty'=> $request->qty[$i]
+                                        ,'rupiah'=> $request->rupiah[$i]
                                         ,'created_by'=> $model->created_by
                                         ,'created_at'=> date('Y-m-d H:i:s')
                                     ]);  
@@ -171,5 +174,27 @@ protected function validator(Request $request)
 
         return redirect('pakan');
     }
+
+
+    public function getharga()
+        {
+            $id = Input::get('id');
+
+            $q = DB::select(
+                      DB::raw("SELECT  AVG(saldo_in) as harga 
+                                FROM v_stocks WHERE item_id = $id GROUP BY item_id"));
+
+            if(!empty($q)){
+                 $harga = $q[0]->harga;
+                        }
+
+                else{
+                    $harga = 0;
+                }
+            
+            return json_encode( $harga );
+
+
+        }
 
 }

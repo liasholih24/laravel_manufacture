@@ -164,5 +164,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/getharga', 'pakanController@getharga');
 });
 Route::group(['middleware' => ['web']], function () {
-	Route::resource('produksi', 'ProduksiController');
+    Route::resource('produksi', 'ProduksiController');
+    Route::get('/jmlakhir', 'ProduksiController@jmlakhir');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('pengobatan', 'PengobatanController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('hpp', 'HppController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('hargapokok', 'HargaPokokController');
 });
