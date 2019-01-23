@@ -48,6 +48,13 @@ Edit Komposisi Pakan
                     {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+            <div class="form-group {{ $errors->has('hpp') ? 'has-error' : ''}}">
+                {!! Form::label('hpp', 'HPP', ['class' => 'col-sm-1 control-label']) !!}
+                <div class="col-sm-5">
+                    {!! Form::text('hpp', null, ['class' => 'form-control Numeric','id'=> 'hpp_pakan', 'placeholder' => 'HPP Pakan', 'readonly' => 'readonly']) !!}
+                    {!! $errors->first('hpp', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
             <div class="form-group {{ $errors->has('notes') ? 'has-error' : ''}}">
                  {!! Form::label('notes', 'Deskripsi', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5 col-xs-12">
@@ -63,24 +70,28 @@ Edit Komposisi Pakan
               <table class="table table-bordered table-hover table-sortable" id="tab_logic">
     <thead>
       <tr>
-        <th class="text-center" style="width:10px;">
+      <th class="text-center" style="width:10px;">
         </th>
         <th class="text-center" style="width:300px;">
           Item
         </th>
-        <th class="text-center" style="width:200px;">
-          Satuan
-        </th>
         <th class="text-center" style="width:100px;">
-          Jumlah
+          Harga
+        </th> 
+        <th class="text-center" style="width:100px;">
+          Qty (Kg)
+        </th> 
+        <th class="text-center" style="width:100px;">
+          Rupiah
         </th> 
 
       </tr>
     </thead>
     <tbody>
-  
+    <?php $i = 0;?>
     @foreach($details as $detail)
-        <tr id='addr0' data-id="0" >
+    <?php $i++;?>
+        <tr id='addr{{$i}}' data-id="0" >
         <td data-name="del">
             <button name="del0" class='btn btn-default btn-xs glyphicon glyphicon-remove row-remove'></button>
         </td>
@@ -91,21 +102,29 @@ Edit Komposisi Pakan
                 @endforeach
           </select>
         </td>
-        <td data-name="satuan">
-            <select  name="satuan[]" class="form-control Satuan chosen-select" data-placeholder="Pilih Satuan" id="satuan" style="width:200px;">
-                @foreach($satuans as $satuan)
-                    <option value="{{$item->id}}" <?php if($detail->satuan == $satuan->id) echo"selected";?>>{{$satuan->name}}</option>
-                @endforeach
-            </select>
+        <td data-name="harga">
+            {!! Form::text('harga[]', $detail->harga, ['class' => 'form-control Harga ','step'=>'any']) !!}
         </td>
         <td data-name="qty">
-            {!! Form::number('qty[]', $detail->qty , ['class' => 'form-control Qty','step'=>'any']) !!}
+            {!! Form::number('qty[]', $detail->qty, ['class' => 'form-control Qty','step'=>'any']) !!}
+        </td>
+       
+        <td data-name="rupiah">
+            {!! Form::number('rupiah[]', $detail->rupiah, ['class' => 'form-control Rupiah','step'=>'any']) !!}
         </td>
       </tr>
     @endforeach
     </tbody>
     <tfoot>
-     
+    <tr>
+        <td colspan="3"></td>
+        <td>
+            {!! Form::number('jqty', null, ['class' => 'form-control jqty Numeric','id' => 'total_kg','placeholder'=>'Total (Kg)']) !!}
+        </td>
+        <td>
+            {!! Form::text('jharga', null, ['class' => 'form-control jharga Numeric','id' => 'total_rp','placeholder'=>'Total (Rp)']) !!}
+        </td>
+    </tr>
     </tfoot>
     </table>
     </div>
@@ -132,12 +151,22 @@ Edit Komposisi Pakan
 </div>
 
 @endsection
-
 @section('script')
 {{ HTML::script('assets_back/js/plugins/select2/select2.full.min.js') }}
+{{ HTML::script('assets_back/js/inputmask/jquery.inputmask.bundle.js') }}
 <script>
 $(document).ready(function () {
 
+
+    $('.Numeric').inputmask("numeric", {
+    radixPoint: ".",
+    groupSeparator: ",",
+    digits: 2,
+    autoGroup: true,
+    rightAlign: false,
+    removeMaskOnSubmit: true,
+    oncleared: function () { self.Value(''); }
+});
             
 
 // DYNAMIC TABLE
@@ -146,7 +175,7 @@ $("#add_row").on("click", function() {
         // Dynamic Rows Code
         
         // Get max row id and set new id
-        var newid = 0;
+        var newid = {{$i}};
         $.each($("#tab_logic tr"), function() {
             if (parseInt($(this).data("id")) > newid) {
                 newid = parseInt($(this).data("id"));
@@ -191,11 +220,88 @@ $("#add_row").on("click", function() {
         
         // add the new row
         $(tr).appendTo($('#tab_logic'));
+
+        calc();
         
         $(tr).find("td button.row-remove").on("click", function() {
              $(this).closest("tr").remove();
            
         });
+
+        $(tr).find("td select.Item").on('change', function(e){
+
+            if ($(this).find(':selected').val() != '') {
+
+               
+
+                // GET NOREK
+                var val     = $(this).find(':selected').val(),
+                    item_d  = $(this).find(':selected').data(),
+                    dataid  = $(this).data("id"),
+                    url     = '{{url("/getharga?id=")}}'+val+'';
+
+                $.ajax({
+                    url : url,
+                    type: "GET",
+                    dataType: 'html',
+                    success: function(datas){
+                        $('#harga'+dataid+'').val(datas);
+                        return false;
+                    }
+                });
+            }
+
+            });
+
+            function calc(){
+
+
+                    var sum1 = 0;
+
+                    $('.Qty').each(function() {
+                        sum1 += Number($(this).val());
+                    });
+
+                    $('#total_kg').val(sum1);
+
+
+                    var sum2 = 0;
+
+                    $('.Rupiah').each(function() {
+                        sum2 += Number($(this).val());
+                    });
+
+                    $('#total_rp').val(sum2);
+
+                    var hpp_pakan = (sum2 / sum1).toFixed(0);
+                    $('#hpp_pakan').val(hpp_pakan);
+
+
+        
+ 
+            }
+
+            $(tr).find("td input.Qty").on("change", function(){
+
+       
+
+            var  dataid  = $(this).data("id"),
+                    qty  = $('#qty'+dataid+'').val(),
+                    harga  = $('#harga'+dataid+'').val();
+
+            
+                $('#rupiah'+dataid+'').val(qty * harga);
+
+
+                calc();
+
+            });
+
+            $("#kal").on("click", function(){
+
+             calc();
+
+            });
  
 
   
@@ -253,4 +359,3 @@ $("#add_row").on("click", function() {
 
         </script>
 @endsection
-

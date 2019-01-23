@@ -3,10 +3,7 @@
 @endsection
 @extends('backLayout.app')
 @section('title')
-Pakan
-@stop
-@section('desc')
-Komposisi & HPP
+Pengobatan
 @stop
 @section('desc')
 
@@ -21,13 +18,13 @@ Komposisi & HPP
             <div class="row ibox-title">
    <ol class="breadcrumb col-sm-6 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
         <li class="active">
-            Pakan
+            Pengobatan
         </li>
     </ol>
     <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline btn-warning pull-right">
         <i class="fa fa-arrow-circle-o-left" style="margin-right: 5px"></i> Back
     </a>
-    <a href="{{ url('pakan/create') }}">
+    <a href="{{ url('pengobatan/create') }}">
     <button class="detail2 btn btn-sm btn-outline btn-primary pull-right" style="margin-right: 10px">
         <i class="fa fa-plus-circle" style="margin-right: 5px"></i> Add New
     </button>
@@ -47,31 +44,25 @@ Komposisi & HPP
 <table class="table table-striped table-bordered table-hover dataTables-example" >
 <thead>
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>HPP</th>
-        <th>Notes</th>
-        <th>Created By</th>
-        <th>Created At</th>
+        <th>No.</th>
+        <th>Tgl. Checkin</th>
+        <th>Populasi</th>
         <th>Actions</th>
     </tr>
 </thead>
 <tbody>
 <?php $i = 0 ?>
-@foreach($pakan as $item)
+@foreach($pengobatan as $item)
 <?php $i++ ?>
     <tr>
         <td>{{ $i }}</td>
-        <td>{{ $item->name }}</td>
-        <td>{!! empty($item->hpp)?"<i>No Data</i>": number_format($item->hpp) !!}</td>
-        <td>{!! empty($item->notes)?"<i>No Data</i>": $item->notes !!}</td>
-        <td>{{ $item->createdby->first_name }} {{ $item->createdby->last_name }}</td>
-        <td>{{$item->created_at}}</td>
-        <td>
-            <a href="{{ url('pakan/' . $item->id . '/edit') }}" class="btn btn-outline btn-primary btn-xs">Update</a>
+        <td>{{ $item->tgl_checkin }}</td>
+        <td>{{ $item->populasi }}</td>
+       <td>
+            <a href="{{ url('pengobatan/' . $item->tgl_checkin . '/edit') }}" class="btn btn-outline btn-primary btn-xs">Update</a>
             {!! Form::open([
                 'method'=>'DELETE',
-                'url' => ['pakan', $item->id],
+                'url' => ['pengobatan', $item->tgl_checkin],
                 'style' => 'display:inline',
                 'onsubmit' => 'return ConfirmDelete()'
             ]) !!}

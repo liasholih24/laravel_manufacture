@@ -87,13 +87,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/ceksaldo', 'NasabahController@ceksaldo');
     Route::post('prints', 'NasabahController@prints');
 });
-Route::group(['middleware' => ['web']], function () {
-    Route::resource('tabungan', 'TabunganController');
-    Route::get('tabungan/{id}/print', ['uses' => 'TabunganController@print', 'as' => 'tabungan.print']);
-    Route::get('/getharga', 'TabunganController@getharga');
-    Route::get('/getsatuan', 'TabunganController@getsatuan');
-    Route::get('/gettrxcode', 'TabunganController@gettrxcode');
-});
+
 Route::group(['middleware' => ['web']], function () {
     Route::resource('posts', 'PostsController');
 });
@@ -158,12 +152,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('customer', 'CustomerController');
 });
 
-Route::group(['middleware' => ['web']], function () {
-	Route::resource('pembelian', 'PembelianController');
-    Route::get('pembelian/{id}/print', ['uses' => 'PembelianController@print', 'as' => 'pembelian.print']);
-    Route::get('/refpb', 'PembelianController@refpb');
-    Route::get('/getharga', 'PembelianController@getharga');
-});
+
 Route::group(['middleware' => ['web']], function () {
 	Route::resource('brand', 'BrandController');
 });
@@ -171,8 +160,19 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('supplier', 'SupplierController');
 });
 Route::group(['middleware' => ['web']], function () {
-	Route::resource('pakan', 'pakanController');
+    Route::resource('pakan', 'pakanController');
+    Route::get('/getharga', 'pakanController@getharga');
 });
 Route::group(['middleware' => ['web']], function () {
-	Route::resource('produksi', 'ProduksiController');
+    Route::resource('produksi', 'ProduksiController');
+    Route::get('/jmlakhir', 'ProduksiController@jmlakhir');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('pengobatan', 'PengobatanController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('hpp', 'HppController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('hargapokok', 'HargaPokokController');
 });

@@ -47,8 +47,8 @@ Supplier
         <th>ID</th>
         <th>Name</th>
         <th>Notes</th>
-        <th>PIC</th>
-        <th>No.Telp</th>
+        <th>PIC/Telp</th>
+        <th>PIC/Telp</th>
         <th>Actions</th>
     </tr>
 </thead>
@@ -60,8 +60,8 @@ Supplier
         <td>{{ $item->id }}</td>
         <td><a href="{{ url('supplier', $item->id) }}">{{ $item->name }}</a></td>
         <td>{!! empty($item->notes)?"<i>Not Set</i>" : $item->notes !!}</td>
-        <td>{!! empty($item->pic)?"<i>Not Set</i>": $item->pic !!}</td>
-        <td>{!! empty($item->telp)?"<i>Not Set</i>": $item->telp !!}</td>
+        <td>{!! empty($item->pic)?"<i>Not Set</i>": $item->pic. " | " .$item->telp !!}</td>
+        <td>{!! empty($item->pic2)?"<i>Not Set</i>": $item->pic2. " | " .$item->telp2 !!}</td>
         <td>
             <a href="{{ url('supplier/' . $item->id . '/edit') }}" class="btn btn-outline btn-primary btn-xs">Update</a>
             {!! Form::open([

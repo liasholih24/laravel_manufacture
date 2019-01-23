@@ -82,7 +82,7 @@ Rekapitulasi Persediaan
     <div class="ibox-title row">
         <ol class="breadcrumb col-sm-7 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
           <li class="active">
-              <strong>Rekapitulasi Persediaan</strong> <small>dikelompokkan berdasarkan sampah</small>
+              <strong>Rekapitulasi Persediaan</strong> <small>dikelompokkan berdasarkan item</small>
           </li>
         </ol>
           <a href="{{ url('stocks')}}" class="btn btn-sm btn-outline btn-primary pull-right">
@@ -161,7 +161,7 @@ Rekapitulasi Persediaan
        ajax: '{{url("/rekstocksapi")}}',
        columns: [
            {data: 'id', name: 'id'},
-           {data: 'sampah', name: 'sampah'},
+           {data: 'item', name: 'item'},
            {data: 'qty_in', name: 'qty_in'},
            {data: 'qty_out', name: 'qty_out'},
            {data: 'qty', name: 'qty'},

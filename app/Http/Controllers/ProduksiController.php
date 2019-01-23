@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Input;
+use DB;
 use App\Produksi;
 use App\Item;
+use App\Lokasi;
 use App\Satuan;
+use App\pakan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
@@ -45,8 +48,8 @@ protected function validator(Request $request)
      */
     public function create()
     {
-        $kandangs = Item::where('status',1)->where('parent_id','=',13)->pluck('name','id');
-        $pakans = Item::where('status',1)->where('parent_id','=',9)->pluck('name','id');
+        $kandangs = Lokasi::where('depth',1)->pluck('name','id');
+        $pakans = pakan::pluck('name','id');
         $satuans = Satuan::where('status','=',3)->get()->pluck('name','id');
         $datenow = date('Y-m-d'); 
         return view('backEnd.produksi.create', compact('datenow','kandangs','pakans','satuans'));
@@ -155,5 +158,28 @@ protected function validator(Request $request)
 
         return redirect('produksi');
     }
+
+    public function jmlakhir()
+        {
+            $id = Input::get('id');
+
+            $q = DB::select(
+                      DB::raw("SELECT jml_akhir as jml_akhir 
+                                FROM produksis WHERE kandang = $id ORDER BY created_at DESC
+                                LIMIT 1
+                             "));
+
+            if(!empty($q)){
+                 $jml_akhir = $q[0]->jml_akhir;
+                        }
+
+                else{
+                    $jml_akhir = 0;
+                }
+            
+            return json_encode( $jml_akhir );
+
+
+        }
 
 }

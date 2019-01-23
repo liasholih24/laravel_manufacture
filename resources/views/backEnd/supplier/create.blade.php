@@ -35,28 +35,42 @@ Create new Supplier
     <div class="form-group">
         {!! Form::label('name', 'Nama*', ['class' => 'col-sm-1 control-label']) !!}
         <div class="col-sm-5 {{ $errors->has('name') ? 'has-error' : ''}}">
-            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nama [Max: 50 Katakter]']) !!}
+            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nama [Max: 50 Katakter]','required' =>'required']) !!}
             {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
         </div>
-        {!! Form::label('telp', 'Telp', ['class' => 'col-sm-1 control-label']) !!}
-                <div class="col-sm-5">
-                    {!! Form::text('telp', null, ['class' => 'form-control', 'placeholder' => 'No Telp/HP']) !!}
-                    {!! $errors->first('telp', '<p class="help-block">:message</p>') !!}
-                </div>
+        
+        {!! Form::label('notes', 'Deskripsi', ['class' => 'col-sm-1 control-label']) !!}
+        <div class="col-sm-5 col-xs-12">
+            {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => '2', 'placeholder' => 'Deskripsi [Max: 500 Katakter]']) !!}
+            {!! $errors->first('notes', '<p class="help-block">:message</p>') !!}
+        </div>
        
     </div>
     <div class="form-group">
-    
-                {!! Form::label('note', 'Deskripsi', ['class' => 'col-sm-1 control-label']) !!}
-        <div class="col-sm-5 col-xs-12">
-            {!! Form::textarea('note', null, ['class' => 'form-control', 'rows' => '2', 'placeholder' => 'Deskripsi [Max: 500 Katakter]']) !!}
-            {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
-        </div>
-    {!! Form::label('pic', 'Pic ', ['class' => 'col-sm-1 control-label']) !!}
+    {!! Form::label('telp', 'Telepon*', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5">
-                    {!! Form::text('pic', null, ['class' => 'form-control','placeholder' => 'Penanggung Jawab']) !!}
-                    {!! $errors->first('pic', '<p class="help-block">:message</p>') !!}
+                    {!! Form::text('telp', null, ['class' => 'form-control', 'placeholder' => 'No Telp/HP', 'required' =>'required']) !!}
+                    {!! $errors->first('telp', '<p class="help-block">:message</p>') !!}
                 </div>
+    {!! Form::label('telp2', 'Telepon', ['class' => 'col-sm-1 control-label']) !!}
+    <div class="col-sm-5">
+        {!! Form::text('telp2', null, ['class' => 'form-control', 'placeholder' => 'No Telp/HP']) !!}
+        {!! $errors->first('telp2', '<p class="help-block">:message</p>') !!}
+    </div>
+    </div>
+    <div class="form-group">
+    
+    
+    {!! Form::label('pic', 'PIC*', ['class' => 'col-sm-1 control-label']) !!}
+        <div class="col-sm-5">
+            {!! Form::text('pic', null, ['class' => 'form-control','placeholder' => 'Penanggung Jawab', 'required' =>'required']) !!}
+            {!! $errors->first('pic', '<p class="help-block">:message</p>') !!}
+        </div>
+    {!! Form::label('pic2', 'PIC', ['class' => 'col-sm-1 control-label']) !!}
+        <div class="col-sm-5">
+            {!! Form::text('pic2', null, ['class' => 'form-control','placeholder' => 'Penanggung Jawab']) !!}
+            {!! $errors->first('pic2', '<p class="help-block">:message</p>') !!}
+        </div>
     </div>
            
 

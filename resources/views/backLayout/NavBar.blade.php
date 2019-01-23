@@ -19,11 +19,16 @@
                 <a href="{{route('home.dashboard')}}"><i class="fa fa-area-chart"></i> <span class="nav-label">Dashboard</span></a>
             </li>
             @endif
-            <li {{{ (Request::is('produksi*','hpp*') ? 'class=active' : '') }}}>
+            @if (Sentinel::getUser()->hasAnyAccess(['produksi*','hpp*','pakan*']))
+           
+            <li {{{ (Request::is('produksi*','hpp*','pakan*','pengobatan') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-check-square-o"></i> <span class="nav-label">Recording</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li {{{ (Request::is('produksi*') ? 'class=active' : '') }}}>
                       <a href="{{route('produksi.index')}}">Produksi </a>
+                    </li>
+                    <li {{{ (Request::is('pengobatan*') ? 'class=active' : '') }}}>
+                      <a href="{{route('pengobatan.index')}}">Pengobatan </a>
                     </li>
                     <li {{{ (Request::is('hpp*') ? 'class=active' : '') }}}>
                       <a href="{{route('produksi.index')}}">HPP Telur</a>
@@ -35,6 +40,7 @@
                     @endif
                 </ul>
           </li>
+          @endif
              @if (Sentinel::getUser()->hasAnyAccess(['pengajuan.*', 'penerimaan.*', 'pengeluaran.*', 'penjualan.*', 'transfer.*']))
             <li {{{ (Request::is('pengajuan*','penerimaan*','penjualan*','pemakaian*','transfer*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Monitoring</span><span class="fa arrow"></span></a>
@@ -62,8 +68,8 @@
             </li>
           @endif
           
-          @if (Sentinel::getUser()->hasAnyAccess(['item*','kategori.*','satuan.*','supplier*','lokasi*','pakan*']))
-            <li {{{ (Request::is('item*','kategori*','status*','satuan*','supplier*','lokasi*','pakan*','customer*') ? 'class=active' : '') }}}>
+          @if (Sentinel::getUser()->hasAnyAccess(['item*','kategori.*','satuan.*','supplier*','lokasi*']))
+            <li {{{ (Request::is('item*','kategori*','status*','satuan*','supplier*','lokasi*','customer*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Master Data</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                    @if (Sentinel::getUser()->hasAnyAccess(['item*','kategori*']))
