@@ -104,7 +104,7 @@ Laporan Persediaan
 <thead>
     <tr>
         <th>Gudang</th>
-        <th>Sampah</th>
+        <th>Item</th>
         <th>Satuan</th>
         <th>Jml. Masuk</th>
         <th>Jml. Keluar</th>
