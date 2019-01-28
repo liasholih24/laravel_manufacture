@@ -8,6 +8,7 @@ use App\Pengajuan;
 use App\DetailPengajuan;
 use App\Item;
 use App\Lokasi;
+use App\Satuan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -45,7 +46,8 @@ class PengajuanController extends Controller
     {
         $item = Item::where('nesting', 1)->get();
         $lokasi = Lokasi::where('depth', 0)->get();
-        return view('backEnd.pengajuan.create', ['item' => $item, 'lokasi' => $lokasi]);
+        $satuan = Satuan::get();
+        return view('backEnd.pengajuan.create', ['item' => $item, 'lokasi' => $lokasi, 'satuan' => $satuan]);
     }
 
     /**
@@ -75,6 +77,7 @@ class PengajuanController extends Controller
             $detail->pengajuan_id = $pengajuan->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->satuan_id = $request->satuan_id[$i];
             $detail->created_by = Sentinel::getUser()->id;
             $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();
@@ -113,7 +116,8 @@ class PengajuanController extends Controller
         $detail = DetailPengajuan::where('pengajuan_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
         $lokasi = Lokasi::where('depth', 0)->get();
-        return view('backEnd.pengajuan.edit', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item, 'lokasi' => $lokasi]);
+        $satuan = Satuan::get();
+        return view('backEnd.pengajuan.edit', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item, 'lokasi' => $lokasi, 'satuan' => $satuan]);
     }
 
     /**
@@ -138,6 +142,7 @@ class PengajuanController extends Controller
             $detail->pengajuan_id = $pengajuan->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->satuan_id = $request->satuan_id[$i];
             $detail->created_by = Sentinel::getUser()->id;
             $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();

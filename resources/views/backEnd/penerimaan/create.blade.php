@@ -81,8 +81,9 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                <th width="25%">Pemasok</th>
+                                                <th width="15%">Pemasok</th>
                                                 <th width="15%">Qty</th>
+                                                <th width="15%">Satuan</th>
                                                 <th width="20%">Harga</th>
                                                 <th width="50px">&nbsp;</th>
                                             </tr>
@@ -109,6 +110,14 @@
                                                     <input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>
                                                 </td>
                                                 <td>
+                                                    <select name="satuan_id[]" class="select-satuan form-control input-sm" required>
+                                                        <option value=""></option>
+                                                        @foreach($satuan as $r)
+                                                        <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
                                                     <input type="text" name="price[]" class="form-control input-sm" autocomplete="off" required>
                                                 </td>
                                                 <td>
@@ -118,7 +127,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="5">
+                                                <td colspan="6">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -170,6 +179,9 @@
             placeholder: 'Pilih Pemasok',
             allowClear: true
         });
+        $('.select-satuan').select2({
+            placeholder: 'Pilih Satuan'
+        });
         var nomor = 1;
         $('#tambah-baris').on('click', function() { 
             $('#tbody').append('<tr id="tr' + nomor + '">' +
@@ -193,6 +205,14 @@
                     '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
+                    '<select name="satuan_id[]" class="form-control input-sm select-satuan" required>' +
+                        '<option value=""></option>' +
+                        @foreach($satuan as $r)
+                        '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
+                        @endforeach
+                    '</select>' +
+                '</td>' +
+                '<td>' +
                     '<input type="text" name="price[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
@@ -205,6 +225,9 @@
             $('.select-supplier').select2({
                 placeholder: 'Pilih Pemasok',
                 allowClear: true
+            });
+            $('.select-satuan').select2({
+                placeholder: 'Pilih Satuan'
             });
             nomor++;
             return false;
@@ -238,6 +261,11 @@
                             '</td>' +
                             '<td>' +
                                 '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" value="' + data[i].qty + '" required>' +
+                            '</td>' +
+                            '<td>' +
+                                '<select name="satuan_id[]" class="form-control input-sm select-satuan" required>' +
+                                    '<option value="' + data[i].satuan_id + '" selected>' + data[i].satuan + '</option>' +
+                                '</select>' +
                             '</td>' +
                             '<td>' +
                                 '<input type="text" name="price[]" class="form-control input-sm" autocomplete="off" required>' +

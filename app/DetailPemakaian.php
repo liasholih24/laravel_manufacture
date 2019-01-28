@@ -28,7 +28,7 @@ class DetailPemakaian extends Model
      *
      * @var array
      */
-    protected $fillable = ['pemakaian_id', 'item_id', 'qty', 'created_by', 'updated_by', 'created_at'];
+    protected $fillable = ['pemakaian_id', 'item_id', 'qty', 'satuan_id', 'created_by', 'updated_by', 'created_at'];
 
     use SoftDeletes;
     protected $dates = ['deleted_at'];

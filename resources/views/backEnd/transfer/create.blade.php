@@ -81,7 +81,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                <th width="25%">Qty</th>
+                                                <th width="20%">Qty</th>
+                                                <th width="20%">Satuan</th>
                                                 <th width="50px">&nbsp;</th>
                                             </tr>
                                         </thead>
@@ -97,6 +98,14 @@
                                                 </td>
                                                 <td>
                                                     <input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>
+                                                </td>
+                                                <td>
+                                                    <select name="satuan_id[]" class="select-satuan form-control input-sm" required>
+                                                        <option value=""></option>
+                                                        @foreach($satuan as $r)
+                                                        <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-sm btn-danger" onclick="hapusBaris(0)"><i class="fa fa-trash"></i></button>
@@ -149,6 +158,9 @@
         $('.select-storage').select2({
             placeholder: 'Pilih Penyimpanan'
         });
+        $('.select-satuan').select2({
+            placeholder: 'Pilih Satuan'
+        });
         var nomor = 1;
         $('#tambah-baris').on('click', function() { 
             $('#tbody').append('<tr id="tr' + nomor + '">' +
@@ -164,11 +176,22 @@
                     '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
+                    '<select name="satuan_id[]" class="form-control input-sm select-satuan" required>' +
+                        '<option value=""></option>' +
+                        @foreach($satuan as $r)
+                        '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
+                        @endforeach
+                    '</select>' +
+                '</td>' +
+                '<td>' +
                     '<button class="btn btn-sm btn-danger" onclick="hapusBaris(' + nomor + ')"><i class="fa fa-trash"></i></button>' +
                 '</td>' +
             '</tr>');
             $('.select-item').select2({
                 placeholder: 'Pilih Item'
+            });
+            $('.select-satuan').select2({
+                placeholder: 'Pilih Satuan'
             });
             nomor++;
             return false;

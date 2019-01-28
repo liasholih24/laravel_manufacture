@@ -71,7 +71,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                <th width="25%">Qty</th>
+                                                <th width="20%">Qty</th>
+                                                <th width="20%">Satuan</th>
                                                 <th width="50px">&nbsp;</th>
                                             </tr>
                                         </thead>
@@ -91,6 +92,14 @@
                                                     <input type="number" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
                                                 </td>
                                                 <td>
+                                                    <select name="satuan_id[]" class="select-satuan form-control input-sm" required>
+                                                        <option value=""></option>
+                                                        @foreach($satuan as $r)
+                                                        <option value="{{ $r->id }}" @if($d->satuan_id==$r->id) selected @endif>{{ $r->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
                                                     <button class="btn btn-sm btn-danger" onclick="hapusBaris({{$i}})"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
@@ -99,7 +108,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="3">
+                                                <td colspan="4">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -146,6 +155,9 @@
         $('.select-lokasi').select2({
             placeholder: 'Pilih Lokasi'
         });
+        $('.select-satuan').select2({
+            placeholder: 'Pilih Satuan'
+        });
         var nomor = {{$i}};
         $('#tambah-baris').on('click', function() { 
             $('#tbody').append('<tr id="tr' + nomor + '">' +
@@ -161,11 +173,22 @@
                     '<input type="number" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
+                    '<select name="satuan_id[]" class="form-control input-sm select-satuan" required>' +
+                        '<option value=""></option>' +
+                        @foreach($satuan as $r)
+                        '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
+                        @endforeach
+                    '</select>' +
+                '</td>' +
+                '<td>' +
                     '<button class="btn btn-sm btn-danger" onclick="hapusBaris(' + nomor + ')"><i class="fa fa-trash"></i></button>' +
                 '</td>' +
             '</tr>');
             $('.select-item').select2({
                 placeholder: 'Pilih Item'
+            });
+            $('.select-satuan').select2({
+                placeholder: 'Pilih Satuan'
             });
             nomor++;
             return false;

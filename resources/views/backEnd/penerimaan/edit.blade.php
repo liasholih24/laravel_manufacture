@@ -85,8 +85,9 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                <th width="25%">Pemasok</th>
+                                                <th width="15%">Pemasok</th>
                                                 <th width="15%">Qty</th>
+                                                <th width="15%">Satuan</th>
                                                 <th width="20%">Harga</th>
                                                 <th width="50px">&nbsp;</th>
                                             </tr>
@@ -118,6 +119,17 @@
                                                     <input type="text" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
                                                 </td>
                                                 <td>
+                                                    <select name="satuan_id[]" class="select-satuan form-control input-sm" @if($penerimaan->pengajuan_id) disabled @endif required>
+                                                        <option value=""></option>
+                                                        @foreach($satuan as $r)
+                                                        <option value="{{ $r->id }}" @if($d->satuan_id==$r->id) selected @endif>{{ $r->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @if($penerimaan->pengajuan_id)
+                                                    <input type="hidden" name="satuan_id[]" value="{{ $d->satuan_id }}">
+                                                    @endif
+                                                </td>
+                                                <td>
                                                     <input type="text" name="price[]" class="form-control input-sm" value="{{ $d->price }}" autocomplete="off" required>
                                                 </td>
                                                 <td>
@@ -129,7 +141,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="5">
+                                                <td colspan="6">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary" @if($penerimaan->pengajuan_id) disabled @endif><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -179,6 +191,9 @@
         $('.select-pengajuan').select2({
             placeholder: 'Pilih Pengajuan'
         });
+        $('.select-satuan').select2({
+            placeholder: 'Pilih Satuan'
+        });
         $('.select-supplier').select2({
             placeholder: 'Pilih Pemasok',
             allowClear: true
@@ -206,6 +221,14 @@
                     '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
+                    '<select name="satuan_id[]" class="form-control input-sm select-satuan" required>' +
+                        '<option value=""></option>' +
+                        @foreach($satuan as $r)
+                        '<option value="{{ $r->id }}">{{ $r->name }}</option>' +
+                        @endforeach
+                    '</select>' +
+                '</td>' +
+                '<td>' +
                     '<input type="text" name="price[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
@@ -218,6 +241,9 @@
             $('.select-supplier').select2({
                 placeholder: 'Pilih Pemasok',
                 allowClear: true
+            });
+            $('.select-satuan').select2({
+                placeholder: 'Pilih Satuan'
             });
             nomor++;
             return false;
