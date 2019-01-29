@@ -63,6 +63,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">Ekspedisi</label>
+                                <div class="col-sm-3">
+                                    <select name="ekspedisi_id" class="select-ekspedisi form-control input-sm">
+                                        <option value=""></option>
+                                        @foreach($ekspedisi as $r)
+                                        <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
                                     <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d') }}">
@@ -167,6 +178,9 @@
         });
         $('.select-satuan').select2({
             placeholder: 'Pilih Satuan'
+        });
+        $('.select-ekspedisi').select2({
+            placeholder: 'Pilih Ekspedisi'
         });
         var nomor = 1;
         $('#tambah-baris').on('click', function() { 

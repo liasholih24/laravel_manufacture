@@ -10,6 +10,7 @@ use App\Item;
 use App\Customer;
 use App\Lokasi;
 use App\Satuan;
+use App\Ekspedisi;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -49,7 +50,8 @@ class PenjualanController extends Controller
         $customer = Customer::all();
         $lokasi = Lokasi::where('depth', 1)->get();
         $satuan = Satuan::get();
-        return view('backEnd.penjualan.create', ['item' => $item, 'customer' => $customer, 'lokasi' => $lokasi, 'satuan' => $satuan]);
+        $ekspedisi = Ekspedisi::get();
+        return view('backEnd.penjualan.create', ['item' => $item, 'customer' => $customer, 'lokasi' => $lokasi, 'satuan' => $satuan, 'ekspedisi' => $ekspedisi]);
     }
 
     /**
@@ -70,6 +72,7 @@ class PenjualanController extends Controller
         $penjualan->number = $number;
         $penjualan->customer_id = $request->customer_id;
         $penjualan->storage_id = $request->storage_id;
+        $penjualan->ekspedisi_id = $request->ekspedisi_id;
         $penjualan->date = $request->date;
         $penjualan->desc = $request->desc;
         $penjualan->created_by = Sentinel::getUser()->id;
@@ -122,7 +125,8 @@ class PenjualanController extends Controller
         $customer = Customer::all();
         $lokasi = Lokasi::where('depth', 1)->get();
         $satuan = Satuan::get();
-        return view('backEnd.penjualan.edit', ['penjualan' => $penjualan, 'detail' => $detail, 'item' => $item, 'customer' => $customer, 'lokasi' => $lokasi, 'satuan' => $satuan]);
+        $ekspedisi = Ekspedisi::get();
+        return view('backEnd.penjualan.edit', ['penjualan' => $penjualan, 'detail' => $detail, 'item' => $item, 'customer' => $customer, 'lokasi' => $lokasi, 'satuan' => $satuan, 'ekspedisi' => $ekspedisi]);
     }
 
     /**
@@ -137,6 +141,7 @@ class PenjualanController extends Controller
         $penjualan = Penjualan::findOrFail($penjualan->id);
         $penjualan->customer_id = $request->customer_id;
         $penjualan->storage_id = $request->storage_id;
+        $penjualan->ekspedisi_id = $request->ekspedisi_id;
         $penjualan->date = $request->date;
         $penjualan->desc = $request->desc;
         $penjualan->updated_by = Sentinel::getUser()->id;
