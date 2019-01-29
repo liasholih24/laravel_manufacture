@@ -165,7 +165,7 @@ class PengajuanController extends Controller
 
     public function item($id)
     {
-        $item = Item::findOrFail($id)->first();
+        $item = Item::findOrFail($id);
         return response($item);
     }
 

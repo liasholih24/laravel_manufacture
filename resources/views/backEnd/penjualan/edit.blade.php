@@ -55,13 +55,18 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Customer</label>
                                 <div class="col-sm-3">
-                                    <select name="customer_id" class="select-customer form-control input-sm">
+                                    <select name="customer_id" onchange="pilihCustomer()" class="select-customer form-control input-sm">
                                         <option value=""></option>
                                         @foreach($customer as $r)
                                         <option value="{{ $r->id }}" @if($r->id==$penjualan->customer_id) selected @endif>{{ $r->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                <label id="deskripsi" class="col-sm-5 control-label" style="text-align: left; color: #ed5565;">
+                                    @if($deskripsi)
+                                    {{ $deskripsi->desc }}
+                                    @endif
+                                </label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Ekspedisi</label>
@@ -228,6 +233,15 @@
             nomor++;
             return false;
         });
+        function pilihCustomer() {
+            var param = $('select[name="customer_id"]').val();
+            $.get("/penjualan/customer/" + param, function(data, status){
+                $('#deskripsi').empty();
+                if(!data.desc == null || !data.desc == ''){
+                    $('#deskripsi').append(data.desc);
+                }
+            });
+        }
         function hapusBaris(baris) {
             $('#tr' + baris).remove();
             return false;
