@@ -63,43 +63,7 @@ Recording Produksi
                 </div>
             </div>
             <br/>
-            <h4>Populasi</h4>
-            <div class="form-group {{ $errors->has('jml_akhir') ? 'has-error' : ''}}">
-                {!! Form::label('jml_akhir', 'Jml Akhir', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-5">
-                    {!! Form::text('jml_akhir', 0, ['class' => 'form-control','id'=>'jml_akhir','placeholder'=>'Jml. Akhir']) !!}
-                    {!! $errors->first('jml_akhir', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <div class="form-group {{ $errors->has('jml_so') ? 'has-error' : ''}}">
-                {!! Form::label('jml_so', 'Jml SO', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-5">
-                    {!! Form::text('jml_so', null, ['class' => 'form-control calcAkhir','id'=>'jml_so','placeholder'=>'Jml. SO']) !!}
-                    {!! $errors->first('jml_so', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <div class="form-group {{ $errors->has('jml_masuk') ? 'has-error' : ''}}">
-                {!! Form::label('jml_masuk', 'Jml Masuk', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-5">
-                    {!! Form::text('jml_masuk', null, ['class' => 'form-control calcAkhir','id'=>'jml_masuk','placeholder'=>'Jual/Akhir']) !!}
-                    {!! $errors->first('jml_masuk', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <div class="form-group {{ $errors->has('jml_mati') ? 'has-error' : ''}}">
-                {!! Form::label('jml_mati', 'Jml Mati', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-5">
-                    {!! Form::text('jml_mati', null, ['class' => 'form-control calcAkhir','id'=>'jml_mati','placeholder'=>'Pindah/Masuk']) !!}
-                    {!! $errors->first('jml_mati', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <div class="form-group {{ $errors->has('jml_afkir') ? 'has-error' : ''}}">
-                {!! Form::label('jml_afkir', 'Jml Afkir', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-5">
-                    {!! Form::text('jml_afkir', null, ['class' => 'form-control calcAkhir','id'=>'jml_afkir','placeholder'=>'Jml. Afkir']) !!}
-                    {!! $errors->first('jml_afkir', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <br/>
+            <div class="hr-line-dashed"></div>
             <h4>Pakan</h4>
             
             <div class="form-group {{ $errors->has('pakan_jenis') ? 'has-error' : ''}}">
@@ -117,6 +81,53 @@ Recording Produksi
                 </div>
             </div>
             <br/>
+            <div class="hr-line-dashed"></div>
+            <h4>Populasi</h4>
+            <div class="form-group">
+                {!! Form::label('jml_akhir', 'Jml Akhir', ['class' => 'col-sm-2 control-label']) !!}
+                <div class="col-sm-4">
+                    {!! Form::text('jml_akhir', 0, ['class' => 'form-control','id'=>'jml_akhir','placeholder'=>'Jml. Akhir']) !!}
+                    {!! Form::hidden('jml_akhir0', 0, ['class' => 'form-control','id'=>'jml_akhir0','placeholder'=>'Jml. Akhir']) !!}
+                    {!! $errors->first('jml_akhir', '<p class="help-block">:message</p>') !!}
+                </div>
+                {!! Form::label('jml_so', 'Jml SO', ['class' => 'col-sm-2 control-label']) !!}
+                <div class="col-sm-4">
+                    {!! Form::text('jml_so', null, ['class' => 'form-control calcAkhir','id'=>'jml_so','placeholder'=>'Jml. SO']) !!}
+                    {!! $errors->first('jml_so', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+            <div class="form-group">
+                {!! Form::label('jml_masuk', 'Jml Masuk', ['class' => 'col-sm-2 control-label']) !!}
+                <div class="col-sm-4">
+                    {!! Form::text('jml_masuk', null, ['class' => 'form-control calcAkhir','id'=>'jml_masuk','placeholder'=>'Jual/Akhir']) !!}
+                    {!! $errors->first('jml_masuk', '<p class="help-block">:message</p>') !!}
+                </div>
+                {!! Form::label('jml_mati', 'Jml Mati', ['class' => 'col-sm-2 control-label']) !!}
+                <div class="col-sm-4">
+                    {!! Form::text('jml_mati', null, ['class' => 'form-control calcAkhir','id'=>'jml_mati','placeholder'=>'Pindah/Masuk']) !!}
+                    {!! $errors->first('jml_mati', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+            <div class="form-group ">
+                {!! Form::label('jml_pindah', 'Jml. Pindah', ['class' => 'col-sm-2 control-label']) !!}
+                <div class="col-sm-4">
+                    {!! Form::text('jml_pindah', null, ['class' => 'form-control calcAkhir','id'=>'jml_pindah','placeholder'=>'Jml. Pindah']) !!}
+                    {!! $errors->first('jml_pindah', '<p class="help-block">:message</p>') !!}
+                </div>
+                {!! Form::label('jml_afkir', 'Jml Afkir', ['class' => 'col-sm-2 control-label']) !!}
+                <div class="col-sm-4">
+                    {!! Form::text('jml_afkir', null, ['class' => 'form-control calcAkhir','id'=>'jml_afkir','placeholder'=>'Jml. Afkir']) !!}
+                    {!! $errors->first('jml_afkir', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+       
+            <a id="kalAkhir" class="btn btn-warning btn-sm pull-right btn-outline"  style="margin-right: 5px;"><i class="fa fa-refresh"></i> Kalkukasi</a>
+         
+
+            <br/>
+            <br/>
+            <div class="hr-line-dashed"></div>
+            
             <h4>Hasil Produksi</h4>
             
             <div class="form-group {{ $errors->has('p_utuh_butir') ? 'has-error' : ''}}">
@@ -193,17 +204,15 @@ Recording Produksi
                     {!! $errors->first('p_jml_kg', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
-
+            <div class="form-group ">
+                    <a id="kal" class="btn btn-warning btn-sm pull-right  btn-outline "  style="margin-right: 5px;"><i class="fa fa-refresh"></i> Kalkukasi</a>
+            </div>
+            <div class="hr-line-dashed"></div>
     <div class="form-group">
-<a href="{{ url('produksi') }}" class="detail2 btn btn-md btn-outline btn-danger pull-right">  <i class="fa fa-times-circle" ></i> Cancel</a>
-      <button type="submit" class="create_mdl btn btn-outline btn-primary pull-right" style="margin-right: 10px; ">
-                        <i class="fa fa-plus-circle"></i>  Create
-                      </button>
-                      
-      </a>
-
-      <a id="kal" class="btn btn-warning btn pull-left  btn-outline "  style="margin-right: 5px;"><i class="fa fa-refresh"></i> Kalkukasi</a>
-               
+            <a href="{{ url('produksi') }}" class="detail2 btn btn-md btn-outline btn-danger pull-right">  <i class="fa fa-times-circle" ></i> Cancel</a>
+            <button type="submit" class="create_mdl btn btn-outline btn-primary pull-right" style="margin-right: 10px; ">
+                                <i class="fa fa-plus-circle"></i>  Create
+             </button>
     </div>
     </div>
     </div>
@@ -242,13 +251,13 @@ Recording Produksi
 
             function calc(){
 
-                p_jml_butir =  Number($("#p_utuh_butir").val())  + Number($("#p_putih_butir").val()) + Number($("#p_retak_butir").val());
+                p_jml_butir =  (Number($("#p_utuh_butir").val())  + Number($("#p_putih_butir").val()) + Number($("#p_retak_butir").val())).toFixed(2);
                 $("#p_jml_butir").val(p_jml_butir);
 
-                p_jml_kg =  Number($("#p_utuh_kg").val())  + Number($("#p_putih_kg").val()) + Number($("#p_retak_kg").val());
+                p_jml_kg =  (Number($("#p_utuh_kg").val())  + Number($("#p_putih_kg").val()) + Number($("#p_retak_kg").val())).toFixed(2);
                 $("#p_jml_kg").val(p_jml_kg);
 
-                gr_butir = Number(p_jml_kg/p_jml_butir * 1000);
+                gr_butir = Number(p_jml_kg/p_jml_butir * 1000).toFixed(2);
                 $("#gr_butir").val(gr_butir);
 
                 kg_1000 = Number(p_jml_kg/ Number($("#jml_akhir").val()) * 1000).toFixed(2);
@@ -262,12 +271,24 @@ Recording Produksi
 
             
             }
+            function calcAkhir(){
 
-            $(".calcAkhir").on("change", function(){
-             
-               jml_akkhir = ( Number($("#jml_akhir").val()) + Number($("#jml_so").val()) ) -  Number($("#jml_masuk").val()) - Number($("#jml_mati").val()) - Number($("#jml_afkir").val()) ;
+                jml_akkhir = ( Number($("#jml_akhir0").val()) + Number($("#jml_so").val()) + Number($("#jml_masuk").val()) ) -  Number($("#jml_pindah").val()) - Number($("#jml_mati").val()) - Number($("#jml_afkir").val()) ;
                 
-               $("#jml_akhir").val(jml_akkhir);
+                $("#jml_akhir").val(jml_akkhir);
+
+            }
+
+           $("#kalAkhir").on("click", function(){
+             
+            calcAkhir();
+           
+            });
+            
+            $(".calcAkhir").on("change", function(){
+
+                calcAkhir();
+           
             });
             //get jml akhir
 
@@ -285,6 +306,7 @@ Recording Produksi
                         dataType: 'html',
                         success: function(datas){
                             $('#jml_akhir').val(datas);
+                            $('#jml_akhir0').val(datas);
                             return false;
                         }
                     });
