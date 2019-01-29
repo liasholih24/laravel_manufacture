@@ -152,6 +152,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('customer', 'CustomerController');
 });
 
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('ekspedisi', 'EkspedisiController');
+});
 
 Route::group(['middleware' => ['web']], function () {
 	Route::resource('brand', 'BrandController');
