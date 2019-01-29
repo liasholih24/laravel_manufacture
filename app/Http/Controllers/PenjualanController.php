@@ -126,7 +126,13 @@ class PenjualanController extends Controller
         $lokasi = Lokasi::where('depth', 1)->get();
         $satuan = Satuan::get();
         $ekspedisi = Ekspedisi::get();
-        return view('backEnd.penjualan.edit', ['penjualan' => $penjualan, 'detail' => $detail, 'item' => $item, 'customer' => $customer, 'lokasi' => $lokasi, 'satuan' => $satuan, 'ekspedisi' => $ekspedisi]);
+        if($penjualan->customer_id > 0){
+            $deskripsi = Customer::findOrFail($penjualan->customer_id);
+        }
+        else{
+            $deskripsi = null;
+        }
+        return view('backEnd.penjualan.edit', ['penjualan' => $penjualan, 'detail' => $detail, 'item' => $item, 'customer' => $customer, 'lokasi' => $lokasi, 'satuan' => $satuan, 'ekspedisi' => $ekspedisi, 'deskripsi' => $deskripsi]);
     }
 
     /**
@@ -173,6 +179,12 @@ class PenjualanController extends Controller
     public function destroy($id)
     {
         
+    }
+
+    public function customer($id)
+    {
+        $customer = Customer::findOrFail($id);
+        return response($customer);
     }
 
 }

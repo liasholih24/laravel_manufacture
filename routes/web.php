@@ -93,6 +93,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 Route::group(['middleware' => ['web']], function () {
     Route::resource('penjualan', 'PenjualanController');
+    Route::get('penjualan/customer/{id}', 'PenjualanController@customer');
     Route::get('penjualan/{id}/print', ['uses' => 'PenjualanController@print', 'as' => 'penjualan.print']);
     Route::get('/refpj', 'PenjualanController@refpj');
     Route::get('/cekstock', 'PenjualanController@cekstock');
