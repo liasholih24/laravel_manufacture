@@ -13,7 +13,7 @@ Kelola Data Lokasi
 <div class="wrapper wrapper-content">
     <div class="row detail_content3">
     <div class="col-lg-12 detail_content2" style="background-color: white">
-  <style>
+  <style>   
                         .ibox { margin: 1px 2px 0px 0px !important }
                         .ibox.float-e-margins{ margin: 0px 2px !important}
                         </style>

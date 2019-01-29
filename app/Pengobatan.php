@@ -25,4 +25,9 @@ class Pengobatan extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
+    public function getlokasi()
+    {
+        return $this->belongsTo('App\Lokasi', 'kandang', 'id');
+    }
+
 }

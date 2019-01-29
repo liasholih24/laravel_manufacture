@@ -36,9 +36,13 @@ protected function validator(Request $request)
     {
       
         $pengobatan = DB::select(
-            DB::raw("SELECT MAX(tgl_checkin) AS tgl_checkin, MAX(populasi) AS populasi
-                     FROM 
-                      pengobatans GROUP BY tgl_checkin"));
+            DB::raw("SELECT MAX(p.tgl_checkin) AS tgl_checkin
+                            , MAX(p.populasi) AS populasi 
+                            , MAX(l.name) AS kandang 
+                            , COUNT(obat) AS qtyobat
+                     FROM pengobatans p
+                     JOIN lokasis l ON l.id = p.kandang
+                    GROUP BY p.tgl_checkin"));
 
         return view('backEnd.pengobatan.index', compact('pengobatan'));
     }

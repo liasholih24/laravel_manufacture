@@ -7,7 +7,6 @@ Recording Produksi
 @stop
 @section('style')
   {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
-  {{ HTML::style('assets_back/css/plugins/chosen/chosen.css')}}
   {{ HTML::style('assets_back/css/plugins/datapicker/datepicker3.css')}}
   
 @endsection
@@ -39,6 +38,7 @@ Recording Produksi
 <div class="row ibox-content" style="min-height: 65vh; ">
 	<div class="col-xs-12 col-sm-22">
     {!! Form::open(['url' => 'produksi', 'class' => 'form-horizontal']) !!}
+    {!! Form::hidden('created_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
     <h4>Info</h4>
                   <div class="form-group {{ $errors->has('prod_tgl') ? 'has-error' : ''}}">
                 {!! Form::label('prod_tgl', 'Tanggal Produksi* ', ['class' => 'col-sm-2 control-label']) !!}
@@ -51,7 +51,7 @@ Recording Produksi
             <div class="form-group {{ $errors->has('kandang') ? 'has-error' : ''}}">
                 {!! Form::label('kandang', 'Kandang*', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-5">
-                    {{ Form::select('kandang', $kandangs, null, ['class' => 'form-control chosen-select Kandang','placeholder' => 'Pilih Kandang']) }}
+                    {{ Form::select('kandang', $kandangs, null, ['class' => 'form-control select2 Kandang','placeholder' => 'Pilih Kandang']) }}
                     {!! $errors->first('kandang', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -69,7 +69,7 @@ Recording Produksi
             <div class="form-group {{ $errors->has('pakan_jenis') ? 'has-error' : ''}}">
                 {!! Form::label('pakan_jenis', 'Jenis Pakan', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-5">
-                   {{ Form::select('pakan_jenis', $pakans, null, ['class' => 'form-control chosen-select','placeholder' => 'Pilih Pakan']) }}
+                   {{ Form::select('pakan_jenis', $pakans, null, ['class' => 'form-control select2','placeholder' => 'Pilih Pakan']) }}
                    {!! $errors->first('pakan_jenis', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -224,23 +224,17 @@ Recording Produksi
 @endsection
 
 @section('script')
-{{ HTML::script('assets_back/js/plugins/chosen/chosen.jquery.js') }}
 {{ HTML::script('assets_back/js/plugins/select2/select2.full.min.js') }}
 {{ HTML::script('assets_back/js/plugins/datapicker/bootstrap-datepicker.js') }}
+{{ HTML::style('assets_back/css/plugins/select2/select2-bootstrap.min.css')}}
 
 <script>
    $(document).ready(function () {
 
-    var config = {
-                '.chosen-select'           : {},
-                '.chosen-select-deselect'  : {allow_single_deselect:true},
-                '.chosen-select-no-single' : {disable_search_threshold:10},
-                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-                '.chosen-select-width'     : {width:"95%"}
-                }
-            for (var selector in config) {
-                $(selector).chosen(config[selector]);
-            }
+    $('.select2').select2({
+        theme: 'bootstrap',
+        width: '100%'
+    });
 
 
             $("#kal").on("click", function(){

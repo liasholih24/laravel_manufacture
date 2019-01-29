@@ -49,7 +49,9 @@ Recording Pengobatan
     <tr>
         <th>No.</th>
         <th>Tgl. Checkin</th>
+        <th>Kandang</th>
         <th>Populasi</th>
+        <th>Qty (Obat/Vitamin/Vaksin)</th>
         <th>Actions</th>
     </tr>
 </thead>
@@ -60,7 +62,9 @@ Recording Pengobatan
     <tr>
         <td>{{ $i }}</td>
         <td>{{ $item->tgl_checkin }}</td>
+        <td>{{ $item->kandang }}</td>
         <td>{{ $item->populasi }}</td>
+        <td>{{ $item->qtyobat }}</td>
        <td>
             <a href="{{ url('pengobatan/' . $item->tgl_checkin . '/edit') }}" class="btn btn-outline btn-primary btn-xs">Update</a>
             {!! Form::open([

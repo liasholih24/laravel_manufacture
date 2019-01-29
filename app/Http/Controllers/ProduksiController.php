@@ -73,10 +73,6 @@ protected function validator(Request $request)
         
       $model = Produksi::create($request->all());
 
-      $attributes = $model->getOriginal();
-
-      activity()->performedOn($model)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Produksi '.$model->name.' is created successfully');
-
       Session::flash('alert-success', 'Produksi '.$model->name.' is created successfully');
 
         return redirect('produksi');
@@ -106,8 +102,12 @@ protected function validator(Request $request)
     public function edit($id)
     {
         $produksi = Produksi::findOrFail($id);
+        $kandangs = Lokasi::where('depth',1)->pluck('name','id');
+        $pakans = pakan::pluck('name','id');
+        $satuans = Satuan::where('status','=',3)->get()->pluck('name','id');
+        $datenow = date('Y-m-d'); 
 
-        return view('backEnd.produksi.edit', compact('produksi'));
+        return view('backEnd.produksi.edit', compact('produksi','kandangs','pakans','satuans','datenow'));
     }
 
     /**
@@ -127,10 +127,6 @@ protected function validator(Request $request)
         
         $produksi = Produksi::findOrFail($id);
         $produksi->update($request->all());
-
-        $attributes = $produksi->getOriginal();
-
-        activity()->performedOn($produksi)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Produksi '.$produksi->name.' is updated successfully');
 
         Session::flash('alert-success', ' Produksi '.$produksi->name.' is updated successfully');
 
