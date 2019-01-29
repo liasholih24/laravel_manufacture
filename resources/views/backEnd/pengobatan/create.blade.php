@@ -178,7 +178,7 @@ $("#add_row").on("click", function() {
         // Dynamic Rows Code
         
         // Get max row id and set new id
-        var newid = {{$i}};
+        var newid = 0;
         $.each($("#tab_logic tr"), function() {
             if (parseInt($(this).data("id")) > newid) {
                 newid = parseInt($(this).data("id"));
