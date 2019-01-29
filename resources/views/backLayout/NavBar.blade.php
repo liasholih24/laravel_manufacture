@@ -20,7 +20,7 @@
             </li>
             @endif 
             @if (Sentinel::getUser()->hasAnyAccess(['produksi*','hargapokok*','pakan*','pengobatan*']))
-           
+            
             <li {{{ (Request::is('produksi*','hargapokok*','pakan*','pengobatan*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-check-square-o"></i> <span class="nav-label">Recording</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">

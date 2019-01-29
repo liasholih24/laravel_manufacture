@@ -4,7 +4,10 @@ Create new Pengobatan
 @stop
 @section('style')
   {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
-  @endsection
+  {{ HTML::style('assets_back/css/plugins/daterangepicker/daterangepicker.css')}}
+  {{ HTML::style('assets_back/css/plugins/datapicker/datepicker3.css')}}
+  {{ HTML::style('assets_back/css/plugins/select2/select2-bootstrap.min.css')}}
+@endsection
 @section('content')
 <div class="wrapper wrapper-content">
 					<div class="row detail_content3">
@@ -15,9 +18,8 @@ Create new Pengobatan
       <div class="row ibox-title">
    <ol class="breadcrumb col-sm-4 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
         <li class="">
-            <a href="{{ url('pengobatan') }}"> Pengobatan
+            <a href="{{ url('pengobatan') }}"> Pengobatan</a>
         </li>
-        /
         <li class="">
                 <a href="#">
                     Add New
@@ -38,15 +40,21 @@ Create new Pengobatan
             <div class="form-group {{ $errors->has('tgl_checkin') ? 'has-error' : ''}}">
                 {!! Form::label('tgl_checkin', 'Tgl Checkin', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-5">
-                    {!! Form::date('tgl_checkin', null, ['class' => 'form-control']) !!}
-                    {!! $errors->first('tgl_checkin', '<p class="help-block">:message</p>') !!}
+                    {!! Form::text('tgl_checkin', $datenow, ['id'=>'tgl_checkin','class' => 'form-control','data-date-format'=>'yyyy-mm-dd','placeholder' => $datenow,'required'=>'required']) !!}
+                      {!! $errors->first('tgl_checkin', '<p class="help-block">:message</p>') !!}
+                </div>  
+            </div>
+            <div class="form-group {{ $errors->has('kandang') ? 'has-error' : ''}}">
+                {!! Form::label('kandang', 'Kandang*', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-5">
+                    {{ Form::select('kandang', $kandangs, null, ['class' => 'form-control select2 Kandang','placeholder' => 'Pilih Kandang','required'=>'required']) }}
+                    {!! $errors->first('kandang', '<p class="help-block">:message</p>') !!}
                 </div>
-                
             </div>
             <div class="form-group {{ $errors->has('populasi') ? 'has-error' : ''}}">
-                {!! Form::label('populasi', 'Populasi', ['class' => 'col-sm-3 control-label']) !!}
+                {!! Form::label('populasi', 'Populasi*', ['class' => 'col-sm-3 control-label']) !!}
                     <div class="col-sm-5">
-                        {!! Form::text('populasi', null, ['class' => 'form-control','placeholder' =>'Jml. Populasi']) !!}
+                        {!! Form::text('populasi', null, ['class' => 'form-control Numeric','placeholder' =>'Jml. Populasi','required'=>'required']) !!}
                         {!! $errors->first('populasi', '<p class="help-block">:message</p>') !!}
                     </div>
             </div>
@@ -58,17 +66,17 @@ Create new Pengobatan
            <thead>
                <tr>
                    <th class="text-center" style="width:10px;"></th>
-                   <th class="text-center" style="width:70px;">
+                   <th class="text-center" style="width:230px;">
                    Tanggal
                    </th>
                    <th class="text-center" style="width:100px;">
                    Umur
                    </th> 
-                   <th class="text-center" style="width:100px;">
-                   Obat/Vitamin
+                   <th class="text-center" style="width:250px;">
+                   Obat/Vitamin/Vaksin
                    </th> 
                    <th class="text-center" style="width:100px;">
-                   Vaksin
+                   Satuan
                    </th> 
                    <th class="text-center" style="width:100px;">
                    Dosis
@@ -84,23 +92,23 @@ Create new Pengobatan
                <td data-name="del">
                    <button name="del0" class='btn btn-default btn-xs glyphicon glyphicon-remove row-remove'></button>
                </td>
-               <td data-name="obat">
-                    {!! Form::date('tgl_pengobatan[]', null, ['class' => 'form-control']) !!}
+               <td data-name="daterange">
+                  <input type="text" name="tgl_pengobatan[]" class="form-control" value="{{$daterange}}" />
                </td>
                <td data-name="umur">
                     {!! Form::text('umur[]', null, ['class' => 'form-control',]) !!}
                </td>
                <td data-name="obat">
-               <select  name="obat[]" class="form-control Obat chosen-select" data-placeholder="Pilih Obat/Vitamin"  style="width:150px;">
+               <select  name="obat[]" class="form-control Obat select2" data-placeholder="Pilih Obat/Vitamin"  style="width:300px;">
                     @foreach($obats as $obat)
                         <option value="{{$obat->id}}">{{$obat->name}}</option>
                     @endforeach
                </select>
                </td>
-               <td data-name="vaksin">
-               <select  name="vaksin[]" class="form-control chosen-select" data-placeholder="Pilih Vaksin"  style="width:150px;">
-                    @foreach($obats as $obat)
-                        <option value="{{$obat->id}}">{{$obat->name}}</option>
+               <td data-name="satuan">
+               <select  name="satuan[]" class="form-control Satuan select2" data-placeholder="Pilih Satuan"  style="width:200px;">
+                    @foreach($satuans as $satuan)
+                        <option value="{{$satuan->id}}">{{$satuan->name}}</option>
                     @endforeach
                </select>
                </td>
@@ -143,9 +151,15 @@ Create new Pengobatan
 @section('script')
 {{ HTML::script('assets_back/js/plugins/select2/select2.full.min.js') }}
 {{ HTML::script('assets_back/js/inputmask/jquery.inputmask.bundle.js') }}
+{{ HTML::script('assets_back/js/plugins/momentjs/moment.min.js') }}
+{{ HTML::script('assets_back/js/plugins/daterangepicker/daterangepicker.min.js') }}
+{{ HTML::script('assets_back/js/plugins/datapicker/bootstrap-datepicker.js') }}
 <script>
 $(document).ready(function () {
-
+    $('.select2').select2({
+                theme: 'bootstrap',
+                width: '100%'
+                });
 
     $('.Numeric').inputmask("numeric", {
     radixPoint: ".",
@@ -215,94 +229,21 @@ $("#add_row").on("click", function() {
            
         });
 
-        $(tr).find("td select.Item").on('change', function(e){
-
-            if ($(this).find(':selected').val() != '') {
-
-               
-
-                // GET NOREK
-                var val     = $(this).find(':selected').val(),
-                    item_d  = $(this).find(':selected').data(),
-                    dataid  = $(this).data("id"),
-                    url     = '{{url("/getharga?id=")}}'+val+'';
-
-                $.ajax({
-                    url : url,
-                    type: "GET",
-                    dataType: 'html',
-                    success: function(datas){
-                        $('#harga'+dataid+'').val(datas);
-                        return false;
-                    }
-                });
-            }
-
+        $(function () {
+            $('body').on('DOMNodeInserted', 'select', function () {
+                 $(this).select2();
             });
-
-            function calc(){
-
-
-                    var sum1 = 0;
-
-                    $('.Qty').each(function() {
-                        sum1 += Number($(this).val());
-                    });
-
-                    $('#total_kg').val(sum1);
-
-
-                    var sum2 = 0;
-
-                    $('.Rupiah').each(function() {
-                        sum2 += Number($(this).val());
-                    });
-
-                    $('#total_rp').val(sum2);
-
-                    var hpp_pakan = (sum2 / sum1).toFixed(0);
-                    $('#hpp_pakan').val(hpp_pakan);
-
-
-        
- 
-            }
-
-            $(tr).find("td input.Qty").on("change", function(){
-
-       
-
-            var  dataid  = $(this).data("id"),
-                    qty  = $('#qty'+dataid+'').val(),
-                    harga  = $('#harga'+dataid+'').val();
-
-            
-                $('#rupiah'+dataid+'').val(qty * harga);
-
-
-                calc();
-
-            });
-
-            $("#kal").on("click", function(){
-
-             calc();
-
-            });
- 
-
-  
-
-          $(function () {
-          $('body').on('DOMNodeInserted', 'select', function () {
-          $(this).select2();
-           });
     
-           $('.Item').select2();
-           $('.Satuan').select2();
-
- 
-});
+           $('.select2').select2({
+                theme: 'bootstrap',
+                width: '100%'
+            });
+            $('input[name="tgl_pengobatan[]"]').daterangepicker({
+                opens: 'left'
+                }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            });
+         });
     
         
 });
@@ -326,15 +267,11 @@ $("#add_row").on("click", function() {
     }).disableSelection();
 
     $(".table-sortable thead").disableSelection();
+     //$("#add_row").trigger("click");
 
-
-
-    $("#add_row").trigger("click");
-// END DYNAMIC TABLE
-
-            });
+    });
             
-   $("#created_at").datepicker({
+   $("#tgl_checkin").datepicker({
               startDate : '-0m',
               format :  'yyyy-mm-dd',
               keyboardNavigation : false,
