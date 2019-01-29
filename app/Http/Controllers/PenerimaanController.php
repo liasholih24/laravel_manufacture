@@ -50,7 +50,7 @@ class PenerimaanController extends Controller
         $pengajuan = Pengajuan::where('status', 1)->get();
         $item = Item::where('nesting', 1)->get();
         $supplier = Supplier::all();
-        $lokasi = Lokasi::where('depth', 0)->get();
+        $lokasi = Lokasi::where('depth', 1)->get();
         $satuan = Satuan::get();
         return view('backEnd.penerimaan.create', ['pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier, 'lokasi' => $lokasi, 'satuan' => $satuan]);
     }
@@ -130,7 +130,7 @@ class PenerimaanController extends Controller
         $pengajuan = Pengajuan::where('status', 1)->get();
         $item = Item::where('nesting', 1)->get();
         $supplier = Supplier::all();
-        $lokasi = Lokasi::where('depth', 0)->get();
+        $lokasi = Lokasi::where('depth', 1)->get();
         $satuan = Satuan::get();
         return view('backEnd.penerimaan.edit', ['penerimaan' => $penerimaan, 'detail' => $detail, 'pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier, 'lokasi' => $lokasi, 'satuan' => $satuan]);
     }

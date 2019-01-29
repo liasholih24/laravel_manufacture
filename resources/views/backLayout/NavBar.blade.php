@@ -95,6 +95,9 @@
                     <li {{{ (Request::is('customer*') ? 'class=active' : '') }}}>
                       <a href="{{route('customer.index')}}">Customer</a>
                     </li>
+                    <li {{{ (Request::is('ekspedisi*') ? 'class=active' : '') }}}>
+                      <a href="{{route('ekspedisi.index')}}">Ekspedisi</a>
+                    </li>
                 </ul>
             </li>
             @endif

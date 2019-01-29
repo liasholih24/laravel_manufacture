@@ -45,7 +45,7 @@ class PengajuanController extends Controller
      public function create()
     {
         $item = Item::where('nesting', 1)->get();
-        $lokasi = Lokasi::where('depth', 0)->get();
+        $lokasi = Lokasi::where('depth', 1)->get();
         $satuan = Satuan::get();
         return view('backEnd.pengajuan.create', ['item' => $item, 'lokasi' => $lokasi, 'satuan' => $satuan]);
     }
@@ -115,7 +115,7 @@ class PengajuanController extends Controller
         $pengajuan = Pengajuan::findOrFail($id);
         $detail = DetailPengajuan::where('pengajuan_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
-        $lokasi = Lokasi::where('depth', 0)->get();
+        $lokasi = Lokasi::where('depth', 1)->get();
         $satuan = Satuan::get();
         return view('backEnd.pengajuan.edit', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item, 'lokasi' => $lokasi, 'satuan' => $satuan]);
     }
