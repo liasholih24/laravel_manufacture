@@ -28,7 +28,7 @@ class DetailPenjualan extends Model
      *
      * @var array
      */
-    protected $fillable = ['penjualan_id', 'item_id', 'qty', 'price', 'created_by', 'updated_by', 'created_at'];
+    protected $fillable = ['penjualan_id', 'item_id', 'qty', 'satuan_id', 'price', 'created_by', 'updated_by', 'created_at'];
 
     use SoftDeletes;
     protected $dates = ['deleted_at'];

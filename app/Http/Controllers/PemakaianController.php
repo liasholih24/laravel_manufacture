@@ -8,6 +8,7 @@ use App\Pemakaian;
 use App\DetailPemakaian;
 use App\Item;
 use App\Lokasi;
+use App\Satuan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -45,7 +46,8 @@ class PemakaianController extends Controller
     {
         $item = Item::where('nesting', 1)->get();
         $storage = Lokasi::where('depth', 1)->get();
-        return view('backEnd.pemakaian.create', ['item' => $item, 'storage' => $storage]);
+        $satuan = Satuan::get();
+        return view('backEnd.pemakaian.create', ['item' => $item, 'storage' => $storage, 'satuan' => $satuan]);
     }
 
     /**
@@ -75,6 +77,7 @@ class PemakaianController extends Controller
             $detail->pemakaian_id = $pemakaian->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->satuan_id = $request->satuan_id[$i];
             $detail->created_by = Sentinel::getUser()->id;
             $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();
@@ -113,7 +116,8 @@ class PemakaianController extends Controller
         $detail = DetailPemakaian::where('pemakaian_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
         $storage = Lokasi::where('depth', 1)->get();
-        return view('backEnd.pemakaian.edit', ['pemakaian' => $pemakaian, 'detail' => $detail, 'item' => $item, 'storage' => $storage]);
+        $satuan = Satuan::get();
+        return view('backEnd.pemakaian.edit', ['pemakaian' => $pemakaian, 'detail' => $detail, 'item' => $item, 'storage' => $storage, 'satuan' => $satuan]);
     }
 
     /**
@@ -139,6 +143,7 @@ class PemakaianController extends Controller
             $detail->pemakaian_id = $pemakaian->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->satuan_id = $request->satuan_id[$i];
             $detail->created_by = Sentinel::getUser()->id;
             $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();

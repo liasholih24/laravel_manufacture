@@ -11,6 +11,7 @@ use App\DetailPengajuan;
 use App\Item;
 use App\Supplier;
 use App\Lokasi;
+use App\Satuan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
@@ -50,7 +51,8 @@ class PenerimaanController extends Controller
         $item = Item::where('nesting', 1)->get();
         $supplier = Supplier::all();
         $lokasi = Lokasi::where('depth', 0)->get();
-        return view('backEnd.penerimaan.create', ['pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier, 'lokasi' => $lokasi]);
+        $satuan = Satuan::get();
+        return view('backEnd.penerimaan.create', ['pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier, 'lokasi' => $lokasi, 'satuan' => $satuan]);
     }
 
     /**
@@ -76,15 +78,18 @@ class PenerimaanController extends Controller
         $penerimaan->created_by = Sentinel::getUser()->id;
         $penerimaan->updated_by = Sentinel::getUser()->id;
         $penerimaan->save();
-        $pengajuan = Pengajuan::findOrFail($request->pengajuan_id);
-        $pengajuan->status = 0;
-        $pengajuan->save();
+        if(!empty($request->pengajuan_id)){
+            $pengajuan = Pengajuan::findOrFail($request->pengajuan_id);
+            $pengajuan->status = 0;
+            $pengajuan->save();
+        }
         for($i=0;$i<count($request->item_id);$i++){
             $detail = new DetailPenerimaan;
             $detail->penerimaan_id = $penerimaan->id;
             $detail->item_id = $request->item_id[$i];
             $detail->supplier_id = $request->supplier_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->satuan_id = $request->satuan_id[$i];
             $detail->price = $request->price[$i];
             $detail->created_by = Sentinel::getUser()->id;
             $detail->updated_by = Sentinel::getUser()->id;
@@ -126,7 +131,8 @@ class PenerimaanController extends Controller
         $item = Item::where('nesting', 1)->get();
         $supplier = Supplier::all();
         $lokasi = Lokasi::where('depth', 0)->get();
-        return view('backEnd.penerimaan.edit', ['penerimaan' => $penerimaan, 'detail' => $detail, 'pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier, 'lokasi' => $lokasi]);
+        $satuan = Satuan::get();
+        return view('backEnd.penerimaan.edit', ['penerimaan' => $penerimaan, 'detail' => $detail, 'pengajuan' => $pengajuan, 'item' => $item, 'supplier' => $supplier, 'lokasi' => $lokasi, 'satuan' => $satuan]);
     }
 
     /**
@@ -152,6 +158,7 @@ class PenerimaanController extends Controller
             $detail->item_id = $request->item_id[$i];
             $detail->supplier_id = $request->supplier_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->satuan_id = $request->satuan_id[$i];
             $detail->price = $request->price[$i];
             $detail->created_by = Sentinel::getUser()->id;
             $detail->updated_by = Sentinel::getUser()->id;
@@ -181,7 +188,9 @@ class PenerimaanController extends Controller
             array_push($item, [
                 'id' => $r->item->id,
                 'name' => $r->item->name,
-                'qty' => $r->qty
+                'qty' => $r->qty,
+                'satuan_id' => $r->satuan->id,
+                'satuan' => $r->satuan->name
             ]);
         }
         return response($item);

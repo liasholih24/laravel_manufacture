@@ -8,6 +8,7 @@ use App\Transfer;
 use App\DetailTransfer;
 use App\Item;
 use App\Lokasi;
+use App\Satuan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
@@ -47,7 +48,8 @@ protected function validator(Request $request)
     {
         $item = Item::where('nesting', 1)->get();
         $storage = Lokasi::where('depth', 0)->get();
-        return view('backEnd.transfer.create', ['item' => $item, 'storage' => $storage]);
+        $satuan = Satuan::get();
+        return view('backEnd.transfer.create', ['item' => $item, 'storage' => $storage, 'satuan' => $satuan]);
     }
 
     /**
@@ -78,6 +80,7 @@ protected function validator(Request $request)
             $detail->transfer_id = $mutasi->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->satuan_id = $request->satuan_id[$i];
             $detail->created_by = Sentinel::getUser()->id;
             $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();
@@ -116,7 +119,8 @@ protected function validator(Request $request)
         $detail = DetailTransfer::where('transfer_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
         $storage = Lokasi::where('depth', 0)->get();
-        return view('backEnd.transfer.edit', ['mutasi' => $mutasi, 'detail' => $detail, 'item' => $item, 'storage' => $storage]);
+        $satuan = Satuan::get();
+        return view('backEnd.transfer.edit', ['mutasi' => $mutasi, 'detail' => $detail, 'item' => $item, 'storage' => $storage, 'satuan' => $satuan]);
     }
 
     /**
@@ -142,6 +146,7 @@ protected function validator(Request $request)
             $detail->transfer_id = $transfer->id;
             $detail->item_id = $request->item_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->satuan_id = $request->satuan_id[$i];
             $detail->created_by = Sentinel::getUser()->id;
             $detail->updated_by = Sentinel::getUser()->id;
             $detail->save();

@@ -19,6 +19,10 @@ class DetailPengajuan extends Model
         return $this->hasOne('App\Item', 'id', 'item_id');
     }
 
+    public function satuan(){
+        return $this->hasOne('App\Satuan', 'id', 'satuan_id');
+    }
+
     public function createdby(){
         return $this->hasOne('App\User', 'id', 'created_by');
     }
@@ -32,7 +36,7 @@ class DetailPengajuan extends Model
      *
      * @var array
      */
-    protected $fillable = ['pengajuan_id', 'item_id', 'qty', 'created_by', 'updated_by', 'created_at'];
+    protected $fillable = ['pengajuan_id', 'item_id', 'qty', 'satuan_id', 'created_by', 'updated_by', 'created_at'];
 
     use SoftDeletes;
     protected $dates = ['deleted_at'];

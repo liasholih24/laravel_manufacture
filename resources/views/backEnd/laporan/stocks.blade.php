@@ -103,28 +103,22 @@ Laporan Persediaan
 <table class="table table-striped table-bordered table-hover" id="tblstocks">
 <thead>
     <tr>
+        <th>Tanggal</th>
         <th>Gudang</th>
         <th>Item</th>
         <th>Satuan</th>
         <th>Jml. Masuk</th>
         <th>Jml. Keluar</th>
-        <th>Saldo(Kg)</th>
-        <th>Saldo(Rp)</th>
-        <th>No.Ref</th>
-        <th>Tgl. Transaksi</th>
     </tr>
 </thead>
 <tfoot>
             <tr>
                <th></th>
                <th></th>
+               <th></th>
                <th>Total</th>
                <th></th>
                <th></th>
-               <th></th>
-               <th></th>
-               <th></th>
-               <th></th> 
             </tr>
 </tfoot>
 <tbody>
@@ -172,16 +166,12 @@ Laporan Persediaan
        serverSide: true,
        ajax: '{{url("/stocksapi")}}',
        columns: [
+           {data: 'date', name: 'date'},
            {data: 'gudang', name: 'gudang'},
            {data: 'item', name: 'item'},
            {data: 'satuan', name: 'satuan'},
            {data: 'qty_in', name: 'qty_in'},
            {data: 'qty_out', name: 'qty_out'},
-           {data: 'qty', name: 'qty'},
-           {data: 'saldo', name: 'saldo'},
-           {data: 'noref', name: 'noref'},
-           {data: 'created_at', name: 'created_at'}
-           
        ],  
       lengthMenu: [[10, 25, 50, 100, 250, 500], [10, 25, 50,100,250,500, "All"]],
        responsive: {
@@ -194,7 +184,6 @@ Laporan Persediaan
            orderable: false,
            targets:   0
        } ],
-       order: [ 8, 'desc' ],
        
        dom: '<"html5buttons"B>lTfgitp',
      
@@ -268,47 +257,6 @@ Laporan Persediaan
                 ''+QtyIn +''
             );
 
-            // Total over all pages
-            qty = api
-                .column(6)
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Total over this page
-            Qty = api
-                .column( 6, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Update footer
-            $( api.column( 6 ).footer() ).html(
-                ''+Qty +''
-            );
-
-
-            qty2 = api
-                .column(7)
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Total over this page
-            Qty2 = api
-                .column( 7, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Update footer
-            $( api.column( 7 ).footer() ).html(
-                ''+Qty2 +''
-            );
         }
 
    });
