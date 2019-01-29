@@ -6,6 +6,9 @@
 Pengobatan
 @stop
 @section('desc')
+Recording Pengobatan
+@stop
+@section('desc')
 
 @stop
 @section('content')

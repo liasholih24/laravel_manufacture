@@ -3,11 +3,14 @@
 Pengobatan
 @stop
 @section('title')
-Edit Pengobatan
+Edit
 @stop
 @section('style')
   {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
-  @endsection
+  {{ HTML::style('assets_back/css/plugins/daterangepicker/daterangepicker.css')}}
+  {{ HTML::style('assets_back/css/plugins/datapicker/datepicker3.css')}}
+  {{ HTML::style('assets_back/css/plugins/select2/select2-bootstrap.min.css')}}
+@endsection
 @section('content')
 <div class="wrapper wrapper-content">
 					<div class="row detail_content3">
@@ -18,13 +21,9 @@ Edit Pengobatan
       <div class="row ibox-title">
    <ol class="breadcrumb col-sm-4 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
         <li class="">
-            <a href="{{ url('pengobatan') }}"> Pengobatan
+            <a href="{{ url('pengobatan') }}"> Pengobatan</a>
         </li>
-        /
-        <li class="">
-                <a href="#">
-                    Edit
-                </a>
+        <li class=""> <a href="#">  Edit   </a>
         </li>
     </ol>
             <a href="{{ url('pengobatan') }}">
@@ -36,23 +35,31 @@ Edit Pengobatan
 <div class="row ibox-content" style="min-height: 65vh; ">
 	<div class="col-xs-12 col-sm-22">
     {!! Form::model($pengobatans, [
-      'method' => 'PATCH',
-      'url' => ['pengobatan', $pengobatans[0]->tgl_checkin],
-      'class' => 'form-horizontal'
-  ]) !!}
+        'method' => 'PATCH',
+        'url' => ['pengobatan', $pengobatans[0]->tgl_checkin],
+        'class' => 'form-horizontal'
+    ]) !!}
+    {!! Form::hidden('updated_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
+
 
             <div class="form-group {{ $errors->has('tgl_checkin') ? 'has-error' : ''}}">
                 {!! Form::label('tgl_checkin', 'Tgl Checkin', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-5">
-                    {!! Form::date('tgl_checkin', $pengobatans[0]->tgl_checkin, ['class' => 'form-control']) !!}
-                    {!! $errors->first('tgl_checkin', '<p class="help-block">:message</p>') !!}
+                    {!! Form::text('tgl_checkin', $pengobatans[0]->tgl_checkin, ['id'=>'tgl_checkin','class' => 'form-control','data-date-format'=>'yyyy-mm-dd','placeholder' => $datenow,'required'=>'required']) !!}
+                      {!! $errors->first('tgl_checkin', '<p class="help-block">:message</p>') !!}
+                </div>  
+            </div>
+            <div class="form-group {{ $errors->has('kandang') ? 'has-error' : ''}}">
+                {!! Form::label('kandang', 'Kandang*', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-5">
+                    {{ Form::select('kandang', $kandangs, $pengobatans[0]->kandang, ['class' => 'form-control select2 Kandang','placeholder' => 'Pilih Kandang','required'=>'required']) }}
+                    {!! $errors->first('kandang', '<p class="help-block">:message</p>') !!}
                 </div>
-                
             </div>
             <div class="form-group {{ $errors->has('populasi') ? 'has-error' : ''}}">
-                {!! Form::label('populasi', 'Populasi', ['class' => 'col-sm-3 control-label']) !!}
+                {!! Form::label('populasi', 'Populasi*', ['class' => 'col-sm-3 control-label']) !!}
                     <div class="col-sm-5">
-                        {!! Form::text('populasi', $pengobatans[0]->populasi, ['class' => 'form-control','placeholder' =>'Jml. Populasi']) !!}
+                        {!! Form::text('populasi', $pengobatans[0]->populasi, ['class' => 'form-control Numeric','placeholder' =>'Jml. Populasi','required'=>'required']) !!}
                         {!! $errors->first('populasi', '<p class="help-block">:message</p>') !!}
                     </div>
             </div>
@@ -64,17 +71,17 @@ Edit Pengobatan
            <thead>
                <tr>
                    <th class="text-center" style="width:10px;"></th>
-                   <th class="text-center" style="width:70px;">
+                   <th class="text-center" style="width:230px;">
                    Tanggal
                    </th>
                    <th class="text-center" style="width:100px;">
                    Umur
                    </th> 
-                   <th class="text-center" style="width:100px;">
-                   Obat/Vitamin
+                   <th class="text-center" style="width:250px;">
+                   Obat/Vitamin/Vaksin
                    </th> 
                    <th class="text-center" style="width:100px;">
-                   Vaksin
+                   Satuan
                    </th> 
                    <th class="text-center" style="width:100px;">
                    Dosis
@@ -86,33 +93,34 @@ Edit Pengobatan
                </tr>
            </thead>
            <tbody>
-            <?php $i = 0 ?>
+           <?php $i = 0 ?>
             @foreach($pengobatans as $item)
             <?php $i++ ?>
-            <tr id='addr0' data-id="0">
+           <tr id='addr0' data-id="0">
                <td data-name="del">
                    <button name="del0" class='btn btn-default btn-xs glyphicon glyphicon-remove row-remove'></button>
                </td>
                <td data-name="obat">
-                    {!! Form::date('tgl_pengobatan[]', $item->tgl_pengobatan, ['class' => 'form-control']) !!}
+                    <input type="text" name="tgl_pengobatan[]" class="form-control" value="{{$item->tgl_pengobatan}}" />
+              
                </td>
                <td data-name="umur">
                     {!! Form::text('umur[]', $item->umur, ['class' => 'form-control',]) !!}
                </td>
                <td data-name="obat">
-               <select  name="obat[]" class="form-control Obat chosen-select" data-placeholder="Pilih Obat/Vitamin"  style="width:150px;">
-                    @foreach($obats as $obat)
-                        <option value="{{$obat->id}}" <?php if($obat->id == $item->obat) echo"selected";?>>{{$obat->name}}</option>
-                    @endforeach
-               </select>
-               </td>
-               <td data-name="vaksin">
-               <select  name="vaksin[]" class="form-control chosen-select" data-placeholder="Pilih Vaksin"  style="width:150px;">
-                    @foreach($obats as $obat)
-                        <option value="{{$obat->id}}" <?php if($obat->id == $item->vaksin) echo"selected";?>>{{$obat->name}}</option>
-                    @endforeach
-               </select>
-               </td>
+                    <select  name="obat[]" class="form-control select2 Obat" data-placeholder="Pilih Obat/Vitamin/Vaksin"  style="width:300px;">
+                            @foreach($obats as $obat)
+                                <option value="{{$obat->id}}" <?php if($obat->id == $item->obat) echo"selected";?>>{{$obat->name}}</option>
+                            @endforeach
+                    </select>
+                </td>
+                <td data-name="satuan">
+                    <select  name="satuan[]" class="form-control select2 Satuan" data-placeholder="Pilih Satuan"  style="width:200px;">
+                            @foreach($satuans as $satuan)
+                                <option value="{{$satuan->id}}" <?php if($satuan->id == $item->satuan) echo"selected";?>>{{$satuan->name}}</option>
+                            @endforeach
+                    </select>
+                </td>
                <td data-name="dosis">
                     {!! Form::text('dosis[]', $item->dosis, ['class' => 'form-control',]) !!}
                </td>
@@ -151,9 +159,15 @@ Edit Pengobatan
 @section('script')
 {{ HTML::script('assets_back/js/plugins/select2/select2.full.min.js') }}
 {{ HTML::script('assets_back/js/inputmask/jquery.inputmask.bundle.js') }}
+{{ HTML::script('assets_back/js/plugins/momentjs/moment.min.js') }}
+{{ HTML::script('assets_back/js/plugins/daterangepicker/daterangepicker.min.js') }}
+{{ HTML::script('assets_back/js/plugins/datapicker/bootstrap-datepicker.js') }}
 <script>
 $(document).ready(function () {
-
+    $('.select2').select2({
+                theme: 'bootstrap',
+                width: '100%'
+                });
 
     $('.Numeric').inputmask("numeric", {
     radixPoint: ".",
@@ -172,7 +186,7 @@ $("#add_row").on("click", function() {
         // Dynamic Rows Code
         
         // Get max row id and set new id
-        var newid = {{$i}};
+        var newid = 0;
         $.each($("#tab_logic tr"), function() {
             if (parseInt($(this).data("id")) > newid) {
                 newid = parseInt($(this).data("id"));
@@ -223,94 +237,21 @@ $("#add_row").on("click", function() {
            
         });
 
-        $(tr).find("td select.Item").on('change', function(e){
-
-            if ($(this).find(':selected').val() != '') {
-
-               
-
-                // GET NOREK
-                var val     = $(this).find(':selected').val(),
-                    item_d  = $(this).find(':selected').data(),
-                    dataid  = $(this).data("id"),
-                    url     = '{{url("/getharga?id=")}}'+val+'';
-
-                $.ajax({
-                    url : url,
-                    type: "GET",
-                    dataType: 'html',
-                    success: function(datas){
-                        $('#harga'+dataid+'').val(datas);
-                        return false;
-                    }
-                });
-            }
-
+        $(function () {
+            $('body').on('DOMNodeInserted', 'select', function () {
+                 $(this).select2();
             });
-
-            function calc(){
-
-
-                    var sum1 = 0;
-
-                    $('.Qty').each(function() {
-                        sum1 += Number($(this).val());
-                    });
-
-                    $('#total_kg').val(sum1);
-
-
-                    var sum2 = 0;
-
-                    $('.Rupiah').each(function() {
-                        sum2 += Number($(this).val());
-                    });
-
-                    $('#total_rp').val(sum2);
-
-                    var hpp_pakan = (sum2 / sum1).toFixed(0);
-                    $('#hpp_pakan').val(hpp_pakan);
-
-
-        
- 
-            }
-
-            $(tr).find("td input.Qty").on("change", function(){
-
-       
-
-            var  dataid  = $(this).data("id"),
-                    qty  = $('#qty'+dataid+'').val(),
-                    harga  = $('#harga'+dataid+'').val();
-
-            
-                $('#rupiah'+dataid+'').val(qty * harga);
-
-
-                calc();
-
-            });
-
-            $("#kal").on("click", function(){
-
-             calc();
-
-            });
- 
-
-  
-
-          $(function () {
-          $('body').on('DOMNodeInserted', 'select', function () {
-          $(this).select2();
-           });
     
-           $('.Item').select2();
-           $('.Satuan').select2();
-
- 
-});
+           $('.select2').select2({
+                theme: 'bootstrap',
+                width: '100%'
+            });
+            $('input[name="tgl_pengobatan[]"]').daterangepicker({
+                opens: 'left'
+                }, function(start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            });
+         });
     
         
 });
@@ -334,15 +275,11 @@ $("#add_row").on("click", function() {
     }).disableSelection();
 
     $(".table-sortable thead").disableSelection();
+     //$("#add_row").trigger("click");
 
-
-
-    $("#add_row").trigger("click");
-// END DYNAMIC TABLE
-
-            });
+    });
             
-   $("#created_at").datepicker({
+   $("#tgl_checkin").datepicker({
               startDate : '-0m',
               format :  'yyyy-mm-dd',
               keyboardNavigation : false,

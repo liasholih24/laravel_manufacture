@@ -20,7 +20,7 @@ class Pengobatan extends Model
      *
      * @var array
      */
-    protected $fillable = ['tgl_pengobatan', 'tgl_checkin', 'umur', 'vaksin', 'dosis', 'aplikasi', 'obat', 'notes', 'created_by','populasi'];
+    protected $fillable = ['tgl_pengobatan','kandang', 'tgl_checkin', 'umur', 'vaksin', 'dosis', 'aplikasi', 'obat', 'notes', 'created_by','populasi'];
 
     use SoftDeletes;
     protected $dates = ['deleted_at'];
