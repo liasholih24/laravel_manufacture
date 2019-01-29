@@ -19,7 +19,7 @@
                                 <div class="stat-percent font-bold text-success">0 kg 
                                 </div>
                                  <small> dari 0 kandang</small>
-                            </div>
+                            </div>  
                         </div>
                     </div>
                     <div class="col-lg-3">

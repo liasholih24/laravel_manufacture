@@ -18,10 +18,10 @@
             <li {{{ (Request::is('dashboard*') ? 'class=active' : '') }}}>
                 <a href="{{route('home.dashboard')}}"><i class="fa fa-area-chart"></i> <span class="nav-label">Dashboard</span></a>
             </li>
-            @endif
-            @if (Sentinel::getUser()->hasAnyAccess(['produksi*','hpp*','pakan*']))
+            @endif 
+            @if (Sentinel::getUser()->hasAnyAccess(['produksi*','hargapokok*','pakan*','pengobatan*']))
            
-            <li {{{ (Request::is('produksi*','hpp*','pakan*','pengobatan') ? 'class=active' : '') }}}>
+            <li {{{ (Request::is('produksi*','hargapokok*','pakan*','pengobatan*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-check-square-o"></i> <span class="nav-label">Recording</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li {{{ (Request::is('produksi*') ? 'class=active' : '') }}}>
@@ -30,8 +30,8 @@
                     <li {{{ (Request::is('pengobatan*') ? 'class=active' : '') }}}>
                       <a href="{{route('pengobatan.index')}}">Pengobatan </a>
                     </li>
-                    <li {{{ (Request::is('hpp*') ? 'class=active' : '') }}}>
-                      <a href="{{route('produksi.index')}}">HPP Telur</a>
+                    <li {{{ (Request::is('hargapokok*') ? 'class=active' : '') }}}>
+                      <a href="{{route('hargapokok.index')}}">HPP Telur</a>
                     </li>
                     @if (Sentinel::getUser()->hasAnyAccess(['pakan*']))
                     <li {{{ (Request::is('pakan*') ? 'class=active' : '') }}}>

@@ -78,7 +78,7 @@ border: 1px solid #f8ac59 !important;
         <th>Updated At</th>
         <th>Actions</th>
     </tr>
-</thead>
+</thead> 
 <tbody>
   <?php $i = 0?>
   @foreach($tables as $table)

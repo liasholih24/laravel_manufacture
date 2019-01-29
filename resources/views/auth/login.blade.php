@@ -54,7 +54,7 @@ Login
                     </div>
 
             </form>
-	            <p class="m-t" ><strong>CV. Multi Berlian Abadi Farm </strong><small>© 2019</small></p>
+	            <p class="m-t" ><strong>CV. Multi Berlian Abadi Farm </strong><small>© 2019</small></p> 
 	        </div>
 	    </div>
 	</div>

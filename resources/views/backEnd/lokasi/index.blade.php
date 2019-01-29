@@ -23,7 +23,7 @@ Kelola Data Lokasi
               <a class="detail2" href="">
                 Lokasi
               </a>
-          </li>
+          </li> 
           </ol>
          
           @if (Sentinel::getUser()->hasAccess(['lokasi.create']))
