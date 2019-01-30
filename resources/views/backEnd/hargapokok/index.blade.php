@@ -3,7 +3,10 @@
 @endsection
 @extends('backLayout.app')
 @section('title')
-Hargapokok
+HPP Telur
+@stop
+@section('desc')
+Harga Pokok Penjualan 
 @stop
 @section('desc')
 
@@ -18,7 +21,7 @@ Hargapokok
             <div class="row ibox-title">
    <ol class="breadcrumb col-sm-6 col-xs-12" style="font-size: 14px; padding-top: 6px; ">
         <li class="active">
-            Hargapokok
+        HPP Telur
         </li>
     </ol>
     <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline btn-warning pull-right">
@@ -46,8 +49,12 @@ Hargapokok
     <tr>
         <th>ID</th>
         <th>Tgl.Perhitungan</th>
-        <th>Jenis</th>
-        <th>HPP</th>
+        <th>HPP Telur</th>
+        <th>HPP Telur Super</th>
+        <th>HPP Telur Bagus</th>
+        <th>HPP Telur Putih</th>
+        <th>HPP Telur Retak</th>
+        <th>HPP Telur Cair</th>
         <th>Actions</th>
     </tr>
 </thead>
@@ -58,8 +65,12 @@ Hargapokok
     <tr>
         <td>{{ $item->id }}</td>
         <td><a href="{{ url('hargapokok', $item->id) }}">{{ $item->tgl_hpp }}</a></td>
-        <td>{{ $item->jenis }}</td>
-        <td>{{ $item->hpp }}</td>
+        <td>{!! empty($item->hpp)? "<i>Not Set</i>" : $item->hpp!!}</td>
+        <td>{!! empty($item->hpp_super)? "<i>Not Set</i>" : $item->hpp_super !!}</td>
+        <td>{!! empty($item->hpp_bagus)? "<i>Not Set</i>" : $item->hpp_bagus !!}</td>
+        <td>{!! empty($item->hpp_putih)? "<i>Not Set</i>": $item->hpp_putih !!}</td>
+        <td>{!! empty($item->hpp_retak)? "<i>Not Set</i>": $item->hpp_retak !!}</td>
+        <td>{!! empty($item->hpp_cair)? "<i>Not Set</i>": $item->hpp_cair !!}</td>
         <td>
             <a href="{{ url('hargapokok/' . $item->id . '/edit') }}" class="btn btn-outline btn-primary btn-xs">Update</a>
             {!! Form::open([
@@ -91,12 +102,11 @@ Hargapokok
 <script>
     $(document).ready(function(){
         $('.dataTables-example').DataTable({
+            order: [ 1, 'desc' ],
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
-                { extend: 'copy'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
+                {extend: 'excel', title: 'HPP Telur'},
+                {extend: 'pdf', title: 'HPP Telur'},
 
                 {extend: 'print',
                  customize: function (win){
@@ -112,38 +122,10 @@ Hargapokok
 
         });
 
-        /* Init DataTables */
-        var oTable = $('#editable').DataTable();
-
-        /* Apply the jEditable handlers to the table */
-        oTable.$('td').editable( '../example_ajax.php', {
-            "callback": function( sValue, y ) {
-                var aPos = oTable.fnGetPosition( this );
-                oTable.fnUpdate( sValue, aPos[0], aPos[1] );
-            },
-            "submitdata": function ( value, settings ) {
-                return {
-                    "row_id": this.parentNode.getAttribute('id'),
-                    "column": oTable.fnGetPosition( this )[2]
-                };
-            },
-
-            "width": "90%",
-            "height": "100%"
-        } );
-
-
+   
     });
 
-    function fnClickAddRow() {
-        $('#editable').dataTable().fnAddData( [
-            "Custom row",
-            "New row",
-            "New row",
-            "New row",
-            "New row" ] );
 
-    }
 
     function ConfirmDelete()
   {

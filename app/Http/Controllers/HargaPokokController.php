@@ -55,21 +55,10 @@ protected function validator(Request $request)
     public function store(Request $request)
     {
 
-
-    if ($this->validator($request)->fails()) {
-        return redirect()->back()
-                    ->withErrors($this->validator($request))
-                    ->withInput();
-    }
-
         
       $model = HargaPokok::create($request->all());
 
-      $attributes = $model->getOriginal();
-
-      activity()->performedOn($model)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('HargaPokok '.$model->name.' is created successfully');
-
-      Session::flash('alert-success', 'HargaPokok '.$model->name.' is created successfully');
+      Session::flash('alert-success', 'HargaPokok '.$model->tgl_hpp.' is created successfully');
 
         return redirect('hargapokok');
     }
@@ -111,20 +100,13 @@ protected function validator(Request $request)
      */
     public function update($id, Request $request)
     {
-    if ($this->validator($request)->fails()) {
-        return redirect()->back()
-                    ->withErrors($this->validator($request))
-                    ->withInput();
-    }
+  
         
         $hargapokok = HargaPokok::findOrFail($id);
         $hargapokok->update($request->all());
 
-        $attributes = $hargapokok->getOriginal();
-
-        activity()->performedOn($hargapokok)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('HargaPokok '.$hargapokok->name.' is updated successfully');
-
-        Session::flash('alert-success', ' HargaPokok '.$hargapokok->name.' is updated successfully');
+       
+        Session::flash('alert-success', ' Harga Pokok '.$hargapokok->tgl_hpp.' is updated successfully');
 
         return redirect('hargapokok');
     }
