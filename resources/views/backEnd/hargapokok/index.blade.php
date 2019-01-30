@@ -64,11 +64,11 @@ Harga Pokok Penjualan
 <?php $i++ ?>
     <tr>
         <td>{{ $item->id }}</td>
-        <td><a href="{{ url('hargapokok', $item->id) }}">{{ $item->tgl_hpp }}</a></td>
+        <td>{{ $item->tgl_hpp }}</td>
         <td>{!! empty($item->hpp)? "<i>Not Set</i>" : number_format($item->hpp) !!}</td>
         <td>{!! empty($item->hpp)? "<i>Not Set</i>" : number_format($item->hpp) !!}</td>
         <td>{!! empty($item->hpp)? "<i>Not Set</i>" : number_format($item->hpp)  !!}</td>
-        <td>{!! empty($item->hpp_putih)? "<i>Not Set</i>": $item->hpp_putih !!}</td>
+        <td>{!! empty($item->hpp)? "<i>Not Set</i>" : number_format($item->hpp)  !!}</td>
         <td>{!! empty($item->hpp)? "<i>Not Set</i>": number_format($item->hpp * 80 / 100) !!}</td>
         <td>{!! empty($item->hpp)? "<i>Not Set</i>": number_format($item->hpp * 70 / 100)  !!}</td>
         <td>
