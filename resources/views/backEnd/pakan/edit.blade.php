@@ -217,6 +217,10 @@ function calc(){
     var hpp_pakan = (sum2 / sum1).toFixed(0);
     $('#hpp_pakan').val(hpp_pakan);
 }
+
+    $("tr td button.row-remove").on("click", function() {
+          $(this).closest("tr").remove(); 
+    });
             
 
 // DYNAMIC TABLE
