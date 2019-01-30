@@ -15,10 +15,10 @@
                                 <h5>Hasil Produksi</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">No Data</h1>
-                                <div class="stat-percent font-bold text-success">0 kg 
+                                <h1 class="no-margins">{{ number_format($ttl_butir)}}</h1>
+                                <div class="stat-percent font-bold text-success">{{ number_format($ttl_kg)}} kg 
                                 </div>
-                                 <small> dari 0 kandang</small>
+                                <small> dari {{ number_format($pakan_kandang)}} kandang</small>
                             </div>  
                         </div>
                     </div>
@@ -29,9 +29,9 @@
                                 <h5>Populasi Akhir</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">No Data</h1>
-                                <div class="stat-percent font-bold text-navy">0 kg </div>
-                                <small>dari 0 kandang</small>
+                                <h1 class="no-margins">{{ number_format($jml_akhir)}}</h1>
+                                <div class="stat-percent font-bold text-navy"></div>
+                                <small> dari {{ number_format($pakan_kandang)}} kandang</small>
                             </div>
                         </div>
                     </div>
@@ -42,10 +42,10 @@
                                 <h5>Pemakaian Pakan</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">No Data</h1>
-                                <div class="stat-percent font-bold text-success">0 kg 
+                                <h1 class="no-margins">{{ number_format($pakan)}}</h1>
+                                <div class="stat-percent font-bold text-success">kg 
                                 </div>
-                                 <small> dari 0 kandang</small>
+                                 <small> dari {{ number_format($pakan_kandang)}} kandang</small>
                             </div>
                         </div>
                     </div>
@@ -56,8 +56,8 @@
                                 <h5>HPP</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">0</h1>
-                                <small>per kg</small>
+                                <h1 class="no-margins">{{ number_format($hpp) }}</h1>
+                                <small>HPP bulan lalu : {{ number_format($hpp0) }}</small>
                             </div>
                         </div>
             </div>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="ibox-content ibox-heading">
                         <h3>Total Persediaan
-                            <div class="stat-percent text-navy">{{number_format(0,1)}} Kg</div>
+                            <div class="stat-percent text-navy">{{number_format(7697)}} Kg</div>
                         </h3>
                         <span class="bar_dashboard">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9,6,4,5,7,3,2,1,0,9,5,6,8,3,2,1</span>
                         </div>
@@ -153,57 +153,6 @@
                
 
                     </div>
-                     <div class="ibox-content">
-                    <div class="row">
-
-                        <div class="col-sm-6">
-                            
-                            <strong>
-                                Rekapitulasi Deposit Pakan
-                            </strong><small>Tahun {{date('Y')}}</small>
-                             <div id="pie"></div>
-                           
-
-                        </div>
-                        <div class="col-sm-6">
-                            
-                            <strong>
-                                Rekapitulasi Hasil Produksi
-                            </strong><small>Tahun {{date('Y')}}</small>
-                            <div id="pie2"></div>
-                            
-
-
-                        </div>
-                       
-
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-sm-8">
-                            
-                            <strong>
-                                Rekapitulasi Populasi Akhir 
-                            </strong><small>Tahun {{date('Y')}}</small>
-                            <div id="pie3"></div>
-                            
-
-
-                        </div>
-                        <div class="col-lg-4">
-                           <h4>Rekap Persediaan Barang (kg)</h4>
-                    <div>
-                        <ul class="list-group">
-                        
-                           
-                        </ul>
-                    </div>
- 
-                       
-                         </div>
-
-
-                  
 
                 </div>
 

@@ -51,14 +51,6 @@ Route::group(['middleware' => ['web','auth', 'permission']], function () {
 
 
 
-  Route::group(['middleware' => ['web','auth', 'permission']], function () {
-      Route::resource('sampah', 'SampahController', ['except' => ['show']]);
-      Route::post('sampah/store', ['uses' => 'SampahController@store']);
-      Route::get('sampah/{id}/filter', ['uses' => 'SampahController@filter']);
-      Route::get('sampah/{id}/show', ['uses' => 'SampahController@show', 'as' => 'sampah.show']);
-      Route::get('sampah/{id}/create', ['uses' => 'SampahController@creates']);
-      Route::get('kategori', ['uses' => 'SampahController@kategori','as' => 'kategori.index']);
-  });
 
   Route::group(['middleware' => ['web','auth', 'permission']], function () {
     Route::resource('item', 'ItemController', ['except' => ['show']]);
@@ -76,17 +68,6 @@ Route::group(['middleware' => ['web','auth', 'permission']], function () {
 Route::group(['middleware' => ['web']], function () {
     Route::resource('satuan', 'SatuanController');
 });
-Route::group(['middleware' => ['web']], function () {
-    Route::resource('penadah', 'PenadahController');
-});
-Route::group(['middleware' => ['web']], function () {
-    Route::resource('nasabah', 'NasabahController');
-    Route::get('nasabah/{id}/print', ['uses' => 'NasabahController@print', 'as' => 'nasabah.print']);
-    Route::get('/getnorek', 'NasabahController@getnorek');
-    Route::get('/datanasabah', 'NasabahController@datanasabah');
-    Route::get('/ceksaldo', 'NasabahController@ceksaldo');
-    Route::post('prints', 'NasabahController@prints');
-});
 
 Route::group(['middleware' => ['web']], function () {
     Route::resource('posts', 'PostsController');
@@ -99,30 +80,31 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/cekstock', 'PenjualanController@cekstock');
     Route::get('pos', 'PenjualanController@pos');
 });
-Route::group(['middleware' => ['web']], function () {
-    Route::resource('sedekah', 'SedekahController');
-    Route::get('sedekah/{id}/print', ['uses' => 'SedekahController@print', 'as' => 'sedekah.print']);
-});
+
 Route::group(['middleware' => ['web']], function () {
     Route::get('stocks', ['uses' => 'LaporanController@stocks', 'as' => 'laporan.stocks']);
     Route::get('/stocksapi', 'LaporanController@stocksapi');
 
-    Route::get('laporan/tabungan', ['uses' => 'LaporanController@tabungan', 'as' => 'laporan.tabungan']);
-    Route::get('/tabunganapi', 'LaporanController@tabunganapi');
-    Route::get('laporan/sedekah', ['uses' => 'LaporanController@sedekah', 'as' => 'laporan.sedekah']);
-    Route::get('/sedekahapi', 'LaporanController@sedekahapi');
     Route::get('laporan/penjualan', ['uses' => 'LaporanController@penjualan', 'as' => 'laporan.penjualan']);
     Route::get('laporan/pembelian', ['uses' => 'LaporanController@pembelian', 'as' => 'laporan.pembelian']);
     Route::get('/penjualanapi', 'LaporanController@penjualanapi');
     Route::get('/pembelianapi', 'LaporanController@pembelianapi');
+
+
 });
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('rekapitulasi/stocks', ['uses' => 'RekapitulasiController@stocks', 'as' => 'rekapitulasi.stocks']);
     Route::get('/rekstocksapi', 'RekapitulasiController@rekstocksapi');
-    Route::get('rekapitulasi/tabungan', ['uses' => 'RekapitulasiController@tabungan', 'as' => 'rekapitulasi.tabungan']);
-    Route::get('/rektabunganapi', 'RekapitulasiController@rektabunganapi');
+  
    
+});
+
+Route::group(['middleware' => ['web']], function () {
+
+    Route::get('recording', ['uses' => 'LaporanProduksiController@recording', 'as' => 'laporan.recording']);
+    Route::get('/recordingapi', 'LaporanProduksiController@recordingapi');
+
 });
 
 Route::group(['middleware' => ['web']], function () {
@@ -179,4 +161,13 @@ Route::group(['middleware' => ['web']], function () {
 });
 Route::group(['middleware' => ['web']], function () {
 	Route::resource('hargapokok', 'HargaPokokController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('standarlayer', 'StandarLayerController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('standargrower', 'StandarGrowerController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('standarfc', 'StandarFcController');
 });

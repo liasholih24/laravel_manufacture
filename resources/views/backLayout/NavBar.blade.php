@@ -101,8 +101,33 @@
                 </ul>
             </li>
             @endif
-            @if (Sentinel::getUser()->hasAnyAccess(['stocks*','rekapitulasi*','laporan.*']))
-            <li {{{ (Request::is('stocks*','rekapitulasi/stocks*','laporan*','rekapitulasi*') ? 'class=active' : '') }}}>
+            @if (Sentinel::getUser()->hasAnyAccess(['standarlayer*','standargrower*','standarfc*']))
+           
+            <li {{{ (Request::is('standarlayer*','standargrower*','standarfc*') ? 'class=active' : '') }}}>
+                <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">Standard Performance</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                @if (Sentinel::getUser()->hasAnyAccess(['standarlayer*']))
+                    <li {{{ (Request::is('standarlayer*') ? 'class=active' : '') }}}>
+                      <a href="{{route('standarlayer.index')}}">Standard Layer</a>
+                    </li> 
+                @endif
+                @if (Sentinel::getUser()->hasAnyAccess(['standargrower*']))
+                    <li  {{{ (Request::is('standargrower*') ? 'class=active' : '') }}}>
+                      <a href="{{route('standargrower.index')}}">Standard Grower</a>
+                    </li>  
+                @endif
+                @if (Sentinel::getUser()->hasAnyAccess(['standarfc*']))
+                   
+                    <li {{{ (Request::is('standarfc*') ? 'class=active' : '') }}}>
+                      <a href="{{route('standarfc.index')}}"">Standard FC</a>
+                    </li> 
+                @endif
+                  </ul>
+            </li>
+            @endif
+
+            @if (Sentinel::getUser()->hasAnyAccess(['stocks*','rekapitulasi*','laporan.*','recording*']))
+            <li {{{ (Request::is('stocks*','rekapitulasi/stocks*','laporan*','rekapitulasi*','recording*') ? 'class=active' : '') }}}>
                 <a href="#"><i class="fa fa-area-chart"></i> <span class="nav-label">Laporan</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     @if (Sentinel::getUser()->hasAnyAccess(['laporan.stocks','rekapitulasi.stocks']))
@@ -119,9 +144,17 @@
                       <a href="{{route('rekapitulasi.stocks')}}">Rekap Persediaan</a>
                     </li>
                     @endif
+                    
                   </ul>
                   </li>
                    @endif  
+                   @if (Sentinel::getUser()->hasAnyAccess(['laporan.recording']))
+                  <li {{{ (Request::is('recording*') ? 'class=active' : '') }}}>
+                            <a href="{{route('laporan.recording')}}">Recording </a>
+                  </li>
+                  @endif
+            
+                  
                 </ul>
             </li>
             @endif

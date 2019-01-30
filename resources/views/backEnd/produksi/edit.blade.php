@@ -91,7 +91,7 @@ Edit
                 {!! Form::label('jml_akhir', 'Jml Akhir', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
                     {!! Form::text('jml_akhir', null, ['class' => 'form-control','id'=>'jml_akhir','placeholder'=>'Jml. Akhir']) !!}
-                    {!! Form::hidden('jml_akhir0', null, ['class' => 'form-control','id'=>'jml_akhir0','placeholder'=>'Jml. Akhir']) !!}
+                    {!! Form::hidden('jml_awal', null, ['class' => 'form-control','id'=>'jml_akhir0','placeholder'=>'Jml. Akhir']) !!}
                     {!! $errors->first('jml_akhir', '<p class="help-block">:message</p>') !!}
                 </div>
                 {!! Form::label('jml_so', 'Jml SO', ['class' => 'col-sm-2 control-label']) !!}

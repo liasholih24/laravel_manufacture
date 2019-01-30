@@ -87,7 +87,7 @@ Recording Produksi
                 {!! Form::label('jml_akhir', 'Jml Akhir', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
                     {!! Form::text('jml_akhir', 0, ['class' => 'form-control','id'=>'jml_akhir','placeholder'=>'Jml. Akhir']) !!}
-                    {!! Form::hidden('jml_akhir0', 0, ['class' => 'form-control','id'=>'jml_akhir0','placeholder'=>'Jml. Akhir']) !!}
+                    {!! Form::hidden('jml_awal', 0, ['class' => 'form-control','id'=>'jml_akhir0','placeholder'=>'Jml. Akhir']) !!}
                     {!! $errors->first('jml_akhir', '<p class="help-block">:message</p>') !!}
                 </div>
                 {!! Form::label('jml_so', 'Jml SO', ['class' => 'col-sm-2 control-label']) !!}
@@ -188,7 +188,7 @@ Recording Produksi
                 </div>
             {!! Form::label('p_jml_butir', 'Total (Butir)', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('p_jml_butir', null, ['class' => 'form-control','id' => 'p_jml_butir','placeholder' => 'Jml.Akhir (Butir)','readonly'=>'readonly']) !!}
+                    {!! Form::text('ttl_butir', null, ['class' => 'form-control','id' => 'p_jml_butir','placeholder' => 'Jml.Akhir (Butir)','readonly'=>'readonly']) !!}
                     {!! $errors->first('p_jml_butir', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -200,7 +200,7 @@ Recording Produksi
                 </div>
             {!! Form::label('p_jml_kg', 'Total (Kg)', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('p_jml_kg', null, ['class' => 'form-control','id'=>'p_jml_kg','placeholder'=>'Jml.Akhir (Kg)','readonly'=>'readonly']) !!}
+                    {!! Form::text('ttl_kg', null, ['class' => 'form-control','id'=>'p_jml_kg','placeholder'=>'Jml.Akhir (Kg)','readonly'=>'readonly']) !!}
                     {!! $errors->first('p_jml_kg', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -243,6 +243,11 @@ Recording Produksi
 
             });
 
+            $("#jml_akhir").on("change", function(){
+               
+                $("#jml_akhir0").val($("#jml_akhir").val());
+            });
+
             function calc(){
 
                 p_jml_butir =  (Number($("#p_utuh_butir").val())  + Number($("#p_putih_butir").val()) + Number($("#p_retak_butir").val())).toFixed(2);
@@ -267,7 +272,7 @@ Recording Produksi
             }
             function calcAkhir(){
 
-                jml_akkhir = ( Number($("#jml_akhir0").val()) + Number($("#jml_so").val()) + Number($("#jml_masuk").val()) ) -  Number($("#jml_pindah").val()) - Number($("#jml_mati").val()) - Number($("#jml_afkir").val()) ;
+                jml_akkhir =  Number($("#jml_akhir0").val()) - Number($("#jml_pindah").val()) - Number($("#jml_mati").val()) - Number($("#jml_afkir").val()) + Number($("#jml_so").val()) + Number($("#jml_masuk").val())  ;
                 
                 $("#jml_akhir").val(jml_akkhir);
 

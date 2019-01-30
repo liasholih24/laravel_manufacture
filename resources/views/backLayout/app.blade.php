@@ -20,6 +20,7 @@
 		</div>
 	</div>
     <!-- Mainly scripts -->
+ 
     {{ HTML::script('assets_back/js/jquery-2.1.1.js') }}
     {{ HTML::script('assets_back/js/bootstrap.min.js') }}
     {{ HTML::script('assets_back/js/plugins/metisMenu/jquery.metisMenu.js') }}
