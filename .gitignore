@@ -7,3 +7,5 @@ config/.DS_Store
 .DS_Store
 bootstrap/
 storage*
+storage/*
+storage/

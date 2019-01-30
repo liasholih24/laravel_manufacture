@@ -17,7 +17,7 @@
             @if (Sentinel::getUser()->hasAnyAccess(['home*']))
             <li {{{ (Request::is('dashboard*') ? 'class=active' : '') }}}>
                 <a href="{{route('home.dashboard')}}"><i class="fa fa-area-chart"></i> <span class="nav-label">Dashboard</span></a>
-            </li>
+            </li> 
             @endif 
             @if (Sentinel::getUser()->hasAnyAccess(['produksi*','hargapokok*','pakan*','pengobatan*']))
             
