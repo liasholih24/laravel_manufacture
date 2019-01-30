@@ -138,7 +138,7 @@ Recording Produksi
                 </div>
                 {!! Form::label('gr_butir', 'Gram/Butir', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('gr_butir', null, ['class' => 'form-control','id'=>'gr_butir','placeholder'=>'Gram/Butir']) !!}
+                    {!! Form::text('gr_butir', null, ['class' => 'form-control','id'=>'gr_butir','placeholder'=>'Gram/Butir','readonly'=>'readonly']) !!}
                     {!! $errors->first('gr_butir', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -150,7 +150,7 @@ Recording Produksi
                 </div>
                 {!! Form::label('kg_1000', 'Kg/1000', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('kg_1000', null, ['class' => 'form-control','id'=>'kg_1000','placeholder'=>'Kg/1000']) !!}
+                    {!! Form::text('kg_1000', null, ['class' => 'form-control','id'=>'kg_1000','placeholder'=>'Kg/1000','readonly'=>'readonly']) !!}
                     {!! $errors->first('kg_1000', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -163,7 +163,7 @@ Recording Produksi
                 </div>
                 {!! Form::label('hd', 'Hd', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('hd', null, ['class' => 'form-control','id' => 'hd','placeholder'=> 'Hd']) !!}
+                    {!! Form::text('hd', null, ['class' => 'form-control','id' => 'hd','placeholder'=> 'Hd','readonly'=>'readonly']) !!}
                     {!! $errors->first('hd', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -176,7 +176,7 @@ Recording Produksi
                 </div>
                 {!! Form::label('fc', 'Fc', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('fc', null, ['class' => 'form-control','id'=>'fc','placeholder'=>'Fc']) !!}
+                    {!! Form::text('fc', null, ['class' => 'form-control','id'=>'fc','placeholder'=>'Fc','readonly'=>'readonly']) !!}
                     {!! $errors->first('fc', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -188,7 +188,7 @@ Recording Produksi
                 </div>
             {!! Form::label('p_jml_butir', 'Total (Butir)', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('p_jml_butir', null, ['class' => 'form-control','id' => 'p_jml_butir','placeholder' => 'Jml.Akhir (Butir)']) !!}
+                    {!! Form::text('p_jml_butir', null, ['class' => 'form-control','id' => 'p_jml_butir','placeholder' => 'Jml.Akhir (Butir)','readonly'=>'readonly']) !!}
                     {!! $errors->first('p_jml_butir', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -200,7 +200,7 @@ Recording Produksi
                 </div>
             {!! Form::label('p_jml_kg', 'Total (Kg)', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('p_jml_kg', null, ['class' => 'form-control','id'=>'p_jml_kg','placeholder'=>'Jml.Akhir (Kg)']) !!}
+                    {!! Form::text('p_jml_kg', null, ['class' => 'form-control','id'=>'p_jml_kg','placeholder'=>'Jml.Akhir (Kg)','readonly'=>'readonly']) !!}
                     {!! $errors->first('p_jml_kg', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
