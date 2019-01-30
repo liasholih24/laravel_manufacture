@@ -75,9 +75,9 @@ protected function validator(Request $request)
 
         //input detail
 
-      if(!empty($request->tgl_pengobatan)){
-        for($i=0;$i<count($request->tgl_pengobatan);$i++){
-             if($request->input('tgl_pengobatan')[$i]){
+      if(!empty($request->dosis)){
+        for($i=0;$i<count($request->dosis);$i++){
+             if($request->input('dosis')[$i]){
 
             DB::table('pengobatans')->insert(
                                     ['tgl_checkin'=> $request->tgl_checkin
@@ -146,9 +146,9 @@ protected function validator(Request $request)
     {
      DB::table('pengobatans')->where('tgl_checkin', $request->tgl_checkin)->delete();
 
-     if(!empty($request->tgl_pengobatan)){
-        for($i=0;$i<count($request->tgl_pengobatan);$i++){
-             if($request->input('tgl_pengobatan')[$i]){
+     if(!empty($request->dosis)){
+        for($i=0;$i<count($request->dosis);$i++){
+             if($request->input('dosis')[$i]){
 
             DB::table('pengobatans')->insert(
                                     ['tgl_checkin'=> $request->tgl_checkin
@@ -178,12 +178,12 @@ protected function validator(Request $request)
      */
     public function destroy($id)
     {
-        $pengobatan = Pengobatan::findOrFail($id);
+       
 
-        $pengobatan->delete();
+        DB::table('pengobatans')->where('tgl_checkin', $id)->delete();
 
     
-        Session::flash('alert-warning', ' Pengobatan '.$pengobatan->name.' is deleted successfully');
+        Session::flash('alert-warning', ' Pengobatan '.$id.' is deleted successfully');
 
         return redirect('pengobatan');
     }

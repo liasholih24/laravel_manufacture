@@ -1,6 +1,9 @@
 @extends('backLayout.app')
 @section('title')
-Create new Pengobatan
+Pengobatan
+@stop
+@section('desc')
+Buat Baru
 @stop
 @section('style')
   {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
@@ -22,7 +25,7 @@ Create new Pengobatan
         </li>
         <li class="">
                 <a href="#">
-                    Add New
+                    Buat Baru
                 </a>
         </li>
     </ol>
@@ -122,11 +125,17 @@ Create new Pengobatan
             
            </tr>
            </tbody>
+           <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <a id="add_row" title="Tambah Baris" class="btn btn-primary btn-sm pull-left" style="margin-right:10px;"><i class="fa fa-plus"></i></a>
+                        </td>
+                    </tr>
+            </tfoot>
        </table>
     </div>
 </div>
-<a id="add_row" class="btn btn-success btn-xs pull-right btn-outline " ><i class="fa fa-plus"></i> Add Row</a>
-   
+
 <br/>
 
 <div class="hr-line-dashed"></div>

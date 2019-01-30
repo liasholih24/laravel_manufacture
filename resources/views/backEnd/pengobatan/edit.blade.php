@@ -2,7 +2,7 @@
 @section('title')
 Pengobatan
 @stop
-@section('title')
+@section('desc')
 Edit
 @stop
 @section('style')
@@ -130,11 +130,17 @@ Edit
            </tr>
            @endforeach
            </tbody>
+           <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <a id="add_row" title="Tambah Baris" class="btn btn-primary btn-sm pull-left" style="margin-right:10px;"><i class="fa fa-plus"></i></a>
+                        </td>
+                    </tr>
+            </tfoot>
        </table>
     </div>
 </div>
-<a id="add_row" class="btn btn-success btn-xs pull-right btn-outline " ><i class="fa fa-plus"></i> Add Row</a>
-   
+
 <br/>
 
 <div class="hr-line-dashed"></div>
@@ -179,7 +185,9 @@ $(document).ready(function () {
     oncleared: function () { self.Value(''); }
 });
             
-
+$("tr td button.row-remove").on("click", function() {
+          $(this).closest("tr").remove(); 
+    });
 // DYNAMIC TABLE
 $("#add_row").on("click", function() {
 
