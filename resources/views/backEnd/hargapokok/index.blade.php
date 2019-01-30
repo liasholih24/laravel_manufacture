@@ -65,12 +65,12 @@ Harga Pokok Penjualan
     <tr>
         <td>{{ $item->id }}</td>
         <td><a href="{{ url('hargapokok', $item->id) }}">{{ $item->tgl_hpp }}</a></td>
-        <td>{!! empty($item->hpp)? "<i>Not Set</i>" : $item->hpp!!}</td>
-        <td>{!! empty($item->hpp_super)? "<i>Not Set</i>" : $item->hpp_super !!}</td>
-        <td>{!! empty($item->hpp_bagus)? "<i>Not Set</i>" : $item->hpp_bagus !!}</td>
+        <td>{!! empty($item->hpp)? "<i>Not Set</i>" : number_format($item->hpp) !!}</td>
+        <td>{!! empty($item->hpp)? "<i>Not Set</i>" : number_format($item->hpp) !!}</td>
+        <td>{!! empty($item->hpp)? "<i>Not Set</i>" : number_format($item->hpp)  !!}</td>
         <td>{!! empty($item->hpp_putih)? "<i>Not Set</i>": $item->hpp_putih !!}</td>
-        <td>{!! empty($item->hpp_retak)? "<i>Not Set</i>": $item->hpp_retak !!}</td>
-        <td>{!! empty($item->hpp_cair)? "<i>Not Set</i>": $item->hpp_cair !!}</td>
+        <td>{!! empty($item->hpp)? "<i>Not Set</i>": number_format($item->hpp * 80 / 100) !!}</td>
+        <td>{!! empty($item->hpp)? "<i>Not Set</i>": number_format($item->hpp * 70 / 100)  !!}</td>
         <td>
             <a href="{{ url('hargapokok/' . $item->id . '/edit') }}" class="btn btn-outline btn-primary btn-xs">Update</a>
             {!! Form::open([
