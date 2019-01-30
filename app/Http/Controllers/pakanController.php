@@ -70,9 +70,9 @@ protected function validator(Request $request)
 
       //input detail
 
-      if(!empty($request->item)){
-        for($i=0;$i<count($request->item);$i++){
-             if($request->input('item')[$i]){
+      if(!empty($request->qty)){
+        for($i=0;$i<count($request->qty);$i++){
+             if($request->input('qty')[$i]){
             DB::table('pakan_items')->insert(['pakan'=> $model->id
                                         ,'item'=> $request->item[$i]
                                         ,'harga'=> $request->harga[$i]
@@ -141,14 +141,29 @@ protected function validator(Request $request)
                     ->withInput();
     }
         
-        $pakan = pakan::findOrFail($id);
-        $pakan->update($request->all());
+        $model = pakan::findOrFail($id);
+        $model->update($request->all());
 
-        $attributes = $pakan->getOriginal();
+        DB::table('pakan_items')->where('pakan', $id)->delete();
+         //input detail
 
-        activity()->performedOn($pakan)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('pakan '.$pakan->name.' is updated successfully');
+      if(!empty($request->item)){
+        for($i=0;$i<count($request->item);$i++){
+             if($request->input('item')[$i]){
+            DB::table('pakan_items')->insert(['pakan'=> $model->id
+                                        ,'item'=> $request->item[$i]
+                                        ,'harga'=> $request->harga[$i]
+                                        ,'qty'=> $request->qty[$i]
+                                        ,'rupiah'=> $request->rupiah[$i]
+                                        ,'created_by'=> $model->created_by
+                                        ,'created_at'=> date('Y-m-d H:i:s')
+                                    ]);  
+            }
+        }
+        }
 
-        Session::flash('alert-success', ' pakan '.$pakan->name.' is updated successfully');
+       
+        Session::flash('alert-success', ' Pakan '.$model->name.' is updated successfully');
 
         return redirect('pakan');
     }
@@ -166,11 +181,10 @@ protected function validator(Request $request)
 
         $pakan->delete();
 
-        $attributes = $pakan->getOriginal();
+        DB::table('pakan_items')->where('pakan', $id)->delete();
 
-        activity()->performedOn($pakan)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('pakan '.$pakan->name.' is deleted successfully');
-
-        Session::flash('alert-warnig', ' pakan '.$pakan->name.' is deleted successfully');
+       
+        Session::flash('alert-warning', ' Pakan '.$pakan->name.' is deleted successfully');
 
         return redirect('pakan');
     }

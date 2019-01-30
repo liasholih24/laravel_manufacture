@@ -1,8 +1,15 @@
 @extends('backLayout.app')
 @section('title')
-Create new Hargapokok
+Harga Pokok
 @stop
-
+@section('desc')
+Buat Baru
+@stop
+@section('style')
+  {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
+  {{ HTML::style('assets_back/css/plugins/datapicker/datepicker3.css')}}
+  
+@endsection
 @section('content')
 <div class="wrapper wrapper-content">
 					<div class="row detail_content3">
@@ -35,15 +42,8 @@ Create new Hargapokok
                   <div class="form-group {{ $errors->has('tgl_hpp') ? 'has-error' : ''}}">
                 {!! Form::label('tgl_hpp', 'Tanggal', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-5">
-                    {!! Form::date('tgl_hpp', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('tgl_hpp', $datenow, ['id'=>'tgl_hpp','class' => 'form-control']) !!}
                     {!! $errors->first('tgl_hpp', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-            <div class="form-group {{ $errors->has('jenis') ? 'has-error' : ''}}">
-                {!! Form::label('jenis', 'Jenis', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-5">
-                    {{ Form::select('jenis', ['Telur Super','Telur Bagus', 'Telur Retak','Telur Putih','Telur Retak','Telur Cair'], null, ['class' => 'form-control chosen-select','placeholder' => 'Pilih Jenis Telur']) }}
-                     {!! $errors->first('jenis', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
             <h4>Biaya Produksi</h4>
@@ -166,6 +166,7 @@ Create new Hargapokok
 @endsection
 @section('script')
 {{ HTML::script('assets_back/js/inputmask/jquery.inputmask.bundle.js') }}
+{{ HTML::script('assets_back/js/plugins/datapicker/bootstrap-datepicker.js') }}
 <script>
 $(document).ready(function () {
 
@@ -202,6 +203,15 @@ $(document).ready(function () {
 
 
 });
+$("#tgl_hpp").datepicker({
+              startDate : '-0m',
+              format :  'yyyy-mm-dd',
+              keyboardNavigation : false,
+              forceParce: false,
+              todayBtn: 'linked',
+              todayHighlight :  true,
+              daysOfWeekDisabled : [0],
+            });
 
 
 </script>

@@ -7,6 +7,7 @@ Edit Komposisi Pakan
 @stop
 @section('style')
   {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
+  {{ HTML::style('assets_back/css/plugins/select2/select2-bootstrap.min.css')}}
   @endsection
 @section('content')
 <div class="wrapper wrapper-content">
@@ -91,35 +92,39 @@ Edit Komposisi Pakan
     <?php $i = 0;?>
     @foreach($details as $detail)
     <?php $i++;?>
-        <tr id='addr{{$i}}' data-id="0" >
+        <tr id='addr{{$i}}' data-id="{{$i}}" >
         <td data-name="del">
             <button name="del0" class='btn btn-default btn-xs glyphicon glyphicon-remove row-remove'></button>
         </td>
         <td data-name="item">
-          <select  name="item[]" class="form-control Item chosen-select" data-placeholder="Pilih Item"  style="width:300px;">
+          <select  name="item[]" id="item{{$i}}" class="form-control Item select2" data-placeholder="Pilih Item"  style="width:300px;">
                 @foreach($items as $item)
                     <option value="{{$item->id}}" <?php if($detail->item == $item->id) echo"selected";?>>{{$item->name}}</option>
                 @endforeach
           </select>
         </td>
         <td data-name="harga">
-            {!! Form::text('harga[]', $detail->harga, ['class' => 'form-control Harga ','step'=>'any']) !!}
+            {!! Form::text('harga[]', $detail->harga, ['id'=>'harga'.$i,'class' => 'form-control Hq Harga ','step'=>'any']) !!}
         </td>
         <td data-name="qty">
-            {!! Form::number('qty[]', $detail->qty, ['class' => 'form-control Qty','step'=>'any']) !!}
+            {!! Form::number('qty[]', $detail->qty, ['id'=>'qty'.$i,'class' => 'form-control Hq Qty','step'=>'any']) !!}
         </td>
        
         <td data-name="rupiah">
-            {!! Form::number('rupiah[]', $detail->rupiah, ['class' => 'form-control Rupiah','step'=>'any']) !!}
+            {!! Form::number('rupiah[]', $detail->rupiah, ['id'=>'rupiah'.$i,'class' => 'form-control Rupiah','step'=>'any']) !!}
         </td>
       </tr>
     @endforeach
     </tbody>
     <tfoot>
     <tr>
-        <td colspan="3"></td>
+        <td colspan="3">
+             <a id="add_row" title="Tambah Baris" class="btn btn-primary btn-sm pull-left" style="margin-right:10px;"><i class="fa fa-plus"></i></a>
+             <a id="kal" title="Kalkulasi" class="btn btn-warning btn-sm pull-right btn-outline" ><i class="fa fa-refresh"> Kalkukasi</i></a>
+                       
+        </td>
         <td>
-            {!! Form::number('jqty', null, ['class' => 'form-control jqty Numeric','id' => 'total_kg','placeholder'=>'Total (Kg)']) !!}
+            {!! Form::text('jqty', null, ['class' => 'form-control jqty Numeric','id' => 'total_kg','placeholder'=>'Total (Kg)']) !!}
         </td>
         <td>
             {!! Form::text('jharga', null, ['class' => 'form-control jharga Numeric','id' => 'total_rp','placeholder'=>'Total (Rp)']) !!}
@@ -129,8 +134,7 @@ Edit Komposisi Pakan
     </table>
     </div>
     </div>
-     <a id="add_row" class="btn btn-success btn-xs pull-right btn-outline " ><i class="fa fa-plus"></i></a>
-            <br/>
+      <br/>
     
     <div class="hr-line-dashed"></div> 
 
@@ -156,6 +160,10 @@ Edit Komposisi Pakan
 {{ HTML::script('assets_back/js/inputmask/jquery.inputmask.bundle.js') }}
 <script>
 $(document).ready(function () {
+    $('.select2').select2({
+                theme: 'bootstrap',
+                width: '100%'
+                });
 
 
     $('.Numeric').inputmask("numeric", {
@@ -167,6 +175,48 @@ $(document).ready(function () {
     removeMaskOnSubmit: true,
     oncleared: function () { self.Value(''); }
 });
+
+calc();
+
+$(".Hq").on("change", function(){
+
+    var  dataid  = $(this).closest('tr').attr('data-id'),
+                    qty  = $('#qty'+dataid+'').val(),
+                    harga  = $('#harga'+dataid+'').val();
+
+            
+    $('#rupiah'+dataid+'').val((qty * harga).toFixed(0));
+                calc();
+});
+
+$("#kal").on("click", function(){
+
+calc();
+
+});
+
+function calc(){
+
+    var sum1 = 0;
+
+    $('.Qty').each(function() {
+        sum1 += Number($(this).val());
+    });
+
+    $('#total_kg').val(sum1.toFixed(2));
+
+
+    var sum2 = 0;
+
+    $('.Rupiah').each(function() {
+        sum2 += Number($(this).val());
+    });
+
+    $('#total_rp').val(sum2.toFixed(0));
+
+    var hpp_pakan = (sum2 / sum1).toFixed(0);
+    $('#hpp_pakan').val(hpp_pakan);
+}
             
 
 // DYNAMIC TABLE
@@ -232,8 +282,6 @@ $("#add_row").on("click", function() {
 
             if ($(this).find(':selected').val() != '') {
 
-               
-
                 // GET NOREK
                 var val     = $(this).find(':selected').val(),
                     item_d  = $(this).find(':selected').data(),
@@ -253,69 +301,35 @@ $("#add_row").on("click", function() {
 
             });
 
-            function calc(){
-
-
-                    var sum1 = 0;
-
-                    $('.Qty').each(function() {
-                        sum1 += Number($(this).val());
-                    });
-
-                    $('#total_kg').val(sum1);
-
-
-                    var sum2 = 0;
-
-                    $('.Rupiah').each(function() {
-                        sum2 += Number($(this).val());
-                    });
-
-                    $('#total_rp').val(sum2);
-
-                    var hpp_pakan = (sum2 / sum1).toFixed(0);
-                    $('#hpp_pakan').val(hpp_pakan);
-
-
-        
- 
-            }
-
-            $(tr).find("td input.Qty").on("change", function(){
-
-       
+            $(tr).find("td input.Hq").on("change", function(){
 
             var  dataid  = $(this).data("id"),
                     qty  = $('#qty'+dataid+'').val(),
                     harga  = $('#harga'+dataid+'').val();
 
             
-                $('#rupiah'+dataid+'').val(qty * harga);
-
-
+            $('#rupiah'+dataid+'').val((qty * harga).toFixed(0));
                 calc();
-
             });
 
             $("#kal").on("click", function(){
 
-             calc();
+            calc();
 
             });
- 
 
-  
+            
 
           $(function () {
           $('body').on('DOMNodeInserted', 'select', function () {
-          $(this).select2();
+             $(this).select2();
            });
     
-           $('.Item').select2();
-           $('.Satuan').select2();
-
- 
-});
+           $('.select2').select2({
+                theme: 'bootstrap',
+                width: '100%'
+                });
+             });
     
         
 });
@@ -342,7 +356,7 @@ $("#add_row").on("click", function() {
 
 
 
-    $("#add_row").trigger("click");
+  // $("#add_row").trigger("click");
 // END DYNAMIC TABLE
 
             });

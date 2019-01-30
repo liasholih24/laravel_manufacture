@@ -7,6 +7,7 @@ Buat Komposisi Pakan
 @stop
 @section('style')
   {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
+  {{ HTML::style('assets_back/css/plugins/select2/select2-bootstrap.min.css')}}
   @endsection
 @section('content')
 <div class="wrapper wrapper-content">
@@ -94,22 +95,25 @@ Buat Komposisi Pakan
                         </select>
                         </td>
                         <td data-name="harga">
-                            {!! Form::text('harga[]', null, ['class' => 'form-control Harga ','step'=>'any']) !!}
+                            {!! Form::text('harga[]', null, ['class' => 'form-control Hq Harga ','step'=>'any']) !!}
                         </td>
                         <td data-name="qty">
-                            {!! Form::number('qty[]', null, ['class' => 'form-control Qty','step'=>'any']) !!}
+                            {!! Form::number('qty[]', null, ['class' => 'form-control Hq Qty','step'=>'any']) !!}
                         </td>
                     
                         <td data-name="rupiah">
-                            {!! Form::number('rupiah[]', null, ['class' => 'form-control Rupiah','step'=>'any']) !!}
+                            {!! Form::number('rupiah[]', null, ['class' => 'form-control Rupiah','step'=>'any','readonly'=>'readonly']) !!}
                         </td>
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="3"></td>
+                        <td colspan="3">
+                            <a id="add_row" title="Tambah Baris" class="btn btn-primary btn-sm pull-left" style="margin-right:10px;"><i class="fa fa-plus"></i></a>
+                            <a id="kal" title="Kalkulasi" class="btn btn-warning btn-sm pull-right btn-outline" ><i class="fa fa-refresh"> Kalkukasi</i></a>
+                        </td>
                         <td>
-                            {!! Form::number('jqty', null, ['class' => 'form-control jqty Numeric','id' => 'total_kg','placeholder'=>'Total (Kg)']) !!}
+                            {!! Form::text('jqty', null, ['class' => 'form-control jqty Numeric','id' => 'total_kg','placeholder'=>'Total (Kg)']) !!}
                         </td>
                         <td>
                             {!! Form::text('jharga', null, ['class' => 'form-control jharga Numeric','id' => 'total_rp','placeholder'=>'Total (Rp)']) !!}
@@ -119,9 +123,7 @@ Buat Komposisi Pakan
                 </table>
              </div>
          </div>
-        <a id="add_row" class="btn btn-success btn-xs pull-right btn-outline " ><i class="fa fa-plus"></i> Add Row</a>
-        <a id="kal" class="btn btn-warning btn-xs pull-right  btn-outline "  style="margin-right: 5px;"><i class="fa fa-refresh"></i> Kalkukasi</a>
-               
+            
         <br/>
     
         <div class="hr-line-dashed"></div> 
@@ -253,7 +255,7 @@ $("#add_row").on("click", function() {
                         sum1 += Number($(this).val());
                     });
 
-                    $('#total_kg').val(sum1);
+                    $('#total_kg').val(sum1.toFixed(2));
 
 
                     var sum2 = 0;
@@ -262,26 +264,23 @@ $("#add_row").on("click", function() {
                         sum2 += Number($(this).val());
                     });
 
-                    $('#total_rp').val(sum2);
+                    $('#total_rp').val(sum2.toFixed(0));
 
                     var hpp_pakan = (sum2 / sum1).toFixed(0);
                     $('#hpp_pakan').val(hpp_pakan);
 
-
-        
  
             }
 
-            $(tr).find("td input.Qty").on("change", function(){
+            $(tr).find("td input.Hq").on("change", function(){
 
-       
 
             var  dataid  = $(this).data("id"),
                     qty  = $('#qty'+dataid+'').val(),
                     harga  = $('#harga'+dataid+'').val();
 
             
-                $('#rupiah'+dataid+'').val(qty * harga);
+                $('#rupiah'+dataid+'').val((qty * harga).toFixed(0));
 
 
                 calc();
@@ -302,8 +301,14 @@ $("#add_row").on("click", function() {
           $(this).select2();
            });
     
-           $('.Item').select2();
-           $('.Satuan').select2();
+           $('.Item').select2({
+                theme: 'bootstrap',
+                width: '100%'
+                });
+           $('.Satuan').select2({
+                theme: 'bootstrap',
+                width: '100%'
+                });
 
  
 });
@@ -333,7 +338,7 @@ $("#add_row").on("click", function() {
 
 
 
-    $("#add_row").trigger("click");
+ //   $("#add_row").trigger("click");
 // END DYNAMIC TABLE
 
             });

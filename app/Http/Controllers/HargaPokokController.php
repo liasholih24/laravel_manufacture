@@ -43,7 +43,8 @@ protected function validator(Request $request)
      */
     public function create()
     {
-        return view('backEnd.hargapokok.create');
+        $datenow = date('Y-m-d'); 
+        return view('backEnd.hargapokok.create',compact('datenow'));
     }
 
     /**
