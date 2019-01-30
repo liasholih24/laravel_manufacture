@@ -98,8 +98,8 @@ Recording Pengobatan
             order: [ 1, 'desc' ],
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
+                {extend: 'excel', title: 'Recording Pengobatan'},
+                {extend: 'pdf', title: 'Recording Pengobatan'},
 
                 {extend: 'print',
                  customize: function (win){

@@ -101,8 +101,8 @@ Komposisi & Harga
             order: [ 5, 'desc' ],
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
+                {extend: 'excel', title: 'Recording Pakan'},
+                {extend: 'pdf', title: 'Recording Pakan'},
 
                 {extend: 'print',
                  customize: function (win){
