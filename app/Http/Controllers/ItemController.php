@@ -229,12 +229,13 @@ else if ($request->item <> ""){
     public function edit($id)
     {
         $node = Item::findOrFail($id);
-        $categories = Item::where('status',3)->get()->pluck('name','id');
+        $categories = Item::get();
         $activations = Status::where('parent_id','=','1')->get()->pluck('name','id');
-        $satuans = Satuan::where('status','=',3)->orderby('id','desc')->get()->pluck('name','id');
-        $types = Status::where('parent_id','=','16')->get()->pluck('name','id');
+        $satuans = Satuan::where('status','=',3)->get()->pluck('name','id');
+        $suppliers = Supplier::get()->pluck('name','id');
         $datenow = date("Y-m-d");
-        return view('backEnd.item.edit', compact('node','categories','activations','satuans','types','datenow'));
+        $id = $id;
+        return view('backEnd.item.edit', compact('node','categories','activations','satuans','suppliers','datenow','id'));
     }
 
     /**

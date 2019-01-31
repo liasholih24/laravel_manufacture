@@ -54,11 +54,10 @@ Edit
                  {!! Form::label('categories', 'Kategori*', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5 {{ $errors->has('item') ? 'has-error' : ''}}">
                   <div class="input-group col-sm-12 col-xs-12 ">
-                    <select class="form-control m-b chosen-select" name="item">
-                       
+                    <select class="form-control m-b chosen-select" name="parent_id">
                         @foreach($categories  as $item)
                               @if($item->nesting==0)
-                                   <option value="{{$item->id}}">{{$item->name}}</option> 
+                                   <option value="{{$item->id}}" <?php if($node->parent_id == $item->id) echo"selected";?>>{{$item->name}}</option> 
                               @endif
                         @endforeach
                     </select>
@@ -120,8 +119,8 @@ Edit
               <div class="form-group ">
               <div class="col-sm-1"></div>
               <div class="col-sm-3 col-xs-12">
-                  {{ Form::select('dimensi_unit', ['cm','m'], null, ['class' => 'form-control','placeholder' => 'Ukuran Dimensi']) }}
-                  {!! $errors->first('dimensi_unit', '<p class="help-block">:message</p>') !!}
+                  {{ Form::select('dimensi_satuan', ['cm','m'], null, ['class' => 'form-control','placeholder' => 'Ukuran Dimensi']) }}
+                  {!! $errors->first('dimensi_satuan', '<p class="help-block">:message</p>') !!}
               </div>
               </div>
 
@@ -135,8 +134,8 @@ Edit
               <div class="form-group ">
               <div class="col-sm-1"></div>
               <div class="col-sm-3 col-xs-12">
-                  {{ Form::select('berat_unit', ['gr','kg'], null, ['class' => 'form-control','placeholder' => 'Ukuran Berat']) }}
-                  {!! $errors->first('satuan', '<p class="help-block">:message</p>') !!}
+                  {{ Form::select('berat_satuan', ['gr','kg'], null, ['class' => 'form-control','placeholder' => 'Ukuran Berat']) }}
+                  {!! $errors->first('berat_satuan', '<p class="help-block">:message</p>') !!}
               </div>
               </div>
 
@@ -150,24 +149,24 @@ Edit
               <div class="form-group ">
               <div class="col-sm-1"></div>
               <div class="col-sm-3 col-xs-12">
-                  {{ Form::select('kapasitas_unit', ['ml','l'], null, ['class' => 'form-control','placeholder' => 'Ukuran Kapasitas']) }}
-                  {!! $errors->first('kapasitas_unit', '<p class="help-block">:message</p>') !!}
+                  {{ Form::select('kapasitas_satuan', ['ml','l'], null, ['class' => 'form-control','placeholder' => 'Ukuran Kapasitas']) }}
+                  {!! $errors->first('kapasitas_satuan', '<p class="help-block">:message</p>') !!}
               </div>
               </div>
               <br/>
               <h4>Informasi Kendali Persediaan</h4>
               <div class="form-group">
-               {!! Form::label('minimum_stock', 'Minimun', ['class' => 'col-sm-1 control-label']) !!}
+               {!! Form::label('minstock', 'Minimun', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5 {{ $errors->has('minimum_stock') ? 'has-error' : ''}}">
-                  {!! Form::text('minimum_stock', null, ['class' => 'form-control', 'placeholder' => 'Minimun Stock']) !!}
-                  {!! $errors->first('minimum_stock', '<p class="help-block">:message</p>') !!}
+                  {!! Form::text('minstock', null, ['class' => 'form-control', 'placeholder' => 'Minimun Stock']) !!}
+                  {!! $errors->first('minstock', '<p class="help-block">:message</p>') !!}
                 </div>
               </div>
               <div class="form-group">
-              {!! Form::label('maksimum_stock', 'Maksimum', ['class' => 'col-sm-1 control-label']) !!}
+              {!! Form::label('maxstock', 'Maksimum', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-5 {{ $errors->has('maksimum_stock') ? 'has-error' : ''}}">
-                  {!! Form::text('maksimum_stock', null, ['class' => 'form-control', 'placeholder' => 'Maksimum Stock']) !!}
-                  {!! $errors->first('maksimum_stock', '<p class="help-block">:message</p>') !!}
+                  {!! Form::text('maxstock', null, ['class' => 'form-control', 'placeholder' => 'Maksimum Stock']) !!}
+                  {!! $errors->first('maxstock', '<p class="help-block">:message</p>') !!}
                 </div>
               </div>
               @endif
