@@ -55,7 +55,7 @@ Edit
                 <div class="col-sm-5 {{ $errors->has('item') ? 'has-error' : ''}}">
                   <div class="input-group col-sm-12 col-xs-12 ">
                     <select class="form-control m-b chosen-select" name="item">
-                        <option value="">Pilih Kategori</option>
+                       
                         @foreach($categories  as $item)
                               @if($item->nesting==0)
                                    <option value="{{$item->id}}">{{$item->name}}</option> 
