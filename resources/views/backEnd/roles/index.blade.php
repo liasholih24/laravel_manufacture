@@ -52,7 +52,6 @@ Modul untuk mengelola pengguna dalam sistem
     <th>Description</th>
     <th>Last Updated</th>
     <th>Updated By</th>
-    <th>Status</th>
     <th>Action</th>
 </tr>
 </thead>
@@ -66,13 +65,7 @@ Modul untuk mengelola pengguna dalam sistem
     <td>{!! empty($item->desc)? "<i>No Description</i>" : $item->desc !!}</td>
     <td>{{ $item->updated_at }}</td>
     <td>{!! empty($item->updated_by)? " " : $item->updatedby->first_name !!} {!! empty($item->updated_by)? " " : $item->updatedby->last_name !!} </td>
-    <td>
-      @if( $item->status == 1)
-      <a href="#" class="btn btn-xs btn-primary btn-outline active">Active</a>
-      @else
-      <a href="#" class="btn btn-xs btn-default btn-outline">Inactive</a>
-      @endif
-    </td>
+    
     <td>
       @if (Sentinel::getUser()->hasAccess(['role.show']))
       <a href="{{url('role/' . $item->id . '/show')}}" class="btn btn-xs btn-primary btn-outline">View</a>
