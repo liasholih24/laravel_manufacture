@@ -141,7 +141,7 @@
                         </div>
                         <div class="ibox-content ibox-heading">
                         <h3>Total Persediaan
-                            <div class="stat-percent text-navy">{{number_format(7697)}} Kg</div>
+                            <div class="stat-percent text-navy">{{number_format($stock)}} Kg</div>
                         </h3>
                         <span class="bar_dashboard">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9,6,4,5,7,3,2,1,0,9,5,6,8,3,2,1</span>
                         </div>
