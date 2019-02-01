@@ -15,7 +15,7 @@
                                 <h5>Hasil Produksi</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ $ttl_butir }}</h1>
+                                <h1 class="no-margins">{{ empty($ttl_butir) ? "No Data" : $ttl_butir }}</h1>
                                 <div class="stat-percent font-bold text-success">{{ $ttl_kg }} kg 
                                 </div>
                                 <small> dari {{ $pakan_kandang }} kandang</small>
@@ -29,7 +29,7 @@
                                 <h5>Populasi Akhir</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ $jml_akhir }}</h1>
+                                <h1 class="no-margins">{{ empty($jml_akhir) ? "No Data" : $jml_akhir }}</h1>
                                 <div class="stat-percent font-bold text-navy"></div>
                                 <small> dari {{ $pakan_kandang }} kandang</small>
                             </div>
@@ -42,7 +42,7 @@
                                 <h5>Pemakaian Pakan</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ $pakan }}</h1>
+                                <h1 class="no-margins">{{ empty($pakan) ? "No Data" : $pakan }}</h1>
                                 <div class="stat-percent font-bold text-success">kg 
                                 </div>
                                  <small> dari {{ $pakan_kandang }} kandang</small>
