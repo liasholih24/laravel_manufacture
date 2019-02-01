@@ -47,7 +47,7 @@ protected function validator(Request $request)
      public function create()
     {
         $item = Item::where('nesting', 1)->get();
-        $storage = Lokasi::where('depth', 1)->get();
+        $storage = Lokasi::where('depth', 0)->get();
         $satuan = Satuan::get();
         return view('backEnd.transfer.create', ['item' => $item, 'storage' => $storage, 'satuan' => $satuan]);
     }
@@ -118,7 +118,7 @@ protected function validator(Request $request)
         $mutasi = Transfer::findOrFail($id);
         $detail = DetailTransfer::where('transfer_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
-        $storage = Lokasi::where('depth', 1)->get();
+        $storage = Lokasi::where('depth', 0)->get();
         $satuan = Satuan::get();
         return view('backEnd.transfer.edit', ['mutasi' => $mutasi, 'detail' => $detail, 'item' => $item, 'storage' => $storage, 'satuan' => $satuan]);
     }

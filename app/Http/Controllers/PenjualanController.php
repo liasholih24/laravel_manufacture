@@ -48,7 +48,7 @@ class PenjualanController extends Controller
     {
         $item = Item::where('nesting', 1)->get();
         $customer = Customer::all();
-        $lokasi = Lokasi::where('depth', 1)->get();
+        $lokasi = Lokasi::where('depth', 0)->get();
         $satuan = Satuan::get();
         $ekspedisi = Ekspedisi::get();
         return view('backEnd.penjualan.create', ['item' => $item, 'customer' => $customer, 'lokasi' => $lokasi, 'satuan' => $satuan, 'ekspedisi' => $ekspedisi]);
@@ -123,7 +123,7 @@ class PenjualanController extends Controller
         $detail = DetailPenjualan::where('penjualan_id', $id)->get();
         $item = Item::where('nesting', 1)->get();
         $customer = Customer::all();
-        $lokasi = Lokasi::where('depth', 1)->get();
+        $lokasi = Lokasi::where('depth', 0)->get();
         $satuan = Satuan::get();
         $ekspedisi = Ekspedisi::get();
         if($penjualan->customer_id > 0){
