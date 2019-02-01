@@ -59,6 +59,13 @@ Edit
                     {!! $errors->first('kandang', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+            <div class="form-group {{ $errors->has('strain') ? 'has-error' : ''}}">
+                {!! Form::label('strain', 'Strain', ['class' => 'col-sm-2 control-label']) !!}
+                <div class="col-sm-5">
+                   {{ Form::select('strain', ['HY-LINE' => 'HY-LINE', 'HY-SEX' => 'HY-LINE', 'HY-ISA' => 'HY-ISA'], null, ['class' => 'form-control select2','placeholder' => 'Pilih strain']) }}
+                   {!! $errors->first('strain', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
             <div class="form-group {{ $errors->has('umur') ? 'has-error' : ''}}">
                 {!! Form::label('umur', 'Umur*', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-5">
@@ -316,7 +323,6 @@ Edit
 });
 
 $("#prod_tgl").datepicker({
-              startDate : '-0m',
               format :  'yyyy-mm-dd',
               keyboardNavigation : false,
               forceParce: false,

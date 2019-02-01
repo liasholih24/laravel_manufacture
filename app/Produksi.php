@@ -20,7 +20,7 @@ class Produksi extends Model
      *
      * @var array
      */
-    protected $fillable = ['prod_tgl', 'kandang', 'umur'
+    protected $fillable = ['prod_tgl', 'kandang', 'strain','umur'
                     , 'jml_awal','jml_mati', 'jml_masuk', 'jml_pindah','jml_so', 'jml_akhir'
                     , 'pakan_jenis', 'pakan_qty', 'pakan_satuan'
                     , 'p_utuh_butir', 'p_utuh_kg'
