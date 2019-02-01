@@ -44,13 +44,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d', strtotime($mutasi->date)) }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d', strtotime($mutasi->date)) }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Dari</label>
                                 <div class="col-sm-3">
-                                    <select name="gdg_from" class="select-storage form-control input-sm">
+                                    <select name="gdg_from" class="select-storage form-control input-sm" required>
                                         <option value=""></option>
                                         @foreach($storage as $r)
                                         <option value="{{ $r->id }}" @if($r->id==$mutasi->gdg_from) selected @endif>{{ $r->name }}</option>
@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Ke</label>
                                 <div class="col-sm-3">
-                                    <select name="gdg_to" class="select-storage form-control input-sm">
+                                    <select name="gdg_to" class="select-storage form-control input-sm" required>
                                         <option value=""></option>
                                         @foreach($storage as $r)
                                         <option value="{{ $r->id }}" @if($r->id==$mutasi->gdg_to) selected @endif>{{ $r->name }}</option>
@@ -72,7 +72,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="keterangan" class="form-control input-sm" rows="3">{{ $mutasi->keterangan }}</textarea>
+                                    <textarea name="keterangan" class="form-control input-sm" rows="3" required>{{ $mutasi->keterangan }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
