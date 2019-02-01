@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Lokasi</label>
                                 <div class="col-sm-3">
-                                    <select name="storage_id" class="select-lokasi form-control input-sm">
+                                    <select name="storage_id" class="select-lokasi form-control input-sm" required>
                                         <option value=""></option>
                                         @foreach($lokasi as $r)
                                         <option value="{{ $r->id }}" @if($r->id==$pengajuan->storage_id) selected @endif>{{ $r->name }}</option>
@@ -55,13 +55,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d', strtotime($pengajuan->date)) }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d', strtotime($pengajuan->date)) }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="desc" class="form-control input-sm" rows="3">{{ $pengajuan->desc }}</textarea>
+                                    <textarea name="desc" class="form-control input-sm" rows="3" required>{{ $pengajuan->desc }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">

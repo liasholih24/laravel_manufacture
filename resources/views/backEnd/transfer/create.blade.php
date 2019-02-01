@@ -43,13 +43,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tanggal</label>
                                 <div class="col-sm-3">
-                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d') }}">
+                                    <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d') }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Dari</label>
                                 <div class="col-sm-3">
-                                    <select name="gdg_from" class="select-storage form-control input-sm">
+                                    <select name="gdg_from" class="select-storage form-control input-sm" required>
                                         <option value=""></option>
                                         @foreach($storage as $r)
                                         <option value="{{ $r->id }}">{{ $r->name }}</option>
@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Ke</label>
                                 <div class="col-sm-3">
-                                    <select name="gdg_to" class="select-storage form-control input-sm">
+                                    <select name="gdg_to" class="select-storage form-control input-sm" required>
                                         <option value=""></option>
                                         @foreach($storage as $r)
                                         <option value="{{ $r->id }}">{{ $r->name }}</option>
@@ -71,7 +71,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Deskripsi</label>
                                 <div class="col-sm-8">
-                                    <textarea name="keterangan" class="form-control input-sm" rows="3"></textarea>
+                                    <textarea name="keterangan" class="form-control input-sm" rows="3" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
