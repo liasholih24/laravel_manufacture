@@ -29,7 +29,6 @@ class ItemController extends Controller
     /*dicustom*/
       return Validator::make($request->all(), [
          'name' => 'required|max:50'
-        ,'code' => 'required|unique:items'
       ]);
     }
 
@@ -38,7 +37,6 @@ class ItemController extends Controller
     /*dicustom*/
       return Validator::make($request->all(), [
          'name' => 'required|max:50'
-        ,'code' => 'required|unique:items'
         ,'item' => 'required'
         ,'satuan' => 'required'
       ]);
