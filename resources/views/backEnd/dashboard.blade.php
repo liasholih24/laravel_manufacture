@@ -57,7 +57,7 @@
                             </div>
                             <div class="ibox-content">
                                 <h1 class="no-margins">{{ empty($hpp)? "" : $hpp }}</h1>
-                                <small>HPP bulan lalu : {{ empty($hpp0)? "" : $hpp0 }}</small>
+                                <small>HPP bulan lalu : {{ empty($hpp0)? "" : number_format($hpp0,2) }}</small>
                             </div>
                         </div>
             </div>
