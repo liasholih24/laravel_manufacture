@@ -44,7 +44,6 @@ Recording Produksi
                 {!! Form::label('prod_tgl', 'Tanggal Produksi* ', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-5">
                     {!! Form::text('prod_tgl', $datenow, ['id' => 'prod_tgl','class' => 'form-control','data-date-format'=>'yyyy-mm-dd','placeholder' => $datenow]) !!}
-            
                     {!! $errors->first('prod_tgl', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -53,6 +52,13 @@ Recording Produksi
                 <div class="col-sm-5">
                     {{ Form::select('kandang', $kandangs, null, ['class' => 'form-control select2 Kandang','placeholder' => 'Pilih Kandang']) }}
                     {!! $errors->first('kandang', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+            <div class="form-group {{ $errors->has('strain') ? 'has-error' : ''}}">
+                {!! Form::label('strain', 'Strain', ['class' => 'col-sm-2 control-label']) !!}
+                <div class="col-sm-5">
+                   {{ Form::select('strain', ['HY-LINE' => 'HY-LINE', 'HY-SEX' => 'HY-LINE', 'HY-ISA' => 'HY-ISA'], null, ['class' => 'form-control select2','placeholder' => 'Pilih strain']) }}
+                   {!! $errors->first('strain', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
             <div class="form-group {{ $errors->has('umur') ? 'has-error' : ''}}">
@@ -73,6 +79,7 @@ Recording Produksi
                    {!! $errors->first('pakan_jenis', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+           
             <div class="form-group {{ $errors->has('pakan_qty') ? 'has-error' : ''}}">
                 {!! Form::label('pakan_qty', 'Pakan (Kg)', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-5">
@@ -317,8 +324,7 @@ Recording Produksi
 });
 
 $("#prod_tgl").datepicker({
-              startDate : '-0m',
-              format :  'yyyy-mm-dd',
+            format :  'yyyy-mm-dd',
               keyboardNavigation : false,
               forceParce: false,
               todayBtn: 'linked',
