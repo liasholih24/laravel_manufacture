@@ -15,10 +15,10 @@
                                 <h5>Hasil Produksi</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ number_format($ttl_butir)}}</h1>
-                                <div class="stat-percent font-bold text-success">{{ number_format($ttl_kg)}} kg 
+                                <h1 class="no-margins">{{ $ttl_butir }}</h1>
+                                <div class="stat-percent font-bold text-success">{{ $ttl_kg }} kg 
                                 </div>
-                                <small> dari {{ number_format($pakan_kandang)}} kandang</small>
+                                <small> dari {{ $pakan_kandang }} kandang</small>
                             </div>  
                         </div>
                     </div>
@@ -29,9 +29,9 @@
                                 <h5>Populasi Akhir</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ number_format($jml_akhir)}}</h1>
+                                <h1 class="no-margins">{{ $jml_akhir }}</h1>
                                 <div class="stat-percent font-bold text-navy"></div>
-                                <small> dari {{ number_format($pakan_kandang)}} kandang</small>
+                                <small> dari {{ $pakan_kandang }} kandang</small>
                             </div>
                         </div>
                     </div>
@@ -42,10 +42,10 @@
                                 <h5>Pemakaian Pakan</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ number_format($pakan)}}</h1>
+                                <h1 class="no-margins">{{ $pakan }}</h1>
                                 <div class="stat-percent font-bold text-success">kg 
                                 </div>
-                                 <small> dari {{ number_format($pakan_kandang)}} kandang</small>
+                                 <small> dari {{ $pakan_kandang }} kandang</small>
                             </div>
                         </div>
                     </div>
@@ -56,8 +56,8 @@
                                 <h5>HPP</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ empty($hpp)? "" : number_format($hpp) }}</h1>
-                                <small>HPP bulan lalu : {{ empty($hpp0)? "" : number_format($hpp0) }}</small>
+                                <h1 class="no-margins">{{ empty($hpp)? "" : $hpp }}</h1>
+                                <small>HPP bulan lalu : {{ empty($hpp0)? "" : $hpp0 }}</small>
                             </div>
                         </div>
             </div>
