@@ -56,8 +56,8 @@
                                 <h5>HPP</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ number_format($hpp) }}</h1>
-                                <small>HPP bulan lalu : {{ number_format($hpp0) }}</small>
+                                <h1 class="no-margins">{{ empty($hpp)? "" : number_format($hpp) }}</h1>
+                                <small>HPP bulan lalu : {{ empty($hpp0)? "" : number_format($hpp0) }}</small>
                             </div>
                         </div>
             </div>
