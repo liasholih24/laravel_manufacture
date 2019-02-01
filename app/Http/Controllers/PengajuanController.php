@@ -95,7 +95,34 @@ class PengajuanController extends Controller
      */
     public function show($id)
     {
-        
+        $pengajuan = Pengajuan::findOrFail($id);
+        $detail = DetailPengajuan::where('pengajuan_id', $id)->get();
+        $item = Item::where('nesting', 1)->get();
+        $lokasi = Lokasi::where('depth', 0)->get();
+        $satuan = Satuan::get();
+        return view('backEnd.pengajuan.show', ['pengajuan' => $pengajuan, 'detail' => $detail, 'item' => $item, 'lokasi' => $lokasi, 'satuan' => $satuan]);
+    }
+
+    public function verifikasi(Request $request, $id)
+    {
+        $pengajuan = Pengajuan::findOrFail($id);
+        $pengajuan->status = 2;
+        $pengajuan->updated_by = Sentinel::getUser()->id;
+        $pengajuan->save();
+        $detail = DetailPengajuan::where('pengajuan_id', $id);
+        $detail->delete();
+        for($i=0;$i<count($request->item_id);$i++){
+            $detail = new DetailPengajuan;
+            $detail->pengajuan_id = $id;
+            $detail->item_id = $request->item_id[$i];
+            $detail->qty = $request->qty[$i];
+            $detail->satuan_id = $request->satuan_id[$i];
+            $detail->created_by = Sentinel::getUser()->id;
+            $detail->updated_by = Sentinel::getUser()->id;
+            $detail->save();
+        }
+        Session::flash('alert-success', 'Pengajuan berhasil diverifikasi.');
+        return redirect('pengajuan');
     }
 
     public function print($id)
