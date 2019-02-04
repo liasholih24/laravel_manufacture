@@ -6,6 +6,7 @@ Users
 
 {{ HTML::style('assets_back/css/plugins/select2/select2.min.css') }}
 {{ HTML::style('assets_back/css/plugins/dataTables/datatables.min.css') }}
+{{ HTML::style('assets_back/css/plugins/select2/select2-bootstrap.min.css')}}
 @endsection
 @section('content')
 <div class="wrapper wrapper-content">
@@ -130,7 +131,10 @@ Users
 
     });
 
-		$(".select2_demo_1").select2();
+		$(".select2_demo_1").select2({
+                theme: 'bootstrap',
+                width: '100%'
+                });
     function ConfirmDelete()
   {
   var x = confirm("Are you sure you want to delete?");
