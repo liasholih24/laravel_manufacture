@@ -32,9 +32,11 @@ class Produksi extends Model
                     , 'fc'
                     , 'ttl_butir'
                     , 'ttl_kg'
+                    , 'created_by'
+                    , 'updated_by'
                 ];
 
-    use SoftDeletes;
-    protected $dates = ['deleted_at'];
+    //use SoftDeletes;
+    //protected $dates = ['deleted_at'];
 
 }
