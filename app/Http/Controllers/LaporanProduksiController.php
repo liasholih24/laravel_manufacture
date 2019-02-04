@@ -41,7 +41,7 @@ class LaporanProduksiController extends Controller
         }
 
         $tables = DB::select(
-                DB::raw("SELECT k.name as kandang, p.umur, 
+                DB::raw("SELECT CONCAT(k0.name,'/', k.name) as kandang, p.umur, 
                                 p.jml_akhir as ppl_awal, p.jml_so as ppl_so, p.jml_pindah as ppl_pindah, p.jml_afkir as ppl_afkir, p.jml_mati as ppl_mati,p.jml_akhir as ppl_akhir,
                                 FORMAT((p.jml_mati/ (p.jml_akhir-p.jml_pindah) * 100),2) as persen_mati,
                                 p.p_utuh_butir , p.p_putih_butir , p.p_retak_butir ,
@@ -56,6 +56,7 @@ class LaporanProduksiController extends Controller
                                 p.prod_tgl 
                          FROM produksis p
                             JOIN lokasis k ON k.id = p.kandang
+                            JOIN lokasis k0 ON k0.id = k.parent_id
                             JOIN pakans pk ON pk.id = p.pakan_jenis
                         WHERE 1=1 $filterRange 
                         ")
