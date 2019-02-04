@@ -37,7 +37,6 @@ class UserController extends Controller
             'email' => 'required|min:3|string',
             'password' => 'min:4|max:50|confirmed',
             'role' => 'required',
-            'mobile_id' => 'required',
         ]);
     }
     /**
@@ -134,9 +133,6 @@ class UserController extends Controller
            $upload_success = $foto_asset->move($destinationPath, $newFilename);
         }
 
-        $attributes = $user->getOriginal();
-
-        activity()->performedOn($user)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('User '.$user->first_name.' '.$user->last_name.' is updated successfully');
 
         Session::flash('alert-success', ' User '.$user->name.' is created successfully');
 
@@ -252,9 +248,9 @@ class UserController extends Controller
 
         $update_user = Validator::make($request->all(), [
             'first_name' => 'min:2|max:35|string',
+            'email' => 'required|min:3|string',
             'password' => 'confirmed',
             'role' => 'required',
-            'mobile_id' => 'required',
               ]);
 
         if ($update_user->fails()) {
@@ -341,7 +337,7 @@ class UserController extends Controller
         }
 
 
-      return redirect('user/'.$user->id.'');
+      return redirect('user');
     }
 
     /**

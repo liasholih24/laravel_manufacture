@@ -7,6 +7,12 @@ Kelola Data Pengguna
 @stop
 @section('style')
 {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
+{{ HTML::style('assets_back/css/plugins/select2/select2-bootstrap.min.css')}}
+<style>
+#imagePreview  {
+  position: absolute !important;
+}
+</style>
 @endsection
 @section('content')
 <div class="wrapper wrapper-content">
@@ -40,65 +46,12 @@ Kelola Data Pengguna
     {!! Form::hidden('updated_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
 
     <div class="form-group">
-      {!! Form::label('first_name', 'Nama Depan*', ['class' => 'col-md-2 control-label']) !!}
-      <div class="col-sm-4 {{ $errors->has('first_name') ? 'has-error' : ''}}">
-         {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
-         {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
-      </div>
-      
-     {!! Form::label('role','Roles', ['class' => 'col-md-2 control-label']) !!}
+    {!! Form::label('role','Roles', ['class' => 'col-md-2 control-label']) !!}
      <div class="col-sm-4 {{ $errors->has('role') ? 'has-error' : ''}}">
          {!! Form::select('role', $roles, null, ['class' => 'form-control select2_demo_1','placeholder' => 'Select Role']) !!}
          {!! $errors->first('role', '<p class="help-block">:message</p>') !!}
      </div>
-    </div>
-    <div class="form-group">
-     {!! Form::label('last_name', 'Nama Belakang' , ['class' => 'col-md-2 control-label']) !!}
-     <div class="col-sm-4">
-         {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
-         {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
-     </div>
-     {!! Form::label('unit_id','Unit Kerja', ['class' => 'col-md-2 control-label']) !!}
-     <div class="col-sm-4 {{ $errors->has('unit_id') ? 'has-error' : ''}}">
-         {!! Form::select('unit_id', $units, null, ['class' => 'form-control select2_demo_1','placeholder' => 'Unit Kerja']) !!}
-         {!! $errors->first('unit_id', '<p class="help-block">:message</p>') !!}
-     </div>
-    </div>
-    <div class="form-group">
-      {!! Form::label('email', 'Username', ['class' => 'col-md-2 control-label']) !!}
-     <div class="col-sm-4 {{ $errors->has('email') ? 'has-error' : ''}}">
-         {!! Form::text('email', null, ['class' => 'form-control']) !!}
-         {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
-     </div>
-       
-      {!! Form::label('mobile_id', 'App Permission', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-4 {{ $errors->has('mobile_id') ? 'has-error' : ''}}">
-    {{ Form::select('mobile_id', ['0' => 'Web Apps Only','1' => 'Mobile Apps Only'], null, ['class' => 'form-control','placeholder'=>'Select App Permission ']) }}
-  {!! $errors->first('mobile_id', '<p class="help-block">:message</p>') !!}
-    </div>
-  </div>
-    <div class="form-group">
-      {!! Form::label('password', 'Password', ['class' => 'col-md-2 control-label']) !!}
-     <div class="col-sm-4">
-         {!! Form::password('password', ['class' => 'form-control']) !!}
-         {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
-     </div>
-     {!! Form::label('status','Status', ['class' => 'col-md-2 control-label']) !!}
-    <div class="col-sm-4">
-        {!! Form::select('status', $statuses, null, ['class' => 'form-control select2_demo_1']) !!}
-        {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
-    </div>
-    </div>
-    <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
-      
-     {!! Form::label('password_confirmation', 'Password Confirmation', ['class' => 'col-md-2 control-label']) !!}
-    <div class="col-sm-4">
-        {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
-        {!! $errors->first('password_confirmation', '<p class="help-block">:message</p>') !!}
-    </div>
-    </div>
-		<div class="form-group">
-			{!! Form::label('image', 'Image', ['class' => 'col-md-2 control-label']) !!}
+     {!! Form::label('image', 'Image', ['class' => 'col-md-2 control-label']) !!}
 			<div class="col-sm-4">
 				<div class="btn-group">
 					<label title="Upload image file" for="inputImage" class="btn btn-primary">
@@ -109,13 +62,59 @@ Kelola Data Pengguna
 				{!! $errors->first('image', '<p class="help-block">:message</p>') !!}
 			</div>
 
-			{!! Form::label('image', 'Preview Image', ['class' => 'col-md-2 control-label']) !!}
-			<div class="col-sm-4">
-				<img id="imagePreview" style="max-height:200px;">
-				{!! $errors->first('image', '<p class="help-block">:message</p>') !!}
-			</div>
 
-		</div>
+     </div>
+    <div class="form-group">
+      {!! Form::label('first_name', 'Nama Depan*', ['class' => 'col-md-2 control-label']) !!}
+      <div class="col-sm-4 {{ $errors->has('first_name') ? 'has-error' : ''}}">
+         {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+         {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
+      </div>
+      {!! Form::label('image', 'Preview Image', ['class' => 'col-md-2 control-label']) !!}
+        <div class="col-sm-4">
+            <img id="imagePreview" style="max-height:200px;">
+            {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
+        </div>
+    
+      
+     
+    </div>
+    <div class="form-group">
+     {!! Form::label('last_name', 'Nama Belakang' , ['class' => 'col-md-2 control-label']) !!}
+     <div class="col-sm-4">
+         {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+         {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
+     </div>
+
+
+	  
+    </div>
+    <div class="form-group">
+      {!! Form::label('email', 'Username', ['class' => 'col-md-2 control-label']) !!}
+     <div class="col-sm-4 {{ $errors->has('email') ? 'has-error' : ''}}">
+         {!! Form::text('email', null, ['class' => 'form-control']) !!}
+         {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
+     </div>
+       
+    
+  </div>
+    <div class="form-group">
+      {!! Form::label('password', 'Password', ['class' => 'col-md-2 control-label']) !!}
+     <div class="col-sm-4">
+         {!! Form::password('password', ['class' => 'form-control']) !!}
+         {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
+     </div>
+     
+    </div>
+    <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
+      
+     {!! Form::label('password_confirmation', 'Password Confirmation', ['class' => 'col-md-2 control-label']) !!}
+    <div class="col-sm-4">
+        {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+        {!! $errors->first('password_confirmation', '<p class="help-block">:message</p>') !!}
+    </div>
+    </div>
+
 
                 <div class="hr-line-dashed"></div>
 
@@ -145,7 +144,10 @@ Kelola Data Pengguna
 
 <script>
 jQuery(document).ready(function() {
-		$(".select2_demo_1").select2();
+		$(".select2_demo_1").select2({
+                theme: 'bootstrap',
+                width: '100%'
+                });
 		function readURL(input) {
 
 				if (input.files && input.files[0]) {
