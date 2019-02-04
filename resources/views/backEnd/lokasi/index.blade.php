@@ -65,7 +65,7 @@ Kelola Data Lokasi
 <thead>
     <tr>
         <th>No.</th>
-        <th>Name</th>
+        <th>Kandang</th>
         <th>Area</th>
         <th>Deskripsi</th>
         <th>Last Update</th>
