@@ -65,7 +65,7 @@ Recording Produksi
     <tr>
         <td>{{ $i}}</td>
         <td><a href="{{ url('produksi', $item->id) }}">{{ $item->prod_tgl }}</a></td>
-        <td>{{ $item->kandang }}</td>
+        <td>{{ $item->getlokasi->name }}</td>
         <td>{{ $item->umur }}</td>
         <td>{{ $item->gr_butir }}</td>
         <td>{{ $item->kg_1000 }}</td>
