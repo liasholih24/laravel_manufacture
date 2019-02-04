@@ -55,9 +55,8 @@
                                         <td>{{ date('d/m/Y', strtotime($r->date)) }}</td>
                                         <td>{{ $r->desc }}</td>
                                         <td>{{ empty($r->createdby->first_name) ? "" : $r->createdby->first_name }} {{ empty($r->createdby->last_name) ? "" : $r->createdby->last_name }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             <a href="{{ url('pemakaian/' . $r->id . '/edit') }}" class="btn btn-outline btn-warning btn-xs">Ubah</a>
-                                            <a href="{{ url('pemakaian/' . $r->id . '/print') }}" class="btn btn-outline btn-primary btn-xs" target="_blank">Cetak</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -83,7 +82,13 @@
     <script>
         $(document).ready(function(){
             var oTable = $('#tblpemakaian').DataTable({
-                order: [0, 'desc']
+                order: [0, 'desc'],
+                columnDefs: [
+                    {width: 70, targets: 0},
+                    {width: 70, targets: 1},
+                    {width: 100, targets: 3},
+                    {width: 100, targets: 4}
+                ]
             });
         });
     </script>
