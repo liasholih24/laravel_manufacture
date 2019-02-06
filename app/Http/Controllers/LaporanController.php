@@ -7,10 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use App\Penjualan;
 use App\Pembelian;
-use App\Tabungan;
-use App\Sedekah;
-use App\Penadah;
-use App\Sampah;
 use App\Satuan;
 use App\Lokasi;
 use App\Stock;
@@ -60,14 +56,9 @@ class LaporanController extends Controller
         return view('backEnd.laporan.pembelian', compact('filters'));
     }
 
-    public function sedekah()
-    {
-        return view('backEnd.laporan.sedekah');
-    }
-
     public function stocksapi()
     {
-        $filterdata= ""; $filterRange= "AND MONTH(`date`) = MONTH(NOW()) ";
+        $filterdata= ""; $filterRange= "";
         $gudang = Input::get('gudang');
         $fromDate = Input::get('fromDate');
         $toDate = Input::get('toDate');
@@ -97,62 +88,9 @@ class LaporanController extends Controller
         return Datatables::of($tables)->make(true);
     }
 
-    public function tabunganapi(Request $request)
-    {
-        $filterRange= "";
+    
 
-        $fromDate = Input::get('fromDate');
-        $toDate = Input::get('toDate');
-
-        if (!empty($fromDate) && empty($toDate)){
-            $filterRange = "AND DATE(t.created_at) = '$fromDate' ";
-        }
-        if (!empty($toDate) && empty($fromDate)){
-            $filterRange = "AND DATE(t.created_at) = '$toDate' ";
-        }
-        if (!empty($toDate) && !empty($fromDate)){
-            $filterRange = "AND DATE(t.created_at) BETWEEN '$fromDate' AND '$toDate'";
-        } 
-
-        $tables = DB::select(
-            DB::raw("SELECT max(t.id) as id 
-                    ,MAX(t.trx_code) as trx_code
-                    ,MAX(t.norek) as norek 
-                    ,MAX(n.nama_depan) as nasabah 
-                    ,sum(t.debit) as debit
-                    ,sum(t.kredit) as kredit
-                    ,sum(t.kredit) - sum(t.debit) as saldo
-                    ,sum(t.saldo_sampah) as saldo_sampah
-                    ,MAX(t.keterangan) as keterangan 
-                    ,max(t.created_at) as created_at
-            from tabungans t
-            LEFT JOIN nasabahs n on n.norek = t.norek
-            WHERE 1 = 1  $filterRange
-            GROUP BY t.id ")
-  );
-
-    return Datatables::of($tables)->make(true);
-    }
-
-    public function sedekahapi(Request $request)
-    {
-        $tables = Sedekah::select('id', 'code', 'total_kg', 'total_rp', 'perusahaan', 'keterangan');
-        if ($request->fromDate&&$request->toDate) {
-            $tables->whereBetween('created_at', [$request->fromDate,$request->toDate]);
-        }
-        $tables= $tables->get();
-        return Datatables::of($tables)
-        ->editColumn('total_rp', function ($tables) {
-            return number_format($tables->total_rp, 0);
-        })
-        ->editColumn('total_kg', function ($tables) {
-            return number_format($tables->total_kg, 0);
-        })
-        ->editColumn('created_at', function ($tables) {
-            return date("d F Y  H:i", strtotime($tables->created_at));
-        })
-        ->make(true);
-    }
+   
 
     public function penjualanapi(Request $request)
     {
