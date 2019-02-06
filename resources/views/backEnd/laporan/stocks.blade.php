@@ -254,7 +254,7 @@ Laporan Persediaan
  
             // Update footer
             $( api.column( 4 ).footer() ).html(
-                ''+QtyIn +''
+                ''+QtyIn.toFixed(2) +''
             );
 
         }
