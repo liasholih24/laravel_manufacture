@@ -13,6 +13,50 @@ Laporan Recording
 @endsection
 @section('content')
 <div class="wrapper wrapper-content">
+<div class="row " >
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title row">
+                            <h5>Filter Laporan</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                             
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                  
+                        <div class="row ibox-content" >
+                            <div class="">
+                                <div class="form-group" >
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Farm</label>
+                                        {{ Form::select('strain', $farms, null, ['class' => 'form-control Farm','id'=>'farm','placeholder' => 'Pilih Farm']) }}
+                                    </div>
+                              
+                                </div>
+                                <div class="form-group" id="data_4" style="">
+                                <label class="control-label">Range Waktu</label>
+                                    <div class="input-daterange input-group" id="datepicker">
+                                    <input type="text" class="input-sm-2 Range form-control" name="start" id="from">
+                                    <span class="input-group-addon">to</span>
+                                    <input type="text" class="input-sm-2 Range form-control" name="end" id="to">
+                                </div>
+                              
+                            </div>
+                         </div>
+                          
+                        </div>
+                    </div>
+                
+                </div>
+
+            
+
+                </div>
     <div class="row detail_content3">
   
     <div class="col-lg-12 detail_content2" style="background-color: white">
@@ -50,14 +94,7 @@ Laporan Recording
     <div class="table-responsive">
   
 <table class="table table-striped table-bordered table-hover" id="tblrecording">
-<div class="form-group" id="data_4" style="margin-left:800px;">
-        <label class="font-noraml">Range Waktu</label>
-            <div class="input-daterange input-group" id="datepicker">
-            <input type="text" class="input-sm-2 Range form-control" name="start" id="from">
-            <span class="input-group-addon">to</span>
-            <input type="text" class="input-sm-2 Range form-control" name="end" id="to">
-            
-    </div>
+
 
 <thead>
 <tr>
@@ -179,6 +216,17 @@ Laporan Recording
             to = $('#to').val();
 
         table.ajax.url("{{url("/recordingapi")}}?fromDate="+from+"&toDate="+to);
+        table.ajax.reload();
+       });
+
+       $('.Farm').on('change', function(e){
+         var from = $('#from').val(),
+             farm = $('#farm').val(),
+             to = $('#to').val();
+
+            
+
+        table.ajax.url("{{url("/recordingapi")}}?farm="+farm+"&fromDate="+from+"&toDate="+to);
         table.ajax.reload();
        });
 

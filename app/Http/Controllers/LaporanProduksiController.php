@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use DB;
+use App\Lokasi;
 use Datatables;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -20,15 +21,17 @@ class LaporanProduksiController extends Controller
     {
         $id = "";
         $datenow = date('Y-m-d');
+        $farms = Lokasi::where('depth', 0)->pluck('name','id');
 
-        return view('backEnd.laporan.recording', compact('id', 'datenow'));
+        return view('backEnd.laporan.recording', compact('id', 'datenow','farms'));
     }
 
     public function recordingapi()
     {
-        $filterdata= ""; $filterRange= "AND MONTH(p.prod_tgl) = MONTH(NOW()) ";
+        $filterFarm= ""; $filterRange= "AND MONTH(p.prod_tgl) = MONTH(NOW()) ";
         $fromDate = Input::get('fromDate');
         $toDate = Input::get('toDate');
+        $farm = Input::get('farm');
 
         if (!empty($fromDate) && empty($toDate)){
             $filterRange = "AND DATE(p.prod_tgl) = '$fromDate' ";
@@ -38,6 +41,9 @@ class LaporanProduksiController extends Controller
         }
         if (!empty($toDate) && !empty($fromDate)){
             $filterRange = "AND DATE(p.prod_tgl) BETWEEN '$fromDate' AND '$toDate'";
+        }
+        if (!empty($farm)){
+            $filterFarm = "AND DATE(k0.id) = '$farm' ";
         }
 
         $tables = DB::select(
@@ -58,7 +64,7 @@ class LaporanProduksiController extends Controller
                             JOIN lokasis k ON k.id = p.kandang
                             JOIN lokasis k0 ON k0.id = k.parent_id
                             JOIN pakans pk ON pk.id = p.pakan_jenis
-                        WHERE 1=1 $filterRange 
+                        WHERE 1=1 $filterRange $filterFarm 
                         ")
                     );
         return Datatables::of($tables)->make(true);
