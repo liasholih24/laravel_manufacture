@@ -226,7 +226,7 @@ Laporan Recording
              from = $('#from').val(),
              to = $('#to').val();
 
-        table.ajax.url("{{url("/recordingapi")}}?farm="+farm);
+        table.ajax.url("{{url("/recordingapi")}}?farm="+farm+"&fromDate="+from+"&toDate="+to);
         table.ajax.reload();
        });
 
