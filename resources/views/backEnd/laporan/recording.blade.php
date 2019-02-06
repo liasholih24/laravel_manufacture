@@ -212,19 +212,18 @@ Laporan Recording
 
 
       $('.Range').on('change', function(e){
-         var from = $('#from').val(),
-            to = $('#to').val();
+         var    farm = $('#farm').val(),
+                from = $('#from').val(),
+                to = $('#to').val();
 
-        table.ajax.url("{{url("/recordingapi")}}?fromDate="+from+"&toDate="+to);
+        table.ajax.url("{{url("/recordingapi")}}?farm="+farm);
         table.ajax.reload();
        });
 
        $('.Farm').on('change', function(e){
-         var from = $('#from').val(),
-             farm = $('#farm').val(),
+         var farm = $('#farm').val(),
+             from = $('#from').val(),
              to = $('#to').val();
-
-            
 
         table.ajax.url("{{url("/recordingapi")}}?farm="+farm+"&fromDate="+from+"&toDate="+to);
         table.ajax.reload();
