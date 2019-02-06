@@ -43,7 +43,7 @@ class LaporanProduksiController extends Controller
             $filterRange = "AND DATE(p.prod_tgl) BETWEEN '$fromDate' AND '$toDate'";
         }
         if (!empty($farm)){
-            $filterFarm = "AND DATE(k0.id) = '$farm' ";
+            $filterFarm = "AND DATE(k.parent_id) = '$farm' ";
         }
 
         $tables = DB::select(
