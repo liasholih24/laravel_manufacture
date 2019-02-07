@@ -55,7 +55,7 @@ class LaporanProduksiController extends Controller
                                 FORMAT((p.p_utuh_butir / p.ttl_butir * 100),2) as persen_utuh,
                                 FORMAT((p.p_putih_butir / p.ttl_butir * 100),2) as persen_putih,
                                 FORMAT((p.p_retak_butir / p.ttl_butir * 100),2) as persen_retak,
-                                FORMAT((p.ttl_butir/7/p.ttl_butir * 100),2) as persen_hd,
+                                FORMAT((p.ttl_butir/p.ttl_butir * 100),2) as persen_hd,
                                 p.pakan_qty,pk.name as pakan_jenis,
                                 FORMAT((p.pakan_qty/p.jml_akhir*1000),2) as gram_ekor,
                                 FORMAT((p.pakan_qty/p.ttl_kg),2) as fcr,
