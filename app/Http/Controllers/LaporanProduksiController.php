@@ -49,7 +49,7 @@ class LaporanProduksiController extends Controller
         $tables = DB::select(
                 DB::raw("SELECT CONCAT(k0.name,'/', k.name) as kandang, p.umur, 
                                 p.jml_awal as ppl_awal, p.jml_so as ppl_so, p.jml_pindah as ppl_pindah, p.jml_afkir as ppl_afkir, p.jml_mati as ppl_mati,p.jml_akhir as ppl_akhir,
-                                FORMAT((p.jml_mati/ p.jml_awal - p.jml_pindah * 100),2) as persen_mati,
+                                FORMAT((p.jml_mati/ (p.jml_awal - p.jml_pindah) * 100),2) as persen_mati,
                                 p.p_utuh_butir , p.p_putih_butir , p.p_retak_butir ,
                                 p.ttl_kg as ttl_kg, p.ttl_butir as ttl_butir, p.gr_butir as gr_butir, p.kg_1000 as kg_1000 ,
                                 FORMAT((p.p_utuh_butir / p.ttl_butir * 100),2) as persen_utuh,
