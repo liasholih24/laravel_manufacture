@@ -100,31 +100,31 @@ Recording Produksi
                 </div>
                 {!! Form::label('jml_so', 'Jml SO', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::number('jml_so', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_so','placeholder'=>'Jml. SO']) !!}
+                    {!! Form::number('jml_so', 0, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_so','placeholder'=>'Jml. SO']) !!}
                     {!! $errors->first('jml_so', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
             <div class="form-group">
                 {!! Form::label('jml_masuk', 'Jml Masuk', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::number('jml_masuk', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_masuk','placeholder'=>'Jual/Akhir']) !!}
+                    {!! Form::number('jml_masuk', 0, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_masuk','placeholder'=>'Jual/Akhir']) !!}
                     {!! $errors->first('jml_masuk', '<p class="help-block">:message</p>') !!}
                 </div>
                 {!! Form::label('jml_mati', 'Jml Mati', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::number('jml_mati', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_mati','placeholder'=>'Pindah/Masuk']) !!}
+                    {!! Form::number('jml_mati', 0, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_mati','placeholder'=>'Pindah/Masuk']) !!}
                     {!! $errors->first('jml_mati', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
             <div class="form-group ">
                 {!! Form::label('jml_pindah', 'Jml. Pindah', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::number('jml_pindah', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_pindah','placeholder'=>'Jml. Pindah']) !!}
+                    {!! Form::number('jml_pindah', 0, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_pindah','placeholder'=>'Jml. Pindah']) !!}
                     {!! $errors->first('jml_pindah', '<p class="help-block">:message</p>') !!}
                 </div>
                 {!! Form::label('jml_afkir', 'Jml Afkir', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::number('jml_afkir', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_afkir','placeholder'=>'Jml. Afkir']) !!}
+                    {!! Form::number('jml_afkir', 0, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_afkir','placeholder'=>'Jml. Afkir']) !!}
                     {!! $errors->first('jml_afkir', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
