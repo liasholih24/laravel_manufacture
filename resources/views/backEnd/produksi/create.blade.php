@@ -9,6 +9,7 @@ Recording Produksi
   {{ HTML::style('assets_back/css/plugins/select2/select2.min.css')}}
   {{ HTML::style('assets_back/css/plugins/datapicker/datepicker3.css')}}
   
+  
 @endsection
 @section('content')
 <div class="wrapper wrapper-content">
@@ -93,37 +94,37 @@ Recording Produksi
             <div class="form-group">
                 {!! Form::label('jml_akhir', 'Jml Akhir', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('jml_akhir', 0, ['class' => 'form-control','id'=>'jml_akhir','placeholder'=>'Jml. Akhir']) !!}
+                    {!! Form::number('jml_akhir', 0, ['class' => 'form-control','min'=>'0','step'=>'any','id'=>'jml_akhir','placeholder'=>'Jml. Akhir']) !!}
                     {!! Form::hidden('jml_awal', 0, ['class' => 'form-control','id'=>'jml_akhir0','placeholder'=>'Jml. Akhir']) !!}
                     {!! $errors->first('jml_akhir', '<p class="help-block">:message</p>') !!}
                 </div>
                 {!! Form::label('jml_so', 'Jml SO', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('jml_so', null, ['class' => 'form-control calcAkhir','id'=>'jml_so','placeholder'=>'Jml. SO']) !!}
+                    {!! Form::text('jml_so', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_so','placeholder'=>'Jml. SO']) !!}
                     {!! $errors->first('jml_so', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
             <div class="form-group">
                 {!! Form::label('jml_masuk', 'Jml Masuk', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('jml_masuk', null, ['class' => 'form-control calcAkhir','id'=>'jml_masuk','placeholder'=>'Jual/Akhir']) !!}
+                    {!! Form::text('jml_masuk', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_masuk','placeholder'=>'Jual/Akhir']) !!}
                     {!! $errors->first('jml_masuk', '<p class="help-block">:message</p>') !!}
                 </div>
                 {!! Form::label('jml_mati', 'Jml Mati', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('jml_mati', null, ['class' => 'form-control calcAkhir','id'=>'jml_mati','placeholder'=>'Pindah/Masuk']) !!}
+                    {!! Form::text('jml_mati', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_mati','placeholder'=>'Pindah/Masuk']) !!}
                     {!! $errors->first('jml_mati', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
             <div class="form-group ">
                 {!! Form::label('jml_pindah', 'Jml. Pindah', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('jml_pindah', null, ['class' => 'form-control calcAkhir','id'=>'jml_pindah','placeholder'=>'Jml. Pindah']) !!}
+                    {!! Form::text('jml_pindah', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_pindah','placeholder'=>'Jml. Pindah']) !!}
                     {!! $errors->first('jml_pindah', '<p class="help-block">:message</p>') !!}
                 </div>
                 {!! Form::label('jml_afkir', 'Jml Afkir', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('jml_afkir', null, ['class' => 'form-control calcAkhir','id'=>'jml_afkir','placeholder'=>'Jml. Afkir']) !!}
+                    {!! Form::text('jml_afkir', null, ['class' => 'form-control calcAkhir','min'=>'0','step'=>'any','id'=>'jml_afkir','placeholder'=>'Jml. Afkir']) !!}
                     {!! $errors->first('jml_afkir', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
