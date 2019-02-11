@@ -210,7 +210,7 @@ Laporan Recording
                             status_hd = data.status_hd; 
                             persen_hd = data.persen_hd; 
                     
-            				if (status_hd != "normal"){
+            				if (status_hd == "abnormal"){
                        return '<b style="color:red;">' + persen_hd + '</b>';
                        return type === 'export' ? row.Descripcion: "";
                     }else{
