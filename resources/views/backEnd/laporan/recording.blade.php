@@ -229,7 +229,7 @@ Laporan Recording
                             gr_butir = data.gr_butir; 
                             status_grower = data.status_grower; 
                     
-            				if (status_grower != "normal"){
+            				if (status_grower == "abnormal"){
                        return '<b style="color:red;">' + gr_butir + '</b>';
                        return type === 'export' ? row.Descripcion: "";
                     }else{
@@ -249,7 +249,7 @@ Laporan Recording
                             fcr = data.fcr; 
                             status_fc = data.status_fc; 
                     
-            				if (status_fc != "normal"){
+            				if (status_fc == "abnormal"){
                        return '<b style="color:red;">' + fcr + '</b>';
                        return type === 'export' ? row.Descripcion: "";
                     }else{
