@@ -178,7 +178,23 @@ Laporan Recording
            {data: 'ppl_pindah', name: 'ppl_pindah'},
            {data: 'ppl_afkir', name: 'ppl_afkir'},
            {data: 'ppl_mati', name: 'ppl_mati'},
-           {data: 'persen_mati', name: 'persen_mati'},
+
+           { data: 'persen_mati', name: 'persen_mati',
+            "render": function ( data, type, row ) {
+            				var persen_mati;
+                            persen_mati = parseFloat(data.replace(',','').replace('$','')); 
+                    console.log(persen_mati);
+            				if (persen_mati > 0.38){
+                       return '<b style="color:red;">' + data + '</b>';
+                       return type === 'export' ? row.Descripcion: "";
+                    }else{
+                       return data;
+                    }
+                    
+                },
+             },
+
+           //{data: 'persen_mati', name: 'persen_mati'},
            {data: 'ppl_akhir', name: 'ppl_akhir'},
 
            {data: 'p_utuh_butir', name: 'p_utuh_butir'},
@@ -187,25 +203,79 @@ Laporan Recording
            {data: 'persen_putih', name: 'persen_putih'},
            {data: 'p_retak_butir', name: 'p_retak_butir'},
            {data: 'persen_retak', name: 'persen_retak'},
-           {data: 'persen_hd', name: 'persen_hd'},
+          // {data: 'persen_hd', name: 'persen_hd'},
+           { data: {status_hd : "status_hd", persen_hd : "persen_hd"},
+            "render": function ( data, type, row ) {
+            				var status_hd, persen_hd;
+                            status_hd = data.status_hd; 
+                            persen_hd = data.persen_hd; 
+                    
+            				if (status_hd == "abnormal"){
+                       return '<b style="color:red;">' + persen_hd + '</b>';
+                       return type === 'export' ? row.Descripcion: "";
+                    }else{
+                       return persen_hd;
+                    }
+                    
+                },
+             },
+          
            {data: 'ttl_butir', name: 'ttl_butir'},
            {data: 'ttl_kg', name: 'ttl_kg'},
-           {data: 'gr_butir', name: 'gr_butir'},
+          // {data: 'gr_butir', name: 'gr_butir'},
+           { data: {gr_butir : "gr_butir", status_grower : "status_grower"},
+            "render": function ( data, type, row ) {
+            				var gr_butir, status_grower;
+                            gr_butir = data.gr_butir; 
+                            status_grower = data.status_grower; 
+                    
+            				if (status_grower == "abnormal"){
+                       return '<b style="color:red;">' + gr_butir + '</b>';
+                       return type === 'export' ? row.Descripcion: "";
+                    }else{
+                       return gr_butir;
+                    }
+                    
+                },
+             },
            {data: 'kg_1000', name: 'kg_1000'},
            {data: 'gram_ekor', name: 'gram_ekor'},
            {data: 'pakan_qty', name: 'pakan_qty'},
            {data: 'pakan_jenis', name: 'pakan_jenis'},
-           {data: 'fcr', name: 'fcr'},
+           //{data: 'fcr', name: 'fcr'},
+           { data: {fcr : "fcr", status_fc : "status_fc"},
+            "render": function ( data, type, row ) {
+            				var fcr, status_fc;
+                            fcr = data.fcr; 
+                            status_fc = data.status_fc; 
+                    
+            				if (status_fc == "abnormal"){
+                       return '<b style="color:red;">' + fcr + '</b>';
+                       return type === 'export' ? row.Descripcion: "";
+                    }else{
+                       return fcr;
+                    }
+                    
+                },
+             }
        ],  
       lengthMenu: [[10, 25, 50, 100, 250, 500], [10, 25, 50,100,250,500, "All"]],
-    
+      
        
        dom: '<"html5buttons"B>lTfgitp',
     
      
        buttons: [
-           {extend: 'excel', title: 'Laporan Recording'},
-           {extend: 'pdf', title: 'Laporan Recording'}
+           {extend: 'excel', title: 'Laporan Recording',
+            exportOptions: {
+                        orthogonal: 'export',
+                    }
+           },
+           {extend: 'pdf', title: 'Laporan Recording',orientation: 'landscape',
+            exportOptions: {
+                        orthogonal: 'export',
+                    }
+           }
        ]
    });
 

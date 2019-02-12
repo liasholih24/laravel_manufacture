@@ -56,14 +56,35 @@ class LaporanProduksiController extends Controller
                                 FORMAT((p.p_putih_butir / p.ttl_butir * 100),2) as persen_putih,
                                 FORMAT((p.p_retak_butir / p.ttl_butir * 100),2) as persen_retak,
                                 FORMAT((p.ttl_butir/p.jml_akhir * 100),2) as persen_hd,
+                                CASE 
+                                WHEN FORMAT((p.ttl_butir/p.jml_akhir * 100),2) >= sl.hd0 AND FORMAT((p.ttl_butir/p.jml_akhir * 100),2) <= sl.hd1
+                                THEN 'normal'
+                                WHEN FORMAT((p.ttl_butir/p.jml_akhir * 100),2) is null OR sl.hd0 is null THEN 'not set'
+                                ELSE 'abnormal'
+                                END AS status_hd,
+                                CASE 
+                                WHEN p.gr_butir >= sg.bbg0 AND p.gr_butir <= sg.bbg1
+                                THEN 'normal'
+                                WHEN p.gr_butir is null OR sg.bbg0 is null THEN 'param not set'
+                                ELSE 'abnormal'
+                                END AS status_grower,
                                 p.pakan_qty,pk.name as pakan_jenis,
                                 FORMAT((p.pakan_qty/p.jml_akhir*1000),2) as gram_ekor,
-                                FORMAT((p.pakan_qty/p.ttl_kg),2) as fcr,
+                               FORMAT((p.pakan_qty/p.ttl_kg),2) as fcr,
+                                CASE 
+                                WHEN FORMAT((p.pakan_qty/p.ttl_kg),2) >= sf.fc0 AND FORMAT((p.pakan_qty/p.ttl_kg),2) <= sf.fc1
+                                THEN 'normal'
+                                WHEN FORMAT((p.pakan_qty/p.ttl_kg),2)is null OR sf.fc0 is null THEN 'not set'
+                                ELSE 'abnormal'
+                                END AS status_fc,
                                 p.prod_tgl 
                          FROM produksis p
                             JOIN lokasis k ON k.id = p.kandang
                             JOIN lokasis k0 ON k0.id = k.parent_id
                             JOIN pakans pk ON pk.id = p.pakan_jenis
+                            LEFT OUTER JOIN standarlayers sl ON p.umur = sl.umur AND p.strain = sl.standar
+                            LEFT OUTER JOIN standargrowers sg ON p.umur = sg.umur AND p.strain = sg.standar
+                            LEFT OUTER JOIN standarfcs sf ON p.umur BETWEEN sf.umur0 AND sf.umur1 
                         WHERE 1=1 $filterRange $filterFarm 
                         ")
                     );
