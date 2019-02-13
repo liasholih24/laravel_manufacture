@@ -161,11 +161,8 @@
     <script>
         $("#tanggal").datepicker({
                 format :  'yyyy-mm-dd',
-              keyboardNavigation : false,
-              forceParce: false,
               todayBtn: 'linked',
               todayHighlight :  true,
-              daysOfWeekDisabled : [0],
         });
         $('.select-item').select2({
             placeholder: 'Pilih Item'
