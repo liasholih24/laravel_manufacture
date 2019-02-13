@@ -42,6 +42,7 @@
                                         <th>Nomor</th>
                                         <th>Tanggal</th>
                                         <th>Deskripsi</th>
+                                        <th>Customer</th>
                                         <th>Dibuat oleh</th>
                                         <th>Actions</th>
                                     </tr>
@@ -54,6 +55,7 @@
                                         <td>{{ $r->number }}</td>
                                         <td>{{ date('d/m/Y', strtotime($r->date)) }}</td>
                                         <td>{{ $r->desc }}</td>
+                                        <td>{{ $r->getcustomer->name }}</td>
                                         <td>{{ empty($r->createdby->first_name) ? "" : $r->createdby->first_name }} {{ empty($r->createdby->last_name) ? "" : $r->createdby->last_name }}</td>
                                         <td class="text-center">
                                             <a href="{{ url('penjualan/' . $r->id . '/edit') }}" class="btn btn-outline btn-warning btn-xs">Ubah</a>
