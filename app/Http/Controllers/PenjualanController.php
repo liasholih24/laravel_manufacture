@@ -35,7 +35,8 @@ class PenjualanController extends Controller
      */
     public function index()
     {
-        $penjualan = Penjualan::whereMonth('created_at', '=', date('m'))->get();
+        //$penjualan = Penjualan::whereMonth('created_at', '=', date('m'))->get();
+        $penjualan = Penjualan::get();
         return view('backEnd.penjualan.index', ['penjualan' => $penjualan]);
     }
 
