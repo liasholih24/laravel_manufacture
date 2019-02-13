@@ -54,7 +54,7 @@
                                     <?php $i++ ?>
                                     <tr>
                                         <td>{{ $r->number }}</td>
-                                        <td>{{ $r->getlokasi->name }}</td>
+                                        <td>{{ empty($r->getlokasi->name) ? "Not Set" : $r->getlokasi->name }}</td>
                                         <td>{{ date('d/m/Y', strtotime($r->date)) }}</td>
                                         <td>{{ $r->desc }}</td>
                                         <td>{{ $r->getcustomer->name }}</td>
