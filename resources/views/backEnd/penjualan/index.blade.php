@@ -40,6 +40,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nomor</th>
+                                        <th>Farm</th>
                                         <th>Tanggal</th>
                                         <th>Deskripsi</th>
                                         <th>Customer</th>
@@ -53,6 +54,7 @@
                                     <?php $i++ ?>
                                     <tr>
                                         <td>{{ $r->number }}</td>
+                                        <td>{{ $r->getlokasi->name }}</td>
                                         <td>{{ date('d/m/Y', strtotime($r->date)) }}</td>
                                         <td>{{ $r->desc }}</td>
                                         <td>{{ $r->getcustomer->name }}</td>
