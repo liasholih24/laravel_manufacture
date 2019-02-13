@@ -86,7 +86,7 @@
     <script>
         $(document).ready(function(){
             var oTable = $('#tblpenjualan').DataTable({
-                order: [0, 'desc'],
+                order: [1, 'asc'],
                 columnDefs: [
                     {width: 70, targets: 0},
                     {width: 70, targets: 1},
