@@ -73,13 +73,13 @@ class LaporanProduksiController extends Controller
                                 CASE 
                                 WHEN FORMAT((p.ttl_butir/p.jml_akhir * 100),2) >= sl.hd0 AND FORMAT((p.ttl_butir/p.jml_akhir * 100),2) <= sl.hd1
                                 THEN 'normal'
-                                WHEN FORMAT((p.ttl_butir/p.jml_akhir * 100),2) is null OR sl.hd0 is null THEN 'not set'
+                                WHEN FORMAT((p.ttl_butir/p.jml_akhir * 100),2) is null THEN 'not set'
                                 ELSE 'abnormal'
                                 END AS status_hd,
                                 CASE 
                                 WHEN p.gr_butir >= sl.btg0 AND p.gr_butir <= sl.btg1
                                 THEN 'normal'
-                                WHEN p.gr_butir is null OR sl.btg0 is null THEN 'not set'
+                                WHEN p.gr_butir is null THEN 'not set'
                                 ELSE 'abnormal'
                                 END AS status_gr_butir,
                                 p.pakan_qty,pk.name as pakan_jenis,
