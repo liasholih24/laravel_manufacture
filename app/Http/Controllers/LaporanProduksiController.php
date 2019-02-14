@@ -71,7 +71,7 @@ class LaporanProduksiController extends Controller
                                 END AS status_retak,
                                 FORMAT((p.ttl_butir/p.jml_akhir * 100),2) as persen_hd,
                                 CASE 
-                                WHEN FORMAT((p.ttl_butir/p.jml_akhir * 100),2) BETWEEN sl.hd0 AND sl.hd1
+                                WHEN FORMAT((p.ttl_butir/p.jml_akhir * 100),2) >= sl.hd0 AND  FORMAT((p.ttl_butir/p.jml_akhir * 100),2) <= sl.hd1
                                 THEN 'normal'
                                 WHEN FORMAT((p.ttl_butir/p.jml_akhir * 100),2) is null THEN 'not set'
                                 ELSE 'abnormal'
