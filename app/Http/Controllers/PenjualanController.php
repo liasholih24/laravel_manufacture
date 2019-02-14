@@ -36,7 +36,8 @@ class PenjualanController extends Controller
     public function index()
     {
         $penjualan = Penjualan::whereMonth('created_at', '=', date('m'))->get();
-        return view('backEnd.penjualan.index', ['penjualan' => $penjualan]);
+        $lokasi = Lokasi::where('depth', 0)->get();
+        return view('backEnd.penjualan.index', ['penjualan' => $penjualan, 'lokasi' => $lokasi]);
     }
 
     /**
@@ -185,6 +186,11 @@ class PenjualanController extends Controller
     {
         $customer = Customer::findOrFail($id);
         return response($customer);
+    }
+
+    public function cetak(Request $request)
+    {
+        return view('backEnd.penjualan.cetak');
     }
 
 }

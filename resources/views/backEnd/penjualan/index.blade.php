@@ -19,6 +19,11 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Daftar Penjualan</h5>
+                        <a href="#">
+                            <button class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px; margin-left: 5px;" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-print"></i> Cetak Laporan
+                            </button>
+                        </a>
                         <a href="{{ url('penjualan/create') }}">
                             <button class="btn btn-sm btn-outline btn-success pull-right" style="margin-top: -7px">
                                 <i class="fa fa-plus-circle"></i> Tambah Penjualan
@@ -72,6 +77,49 @@
                         @endif
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <i class="fa fa-print modal-icon"></i>
+                    <h4 class="modal-title">Cetak Laporan Penjualan</h4>
+                </div>
+                <form action="{{ url('penjualan/cetak/laporan') }}" method="GET" class="form-horizontal" target="_blank">
+                    <div class="modal-body">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Lokasi</label>
+                            <div class="col-sm-7">
+                                <select name="storage_id" class="form-control input-sm" required>
+                                    <option value="">Pilih Lokasi</option>
+                                    @foreach($lokasi as $r)
+                                    <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Dari</label>
+                            <div class="col-sm-7">
+                                <input type="date" name="from_date" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Sampai</label>
+                            <div class="col-sm-7">
+                                <input type="date" name="to_date" class="form-control input-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Cetak</button>
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Tutup</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
