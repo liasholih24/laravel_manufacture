@@ -77,7 +77,7 @@ class LaporanProduksiController extends Controller
                                 ELSE 'abnormal'
                                 END AS status_hd,
                                 CASE 
-                                WHEN p.gr_butir BETWEEN sl.btg0 AND sl.btg1
+                                WHEN p.gr_butir >= sl.btg0 AND p.gr_butir <= sl.btg1
                                 THEN 'normal'
                                 WHEN p.gr_butir is null OR sl.btg0 is null THEN 'not set'
                                 ELSE 'abnormal' 
