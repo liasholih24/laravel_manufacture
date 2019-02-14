@@ -75,6 +75,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web']], function () {
     Route::resource('penjualan', 'PenjualanController');
     Route::get('penjualan/customer/{id}', 'PenjualanController@customer');
+    Route::get('penjualan/cetak/laporan', 'PenjualanController@cetak');
     Route::get('penjualan/{id}/print', ['uses' => 'PenjualanController@print', 'as' => 'penjualan.print']);
     Route::get('/refpj', 'PenjualanController@refpj');
     Route::get('/cekstock', 'PenjualanController@cekstock');
@@ -122,6 +123,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web']], function () {
     Route::resource('penerimaan', 'PenerimaanController');
     Route::get('penerimaan/pengajuan/{id}', 'PenerimaanController@pengajuan');
+    Route::get('penerimaan/cetak/laporan', 'PenerimaanController@cetak');
 });
 
 Route::group(['middleware' => ['web']], function () {

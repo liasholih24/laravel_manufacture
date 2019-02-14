@@ -35,9 +35,9 @@ class PenjualanController extends Controller
      */
     public function index()
     {
-        //$penjualan = Penjualan::whereMonth('created_at', '=', date('m'))->get();
         $penjualan = Penjualan::get();
-        return view('backEnd.penjualan.index', ['penjualan' => $penjualan]);
+        $lokasi = Lokasi::where('depth', 0)->get();
+        return view('backEnd.penjualan.index', ['penjualan' => $penjualan, 'lokasi' => $lokasi]);
     }
 
     /**
@@ -106,10 +106,10 @@ class PenjualanController extends Controller
         
     }
 
-    public function print($id)
+    /*public function print($id)
     {
         
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.
@@ -186,6 +186,13 @@ class PenjualanController extends Controller
     {
         $customer = Customer::findOrFail($id);
         return response($customer);
+    }
+
+    public function cetak(Request $request)
+    {
+        $data = DB::table('penjualans')->join('detailpenjualans', 'penjualans.id', '=', 'detailpenjualans.penjualan_id')->selectRaw('penjualans.date, penjualans.number, penjualans.desc, sum(detailpenjualans.qty) as qty, sum(detailpenjualans.price) as price')->where('detailpenjualans.deleted_at', null)->where('penjualans.deleted_at', null)->whereRaw('penjualans.date between "'.$request->from_date.'" and "'.$request->to_date.'"')->groupBy(['penjualans.id', 'penjualans.date', 'penjualans.number', 'penjualans.desc'])->get();
+        $storage = DB::table('lokasis')->where('id', $request->storage_id)->first();
+        return view('backEnd.penjualan.cetak', ['data' => $data, 'storage' => $storage, 'from' => $request->from_date, 'to' => $request->to_date]);
     }
 
 }
