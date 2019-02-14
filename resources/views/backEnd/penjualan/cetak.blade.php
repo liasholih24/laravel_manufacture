@@ -18,45 +18,50 @@
 <body onload="window.print();">
     <table width="99%">
         <tr>
-            <td colspan="9" style="text-align: center; font-weight: bold;">MBA</td>
+            <td colspan="7" style="text-align: center; font-weight: bold;">{{ $storage->name }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="text-align: center; font-weight: bold;">LAPORAN PEMBELIAN PAKAN</td>
+            <td colspan="7" style="text-align: center; font-weight: bold;">LAPORAN PENJUALAN TELUR BAGUS</td>
         </tr>
         <tr>
-            <td colspan="9" style="text-align: center; font-weight: bold;">PERIODE</td>
+            <td colspan="7" style="text-align: center; font-weight: bold;">PERIODE {{ date('d/m/Y', strtotime($from)) }} - {{ date('d/m/Y', strtotime($to)) }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="text-align: center; font-weight: bold;">&nbsp;</td>
+            <td colspan="7" style="text-align: center; font-weight: bold;">&nbsp;</td>
         </tr>
-        <tr>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">TGL</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">NO MOBIL</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">SUPPLIER</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">FAKTUR</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">JENIS</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">BALL</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">QTY (KG)</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">HARGA/KG</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">JUMLAH</td>
+        <tr style="line-height: 30px; border-top: 1px dashed #000; border-bottom: 1px dashed #000;">
+            <td style="text-align: center; font-weight: bold;">TANGGAL</td>
+            <td style="text-align: center; font-weight: bold;">N.BUKTI</td>
+            <td style="font-weight: bold;">CUSTOMER</td>
+            <td style="font-weight: bold;">KETERANGAN</td>
+            <td style="text-align: center; font-weight: bold;">QUANTITY</td>
+            <td style="text-align: center; font-weight: bold;">HARGA</td>
+            <td style="text-align: center; font-weight: bold;">JUMLAH</td>
         </tr>
+        <?php 
+            $tqty    = 0;
+            $tjumlah = 0;
+        ?>
+        @foreach($data as $r)
         <tr>
-            <td style="text-align: center; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; border: 1px solid #000;">&nbsp;</td>
+            <td style="text-align: center;">{{ date('d-m-y', strtotime($r->date)) }}</td>
+            <td style="text-align: center;">{{ $r->number }}</td>
+            <td>{{ $r->name }}</td>
+            <td>{{ $r->desc }}</td>
+            <td style="text-align: right;">{{ number_format($r->qty,2,",",".") }}</td>
+            <td style="text-align: right;">{{ number_format($r->price,2,",",".") }}</td>
+            <td style="text-align: right;">{{ number_format($r->qty*$r->price,2,",",".") }}</td>
         </tr>
+        <?php 
+            $tqty    = $tqty + $r->qty;
+            $tjumlah = $tjumlah + ($r->qty*$r->price);
+        ?>
+        @endforeach
         <tr>
-            <td colspan="5" style="text-align: center; font-weight: bold; border: 1px solid #000;">Total</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">&nbsp;</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">&nbsp;</td>
+            <td colspan="4" style="text-align: center; font-weight: bold; border-top: 1px dashed #000;">&nbsp;</td>
+            <td style="text-align: right; font-weight: bold; border-top: 1px dashed #000;">{{ number_format($tqty,2,",",".") }}</td>
+            <td style="text-align: center; font-weight: bold; border-top: 1px dashed #000;">&nbsp;</td>
+            <td style="text-align: right; font-weight: bold; border-top: 1px dashed #000;">{{ number_format($tjumlah,2,",",".") }}</td>
         </tr>
     </table>
 </body>

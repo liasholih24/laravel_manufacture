@@ -190,7 +190,9 @@ class PenjualanController extends Controller
 
     public function cetak(Request $request)
     {
-        return view('backEnd.penjualan.cetak');
+        $data = DB::table('penjualans')->join('detailpenjualans', 'penjualans.id', '=', 'detailpenjualans.penjualan_id')->join('customers', 'penjualans.customer_id', '=', 'customers.id')->selectRaw('penjualans.date, penjualans.number, customers.name, penjualans.desc, sum(detailpenjualans.qty) as qty, sum(detailpenjualans.price) as price')->where('detailpenjualans.deleted_at', null)->where('penjualans.deleted_at', null)->where('penjualans.storage_id', $request->storage_id)->whereRaw('penjualans.date between "'.$request->from_date.'" and "'.$request->to_date.'"')->groupBy(['penjualans.id', 'penjualans.date', 'penjualans.number', 'penjualans.desc', 'customers.name'])->get();
+        $storage = DB::table('lokasis')->where('id', $request->storage_id)->first();
+        return view('backEnd.penjualan.cetak', ['data' => $data, 'storage' => $storage, 'from' => $request->from_date, 'to' => $request->to_date]);
     }
 
 }

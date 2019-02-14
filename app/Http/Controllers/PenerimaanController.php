@@ -199,7 +199,9 @@ class PenerimaanController extends Controller
 
     public function cetak(Request $request)
     {
-        return view('backEnd.penerimaan.cetak');
+        $data = DB::table('detailpenerimaans')->join('penerimaans', 'detailpenerimaans.penerimaan_id', '=', 'penerimaans.id')->join('suppliers', 'detailpenerimaans.supplier_id', '=', 'suppliers.id')->join('items', 'detailpenerimaans.item_id', '=', 'items.id')->selectRaw('penerimaans.date, suppliers.name as supplier_name, penerimaans.number, items.name as item_name, detailpenerimaans.qty, detailpenerimaans.price')->where('detailpenerimaans.deleted_at', null)->where('penerimaans.deleted_at', null)->where('penerimaans.storage_id', $request->storage_id)->whereRaw('penerimaans.date between "'.$request->from_date.'" and "'.$request->to_date.'"')->get();
+        $storage = DB::table('lokasis')->where('id', $request->storage_id)->first();
+        return view('backEnd.penerimaan.cetak', ['data' => $data, 'storage' => $storage, 'from' => $request->from_date, 'to' => $request->to_date]);
     }
 
 }
