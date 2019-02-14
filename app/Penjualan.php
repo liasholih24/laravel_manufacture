@@ -23,6 +23,14 @@ class Penjualan extends Model
         return $this->hasOne('App\User', 'id', 'updated_by');
     }
 
+    public function getcustomer(){
+        return $this->hasOne('App\Customer', 'id', 'customer_id');
+    }
+
+    public function getlokasi(){
+        return $this->hasOne('App\Lokasi', 'id', 'storage_id');
+    }
+
     /**
      * Attributes that should be mass-assignable.
      *
