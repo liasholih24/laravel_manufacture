@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use DB;
 use App\Produksi;
+use App\Pemakaian; 
+use App\DetailPemakaian;
 use App\Item;
 use App\Lokasi;
 use App\Satuan;
@@ -73,9 +75,52 @@ protected function validator(Request $request)
         
       $model = Produksi::create($request->all());
 
+
+      //input ke pemakaian
+
+
+      $number = Pemakaian::max('number');
+        if($number==null){
+            $number = 'RC-000001';
+        }
+        else{
+            $number = 'RC-'.sprintf('%06d', substr($number, 3) + 1);
+        }
+
+
+        $pemakaians = Pemakaian::create(['number' => $number
+                                        , 'storage_id' => $model->kandang
+                                        , 'date' => $model->prod_tgl
+                                        , 'desc' => 'Pemakaian pakan dari proses recording '.$number
+                                        , 'created_at' => $model->created_at
+                                        , 'created_by' => $model->created_by]);
+
+        $pakanitems = DB::select(
+            DB::raw("SELECT * FROM pakan_items a
+                WHERE pakan = ".$model->pakan_jenis.""));
+      
+        
+        if(!empty($pakanitems)){
+            foreach($pakanitems as $pakanitem){
+                    $dpemakaians = DetailPemakaian::create(['pemakaian_id' => $pemakaians->id
+                    , 'item_id' => $pakanitem->item
+                    , 'qty' => $pakanitem->qty
+                    , 'date' => $model->prod_tgl
+                    , 'desc' => 'ID Produksi-'.$model->id
+                    , 'created_at' => $model->created_at
+                    , 'created_by' => $model->created_by]);
+            }
+            }
+            
+        
+      //end ke pemakaian
+   
+
+
+
       Session::flash('alert-success', 'Produksi '.$model->name.' is created successfully');
 
-        return redirect('produksi');
+      return redirect('produksi');
     }
 
     /**
@@ -127,6 +172,35 @@ protected function validator(Request $request)
         
         $produksi = Produksi::findOrFail($id);
         $produksi->update($request->all());
+
+
+
+        //input ke pemakaian
+            // delete dulu detail pemakaian
+          $pemakaians =   DB::select(
+              DB::raw("SELECT id, `number` from pemakaians WHERE `desc` =  'ID Produksi-$id' "));
+
+            $detailpemakaian =   DetailPemakaian::where('pemakaian_id', $pemakaians[0]->id)->delete();
+
+           $pakanitems = DB::select(
+                DB::raw("SELECT * FROM pakan_items a
+                    WHERE pakan = ".$produksi->pakan_jenis.""));
+    
+      
+      if(!empty($pakanitems)){
+          foreach($pakanitems as $pakanitem){
+                  $dpemakaians = DetailPemakaian::create(['pemakaian_id' => $pemakaians[0]->id
+                  , 'item_id' => $pakanitem->item
+                  , 'qty' => $pakanitem->qty
+                  , 'date' => $produksi->prod_tgl
+                  , 'desc' => 'Pemakaian pakan dari proses recording '.$pemakaians[0]->number
+                  , 'created_at' => $produksi->created_at
+                  , 'created_by' => $produksi->created_by]);
+          }
+          }
+          
+      
+    //end ke pemakaian
 
         Session::flash('alert-success', ' Produksi '.$produksi->name.' is updated successfully');
 

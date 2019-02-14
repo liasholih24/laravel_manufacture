@@ -116,6 +116,37 @@ Edit Komposisi Pakan
       </tr>
     @endforeach
     </tbody>
+
+        @if(empty($details))
+        <tbody>
+            <tr id='addr0' data-id="0" class="hidden">
+                        <td data-name="del">
+                            <button name="del0" class='btn btn-default btn-xs glyphicon glyphicon-remove row-remove'></button>
+                        </td>
+                        <td data-name="item">
+                        <select  name="item[]" class="form-control Item chosen-select" data-placeholder="Pilih Item"  style="width:300px;">
+                                @foreach($items as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                        </select>
+                        </td>
+                        <td data-name="harga">
+                            {!! Form::text('harga[]', null, ['class' => 'form-control Hq Harga ','step'=>'any']) !!}
+                        </td>
+                        <td data-name="qty">
+                            {!! Form::number('qty[]', null, ['class' => 'form-control Hq Qty','step'=>'any']) !!}
+                        </td>
+                    
+                        <td data-name="rupiah">
+                            {!! Form::number('rupiah[]', null, ['class' => 'form-control Rupiah','step'=>'any','readonly'=>'readonly']) !!}
+                        </td>
+                    </tr>
+        </tbody>
+
+        @endif
+
+
+
     <tfoot>
     <tr>
         <td colspan="3">
