@@ -78,7 +78,7 @@ class LaporanProduksiController extends Controller
                                 CASE 
                                 WHEN p.gr_butir BETWEEN sl.btg0 AND sl.btg1
                                 THEN 'normal'
-                                WHEN p.gr_butir is null ORD sl.btg0 is null THEN 'not set'
+                                WHEN p.gr_butir is null OR sl.btg0 is null THEN 'not set'
                                 ELSE 'abnormal'
                                 END AS status_gr_butir,
                                 p.pakan_qty,pk.name as pakan_jenis,
