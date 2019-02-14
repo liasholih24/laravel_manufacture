@@ -106,14 +106,14 @@ protected function validator(Request $request)
                     , 'item_id' => $pakanitem->item
                     , 'qty' => $pakanitem->qty
                     , 'date' => $model->prod_tgl
-                    , 'desc' => 'Pemakaian pakan dari proses recording '.$number
+                    , 'desc' => 'ID Produksi-'.$model->id
                     , 'created_at' => $model->created_at
                     , 'created_by' => $model->created_by]);
             }
             }
             
         
-
+      //end ke pemakaian
    
 
 
@@ -172,6 +172,35 @@ protected function validator(Request $request)
         
         $produksi = Produksi::findOrFail($id);
         $produksi->update($request->all());
+
+
+
+        //input ke pemakaian
+            // delete dulu detail pemakaian
+          $pemakaians =   DB::select(
+              DB::raw("SELECT id, `number` from pemakaians WHERE `desc` =  'ID Produksi-$id' "));
+
+            $detailpemakaian =   DetailPemakaian::where('pemakaian_id', $pemakaians[0]->id)->delete();
+
+           $pakanitems = DB::select(
+                DB::raw("SELECT * FROM pakan_items a
+                    WHERE pakan = ".$produksi->pakan_jenis.""));
+    
+      
+      if(!empty($pakanitems)){
+          foreach($pakanitems as $pakanitem){
+                  $dpemakaians = DetailPemakaian::create(['pemakaian_id' => $pemakaians[0]->id
+                  , 'item_id' => $pakanitem->item
+                  , 'qty' => $pakanitem->qty
+                  , 'date' => $produksi->prod_tgl
+                  , 'desc' => 'Pemakaian pakan dari proses recording '.$pemakaians[0]->number
+                  , 'created_at' => $produksi->created_at
+                  , 'created_by' => $produksi->created_by]);
+          }
+          }
+          
+      
+    //end ke pemakaian
 
         Session::flash('alert-success', ' Produksi '.$produksi->name.' is updated successfully');
 
