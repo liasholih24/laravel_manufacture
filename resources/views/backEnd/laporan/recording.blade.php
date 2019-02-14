@@ -200,9 +200,39 @@ Laporan Recording
            {data: 'p_utuh_butir', name: 'p_utuh_butir'},
            {data: 'persen_utuh', name: 'persen_utuh'},
            {data: 'p_putih_butir', name: 'p_putih_butir'},
-           {data: 'persen_putih', name: 'persen_putih'},
+          // {data: 'persen_putih', name: 'persen_putih'},
+           { data: {status_putih : "status_putih", persen_putih : "persen_putih"},
+            "render": function ( data, type, row ) {
+            				var status_putih, persen_putih;
+                            status_putih = data.status_putih; 
+                            persen_putih = data.persen_putih; 
+                    
+            				if (status_putih == "abnormal"){
+                       return '<b style="color:red;">' + persen_putih + '</b>';
+                       return type === 'export' ? row.Descripcion: "";
+                    }else{
+                       return persen_putih;
+                    }
+                    
+                },
+             },
            {data: 'p_retak_butir', name: 'p_retak_butir'},
-           {data: 'persen_retak', name: 'persen_retak'},
+           //{data: 'persen_retak', name: 'persen_retak'},
+           { data: {status_retak : "status_retak", persen_retak : "persen_retak"},
+            "render": function ( data, type, row ) {
+            				var status_retak, persen_retak;
+                            status_retak = data.status_retak; 
+                            persen_retak = data.persen_retak; 
+                    
+            				if (status_retak == "abnormal"){
+                       return '<b style="color:red;">' + persen_retak + '</b>';
+                       return type === 'export' ? row.Descripcion: "";
+                    }else{
+                       return persen_retak;
+                    }
+                    
+                },
+             },
           // {data: 'persen_hd', name: 'persen_hd'},
            { data: {status_hd : "status_hd", persen_hd : "persen_hd"},
             "render": function ( data, type, row ) {
@@ -223,13 +253,13 @@ Laporan Recording
            {data: 'ttl_butir', name: 'ttl_butir'},
            {data: 'ttl_kg', name: 'ttl_kg'},
           // {data: 'gr_butir', name: 'gr_butir'},
-           { data: {gr_butir : "gr_butir", status_grower : "status_grower"},
+           { data: {gr_butir : "gr_butir", status_gr_butir : "status_gr_butir"},
             "render": function ( data, type, row ) {
-            				var gr_butir, status_grower;
+            				var gr_butir, status_gr_butir;
                             gr_butir = data.gr_butir; 
-                            status_grower = data.status_grower; 
+                            status_gr_butir = data.status_gr_butir; 
                     
-            				if (status_grower == "abnormal"){
+            				if (status_gr_butir == "abnormal"){
                        return '<b style="color:red;">' + gr_butir + '</b>';
                        return type === 'export' ? row.Descripcion: "";
                     }else{

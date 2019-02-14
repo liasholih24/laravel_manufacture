@@ -54,7 +54,21 @@ class LaporanProduksiController extends Controller
                                 p.ttl_kg as ttl_kg, p.ttl_butir as ttl_butir, p.gr_butir as gr_butir, p.kg_1000 as kg_1000 ,
                                 FORMAT((p.p_utuh_butir / p.ttl_butir * 100),2) as persen_utuh,
                                 FORMAT((p.p_putih_butir / p.ttl_butir * 100),2) as persen_putih,
+                                CASE 
+                                 WHEN FORMAT((p.p_putih_butir / p.ttl_butir * 100),2) < '1.00'
+                                THEN 'normal'
+                                WHEN FORMAT((p.p_putih_butir / p.ttl_butir * 100),2) > '1.00'
+                                THEN 'abnormal'
+                                 ELSE 'not set'
+                                END AS status_putih,
                                 FORMAT((p.p_retak_butir / p.ttl_butir * 100),2) as persen_retak,
+                                CASE 
+                                WHEN FORMAT((p.p_retak_butir / p.ttl_butir * 100),2) < '1.5'
+                                THEN 'normal'
+                                WHEN FORMAT((p.p_retak_butir / p.ttl_butir * 100),2) > '1.5'
+                                THEN 'abnormal'
+                                ELSE 'not set'
+                                END AS status_retak,
                                 FORMAT((p.ttl_butir/p.jml_akhir * 100),2) as persen_hd,
                                 CASE 
                                 WHEN FORMAT((p.ttl_butir/p.jml_akhir * 100),2) >= sl.hd0 AND FORMAT((p.ttl_butir/p.jml_akhir * 100),2) <= sl.hd1
@@ -63,11 +77,11 @@ class LaporanProduksiController extends Controller
                                 ELSE 'abnormal'
                                 END AS status_hd,
                                 CASE 
-                                WHEN p.gr_butir >= sg.bbg0 AND p.gr_butir <= sg.bbg1
+                                WHEN p.gr_butir >= sl.btg0 AND p.gr_butir <= sl.btg1
                                 THEN 'normal'
-                                WHEN p.gr_butir is null OR sg.bbg0 is null THEN 'param not set'
+                                WHEN p.gr_butir is null OR sl.btg0 is null THEN 'not set'
                                 ELSE 'abnormal'
-                                END AS status_grower,
+                                END AS status_gr_butir,
                                 p.pakan_qty,pk.name as pakan_jenis,
                                 FORMAT((p.pakan_qty/p.jml_akhir*1000),2) as gram_ekor,
                                FORMAT((p.pakan_qty/p.ttl_kg),2) as fcr,
@@ -82,8 +96,7 @@ class LaporanProduksiController extends Controller
                             JOIN lokasis k ON k.id = p.kandang
                             JOIN lokasis k0 ON k0.id = k.parent_id
                             JOIN pakans pk ON pk.id = p.pakan_jenis
-                            LEFT OUTER JOIN standarlayers sl ON p.umur = sl.umur AND p.strain = sl.standar
-                            LEFT OUTER JOIN standargrowers sg ON p.umur = sg.umur AND p.strain = sg.standar
+                            LEFT OUTER JOIN standarlayers sl ON p.umur = sl.umur AND sl.standar = 'Standard HY-LINE'
                             LEFT OUTER JOIN standarfcs sf ON p.umur BETWEEN sf.umur0 AND sf.umur1 
                         WHERE 1=1 $filterRange $filterFarm 
                         ")
