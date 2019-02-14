@@ -106,10 +106,10 @@ class PenjualanController extends Controller
         
     }
 
-    public function print($id)
+    /*public function print($id)
     {
         
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.
