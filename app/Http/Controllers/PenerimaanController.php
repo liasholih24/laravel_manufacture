@@ -37,7 +37,8 @@ class PenerimaanController extends Controller
     public function index()
     {
         $penerimaan = Penerimaan::whereMonth('created_at', '=', date('m'))->get();
-        return view('backEnd.penerimaan.index', ['penerimaan' => $penerimaan]);
+        $lokasi = Lokasi::where('depth', 0)->get();
+        return view('backEnd.penerimaan.index', ['penerimaan' => $penerimaan, 'lokasi' => $lokasi]);
     }
 
     /**
@@ -194,6 +195,11 @@ class PenerimaanController extends Controller
             ]);
         }
         return response($item);
+    }
+
+    public function cetak(Request $request)
+    {
+        return view('backEnd.penerimaan.cetak');
     }
 
 }
