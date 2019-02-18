@@ -157,7 +157,7 @@
     {{ HTML::script('assets_back/js/plugins/datapicker/bootstrap-datepicker.js') }}
     <script>
         $("#tanggal").datepicker({
-            format :  'yyyy-mm-dd',
+              format :  'yyyy-mm-dd',
               todayBtn: 'linked',
               todayHighlight :  true,
         });
