@@ -49,15 +49,6 @@ Rekapitulasi Persediaan
                         </div>
                     </div>
 
-                   <div class="form-group" id="data_4">
-                                <label class="font-noraml">Waktu</label>
-                                 <div class="input-daterange input-group" id="datepicker">
-                                    <input type="text" class="input-sm form-control" name="start" id="from">
-                                    <span class="input-group-addon">to</span>
-                                    <input type="text" class="input-sm form-control" name="end" id="to">
-                                </div>
-                            </div>
-
              <div class="form-group">
                     <div class="col-sm-12">
                   <button class="btn btn-success pull-right Filter" id="filter">
@@ -160,27 +151,18 @@ Rekapitulasi Persediaan
        serverSide: true,
        ajax: '{{url("/rekstocksapi")}}',
        columns: [
-           {data: 'id', name: 'id'},
+           {data: 'gudang', name: 'gudang'},
            {data: 'item', name: 'item'},
-           {data: 'qty_in', name: 'qty_in'},
-           {data: 'qty_out', name: 'qty_out'},
-           {data: 'qty', name: 'qty'},
-           {data: 'saldo', name: 'saldo'},
-           {data: 'created_at', name: 'created_at'}
+           {data: 'qty', name: 'qty'}
            
        ],
-      lengthMenu: [[10, 25, 50, 100, 250, 500], [10, 25, 50,100,250,500, "All"]],
+      lengthMenu: [[20, 50, 30], [20, 50, 30, "All"]],
        responsive: {
            details: {
                type: 'column'
            }
        },
-       columnDefs: [ {
-           className: 'control',
-           orderable: false,
-           targets:   0
-       } ],
-       order: [ 6, 'desc' ],
+       order: [ 0, 'desc' ],
        
        dom: '<"html5buttons"B>lTfgitp',
      

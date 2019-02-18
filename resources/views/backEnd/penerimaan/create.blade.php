@@ -1,11 +1,11 @@
 @extends('backLayout.app')
 
 @section('title')
-    Penerimaan
+    Pembelian
 @stop
 
 @section('desc')
-    Tambah Penerimaan
+    Tambah Pembelian
 @stop
 
 @section('style')
@@ -26,7 +26,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Tambah Penerimaan</h5>
+                        <h5>Tambah Pembelian</h5>
                         <a href="{{ url('penerimaan') }}" class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px">
                             <i class="fa fa-arrow-circle-o-left"></i> Kembali
                         </a>

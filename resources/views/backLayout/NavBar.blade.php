@@ -51,7 +51,7 @@
                     </li>
                     @endif
                     <li {{{ (Request::is('penerimaan*') ? 'class=active' : '') }}}>
-                      <a href="{{route('penerimaan.index')}}">Penerimaan </a>
+                      <a href="{{route('penerimaan.index')}}">Pembelian </a>
                     </li>
                     <li {{{ (Request::is('penjualan*') ? 'class=active' : '') }}}>
                       <a href="{{route('penjualan.index')}}">Penjualan </a>

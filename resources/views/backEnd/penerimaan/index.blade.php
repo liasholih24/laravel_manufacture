@@ -13,11 +13,11 @@
 @extends('backLayout.app')
 
 @section('title')
-    Penerimaan
+    Pembelian
 @stop
 
 @section('desc')
-    Daftar Penerimaan
+    Daftar Pembelian
 @stop
 
 @section('content')
@@ -26,7 +26,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Daftar Penerimaan</h5>
+                        <h5>Daftar Pembelian</h5>
                         <a href="#">
                             <button class="btn btn-sm btn-outline btn-primary pull-right" style="margin-top: -7px; margin-left: 5px;" data-toggle="modal" data-target="#myModal">
                                 <i class="fa fa-print"></i> Cetak Laporan
@@ -34,7 +34,7 @@
                         </a>
                         <a href="{{ url('penerimaan/create') }}">
                             <button class="btn btn-sm btn-outline btn-success pull-right" style="margin-top: -7px">
-                                <i class="fa fa-plus-circle"></i> Tambah Penerimaan
+                                <i class="fa fa-plus-circle"></i> Tambah Pembelian
                             </button>
                         </a>
                     </div>
@@ -79,7 +79,7 @@
                         @else
                         <div class="jumbotron">
                             <h1>Data Kosong ... </h1>
-                            <p>Mohon maaf, tidak ada data penerimaan untuk bulan ini.</p>
+                            <p>Mohon maaf, tidak ada data pembelian untuk bulan ini.</p>
                             <p><a href="{{ url('penerimaan/create') }}" class="btn btn-primary btn-lg" role="button">Tambah Penerimaan</a></p>
                         </div>
                         @endif
@@ -94,7 +94,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                     <i class="fa fa-print modal-icon"></i>
-                    <h4 class="modal-title">Cetak Laporan Penerimaan</h4>
+                    <h4 class="modal-title">Cetak Laporan Pembelian</h4>
                 </div>
                 <form action="{{ url('penerimaan/cetak/laporan') }}" method="GET" class="form-horizontal" target="_blank">
                     <div class="modal-body">

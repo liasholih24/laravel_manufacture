@@ -35,12 +35,11 @@ class RekapitulasiController extends Controller
      */
     public function stocks()
     {
-        $stocks = Stock::all();
-        $filters = Lokasi::where('type', 13)->get();
+        $filters = Lokasi::where('depth', 0)->get();
         $id = "";
         $datenow = date('Y-m-d');
 
-        return view('backEnd.rekapitulasi.stocks', compact('tables', 'stocks', 'filters', 'id', 'datenow'));
+        return view('backEnd.rekapitulasi.stocks', compact('filters', 'id', 'datenow'));
     }
 
     public function tabungan()
@@ -100,53 +99,19 @@ class RekapitulasiController extends Controller
 
     public function rekstocksapi()
     {
-        $filterdata= ""; $filterRange= "";
+        $filterdata= "";
         $gudang = Input::get('gudang');
-        $fromDate = Input::get('fromDate');
-        $toDate = Input::get('toDate');
-        
 
         if (!empty($gudang)) {
-            $filterdata = "AND a.gudang = '$gudang'";
-        }
-        if (!empty($fromDate) && empty($toDate)){
-            $filterRange = "AND DATE(a.created_at) = '$fromDate' ";
-        }
-        if (!empty($toDate) && empty($fromDate)){
-            $filterRange = "AND DATE(a.created_at) = '$toDate' ";
-        }
-        if (!empty($toDate) && !empty($fromDate)){
-            $filterRange = "AND DATE(a.created_at) BETWEEN '$fromDate' AND '$toDate'";
+            $filterdata = "WHERE gudang_id = '$gudang'";
         }
 
         $tables = DB::select(
-                DB::raw("SELECT MAX(s.id) as id
-                      ,MAX(s.name) as sampah
-                      ,CASE WHEN SUM(a.qty_in) is null
-                                   THEN 0
-                                   ELSE FORMAT(SUM(a.qty_in),1)
-                                   END as qty_in
-                       ,CASE WHEN SUM(a.qty_out) is null
-                                   THEN 0
-                                   ELSE FORMAT(SUM(a.qty_out),1)
-                                   END as qty_out
-                      , CASE WHEN SUM(a.qty_in) - SUM(qty_out) is null
-                                   THEN 0
-                                   ELSE FORMAT(SUM(a.qty_in) - SUM(qty_out),1)
-                                   END as qty
-                      , CASE WHEN SUM(a.saldo_in) - SUM(saldo_out) is null
-                                   THEN 0
-                                   ELSE FORMAT(SUM(a.saldo_in) - SUM(saldo_out),1)
-                                   END as saldo
-                      , CASE WHEN MAX(a.created_at) is null
-                                   THEN 'Tidak ada pembaharuan'
-                                   ELSE MAX(a.created_at)
-                                   END as created_at
-        FROM sampahs s
-        LEFT JOIN stocks a on s.id = a.sampah
-        WHERE 1 = 1 AND nesting = 1 $filterdata $filterRange
-        GROUP BY s.id")
-      );
+            DB::raw("SELECT *
+            FROM v_recap_stocks
+            $filterdata
+            ORDER BY `created_at` asc")
+        );
 
         return Datatables::of($tables)->make(true);
     }
