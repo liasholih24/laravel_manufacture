@@ -193,7 +193,7 @@ Laporan Recording
             				var persen_mati;
                             persen_mati = parseFloat(data.replace(',','').replace('$','')); 
             				if (persen_mati > 0.38){
-                       return '<b style="color:red;">' + data + '</b><span style="color:white;">|0</span>';
+                       return '<b style="color:red;">' + data + '</b><span style="visibility:hidden">|0</span>';
                     }else{
                        return data;
                     }
@@ -215,7 +215,7 @@ Laporan Recording
                             persen_putih = data.persen_putih; 
                     
             				if (status_putih == "abnormal"){
-                       return '<b style="color:red;">' + persen_putih + '</b><span style="color:white;">|0</span>';
+                       return '<b style="color:red;">' + persen_putih + '</b><span style="visibility:hidden">|0</span>';
                     }else{
                        return persen_putih;
                     }
@@ -231,7 +231,7 @@ Laporan Recording
                             persen_retak = data.persen_retak; 
                     
             				if (status_retak == "abnormal"){
-                       return '<b style="color:red;">' + persen_retak + '</b><span style="color:white;">|0</span>';
+                       return '<b style="color:red;">' + persen_retak + '</b><span style="visibility:hidden">|0</span>';
                     }else{
                        return persen_retak;
                     }
@@ -246,7 +246,7 @@ Laporan Recording
                             persen_hd = data.persen_hd; 
                     
             				if (status_hd == "abnormal"){
-                       return '<b style="color:red;">' + persen_hd + '</b><span style="color:white;">|0</span>';
+                       return '<b style="color:red;">' + persen_hd + '</b><span style="visibility:hidden">|0</span>';
                     }else{
                        return persen_hd;
                     }
@@ -264,7 +264,7 @@ Laporan Recording
                             status_gr_butir = data.status_gr_butir; 
                     
             				if (status_gr_butir == "abnormal"){
-                       return '<b style="color:red;">' + gr_butir + '</b><span style="color:white;">|0</span>';
+                       return '<b style="color:red;">' + gr_butir + '</b><span style="visibility:hidden">|0</span>';
                     }else{
                        return gr_butir;
                     }
@@ -283,7 +283,7 @@ Laporan Recording
                             status_fc = data.status_fc; 
                     
             				if (status_fc == "abnormal"){
-                       return '<b style="color:red;">' + fcr + '</b><span style="color:white;">|0</span>';
+                       return '<b style="color:red;">' + fcr + '</b><span style="visibility:hidden">|0</span>';
                        //$(row).find('td:eq(3)').css('color', 'red');
                       // return type === 'export' ? '="<b style="color:red;">"' : '"<b style="color:red;">"' ;
                     }else{
