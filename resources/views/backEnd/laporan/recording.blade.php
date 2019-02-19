@@ -77,7 +77,7 @@ Laporan Recording
           </a>
        
     </div>
-   
+       
   <div class="col-xs-12 col-sm-12 ibox-content row" style="min-height:65vh;">
     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if(Session::has('alert-' . $msg))
