@@ -56,7 +56,7 @@ class HomeController extends Controller
 
     $QGrafik = DB::select(
       DB::raw("SELECT YEAR(prod_tgl) as y,MONTH(prod_tgl) as m,MONTH(prod_tgl) as d, SUM(pakan_qty) as pakan_qty, ROUND(SUM(ttl_kg)) as ttl_kg from produksis
-      group by prod_tgl"));
+      where prod_tgl is not null group by prod_tgl"));
 
       
 
