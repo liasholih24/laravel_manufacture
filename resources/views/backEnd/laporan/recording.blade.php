@@ -299,7 +299,7 @@ Laporan Recording
       lengthMenu: [[10, 25, 50, 100, 250, 500], [10, 25, 50,100,250,500, "All"]],
       
  
-      dom: 'Bfrtip',
+      dom: '<"html5buttons"B>lTfgitp',
         buttons: [
             {
                 extend: 'excel',
