@@ -58,7 +58,7 @@ class HomeController extends Controller
       DB::raw("SELECT YEAR(prod_tgl) as y,MONTH(prod_tgl) as m,MONTH(prod_tgl) as d, SUM(pakan_qty) as pakan_qty, ROUND(SUM(ttl_kg)) as ttl_kg from produksis
       group by prod_tgl"));
 
-  
+      
 
     $stock = "No Data";
     if(!empty($Qstocks))
