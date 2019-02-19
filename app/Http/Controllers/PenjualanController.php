@@ -70,7 +70,7 @@ class PenjualanController extends Controller
             $number = 'PJ-'.sprintf('%06d', substr($number, 3) + 1);
         }
         $penjualan = new Penjualan;
-        $penjualan->number = $number;
+        $penjualan->number = $request->number;
         $penjualan->customer_id = $request->customer_id;
         $penjualan->storage_id = $request->storage_id;
         $penjualan->ekspedisi_id = $request->ekspedisi_id;
@@ -146,6 +146,7 @@ class PenjualanController extends Controller
     public function update(Request $request, Penjualan $penjualan)
     {
         $penjualan = Penjualan::findOrFail($penjualan->id);
+        $penjualan->number = $request->number;
         $penjualan->customer_id = $request->customer_id;
         $penjualan->storage_id = $request->storage_id;
         $penjualan->ekspedisi_id = $request->ekspedisi_id;

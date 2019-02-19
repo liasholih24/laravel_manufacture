@@ -71,7 +71,7 @@ class PenerimaanController extends Controller
             $number = 'PR-'.sprintf('%06d', substr($number, 3) + 1);
         }
         $penerimaan = new Penerimaan;
-        $penerimaan->number = $number;
+        $penerimaan->number = $request->number;
         $penerimaan->storage_id = $request->storage_id;
         $penerimaan->pengajuan_id = $request->pengajuan_id;
         $penerimaan->date = $request->date;
@@ -146,6 +146,7 @@ class PenerimaanController extends Controller
     public function update(Request $request, Penerimaan $penerimaan)
     {
         $penerimaan = Penerimaan::findOrFail($penerimaan->id);
+        $penerimaan->number = $request->number;
         $penerimaan->pengajuan_id = $request->pengajuan_id;
         $penerimaan->storage_id = $request->storage_id;
         $penerimaan->date = $request->date;

@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control input-sm" placeholder="-- Auto Number --" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" placeholder="Nomor">
                                 </div>
                             </div>
                             <div class="form-group">
