@@ -156,14 +156,10 @@
     {{ HTML::script('assets_back/js/plugins/select2/select2.full.min.js') }}
     {{ HTML::script('assets_back/js/plugins/datapicker/bootstrap-datepicker.js') }}
     <script>
-        $("#tanggal").datepicker({
-            startDate : '-0m',
-            format :  'yyyy-mm-dd',
-            keyboardNavigation : false,
-            forceParce: false,
-            todayBtn: 'linked',
-            todayHighlight :  true,
-            daysOfWeekDisabled : [0],
+        $("#tanggal").datepicker({ 
+              format :  'yyyy-mm-dd',
+              todayBtn: 'linked',
+              todayHighlight :  true,
         });
         $('.select-item').select2({
             placeholder: 'Pilih Item'

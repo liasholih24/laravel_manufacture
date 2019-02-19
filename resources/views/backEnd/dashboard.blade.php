@@ -4,7 +4,7 @@
   {{ HTML::style('assets_back/css/plugins/chosen/chosen.css')}}
   {{ HTML::style('assets_back/css/plugins/c3/c3.min.css')}}
 @endsection
-@section('content') 
+@section('content')  
 
 <div class="wrapper wrapper-content">
 <div class="row">   
@@ -61,12 +61,12 @@
                             </div>
                         </div>
             </div>
-</div>
+</div>   
 <div class="row">
                     <div class="col-lg-9">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Hasil Produksi & Pemakaian Pakan</h5>
+                                <h5>Hasil Produksi & Pemakaian Pakan (kg)</h5>
                                 <div class="pull-right">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-xs btn-white">Update per {{date('d M Y')}}</button>
@@ -83,37 +83,17 @@
                                 <div class="col-lg-3">
                                     <ul class="stat-list">
                                         <li>
-                                            <h2 class="no-margins">0</h2>
-                                            <small>Pemakaian Pakan (Rp.) {{date('M Y')}}</small>
-                                            <div class="stat-percent">0% <i class="fa fa-level-up text-navy"></i></div>
-                                            <div class="progress progress-mini">
-                                                <div style="width: 0%;" class="progress-bar"></div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <h2 class="no-margins">0</h2>
+                                            <h2 class="no-margins">{{ !empty($ttl_pakan_month) ? number_format($ttl_pakan_month) : "No Data" }}</h2>
                                             <small>Pemakaian Pakan (kg) {{date('M Y')}}</small>
-                                            <div class="stat-percent">0% <i class="fa fa-level-up text-navy"></i></div>
-                                            <div class="progress progress-mini">
-                                                <div style="width: 0%;" class="progress-bar"></div>
-                                            </div>
-                                        </li>
-                                         <li>
-                                            <h2 class="no-margins">0</h2>
-                                            <small>Hasil Produksi (Rp.) {{date('M Y')}} </small>
-                                            <div class="stat-percent">0%
-                                             <i class="fa fa-level-up text-navy"></i></div>
-                                            <div class="progress progress-mini">
-                                                <div style="width: 0%;" class="progress-bar"></div>
-                                            </div>
+                                          
                                         </li>
                                         <li>
-                                            <h2 class="no-margins">0</h2>
-                                            <small>Hasil Produksi (kg) {{date('M Y')}}</small>
-                                            <div class="stat-percent">0% <i class="fa fa-level-up text-navy"></i></div>
-                                            <div class="progress progress-mini">
-                                                <div style="width: 0%;" class="progress-bar"></div>
-                                            </div>
+                                            <h2 class="no-margins">{{ !empty($hpp_pakan_month) ? number_format($hpp_pakan_month) : "No Data" }}</h2>
+                                            <small>Pemakaian Pakan  (Rp.) {{date('M Y')}}</small>   
+                                        </li>
+                                        <li>
+                                            <h2 class="no-margins">{{ !empty($ttl_produksi_month) ? number_format($ttl_produksi_month) : "No Data" }}</h2>
+                                            <small>Hasil Produksi (kg) {{date('M Y')}}</small>   
                                         </li>
                                         </ul>
                                     </div>
@@ -121,10 +101,10 @@
                                     <div class="m-t-md">
                             <small class="pull-right">
                                 <i class="fa fa-clock-o"> </i>
-                               <strong>Rekap Perbandingan</strong> dengan bulan lalu.
+                               <strong>Rekap Perbandingan</strong> per bulan berjalan.
                             </small>
                             <small>
-                                Rekapitulasi Pendapatan dan Penjualan tahun {{date('Y')}}
+                                Grafik Pemakaian Pakan dan Hasil Produksi tahun {{date('Y')}}
                             </small>
                         </div>
                                 </div>
@@ -143,7 +123,7 @@
                         <h3>Total Persediaan
                             <div class="stat-percent text-navy">{{number_format($stock)}} Kg</div>
                         </h3>
-                        <span class="bar_dashboard">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9,6,4,5,7,3,2,1,0,9,5,6,8,3,2,1</span>
+                        <span class="bar_dashboard">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9</span>
                         </div>
                  
                        
@@ -183,12 +163,27 @@
                 size: 80
             });
 
+
+            
+            var data2 = [
+                <?php foreach($QGrafik as $q){?>
+                [gd({{$q->y}}, {{$q->m}}, {{$q->d}}), {{$q->pakan_qty}}],
+                <?php }?>
+            ];
+
+            var data3 = [
+                <?php foreach($QGrafik as $q){?>
+                [gd({{$q->y}}, {{$q->m}}, {{$q->d}}), {{$q->ttl_kg}}],
+                <?php }?>
+            ];
+
+         
     
 
 
             var dataset = [
                 {
-                    label: "Deposit",
+                    label: "Pemakaian Pakan",
                     data: data3,
                     color: "#1ab394",
                     bars: {
@@ -199,7 +194,7 @@
                     }
 
                 }, {
-                    label: "Penjualan",
+                    label: "Hasil Produksi",
                     data: data2,
                     yaxis: 2,
                     color: "#1C84C6",

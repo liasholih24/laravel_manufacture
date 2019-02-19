@@ -9,6 +9,8 @@ use App\Pengobatan;
 use App\Item;
 use App\Lokasi;
 use App\Satuan;
+use App\Pemakaian;
+use App\DetailPemakaian;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
@@ -96,6 +98,39 @@ protected function validator(Request $request)
         }
         }
 
+        //input ke pemakaian
+        $number = Pemakaian::max('number');
+        if($number==null){
+            $number = 'OB-000001';
+        }
+        else{
+            $number = 'OB-'.sprintf('%06d', substr($number, 3) + 1);
+        }
+
+
+        $pemakaians = Pemakaian::create(['number' => $number
+                                        , 'storage_id' => $request->kandang
+                                        , 'date' => date('Y-m-d H:i:s')
+                                        , 'desc' => 'Tanggal Pengobatan-'.$request->tgl_checkin
+                                        , 'created_at' => date('Y-m-d H:i:s')
+                                        , 'created_by' => $request->created_by]);
+
+                                        if(!empty($request->dosis)){
+                                            for($i=0;$i<count($request->dosis);$i++){
+                                                 if($request->input('dosis')[$i]){
+
+
+                                                    $dpemakaians = DetailPemakaian::create(['pemakaian_id' => $pemakaians->id
+                                                    , 'item_id' => $request->obat[$i]
+                                                    , 'qty' => $request->dosis[$i]
+                                                    , 'date' => date('Y-m-d H:i:s')
+                                                    , 'created_at' => date('Y-m-d H:i:s')
+                                                    , 'created_by' => $request->created_by]);
+
+                                                 }
+                                            }
+                                        }     
+        //end input ke pemakaian
 
       Session::flash('alert-success', 'Pengobatan '.$request->tgl_checkin.' is created successfully');
 
@@ -146,6 +181,12 @@ protected function validator(Request $request)
     {
      DB::table('pengobatans')->where('tgl_checkin', $request->tgl_checkin)->delete();
 
+
+     $pemakaians =   DB::select(
+        DB::raw("SELECT id, `number` from pemakaians WHERE `desc` =  'Tanggal Pengobatan-$request->tgl_checkin' "));
+
+        DB::table('detailpemakaians')->where('pemakaian_id', $pemakaians[0]->id )->delete();
+
      if(!empty($request->dosis)){
         for($i=0;$i<count($request->dosis);$i++){
              if($request->input('dosis')[$i]){
@@ -166,6 +207,23 @@ protected function validator(Request $request)
             }
         }
         }
+
+        if(!empty($request->dosis)){
+            for($i=0;$i<count($request->dosis);$i++){
+                 if($request->input('dosis')[$i]){
+
+
+                    $dpemakaians = DetailPemakaian::create(['pemakaian_id' => $pemakaians[0]->id
+                    , 'item_id' => $request->obat[$i]
+                    , 'qty' => $request->dosis[$i]
+                    , 'date' => date('Y-m-d H:i:s')
+                    , 'desc' => 'Tanggal Pengobatan-'.$request->tgl_checkin
+                    , 'created_at' => date('Y-m-d H:i:s')
+                    , 'created_by' => $request->created_by]);
+
+                 }
+            }
+        } 
         return redirect('pengobatan');
     }
 
@@ -179,9 +237,20 @@ protected function validator(Request $request)
     public function destroy($id)
     {
        
+        $pengobatan = DB::table('pengobatans')->where('tgl_checkin', $id)->first();
 
-        DB::table('pengobatans')->where('tgl_checkin', $id)->delete();
+    
+        $pemakaians =   DB::select(
+         DB::raw("SELECT id, `number` from pemakaians WHERE `desc` =  'Tanggal Pengobatan-$pengobatan->tgl_checkin' "));
+ 
+         DB::table('detailpemakaians')->where('pemakaian_id', $pemakaians[0]->id )->delete();
 
+         DB::table('pemakaians')->where('id', $pemakaians[0]->id )->delete();
+
+         DB::table('pengobatans')->where('tgl_checkin', $id)->delete();
+
+
+       
     
         Session::flash('alert-warning', ' Pengobatan '.$id.' is deleted successfully');
 

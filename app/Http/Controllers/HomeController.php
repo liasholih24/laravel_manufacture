@@ -39,10 +39,26 @@ class HomeController extends Controller
       DB::raw("SELECT SUM(pakan_qty) as qty, COUNT(kandang) as pakan_kandang , SUM(jml_akhir) as jml_akhir , SUM(ttl_kg) as ttl_kg, SUM(ttl_butir) as ttl_butir FROM produksis WHERE DATE(prod_tgl) = DATE(NOW())")
     );
 
+
+    $QMonthPakan = DB::select(
+      DB::raw("SELECT SUM(a.pakan_qty) as pakan, SUM(b.hpp) as pakan_hpp
+      ,SUM(a.ttl_kg) as produksi
+      FROM produksis a
+      JOIN pakans b ON a.pakan_jenis = b.id
+      JOIN items c 
+      WHERE MONTH(a.prod_tgl) = MONTH(NOW())"));
+
     $Qstocks = DB::select(
       DB::raw("SELECT SUM(qty_out - qty_in) as qty
             FROM v_recap_stocks")
             );
+
+
+    $QGrafik = DB::select(
+      DB::raw("SELECT YEAR(prod_tgl) as y,MONTH(prod_tgl) as m,MONTH(prod_tgl) as d, SUM(pakan_qty) as pakan_qty, ROUND(SUM(ttl_kg)) as ttl_kg from produksis
+      where prod_tgl is not null group by prod_tgl"));
+
+      
 
     $stock = "No Data";
     if(!empty($Qstocks))
@@ -80,7 +96,19 @@ class HomeController extends Controller
         $ttl_butir = $QPakan[0]->ttl_butir;
     }
 
-      return view('backEnd.dashboard',compact('hpp','hpp0','pakan','pakan_kandang','jml_akhir','ttl_butir','ttl_kg','stock'));
+
+    $ttl_pakan_month = "No Data";
+    $ttl_produksi_month = "No Data";
+    $hpp_pakan_month = "No Data";
+    if(!empty($QMonthPakan))
+    {
+        
+        $ttl_pakan_month = $QMonthPakan[0]->pakan;
+        $ttl_produksi_month = $QMonthPakan[0]->produksi;
+        $hpp_pakan_month = $QMonthPakan[0]->pakan_hpp;
+    }
+
+      return view('backEnd.dashboard',compact('hpp','hpp0','pakan','pakan_kandang','jml_akhir','ttl_butir','ttl_kg','stock','ttl_pakan_month','ttl_produksi_month','hpp_pakan_month','QGrafik'));
     }
    
     }
