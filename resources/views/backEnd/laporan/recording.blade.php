@@ -155,6 +155,9 @@ Laporan Recording
 {{ HTML::script('assets_back/js/plugins/dataTables/datatables.min.js') }}
 {{ HTML::script('assets_back/js/plugins/select2/select2.full.min.js') }}
 {{ HTML::script('assets_back/js/plugins/datapicker/bootstrap-datepicker.js') }}
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
 <!-- Page-Level Scripts -->
 <script>
@@ -163,6 +166,12 @@ Laporan Recording
        $('.input-daterange input').each(function() {
         $(this).datepicker({format:'yyyy-mm-dd'});
         });
+
+
+        var spreadsheetOptions = {
+        rows: { selected: true },
+        orthogonal: 'export'
+        };
 
      var table = $('#tblrecording').DataTable({
 
@@ -183,10 +192,8 @@ Laporan Recording
             "render": function ( data, type, row ) {
             				var persen_mati;
                             persen_mati = parseFloat(data.replace(',','').replace('$','')); 
-                    console.log(persen_mati);
             				if (persen_mati > 0.38){
-                       return '<b style="color:red;">' + data + '</b>';
-                       return type === 'export' ? row.Descripcion: "";
+                       return '<b style="color:red;">' + data + '</b><span style="color:white;">|0</span>';
                     }else{
                        return data;
                     }
@@ -208,8 +215,7 @@ Laporan Recording
                             persen_putih = data.persen_putih; 
                     
             				if (status_putih == "abnormal"){
-                       return '<b style="color:red;">' + persen_putih + '</b>';
-                       return type === 'export' ? row.Descripcion: "";
+                       return '<b style="color:red;">' + persen_putih + '</b><span style="color:white;">|0</span>';
                     }else{
                        return persen_putih;
                     }
@@ -225,8 +231,7 @@ Laporan Recording
                             persen_retak = data.persen_retak; 
                     
             				if (status_retak == "abnormal"){
-                       return '<b style="color:red;">' + persen_retak + '</b>';
-                       return type === 'export' ? row.Descripcion: "";
+                       return '<b style="color:red;">' + persen_retak + '</b><span style="color:white;">|0</span>';
                     }else{
                        return persen_retak;
                     }
@@ -241,8 +246,7 @@ Laporan Recording
                             persen_hd = data.persen_hd; 
                     
             				if (status_hd == "abnormal"){
-                       return '<b style="color:red;">' + persen_hd + '</b>';
-                       return type === 'export' ? row.Descripcion: "";
+                       return '<b style="color:red;">' + persen_hd + '</b><span style="color:white;">|0</span>';
                     }else{
                        return persen_hd;
                     }
@@ -260,8 +264,7 @@ Laporan Recording
                             status_gr_butir = data.status_gr_butir; 
                     
             				if (status_gr_butir == "abnormal"){
-                       return '<b style="color:red;">' + gr_butir + '</b>';
-                       return type === 'export' ? row.Descripcion: "";
+                       return '<b style="color:red;">' + gr_butir + '</b><span style="color:white;">|0</span>';
                     }else{
                        return gr_butir;
                     }
@@ -274,39 +277,111 @@ Laporan Recording
            {data: 'pakan_jenis', name: 'pakan_jenis'},
            //{data: 'fcr', name: 'fcr'},
            { data: {fcr : "fcr", status_fc : "status_fc"},
-            "render": function ( data, type, row ) {
+            "render": function ( data, type, row) {
             				var fcr, status_fc;
                             fcr = data.fcr; 
                             status_fc = data.status_fc; 
                     
             				if (status_fc == "abnormal"){
-                       return '<b style="color:red;">' + fcr + '</b>';
-                       return type === 'export' ? row.Descripcion: "";
+                       return '<b style="color:red;">' + fcr + '</b><span style="color:white;">|0</span>';
+                       //$(row).find('td:eq(3)').css('color', 'red');
+                      // return type === 'export' ? '="<b style="color:red;">"' : '"<b style="color:red;">"' ;
                     }else{
                        return fcr;
+                  
                     }
                     
                 },
+                
+                
              }
-       ],  
+       ], 
       lengthMenu: [[10, 25, 50, 100, 250, 500], [10, 25, 50,100,250,500, "All"]],
       
-       
-       dom: '<"html5buttons"B>lTfgitp',
-    
-     
-       buttons: [
-           {extend: 'excel', title: 'Laporan Recording',
-            exportOptions: {
-                        orthogonal: 'export',
+ 
+      dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'Laporan Recording',
+                customize: function( xlsx ) {
+            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+
+
+
+            //notif MATI (%)
+            $('row c[r^="I"]', sheet).each( function () {
+
+            var fields = $(this).text().split('|');
+            $('is t', this).text(fields[0]);
+            if ( fields[1] == "0") {
+                        $(this).attr( 's', '20' );      
+                }
+
+            });
+
+
+            //notif PUTIH (%)
+            $('row c[r^="N"]', sheet).each( function () {
+
+            var fields = $(this).text().split('|');
+            $('is t', this).text(fields[0]);
+            if ( fields[1] == "0") {
+                        $(this).attr( 's', '20' );      
+                }
+
+            });
+
+
+            //notif RETAK (%)
+            $('row c[r^="P"]', sheet).each( function () {
+
+            var fields = $(this).text().split('|');
+            $('is t', this).text(fields[0]);
+            if ( fields[1] == "0") {
+                        $(this).attr( 's', '20' );      
+                }
+
+            });
+
+
+            //notif HD
+            $('row c[r^="Q"]', sheet).each( function () {
+
+            var fields = $(this).text().split('|');
+            $('is t', this).text(fields[0]);
+            if ( fields[1] == "0") {
+                        $(this).attr( 's', '20' );      
+                }
+
+            });
+
+            //notif gram_butir
+            $('row c[r^="T"]', sheet).each( function () {
+
+            var fields = $(this).text().split('|');
+            $('is t', this).text(fields[0]);
+            if ( fields[1] == "0") {
+                        $(this).attr( 's', '20' );      
+                }
+
+            });
+            //notif fcr
+            $('row c[r^="Y"]', sheet).each( function () {
+
+                var fields = $(this).text().split('|');
+                $('is t', this).text(fields[0]);
+                if ( fields[1] == "0") {
+                            $(this).attr( 's', '20' );      
                     }
-           },
-           {extend: 'pdf', title: 'Laporan Recording',orientation: 'landscape',
-            exportOptions: {
-                        orthogonal: 'export',
-                    }
-           }
-       ]
+           
+            });
+
+
+
+            }
+            } 
+        ]
    });
 
 
