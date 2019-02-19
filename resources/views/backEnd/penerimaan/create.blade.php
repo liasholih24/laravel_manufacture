@@ -81,9 +81,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                <th width="15%">Pemasok</th>
-                                                <th width="15%">Qty</th>
-                                                <th width="15%">Satuan</th>
+                                                <th width="12%">Pemasok</th>
+                                                <th width="12%">Qty</th>
+                                                <th width="12%">Ball</th>
+                                                <th width="12%">Satuan</th>
                                                 <th width="20%">Harga</th>
                                                 <th width="50px">&nbsp;</th>
                                             </tr>
@@ -110,6 +111,9 @@
                                                     <input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>
                                                 </td>
                                                 <td>
+                                                    <input type="text" name="ball[]" class="form-control input-sm" autocomplete="off" required>
+                                                </td>
+                                                <td>
                                                     <select name="satuan_id[]" class="select-satuan form-control input-sm" required>
                                                         <option value=""></option>
                                                         @foreach($satuan as $r)
@@ -127,7 +131,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="6">
+                                                <td colspan="7">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -201,6 +205,9 @@
                     '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
+                    '<input type="text" name="ball[]" class="form-control input-sm" autocomplete="off" required>' +
+                '</td>' +
+                '<td>' +
                     '<select name="satuan_id[]" class="form-control input-sm select-satuan" required>' +
                         '<option value=""></option>' +
                         @foreach($satuan as $r)
@@ -257,6 +264,9 @@
                             '</td>' +
                             '<td>' +
                                 '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" value="' + data[i].qty + '" required>' +
+                            '</td>' +
+                            '<td>' +
+                                '<input type="text" name="ball[]" class="form-control input-sm" autocomplete="off" value="" required>' +
                             '</td>' +
                             '<td>' +
                                 '<select name="satuan_id[]" class="form-control input-sm select-satuan" required>' +

@@ -48,17 +48,17 @@
         @foreach($data as $r)
         <tr>
             <td style="text-align: center; border: 1px solid #000;">{{ date('d-m-y', strtotime($r->date)) }}</td>
-            <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
+            <td style="border: 1px solid #000; padding-left: 2px;">{{ $r->desc }}</td>
             <td style="border: 1px solid #000; padding-left: 2px;">{{ $r->supplier_name }}</td>
             <td style="border: 1px solid #000; padding-left: 2px;">{{ $r->number }}</td>
             <td style="border: 1px solid #000; padding-left: 2px;">{{ $r->item_name }}</td>
-            <td style="text-align: right; border: 1px solid #000; padding-right: 2px;">{{ number_format(0,2,",",".") }}</td>
+            <td style="text-align: right; border: 1px solid #000; padding-right: 2px;">{{ number_format($r->ball,2,",",".") }}</td>
             <td style="text-align: right; border: 1px solid #000; padding-right: 2px;">{{ number_format($r->qty,2,",",".") }}</td>
             <td style="text-align: right; border: 1px solid #000; padding-right: 2px;">{{ number_format($r->price,2,",",".") }}</td>
             <td style="text-align: right; border: 1px solid #000; padding-right: 2px;">{{ number_format($r->qty*$r->price,2,",",".") }}</td>
         </tr>
         <?php
-            $tball   = $tball + 0;
+            $tball   = $tball + $r->ball;
             $tqty    = $tqty + $r->qty;
             $tjumlah = $tjumlah + ($r->qty*$r->price);
         ?>
