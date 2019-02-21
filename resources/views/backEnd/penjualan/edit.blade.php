@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control input-sm" value="{{ $penjualan->number }}" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" value="{{ $penjualan->number }}">
                                 </div>
                             </div>
                             <div class="form-group">

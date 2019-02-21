@@ -71,7 +71,7 @@ class PenerimaanController extends Controller
             $number = 'PR-'.sprintf('%06d', substr($number, 3) + 1);
         }
         $penerimaan = new Penerimaan;
-        $penerimaan->number = $number;
+        $penerimaan->number = $request->number;
         $penerimaan->storage_id = $request->storage_id;
         $penerimaan->pengajuan_id = $request->pengajuan_id;
         $penerimaan->date = $request->date;
@@ -90,6 +90,7 @@ class PenerimaanController extends Controller
             $detail->item_id = $request->item_id[$i];
             $detail->supplier_id = $request->supplier_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->ball = $request->ball[$i];
             $detail->satuan_id = $request->satuan_id[$i];
             $detail->price = $request->price[$i];
             $detail->created_by = Sentinel::getUser()->id;
@@ -146,6 +147,7 @@ class PenerimaanController extends Controller
     public function update(Request $request, Penerimaan $penerimaan)
     {
         $penerimaan = Penerimaan::findOrFail($penerimaan->id);
+        $penerimaan->number = $request->number;
         $penerimaan->pengajuan_id = $request->pengajuan_id;
         $penerimaan->storage_id = $request->storage_id;
         $penerimaan->date = $request->date;
@@ -159,6 +161,7 @@ class PenerimaanController extends Controller
             $detail->item_id = $request->item_id[$i];
             $detail->supplier_id = $request->supplier_id[$i];
             $detail->qty = $request->qty[$i];
+            $detail->ball = $request->ball[$i];
             $detail->satuan_id = $request->satuan_id[$i];
             $detail->price = $request->price[$i];
             $detail->created_by = Sentinel::getUser()->id;
@@ -199,7 +202,7 @@ class PenerimaanController extends Controller
 
     public function cetak(Request $request)
     {
-        $data = DB::table('detailpenerimaans')->join('penerimaans', 'detailpenerimaans.penerimaan_id', '=', 'penerimaans.id')->join('suppliers', 'detailpenerimaans.supplier_id', '=', 'suppliers.id')->join('items', 'detailpenerimaans.item_id', '=', 'items.id')->selectRaw('penerimaans.date, suppliers.name as supplier_name, penerimaans.number, items.name as item_name, detailpenerimaans.qty, detailpenerimaans.price')->where('detailpenerimaans.deleted_at', null)->where('penerimaans.deleted_at', null)->where('penerimaans.storage_id', $request->storage_id)->whereRaw('penerimaans.date between "'.$request->from_date.'" and "'.$request->to_date.'"')->get();
+        $data = DB::table('detailpenerimaans')->join('penerimaans', 'detailpenerimaans.penerimaan_id', '=', 'penerimaans.id')->join('suppliers', 'detailpenerimaans.supplier_id', '=', 'suppliers.id')->join('items', 'detailpenerimaans.item_id', '=', 'items.id')->selectRaw('penerimaans.date, suppliers.name as supplier_name, penerimaans.number, items.name as item_name, detailpenerimaans.qty, detailpenerimaans.ball, detailpenerimaans.price, penerimaans.desc')->where('detailpenerimaans.deleted_at', null)->where('penerimaans.deleted_at', null)->where('penerimaans.storage_id', $request->storage_id)->whereRaw('penerimaans.date between "'.$request->from_date.'" and "'.$request->to_date.'"')->get();
         $storage = DB::table('lokasis')->where('id', $request->storage_id)->first();
         return view('backEnd.penerimaan.cetak', ['data' => $data, 'storage' => $storage, 'from' => $request->from_date, 'to' => $request->to_date]);
     }

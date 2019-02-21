@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nomor</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="number" class="form-control input-sm" value="{{ $penerimaan->number }}" readonly>
+                                    <input type="text" name="number" class="form-control input-sm" value="{{ $penerimaan->number }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -85,9 +85,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                <th width="15%">Pemasok</th>
-                                                <th width="15%">Qty</th>
-                                                <th width="15%">Satuan</th>
+                                                <th width="12%">Pemasok</th>
+                                                <th width="12%">Qty</th>
+                                                <th width="12%">Ball</th>
+                                                <th width="12%">Satuan</th>
                                                 <th width="20%">Harga</th>
                                                 <th width="50px">&nbsp;</th>
                                             </tr>
@@ -119,6 +120,9 @@
                                                     <input type="text" name="qty[]" class="form-control input-sm" value="{{ $d->qty }}" autocomplete="off" required>
                                                 </td>
                                                 <td>
+                                                    <input type="text" name="ball[]" class="form-control input-sm" value="{{ $d->ball }}" autocomplete="off" required>
+                                                </td>
+                                                <td>
                                                     <select name="satuan_id[]" class="select-satuan form-control input-sm" @if($penerimaan->pengajuan_id) disabled @endif required>
                                                         <option value=""></option>
                                                         @foreach($satuan as $r)
@@ -141,7 +145,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="6">
+                                                <td colspan="7">
                                                     <button id="tambah-baris" class="btn btn-sm btn-primary" @if($penerimaan->pengajuan_id) disabled @endif><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -219,6 +223,9 @@
                 '</td>' +
                 '<td>' +
                     '<input type="text" name="qty[]" class="form-control input-sm" autocomplete="off" required>' +
+                '</td>' +
+                '<td>' +
+                    '<input type="text" name="ball[]" class="form-control input-sm" autocomplete="off" required>' +
                 '</td>' +
                 '<td>' +
                     '<select name="satuan_id[]" class="form-control input-sm select-satuan" required>' +
