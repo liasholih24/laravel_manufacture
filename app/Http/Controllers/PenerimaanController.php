@@ -63,19 +63,20 @@ class PenerimaanController extends Controller
      */
     public function store(Request $request)
     {
+        
+        /*
         $number = Penerimaan::max('number');
 
 
         return $number;
         if($number==null){
             $number = 'PR-000001';
-            $n = '000001';
         }
         else{
-            $number = 'PR-'.sprintf('%06d', substr($n, 3) + 1);
+            $number = 'PR-'.sprintf('%06d', substr($number, 3) + 1);
         }
 
-      return $number;
+      */
         $penerimaan = new Penerimaan;
         $penerimaan->number = $request->number;
         $penerimaan->storage_id = $request->storage_id;
