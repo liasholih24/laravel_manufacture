@@ -62,13 +62,14 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        $number = Penjualan::max('number');
+        /* $number = Penjualan::max('number');
         if($number==null){
             $number = 'PJ-000001';
         }
         else{
             $number = 'PJ-'.sprintf('%06d', substr($number, 3) + 1);
         }
+        */
         $penjualan = new Penjualan;
         $penjualan->number = $request->number;
         $penjualan->customer_id = $request->customer_id;
