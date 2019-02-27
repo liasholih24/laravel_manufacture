@@ -70,6 +70,8 @@ class PenerimaanController extends Controller
         else{
             $number = 'PR-'.sprintf('%06d', substr($number, 3) + 1);
         }
+
+        return $number;
         $penerimaan = new Penerimaan;
         $penerimaan->number = $request->number;
         $penerimaan->storage_id = $request->storage_id;
