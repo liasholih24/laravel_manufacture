@@ -107,6 +107,17 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">Kategori</label>
+                            <div class="col-sm-7">
+                                <select name="kategori_id" class="form-control input-sm" required>
+                                    <option value="">Pilih Kategori</option>
+                                    @foreach($kategori as $r)
+                                    <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">Dari</label>
                             <div class="col-sm-7">
                                 <input type="date" name="from_date" class="form-control input-sm">
