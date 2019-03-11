@@ -96,11 +96,13 @@ Rekapitulasi Persediaan
     <tr>
         <th>Gudang</th>
         <th>Item</th>
+        <th>Jenis</th>
         <th>Stok</th>
     </tr>
 </thead>
 <tfoot>
             <tr>
+               <th></th>
                <th></th>
                <th>Total</th>
                <th></th>
@@ -153,10 +155,11 @@ Rekapitulasi Persediaan
        columns: [
            {data: 'gudang', name: 'gudang'},
            {data: 'item', name: 'item'},
+           {data: 'jenis', name: 'jenis'},
            {data: 'qty', name: 'qty'}
            
        ],
-      lengthMenu: [[20, 50, 30], [20, 50, 30, "All"]],
+      lengthMenu: [[20, 25, 25, 30], [20, 25, 25, 30, "All"]],
        responsive: {
            details: {
                type: 'column'
@@ -196,7 +199,7 @@ Rekapitulasi Persediaan
 
               // Total over all pages
             qty_in = api
-                .column(2)
+                .column(3)
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
@@ -204,14 +207,14 @@ Rekapitulasi Persediaan
  
             // Total over this page
             QtyIn = api
-                .column( 2, { page: 'current'} )
+                .column( 3, { page: 'current'} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
  
             // Update footer
-            $( api.column( 2 ).footer() ).html(
+            $( api.column( 3 ).footer() ).html(
                 ''+QtyIn +''
             );
  

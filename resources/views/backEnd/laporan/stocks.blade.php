@@ -106,6 +106,7 @@ Laporan Persediaan
         <th>Tanggal</th>
         <th>Gudang</th>
         <th>Item</th>
+        <th>Jenis</th>
         <th>Satuan</th>
         <th>Jml. Masuk</th>
         <th>Jml. Keluar</th>
@@ -113,6 +114,7 @@ Laporan Persediaan
 </thead>
 <tfoot>
             <tr>
+               <th></th>
                <th></th>
                <th></th>
                <th></th>
@@ -169,11 +171,12 @@ Laporan Persediaan
            {data: 'date', name: 'date'},
            {data: 'gudang', name: 'gudang'},
            {data: 'item', name: 'item'},
+           {data: 'jenis', name: 'jenis'},
            {data: 'satuan', name: 'satuan'},
            {data: 'qty_in', name: 'qty_in'},
            {data: 'qty_out', name: 'qty_out'},
        ],  
-      lengthMenu: [[10, 25, 50, 100, 250, 500], [10, 25, 50,100,250,500, "All"]],
+      lengthMenu: [[10, 25, 50, 100, 100, 250, 500], [10, 25, 50, 100, 100, 250, 500, "All"]],
        responsive: {
            details: {
                type: 'column'
@@ -217,7 +220,7 @@ Laporan Persediaan
  
             // Total over all pages
             total = api
-                .column(5)
+                .column(6)
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
@@ -225,6 +228,27 @@ Laporan Persediaan
  
             // Total over this page
             pageTotal = api
+                .column( 6, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Update footer
+            $( api.column( 6 ).footer() ).html(
+                ''+pageTotal +''
+            );
+
+             // Total over all pages
+            qty_in = api
+                .column(5)
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Total over this page
+            QtyIn = api
                 .column( 5, { page: 'current'} )
                 .data()
                 .reduce( function (a, b) {
@@ -233,27 +257,6 @@ Laporan Persediaan
  
             // Update footer
             $( api.column( 5 ).footer() ).html(
-                ''+pageTotal +''
-            );
-
-             // Total over all pages
-            qty_in = api
-                .column(4)
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Total over this page
-            QtyIn = api
-                .column( 4, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Update footer
-            $( api.column( 4 ).footer() ).html(
                 ''+QtyIn.toFixed(2) +''
             );
 
