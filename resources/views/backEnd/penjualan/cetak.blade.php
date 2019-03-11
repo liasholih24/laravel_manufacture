@@ -48,7 +48,7 @@
             <td style="text-align: center;">{{ $r->number }}</td>
             <td>{{ $r->name }}</td>
             <td>{{ $kategori->name }}</td>
-            <td style="text-align: right;">{{ number_format($r->qty,2,",",".") }}</td>
+            <td style="text-align: right;">{{ number_format($r->qty,2,",",".") }} {{ $r->satuan_code }}</td>
             <td style="text-align: right;">{{ number_format($r->price,2,",",".") }}</td>
             <td style="text-align: right;">{{ number_format($r->qty*$r->price,2,",",".") }}</td>
         </tr>
