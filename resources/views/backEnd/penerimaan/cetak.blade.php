@@ -21,7 +21,7 @@
             <td colspan="9" style="text-align: center; font-weight: bold;">{{ $storage->name }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="text-align: center; font-weight: bold;">LAPORAN PEMBELIAN PAKAN</td>
+            <td colspan="9" style="text-align: center; font-weight: bold;">LAPORAN PEMBELIAN</td>
         </tr>
         <tr>
             <td colspan="9" style="text-align: center; font-weight: bold;">PERIODE {{ date('d/m/Y', strtotime($from)) }} - {{ date('d/m/Y', strtotime($to)) }}</td>
