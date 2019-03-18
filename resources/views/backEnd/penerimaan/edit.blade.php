@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Tanggal</label>
+                                <label class="col-sm-2 control-label">Tanggal2</label>
                                 <div class="col-sm-3">
                                     <input id="tanggal" type="text" name="date" class="form-control input-sm" value="{{ date('Y-m-d', strtotime($penerimaan->date)) }}" required>
                                 </div>
