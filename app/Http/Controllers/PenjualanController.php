@@ -37,7 +37,8 @@ class PenjualanController extends Controller
     {
         $penjualan = Penjualan::get();
         $lokasi = Lokasi::where('depth', 0)->get();
-        return view('backEnd.penjualan.index', ['penjualan' => $penjualan, 'lokasi' => $lokasi]);
+        $kategori = Item::where('nesting', 0)->get();
+        return view('backEnd.penjualan.index', ['penjualan' => $penjualan, 'lokasi' => $lokasi, 'kategori' => $kategori]);
     }
 
     /**
@@ -192,9 +193,10 @@ class PenjualanController extends Controller
 
     public function cetak(Request $request)
     {
-        $data = DB::table('penjualans')->join('detailpenjualans', 'penjualans.id', '=', 'detailpenjualans.penjualan_id')->join('customers', 'penjualans.customer_id', '=', 'customers.id')->selectRaw('penjualans.date, penjualans.number, customers.name, penjualans.desc, sum(detailpenjualans.qty) as qty, sum(detailpenjualans.price) as price')->where('detailpenjualans.deleted_at', null)->where('penjualans.deleted_at', null)->where('penjualans.storage_id', $request->storage_id)->whereRaw('penjualans.date between "'.$request->from_date.'" and "'.$request->to_date.'"')->groupBy(['penjualans.id', 'penjualans.date', 'penjualans.number', 'penjualans.desc', 'customers.name'])->orderby('penjualans.date','asc')->get(); 
+        $data = DB::table('penjualans')->join('detailpenjualans', 'penjualans.id', '=', 'detailpenjualans.penjualan_id')->join('customers', 'penjualans.customer_id', '=', 'customers.id')->join('items', 'items.id', '=', 'detailpenjualans.item_id')->join('satuans', 'satuans.id', '=', 'detailpenjualans.satuan_id')->selectRaw('penjualans.date, penjualans.number, customers.name, satuans.code as satuan_code, penjualans.desc, sum(detailpenjualans.qty) as qty, sum(detailpenjualans.price) as price')->where('detailpenjualans.deleted_at', null)->where('penjualans.deleted_at', null)->where('penjualans.storage_id', $request->storage_id)->where('items.parent_id', $request->kategori_id)->whereRaw('penjualans.date between "'.$request->from_date.'" and "'.$request->to_date.'"')->groupBy(['penjualans.id', 'penjualans.date', 'penjualans.number', 'penjualans.desc', 'customers.name', 'satuans.code'])->orderby('penjualans.date','asc')->get();
         $storage = DB::table('lokasis')->where('id', $request->storage_id)->first();
-        return view('backEnd.penjualan.cetak', ['data' => $data, 'storage' => $storage, 'from' => $request->from_date, 'to' => $request->to_date]);
+        $kategori = DB::table('items')->where('nesting', 0)->where('id', $request->kategori_id)->first();
+        return view('backEnd.penjualan.cetak', ['data' => $data, 'storage' => $storage, 'kategori' => $kategori, 'from' => $request->from_date, 'to' => $request->to_date]);
     }
 
 }
