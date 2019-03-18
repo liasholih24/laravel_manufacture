@@ -246,11 +246,14 @@ else if ($request->item <> ""){
     public function update($id, Request $request)
     {
 
-
+        
         $attributes = Item::findOrFail($id);
     
         $item = Item::findOrFail($id);
         $item->update($request->all());
+
+
+        Item::where('id', $id)->update(['parent_id' => $request->parent_id]);
 
         if ($request->thumbnail) {
           $image = $request->thumbnail;
