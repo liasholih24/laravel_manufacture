@@ -1,9 +1,7 @@
 @extends('backLayout.app')
-
 @section('title')
-    Pembelian2
+    Pembelian22
 @stop
-
 @section('desc')
     Ubah Pembelian
 @stop
@@ -179,8 +177,8 @@
         });
         $("#tanggal").datepicker({
             format :  'yyyy-mm-dd',
-              todayBtn: 'linked',
-              todayHighlight :  true,
+            todayBtn: 'linked',
+            todayHighlight :  true,
         });
         $('.select-item').select2({
             placeholder: 'Pilih Item'
