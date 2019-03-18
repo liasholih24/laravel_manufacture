@@ -178,7 +178,7 @@
             
         });
         $("#tanggal").datepicker({
-              format :  'yyyy-mm-dd',
+            format :  'yyyy-mm-dd',
               todayBtn: 'linked',
               todayHighlight :  true,
         });
