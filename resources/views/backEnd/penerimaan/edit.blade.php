@@ -1,6 +1,6 @@
 @extends('backLayout.app')
 @section('title')
-    Pembelian2
+    Pembelian
 @stop
 @section('desc')
     Ubah Pembelian
