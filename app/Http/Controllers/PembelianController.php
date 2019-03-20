@@ -37,9 +37,9 @@ protected function validator(Request $request)
     public function index()
     {
 
-        $date = \Carbon\Carbon::today()->subDays(60);
+        $date = \Carbon\Carbon::today()->subDays(90);
 
-        $pembelian = Pembelian::where('created_at', '>=', date($date))->get();
+        $pembelian = Pembelian::where('date', '>=', date($date))->get();
 
 
         return view('backEnd.pembelian.index', compact('pembelian'));
