@@ -182,6 +182,16 @@ class PenjualanController extends Controller
      */
     public function destroy($id)
     {
+        $penjualan = Penjualan::findOrFail($id);
+
+        $penjualan->delete();
+
+        DB::table('detailpenjualans')->where('penjualan_id', $penjualan->id)->delete();
+
+
+        Session::flash('alert-warning', ' Penjualan '.$penjualan->number.' is deleted successfully');
+
+        return redirect('penjualan');
         
     }
 

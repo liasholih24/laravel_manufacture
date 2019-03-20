@@ -193,6 +193,17 @@ class PenerimaanController extends Controller
      */
     public function destroy($id)
     {
+
+        $penerimaan = Penerimaan::findOrFail($id);
+
+        $penerimaan->delete();
+
+        DB::table('detailpenerimaans')->where('penerimaan_id', $penerimaan->id)->delete();
+
+
+        Session::flash('alert-warning', ' Pembelian '.$penerimaan->number.' is deleted successfully');
+
+        return redirect('penerimaan');
         
     }
 

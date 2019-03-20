@@ -30,7 +30,7 @@ class Penerimaan extends Model
      */
     protected $fillable = ['number', 'pengajuan_id', 'date', 'desc', 'created_by', 'updated_by', 'created_at'];
 
-    use SoftDeletes;
-    protected $dates = ['deleted_at'];
+   // use SoftDeletes;
+    //protected $dates = ['deleted_at'];
 
 }
