@@ -35,7 +35,7 @@ Create new Status
     {!! Form::open(['url' => 'status', 'class' => 'form-horizontal']) !!}
 		{!! Form::hidden('created_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
 		{!! Form::hidden('updated_by', Sentinel::getUser()->id, ['class' => 'form-control']) !!}
-		{!! Form::hidden('status', 3, ['class' => 'form-control']) !!}
+		
 		<div class="form-group">
 			{!! Form::label('kategori', 'Kategori', ['class' => 'col-sm-1 control-label']) !!}
 			<div class="col-sm-5 {{ $errors->has('category') ? 'has-error' : ''}}">
