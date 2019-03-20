@@ -36,7 +36,14 @@ class PenerimaanController extends Controller
      */
     public function index()
     {
-        $penerimaan = Penerimaan::whereMonth('created_at', '=', date('m'))->get();
+       // $penerimaan = Penerimaan::whereMonth('created_at', '=', date('m'))->get();
+
+
+        $date = \Carbon\Carbon::today()->subDays(90);
+
+        $penerimaan = Penerimaan::where('created_at', '>=', date($date))->get();
+
+
         $lokasi = Lokasi::where('depth', 0)->get();
         $kategori = Item::where('nesting', 0)->get();
         return view('backEnd.penerimaan.index', ['penerimaan' => $penerimaan, 'lokasi' => $lokasi, 'kategori' => $kategori]);
