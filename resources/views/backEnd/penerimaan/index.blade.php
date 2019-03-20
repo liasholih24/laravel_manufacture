@@ -70,7 +70,7 @@
                                         <td>{{ $r->desc }}</td>
                                         <td>{{ empty($r->createdby->first_name) ? "" : $r->createdby->first_name }} {{ empty($r->createdby->last_name) ? "" : $r->createdby->last_name }}</td>
                                         <td>{{ $r->created_at }}</td>
-                                        <td class="text-center">
+                                        <td class="text-left">
                                             <a href="{{ url('penerimaan/' . $r->id . '/edit') }}" class="btn btn-outline btn-warning btn-xs">Ubah</a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
