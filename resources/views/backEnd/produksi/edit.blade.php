@@ -62,7 +62,7 @@ Edit
             <div class="form-group {{ $errors->has('strain') ? 'has-error' : ''}}">
                 {!! Form::label('strain', 'Strain', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-5">
-                   {{ Form::select('strain', ['HY-LINE' => 'HY-LINE', 'HY-SEX' => 'HY-LINE', 'HY-ISA' => 'HY-ISA'], null, ['class' => 'form-control select2','placeholder' => 'Pilih strain']) }}
+                   {{ Form::select('strain', ['HY-LINE' => 'HY-LINE', 'HY-SEX' => 'HY-SEX', 'HY-ISA' => 'HY-ISA'], null, ['class' => 'form-control select2','placeholder' => 'Pilih strain']) }}
                    {!! $errors->first('strain', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
