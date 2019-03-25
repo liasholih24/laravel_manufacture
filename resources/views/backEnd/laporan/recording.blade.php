@@ -315,7 +315,7 @@ Laporan Recording
             var fields = $(this).text().split('|');
             $('is t', this).text(fields[0]);
             if ( fields[1] == "0") {
-                        $(this).attr( 's', '20' );      
+                        $(this).attr( 's', '35' );      
                 }
 
             });
@@ -327,7 +327,7 @@ Laporan Recording
             var fields = $(this).text().split('|');
             $('is t', this).text(fields[0]);
             if ( fields[1] == "0") {
-                        $(this).attr( 's', '20' );      
+                        $(this).attr( 's', '35' );      
                 }
 
             });
@@ -339,7 +339,7 @@ Laporan Recording
             var fields = $(this).text().split('|');
             $('is t', this).text(fields[0]);
             if ( fields[1] == "0") {
-                        $(this).attr( 's', '20' );      
+                        $(this).attr( 's', '35' );      
                 }
 
             });
@@ -351,7 +351,7 @@ Laporan Recording
             var fields = $(this).text().split('|');
             $('is t', this).text(fields[0]);
             if ( fields[1] == "0") {
-                        $(this).attr( 's', '20' );      
+                        $(this).attr( 's', '35' );      
                 }
 
             });
@@ -362,7 +362,7 @@ Laporan Recording
             var fields = $(this).text().split('|');
             $('is t', this).text(fields[0]);
             if ( fields[1] == "0") {
-                        $(this).attr( 's', '20' );      
+                        $(this).attr( 's', '35' );      
                 }
 
             });
@@ -372,7 +372,7 @@ Laporan Recording
                 var fields = $(this).text().split('|');
                 $('is t', this).text(fields[0]);
                 if ( fields[1] == "0") {
-                            $(this).attr( 's', '20' );      
+                            $(this).attr( 's', '35' );      
                     }
            
             });
