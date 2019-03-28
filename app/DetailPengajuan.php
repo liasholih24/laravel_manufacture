@@ -15,6 +15,7 @@ class DetailPengajuan extends Model
      */
     protected $table = 'detailpengajuans';
 
+
     public function item(){
         return $this->hasOne('App\Item', 'id', 'item_id');
     }
