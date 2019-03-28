@@ -57,9 +57,7 @@
                                         <td>{{ $r->desc }}</td>
                                         <td width="35%">
                                         <ul>
-                                            @foreach ($r->items as $item)
-                                                <li>{{$item->item->name}} {{$item->qty}} {{$item->satuan->code}}</li>
-                                            @endforeach
+                                            
                                         </ul>
                                         </td>
                                         <td>{{ empty($r->createdby->first_name) ? "" : $r->createdby->first_name }} {{ empty($r->createdby->last_name) ? "" : $r->createdby->last_name }}</td>
