@@ -33,7 +33,10 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-        $pengajuan = Pengajuan::whereMonth('created_at', '=', date('m'))->get();
+
+        $date = \Carbon\Carbon::today()->subDays(90);
+
+        $pengajuan = Pengajuan::where('created_at', '>=', date($date))->get();
         return view('backEnd.pengajuan.index', ['pengajuan' => $pengajuan]);
     }
 
