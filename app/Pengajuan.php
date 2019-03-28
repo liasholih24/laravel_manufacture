@@ -23,6 +23,10 @@ class Pengajuan extends Model
         return $this->hasOne('App\User', 'id', 'updated_by');
     }
 
+    public function items(){
+        return $this->hasMany('App\DetailPengajuan', 'pengajuan_id', 'id');
+    }
+
     /**
      * Attributes that should be mass-assignable.
      *
