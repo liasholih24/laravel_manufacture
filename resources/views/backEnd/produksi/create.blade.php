@@ -267,11 +267,21 @@ Recording Produksi
                 gr_butir = Number(p_jml_kg/p_jml_butir * 1000).toFixed(2);
                 $("#gr_butir").val(gr_butir);
 
-                kg_1000 = Number(p_jml_kg/ Number($("#jml_akhir").val()) * 1000).toFixed(2);
-                $("#kg_1000").val(kg_1000);
 
-                hd = Number(p_jml_butir/ Number($("#jml_akhir").val()) * 100).toFixed(2);
+
+                if($("#jml_akhir").val() != 0){
+                    kg_1000 = Number(p_jml_kg/ Number($("#jml_akhir").val()) * 1000).toFixed(2);
+                $("#kg_1000").val(kg_1000);
+                }else {
+                    $("#kg_1000").val(0);
+                }
+                if($("#jml_akhir").val() != 0){
+                    hd = Number(p_jml_butir/ Number($("#jml_akhir").val()) * 100).toFixed(2);
                 $("#hd").val(hd);
+                }else{
+                    $("#hd").val(0); 
+                }
+                
 
                 fc = Number(Number($("#pakan_qty").val()) / p_jml_kg).toFixed(2);
                 $("#fc").val(fc);
