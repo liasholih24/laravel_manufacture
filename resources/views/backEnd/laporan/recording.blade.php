@@ -175,9 +175,7 @@ Laporan Recording
 
      var table = $('#tblrecording').DataTable({
 
-      // "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        "paging":   false,
-        "ordering": false,
+       lengthMenu: [[100, 250, 500, -1], [100, 250, 500, "All"]],
        processing: true,
        serverSide: true,
        ajax: '{{url("/recordingapi")}}',
@@ -190,10 +188,11 @@ Laporan Recording
            {data: 'ppl_pindah', name: 'ppl_pindah'},
            {data: 'ppl_afkir', name: 'ppl_afkir'},
            {data: 'ppl_mati', name: 'ppl_mati'},
+
            { data: 'persen_mati', name: 'persen_mati',
             "render": function ( data, type, row ) {
             				var persen_mati;
-                          //  persen_mati = parseFloat(data.replace(',','').replace('$','')); 
+                            //persen_mati = parseFloat(data.replace(',','').replace('$','')); 
             				if (persen_mati > 0.38){
                        return '<b style="color:red;">' + data + '</b><span style="visibility:hidden">|0</span>';
                     }else{
