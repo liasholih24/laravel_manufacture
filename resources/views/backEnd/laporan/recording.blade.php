@@ -175,7 +175,9 @@ Laporan Recording
 
      var table = $('#tblrecording').DataTable({
 
-       "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+      // "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "paging":   false,
+        "ordering": false,
        processing: true,
        serverSide: true,
        ajax: '{{url("/recordingapi")}}',
