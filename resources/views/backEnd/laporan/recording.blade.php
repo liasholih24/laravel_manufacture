@@ -193,11 +193,9 @@ Laporan Recording
            { data: 'persen_mati', name: 'persen_mati',
             "render": function ( data, type, row ) {
             				var persen_mati;
-                            if(!empty(persen_mati)){
-                            persen_mati = parseFloat(data.replace(',','').replace('$','')); 
+                          //  persen_mati = parseFloat(data.replace(',','').replace('$','')); 
             				if (persen_mati > 0.38){
                        return '<b style="color:red;">' + data + '</b><span style="visibility:hidden">|0</span>';
-                            }
                     }else{
                        return data;
                     }
