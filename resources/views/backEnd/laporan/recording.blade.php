@@ -296,7 +296,7 @@ Laporan Recording
                 
              }
        ], 
-       lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+      lengthMenu: [[10, 25, 50, 100, 250, 500], [10, 25, 50,100,250,500, "All"]],
       
  
       dom: '<"html5buttons"B>lTfgitp',
