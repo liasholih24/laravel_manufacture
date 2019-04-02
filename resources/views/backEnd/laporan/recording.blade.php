@@ -190,7 +190,6 @@ Laporan Recording
            {data: 'ppl_pindah', name: 'ppl_pindah'},
            {data: 'ppl_afkir', name: 'ppl_afkir'},
            {data: 'ppl_mati', name: 'ppl_mati'},
-
            { data: 'persen_mati', name: 'persen_mati',
             "render": function ( data, type, row ) {
             				var persen_mati;
