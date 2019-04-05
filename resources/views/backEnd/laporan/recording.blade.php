@@ -98,7 +98,7 @@ Laporan Recording
 
 <thead>
 <tr>
-        <th rowspan="2"  style="vertical-align:bottom">Tanggal</th>
+        <th rowspan="2"  style="vertical-align:bottom">Minggu ke</th>
         <th rowspan="2" style="vertical-align:bottom">Kandang</th>
         <th rowspan="2" style="vertical-align:bottom">Umur</th>
         <th colspan="7" style="text-align:center">Populasi</th>
@@ -180,7 +180,7 @@ Laporan Recording
        serverSide: true,
        ajax: '{{url("/recordingapi")}}',
        columns: [
-           {data: 'prod_tgl', name: 'prod_tgl'},
+           {data: 'weeknumber', name: 'weeknumber'},
            {data: 'kandang', name: 'kandang'},
            {data: 'umur', name: 'umur'},
            {data: 'ppl_awal', name: 'ppl_awal'},
