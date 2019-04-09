@@ -108,6 +108,8 @@ Rekapitulasi Persediaan
                <th></th>
                <th>Total</th>
                <th></th>
+               <th></th>
+               <th></th>
             </tr>
 </tfoot>
 <tbody>
