@@ -221,6 +221,49 @@ Rekapitulasi Persediaan
             $( api.column( 3 ).footer() ).html(
                 ''+QtyIn +''
             );
+
+
+             // Total over all pages
+             qty_out = api
+                .column(3)
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Total over this page
+            QtyOut = api
+                .column( 4, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Update footer
+            $( api.column( 4 ).footer() ).html(
+                ''+QtyOut +''
+            );
+
+            // Total over all pages
+            qty = api
+                .column(5)
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Total over this page
+            Qty = api
+                .column( 5, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Update footer
+            $( api.column( 5 ).footer() ).html(
+                ''+Qty +''
+            );
  
         }
 
