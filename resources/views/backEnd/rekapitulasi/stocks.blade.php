@@ -97,6 +97,8 @@ Rekapitulasi Persediaan
         <th>Gudang</th>
         <th>Item</th>
         <th>Jenis</th>
+        <th>Jml. Masuk</th>
+        <th>Jml. Keluar</th>
         <th>Stok</th>
     </tr>
 </thead>
@@ -156,6 +158,8 @@ Rekapitulasi Persediaan
            {data: 'gudang', name: 'gudang'},
            {data: 'item', name: 'item'},
            {data: 'jenis', name: 'jenis'},
+           {data: 'qty_in', name: 'qty_in'},
+           {data: 'qty_out', name: 'qty_out'}
            {data: 'qty', name: 'qty'}
            
        ],
@@ -163,7 +167,7 @@ Rekapitulasi Persediaan
        responsive: {
            details: {
                type: 'column'
-           }
+           } 
        },
        order: [ 0, 'desc' ],
        
