@@ -159,7 +159,7 @@ Rekapitulasi Persediaan
            {data: 'item', name: 'item'},
            {data: 'jenis', name: 'jenis'},
            {data: 'qty_in', name: 'qty_in'},
-           {data: 'qty_out', name: 'qty_out'}
+           {data: 'qty_out', name: 'qty_out'},
            {data: 'qty', name: 'qty'}
            
        ],
