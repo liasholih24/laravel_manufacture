@@ -9,6 +9,8 @@ use DB;
 use App\Produksi;
 use App\Pemakaian; 
 use App\DetailPemakaian;
+use App\Penerimaan; 
+use App\DetailPenerimaan;
 use App\Item;
 use App\Lokasi;
 use App\Satuan;
@@ -73,7 +75,59 @@ protected function validator(Request $request)
     }
 
         
-      $model = Produksi::create($request->all());
+      $produksi = Produksi::create($request->all());
+
+
+
+      //input ke penerimaan
+       
+
+      $number = Penerimaan::max('number');
+        if($number==null){
+            $number = 'RC1-000001';
+        }
+        else{
+            $number = 'RC1-'.sprintf('%06d', substr($number, 4) + 1);
+        }
+        $penerimaans = Penerimaan::create(['number' => $number
+        , 'storage_id' => $produksi->kandang
+        , 'date' => $produksi->prod_tgl
+        , 'desc' => 'ID Produksi-'.$produksi->id
+        , 'created_at' => $produksi->created_at
+        , 'created_by' => $produksi->created_by]);
+
+
+        if($produksi->p_utuh_kg > 0){
+
+        $dpenerimaans = DetailPenerimaan::create(['penerimaan_id' => $penerimaans->id
+                    , 'item_id' => 42
+                    , 'qty' => $produksi->p_utuh_kg
+                    , 'date' => $produksi->prod_tgl
+                    , 'desc' => 'ID Produksi-'.$produksi->id
+                    , 'created_at' => $produksi->created_at
+                    , 'created_by' => $produksi->created_by]);
+        }
+        if($produksi->p_retak_kg > 0){
+
+            $dpenerimaans = DetailPenerimaan::create(['penerimaan_id' => $penerimaans->id
+                        , 'item_id' => 44
+                        , 'qty' => $produksi->p_retak_kg
+                        , 'date' => $produksi->prod_tgl
+                        , 'desc' => 'ID Produksi-'.$produksi->id
+                        , 'created_at' => $produksi->created_at
+                        , 'created_by' => $produksi->created_by]);
+            }
+        if($produksi->p_putih_kg > 0){
+
+                $dpenerimaans = DetailPenerimaan::create(['penerimaan_id' => $penerimaans->id
+                            , 'item_id' => 123
+                            , 'qty' => $produksi->p_putih_kg
+                            , 'date' => $produksi->prod_tgl
+                            , 'desc' => 'ID Produksi-'.$produksi->id
+                            , 'created_at' => $produksi->created_at
+                            , 'created_by' => $produksi->created_by]);
+                }
+      // end ke penerimaan
 
 
       //input ke pemakaian
@@ -87,38 +141,38 @@ protected function validator(Request $request)
             $number = 'RC-'.sprintf('%06d', substr($number, 3) + 1);
         }
 
+        
 
         $pemakaians = Pemakaian::create(['number' => $number
-                                        , 'storage_id' => $model->kandang
-                                        , 'date' => $model->prod_tgl
-                                        , 'desc' => 'Pemakaian pakan dari proses recording '.$number
-                                        , 'created_at' => $model->created_at
-                                        , 'created_by' => $model->created_by]);
+                                        , 'storage_id' => $produksi->kandang
+                                        , 'date' => $produksi->prod_tgl
+                                        , 'desc' => 'ID Produksi-'.$produksi->id
+                                        , 'created_at' => $produksi->created_at
+                                        , 'created_by' => $produksi->created_by]);
 
         $pakanitems = DB::select(
             DB::raw("SELECT * FROM pakan_items a
-                WHERE pakan = ".$model->pakan_jenis.""));
-      
+                WHERE pakan = ".$produksi->pakan_jenis.""));    
         
         if(!empty($pakanitems)){
             foreach($pakanitems as $pakanitem){
                     $dpemakaians = DetailPemakaian::create(['pemakaian_id' => $pemakaians->id
                     , 'item_id' => $pakanitem->item
                     , 'qty' => $pakanitem->qty
-                    , 'date' => $model->prod_tgl
-                    , 'desc' => 'ID Produksi-'.$model->id
-                    , 'created_at' => $model->created_at
-                    , 'created_by' => $model->created_by]);
+                    , 'date' => $produksi->prod_tgl
+                    , 'desc' => 'ID Produksi-'.$produksi->id
+                    , 'created_at' => $produksi->created_at
+                    , 'created_by' => $produksi->created_by]);
             }
             }
             
         
       //end ke pemakaian
    
+      
 
 
-
-      Session::flash('alert-success', 'Produksi '.$model->name.' is created successfully');
+      Session::flash('alert-success', 'Produksi '.$produksi->name.' is created successfully');
 
       return redirect('produksi');
     }
@@ -173,14 +227,73 @@ protected function validator(Request $request)
         $produksi = Produksi::findOrFail($id);
         $produksi->update($request->all());
 
+    //input ke penerimaan
 
+    $penerimaans =   DB::select(
+        DB::raw("SELECT id, `number` from penerimaans WHERE `desc` =  'ID Produksi-$id' "));;
+
+    if(!empty($penerimaans[0]->id)){
+
+      $detailpenerimaan =   DetailPenerimaan::where('penerimaan_id', $penerimaans[0]->id)->delete();
+      Penerimaan::where('id', $penerimaans[0]->id)->delete();
+    }
+
+    $number = Penerimaan::max('number');
+    if($number==null){
+        $number = 'RC1-000001';
+    }
+    else{
+        $number = 'RC1-'.sprintf('%06d', substr($number, 4) + 1);
+    }
+    $penerimaans = Penerimaan::create(['number' => $number
+    , 'storage_id' => $produksi->kandang
+    , 'date' => $produksi->prod_tgl
+    , 'desc' => 'ID Produksi-'.$produksi->id
+    , 'created_at' => $produksi->created_at
+    , 'created_by' => $produksi->created_by]);
+
+
+    if($produksi->p_utuh_kg > 0){
+
+    $dpenerimaans = DetailPenerimaan::create(['penerimaan_id' => $penerimaans->id
+                , 'item_id' => 42
+                , 'qty' => $produksi->p_utuh_kg
+                , 'date' => $produksi->prod_tgl
+                , 'desc' => 'ID Produksi-'.$produksi->id
+                , 'created_at' => $produksi->created_at
+                , 'created_by' => $produksi->created_by]);
+    }
+    if($produksi->p_retak_kg > 0){
+
+        $dpenerimaans = DetailPenerimaan::create(['penerimaan_id' => $penerimaans->id
+                    , 'item_id' => 44
+                    , 'qty' => $produksi->p_retak_kg
+                    , 'date' => $produksi->prod_tgl
+                    , 'desc' => 'ID Produksi-'.$produksi->id
+                    , 'created_at' => $produksi->created_at
+                    , 'created_by' => $produksi->created_by]);
+        }
+    if($produksi->p_putih_kg > 0){
+
+            $dpenerimaans = DetailPenerimaan::create(['penerimaan_id' => $penerimaans->id
+                        , 'item_id' => 123
+                        , 'qty' => $produksi->p_putih_kg
+                        , 'date' => $produksi->prod_tgl
+                        , 'desc' => 'ID Produksi-'.$produksi->id
+                        , 'created_at' => $produksi->created_at
+                        , 'created_by' => $produksi->created_by]);
+            }
+  // end ke penerimaan
 
         //input ke pemakaian
             // delete dulu detail pemakaian
           $pemakaians =   DB::select(
               DB::raw("SELECT id, `number` from pemakaians WHERE `desc` =  'ID Produksi-$id' "));
-
-            $detailpemakaian =   DetailPemakaian::where('pemakaian_id', $pemakaians[0]->id)->delete();
+              
+            if(!empty($pemakaians[0]->id)){
+                $detailpemakaian =   DetailPemakaian::where('pemakaian_id', $pemakaians[0]->id)->delete();
+                Pemakaian::where('id', $pemakaians[0]->id)->delete();
+            }
 
            $pakanitems = DB::select(
                 DB::raw("SELECT * FROM pakan_items a
@@ -193,7 +306,7 @@ protected function validator(Request $request)
                   , 'item_id' => $pakanitem->item
                   , 'qty' => $pakanitem->qty
                   , 'date' => $produksi->prod_tgl
-                  , 'desc' => 'Pemakaian pakan dari proses recording '.$pemakaians[0]->number
+                  , 'desc' => 'ID Produksi-'.$produksi->id
                   , 'created_at' => $produksi->created_at
                   , 'created_by' => $produksi->created_by]);
           }
@@ -216,15 +329,34 @@ protected function validator(Request $request)
      */
     public function destroy($id)
     {
+
+
+        $penerimaans =   DB::select(
+            DB::raw("SELECT id, `number` from penerimaans WHERE `desc` =  'ID Produksi-$id' "));;
+    
+        if(!empty($penerimaans[0]->id)){
+    
+          $detailpenerimaan =   DetailPenerimaan::where('penerimaan_id', $penerimaans[0]->id)->delete();
+          Penerimaan::where('id', $penerimaans[0]->id)->delete();
+        }
+
+        $pemakaians =   DB::select(
+            DB::raw("SELECT id, `number` from pemakaians WHERE `desc` =  'ID Produksi-$id' "));
+            
+          if(!empty($pemakaians[0]->id)){
+              $detailpemakaian =   DetailPemakaian::where('pemakaian_id', $pemakaians[0]->id)->delete();
+              Pemakaian::where('id', $pemakaians[0]->id)->delete();
+          }
+
         $produksi = Produksi::findOrFail($id);
 
         $produksi->delete();
 
         $attributes = $produksi->getOriginal();
 
-        activity()->performedOn($produksi)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Produksi '.$produksi->name.' is deleted successfully');
+       // activity()->performedOn($produksi)->causedBy(Sentinel::getUser()->id)->withProperties($attributes)->log('Produksi '.$produksi->name.' is deleted successfully');
 
-        Session::flash('alert-warnig', ' Produksi '.$produksi->name.' is deleted successfully');
+        Session::flash('alert-warning', ' Produksi '.$produksi->name.' is deleted successfully');
 
         return redirect('produksi');
     }
