@@ -78,7 +78,7 @@ border: 1px solid #f8ac59 !important;
         <th>Updated At</th>
         <th>Actions</th>
     </tr>
-</thead> 
+</thead>  
 <tbody>
   <?php $i = 0?>
   @foreach($tables as $table)
@@ -87,8 +87,8 @@ border: 1px solid #f8ac59 !important;
       <td>{{$i}}</td>
       <td>{{$table->code}}</td>
       <td>{{$table->name}}</td> 
-      <td>{{$table->parent->name}}</td>
-      <td>{{$table->getsatuan->name}}</td>
+      <td>{{ empty($table->parent->name) ? "Not Set" : $table->parent->name }}</td>
+      <td>{{ empty($table->getsatuan->name) ? "Not Set" : $table->getsatuan->name }}</td>
       <td>{!! empty($table->createdby->first_name)?"": $table->createdby->first_name!!} {!! empty($table->createdby->last_name)?"": $table->createdby->last_name!!}</td>
       <td>{{$table->created_at}}</td>
       <td>
