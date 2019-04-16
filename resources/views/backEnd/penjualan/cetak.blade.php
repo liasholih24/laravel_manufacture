@@ -33,7 +33,9 @@
             <td style="text-align: center; font-weight: bold;">TANGGAL</td>
             <td style="text-align: center; font-weight: bold;">FAKTUR</td>
             <td style="text-align: center; font-weight: bold;">KONSUMEN</td>
+            @if($kategori->id=='128' || $kategori->id=='125')
             <td style="text-align: center; font-weight: bold;">PETI</td>
+            @endif
             <td style="text-align: center; font-weight: bold;">QTY</td>
             <td style="text-align: center; font-weight: bold;">HARGA</td>
             <td style="text-align: center; font-weight: bold;">JUMLAH</td>
@@ -50,7 +52,9 @@
             <td style="text-align: center;">{{ date('d-m-y', strtotime($r->date)) }}</td>
             <td style="text-align: center;">{{ $r->number }}</td>
             <td style="text-align: center;">{{ $r->name }}</td>
+            @if($kategori->id=='128' || $kategori->id=='125')
             <td style="text-align: center;">{{ number_format($r->qty/15,2,",",".") }}</td>
+            @endif
             <td style="text-align: right;">{{ number_format($r->qty,2,",",".") }} {{ $r->satuan_code }}</td>
             <td style="text-align: right;">{{ number_format($r->price,2,",",".") }}</td>
             <td style="text-align: right;">{{ number_format($r->qty*$r->price,2,",",".") }}</td>
@@ -64,7 +68,11 @@
         ?>
         @endforeach
         <tr>
+            @if($kategori->id=='128' || $kategori->id=='125')
             <td colspan="4" style="text-align: center; font-weight: bold; border-top: 1px dashed #000;">&nbsp;</td>
+            @else
+            <td colspan="3" style="text-align: center; font-weight: bold; border-top: 1px dashed #000;">&nbsp;</td>
+            @endif
             <td style="text-align: right; font-weight: bold; border-top: 1px dashed #000;">{{ number_format($tqty,2,",",".") }}</td>
             <td style="text-align: center; font-weight: bold; border-top: 1px dashed #000;">&nbsp;</td>
             <td style="text-align: right; font-weight: bold; border-top: 1px dashed #000;">{{ number_format($tjumlah,2,",",".") }}</td>
