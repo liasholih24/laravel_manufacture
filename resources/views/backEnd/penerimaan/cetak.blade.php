@@ -16,7 +16,7 @@
     </style>
 </head>
 <body onload="window.print();">
-    <table width="99%">
+    <table width="99.99%">
         <tr>
             <td colspan="16" style="text-align: center; font-weight: bold;">{{ $storage->name }}</td>
         </tr>
