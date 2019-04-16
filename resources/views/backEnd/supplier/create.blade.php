@@ -72,6 +72,15 @@ Create new Supplier
             {!! $errors->first('pic2', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
+    <div class="form-group">
+        <label class="col-sm-1 control-label">Pajak/Non Pajak</label>
+        <div class="col-sm-5">
+            <select name="pajak" class="form-control">
+                <option value="Pajak">Pajak</option>
+                <option value="Non Pajak">Non Pajak</option>
+            </select>
+        </div>
+    </div>
            
 
 

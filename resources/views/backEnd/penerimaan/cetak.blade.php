@@ -66,7 +66,7 @@
             <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
             <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
             <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
-            <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
+            <td style="border: 1px solid #000; padding-left: 2px;">{{ $r->pajak }}</td>
             <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
         </tr>
         <?php

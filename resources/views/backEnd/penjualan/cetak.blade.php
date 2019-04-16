@@ -54,7 +54,7 @@
             <td style="text-align: right;">{{ number_format($r->price,2,",",".") }}</td>
             <td style="text-align: right;">{{ number_format($r->qty*$r->price,2,",",".") }}</td>
             <td>&nbsp;<br>&nbsp;</td>
-            <td>&nbsp;</td>
+            <td>{{ $r->pajak }}</td>
         </tr>
         <?php 
             $tqty    = $tqty + $r->qty;

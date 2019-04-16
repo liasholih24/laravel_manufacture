@@ -20,7 +20,7 @@ class Customer extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'address', 'contact', 'desc', 'created_at'];
+    protected $fillable = ['name', 'address', 'contact', 'desc', 'pajak', 'created_at'];
 
     use SoftDeletes;
     protected $dates = ['deleted_at'];
