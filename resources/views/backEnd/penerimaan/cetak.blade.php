@@ -36,7 +36,7 @@
             <td style="text-align: center; font-weight: bold; border: 1px solid #000;">Faktur</td>
             <td style="text-align: center; font-weight: bold; border: 1px solid #000;">Jenis</td>
             <td style="text-align: center; font-weight: bold; border: 1px solid #000;">Ball</td>
-            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">Kg</td>
+            <td style="text-align: center; font-weight: bold; border: 1px solid #000;">Qty</td>
             <td style="text-align: center; font-weight: bold; border: 1px solid #000;">Harga</td>
             <td style="text-align: center; font-weight: bold; border: 1px solid #000;">Jumlah</td>
             <td style="text-align: center; font-weight: bold; border: 1px solid #000;">Pimpinan</td>

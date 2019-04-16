@@ -34,7 +34,7 @@
             <td style="text-align: center; font-weight: bold;">FAKTUR</td>
             <td style="text-align: center; font-weight: bold;">KONSUMEN</td>
             <td style="text-align: center; font-weight: bold;">PETI</td>
-            <td style="text-align: center; font-weight: bold;">KG</td>
+            <td style="text-align: center; font-weight: bold;">QTY</td>
             <td style="text-align: center; font-weight: bold;">HARGA</td>
             <td style="text-align: center; font-weight: bold;">JUMLAH</td>
             <td style="text-align: center; font-weight: bold;">ACC PIMPINAN</td>
