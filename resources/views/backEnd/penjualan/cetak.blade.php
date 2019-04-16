@@ -53,7 +53,7 @@
             <td style="text-align: right;">{{ number_format($r->qty,2,",",".") }} {{ $r->satuan_code }}</td>
             <td style="text-align: right;">{{ number_format($r->price,2,",",".") }}</td>
             <td style="text-align: right;">{{ number_format($r->qty*$r->price,2,",",".") }}</td>
-            <td>&nbsp;</td>
+            <td>&nbsp;<br>&nbsp;</td>
             <td>&nbsp;</td>
         </tr>
         <?php 

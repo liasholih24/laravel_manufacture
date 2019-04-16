@@ -62,7 +62,7 @@
             <td style="text-align: right; border: 1px solid #000; padding-right: 2px;">{{ number_format($r->qty,2,",",".") }} {{ $r->satuan_code }}</td>
             <td style="text-align: right; border: 1px solid #000; padding-right: 2px;">{{ number_format($r->price,2,",",".") }}</td>
             <td style="text-align: right; border: 1px solid #000; padding-right: 2px;">{{ number_format($r->qty*$r->price,2,",",".") }}</td>
-            <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
+            <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;<br>&nbsp;</td>
             <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
             <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
             <td style="border: 1px solid #000; padding-left: 2px;">&nbsp;</td>
