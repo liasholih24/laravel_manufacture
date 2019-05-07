@@ -91,8 +91,7 @@ class LaporanProduksiController extends Controller
                                 WHEN FORMAT((p.pakan_qty/p.ttl_kg),2)is null  THEN 'not set'
                                 ELSE 'abnormal'
                                 END AS status_fc,
-                                p.prod_tgl ,  WEEK(p.prod_tgl) weeknumber,
-                                FLOOR(((DAY(p.prod_tgl) - 1) / 7) + 1)) as month_week
+                                CEILING(DATE_FORMAT(p.prod_tgl,'%d')/7)as weeknumber
                          FROM produksis p
                             JOIN lokasis k ON k.id = p.kandang
                             JOIN lokasis k0 ON k0.id = k.parent_id
@@ -100,9 +99,10 @@ class LaporanProduksiController extends Controller
                             LEFT OUTER JOIN standarlayers sl ON p.umur = sl.umur AND sl.standar = 'HY-LINE'
                             LEFT OUTER JOIN standarfcs sf ON p.umur BETWEEN sf.umur0 AND sf.umur1 
                         WHERE 1=1 $filterRange $filterFarm 
-                        GROUP BY k.id, month_week
+                        GROUP BY k.id, weeknumber
                         ")
                     );
+                     /* p.prod_tgl ,  WEEK(p.prod_tgl) weeknumber,*/
         return Datatables::of($tables)->make(true);
     }
 }
