@@ -99,7 +99,7 @@ class LaporanProduksiController extends Controller
                             LEFT OUTER JOIN standarlayers sl ON p.umur = sl.umur AND sl.standar = 'HY-LINE'
                             LEFT OUTER JOIN standarfcs sf ON p.umur BETWEEN sf.umur0 AND sf.umur1 
                         WHERE 1=1 $filterRange $filterFarm 
-                        GROUP BY k.id, weeknumber
+                        GROUP BY k.name, weeknumber
                         ")
                     );
                      /* p.prod_tgl ,  WEEK(p.prod_tgl) weeknumber,*/
