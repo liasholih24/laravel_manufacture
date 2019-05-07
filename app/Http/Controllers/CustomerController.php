@@ -53,6 +53,7 @@ class CustomerController extends Controller
         $customer->address = $request->address;
         $customer->contact = $request->contact;
         $customer->desc = $request->desc;
+        $customer->pajak = $request->pajak;
         $customer->save();
         Session::flash('alert-success', 'Customer berhasil dibuat.');
         return redirect('customer');
@@ -102,6 +103,7 @@ class CustomerController extends Controller
         $customer->address = $request->address;
         $customer->contact = $request->contact;
         $customer->desc = $request->desc;
+        $customer->pajak = $request->pajak;
         $customer->save();
         Session::flash('alert-success', 'Customer berhasil diubah.');
         return redirect('customer');

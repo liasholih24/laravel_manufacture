@@ -47,6 +47,15 @@
                                     <textarea name="desc" class="form-control" rows="3" placeholder="Deskripsi">{{ $customer->desc }}</textarea>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Pajak/Non Pajak</label>
+                                <div class="col-sm-4">
+                                    <select name="pajak" class="form-control">
+                                        <option value="Pajak">Pajak</option>
+                                        <option value="Non Pajak" @if($customer->pajak=='Non Pajak') selected @endif>Non Pajak</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
