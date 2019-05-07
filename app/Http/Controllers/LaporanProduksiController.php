@@ -92,7 +92,7 @@ class LaporanProduksiController extends Controller
                                 ELSE 'abnormal'
                                 END AS status_fc,
                                 p.prod_tgl ,  WEEK(p.prod_tgl) weeknumber,
-                                FLOOR(((DAY(`date`) - 1) / 7) + 1)) as month_week
+                                FLOOR(((DAY(p.prod_tgl) - 1) / 7) + 1)) as month_week
                          FROM produksis p
                             JOIN lokasis k ON k.id = p.kandang
                             JOIN lokasis k0 ON k0.id = k.parent_id
