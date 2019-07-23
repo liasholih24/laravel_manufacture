@@ -58,7 +58,7 @@
                                         <td width="35%">
                                         <ul>
                                             @foreach ($r->items as $item)
-                                                <li>{{ empty($item->item->name)? '' : $item->item->name.  ',Qty:' .$item->qty.  ' '   empty($item->satuan->name)? '' : $item->satuan->name  }} </li>
+                                                <li>{{ empty($item->item->name)? '' : $item->item->name.  ',Qty:' .$item->qty  }}  {{ $item->satuan->name }}</li>
                                             @endforeach
                                         </ul>
                                         </td>
